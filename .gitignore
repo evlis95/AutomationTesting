@@ -23,4 +23,5 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 .idea/*
-
+/src/main/java/com/automation_testing/xmlfile/request.xml
+/src/main/java/com/automation_testing/xmlfile/response.xml
