@@ -1,4 +1,4 @@
-package com.autotest.parsingxml;
+package com.automation_testing.parsingxml;
 
 import javax.xml.bind.annotation.*;
 import java.util.List;

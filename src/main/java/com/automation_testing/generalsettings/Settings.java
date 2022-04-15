@@ -1,4 +1,4 @@
-package com.autotest.generalsettings;
+package com.automation_testing.generalsettings;
 
 public class Settings {
     //192.168.0.106

@@ -1,9 +1,9 @@
-package com.autotest.checks;
+package com.automation_testing.checks;
 
-import com.autotest.allrequests.authorization.AuthCryptoprofCode;
-import com.autotest.allrequests.authorization.UserAccount;
-import com.autotest.allrequests.work_in_authorized_mode.create_pay_ord.PutPayOrdDoc;
-import com.autotest.parsingxml.UniversalResponseRootTag;
+import com.automation_testing.allrequests.authorization.AuthCryptoprofCode;
+import com.automation_testing.allrequests.authorization.UserAccount;
+import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.PutPayOrdDoc;
+import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;

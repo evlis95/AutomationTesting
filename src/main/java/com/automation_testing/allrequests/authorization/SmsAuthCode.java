@@ -1,9 +1,9 @@
-package com.autotest.allrequests.authorization;
+package com.automation_testing.allrequests.authorization;
 
-import com.autotest.checks.Check;
-import com.autotest.creatingxml.UniversalRequestRootTag;
-import com.autotest.parsingxml.UniversalResponseRootTag;
-import com.autotest.post_request_type.Post;
+import com.automation_testing.checks.Check;
+import com.automation_testing.creatingxml.UniversalRequestRootTag;
+import com.automation_testing.parsingxml.UniversalResponseRootTag;
+import com.automation_testing.post_request_type.Post;
 
 import javax.xml.bind.JAXBException;
 import java.io.*;

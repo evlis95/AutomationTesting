@@ -1,4 +1,4 @@
-package com.autotest.jaxbsettings;
+package com.automation_testing.jaxbsettings;
 
 
 import com.sun.xml.bind.marshaller.CharacterEscapeHandler;

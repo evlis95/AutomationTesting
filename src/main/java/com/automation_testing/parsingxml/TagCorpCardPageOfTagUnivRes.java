@@ -1,4 +1,4 @@
-package com.autotest.parsingxml;
+package com.automation_testing.parsingxml;
 
 import java.util.List;
 

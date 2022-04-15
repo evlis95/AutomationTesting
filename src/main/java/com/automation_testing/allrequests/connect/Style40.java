@@ -1,11 +1,11 @@
-package com.autotest.allrequests.connect;
+package com.automation_testing.allrequests.connect;
 
-import com.autotest.checks.Check;
-import com.autotest.creatingxml.TagAboutOfUnivReq;
-import com.autotest.creatingxml.UniversalRequestRootTag;
-import com.autotest.parsingxml.UniversalResponseRootTag;
+import com.automation_testing.checks.Check;
+import com.automation_testing.creatingxml.TagAboutOfUnivReq;
+import com.automation_testing.creatingxml.UniversalRequestRootTag;
+import com.automation_testing.parsingxml.UniversalResponseRootTag;
 
-import com.autotest.post_request_type.Post;
+import com.automation_testing.post_request_type.Post;
 import javax.xml.bind.JAXBException;
 import java.io.*;
 

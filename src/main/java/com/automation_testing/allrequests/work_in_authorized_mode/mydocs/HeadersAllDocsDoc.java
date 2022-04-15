@@ -1,11 +1,11 @@
-package com.autotest.allrequests.work_in_authorized_mode.mydocs;
+package com.automation_testing.allrequests.work_in_authorized_mode.mydocs;
 
-import com.autotest.allrequests.authorization.AuthLogin;
-import com.autotest.allrequests.authorization.UserFilter;
-import com.autotest.checks.Check;
-import com.autotest.post_request_type.Post;
-import com.autotest.creatingxml.*;
-import com.autotest.parsingxml.UniversalResponseRootTag;
+import com.automation_testing.allrequests.authorization.AuthLogin;
+import com.automation_testing.allrequests.authorization.UserFilter;
+import com.automation_testing.checks.Check;
+import com.automation_testing.post_request_type.Post;
+import com.automation_testing.creatingxml.*;
+import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

@@ -1,17 +1,17 @@
-package com.autotest.allrequests.work_in_authorized_mode.create_pay_ord;
+package com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord;
 
-import com.autotest.allrequests.authorization.AuthLogin;
-import com.autotest.allrequests.work_in_authorized_mode.create_pay_ord.typ_fields_map_in_req.BudMap;
-import com.autotest.allrequests.work_in_authorized_mode.create_pay_ord.typ_fields_map_in_req.KonMap;
-import com.autotest.allrequests.work_in_authorized_mode.create_pay_ord.typ_fields_map_in_req.YSMap;
-import com.autotest.allrequests.work_in_authorized_mode.getdoc.ReqToReceiveADoc;
-import com.autotest.checks.Check;
-import com.autotest.creatingxml.TagPOfUnivReq;
-import com.autotest.creatingxml.TagReqActOfUnivReq;
-import com.autotest.creatingxml.UniversalRequestRootTag;
-import com.autotest.parsingxml.UniversalResponseRootTag;
-import com.autotest.post_request_type.Post;
-import com.autotest.testruns.TestRunClassicBox;
+import com.automation_testing.allrequests.authorization.AuthLogin;
+import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.typ_fields_map_in_req.BudMap;
+import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.typ_fields_map_in_req.KonMap;
+import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.typ_fields_map_in_req.YSMap;
+import com.automation_testing.allrequests.work_in_authorized_mode.getdoc.ReqToReceiveADoc;
+import com.automation_testing.checks.Check;
+import com.automation_testing.creatingxml.TagPOfUnivReq;
+import com.automation_testing.creatingxml.TagReqActOfUnivReq;
+import com.automation_testing.creatingxml.UniversalRequestRootTag;
+import com.automation_testing.parsingxml.UniversalResponseRootTag;
+import com.automation_testing.post_request_type.Post;
+import com.automation_testing.testruns.TestRunClassicBox;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

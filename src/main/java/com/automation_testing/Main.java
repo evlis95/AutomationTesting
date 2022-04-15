@@ -1,6 +1,6 @@
-package com.autotest;
+package com.automation_testing;
 
-import com.autotest.testruns.TestRunClassicBox;
+import com.automation_testing.testruns.TestRunClassicBox;
 
 public class Main {
 

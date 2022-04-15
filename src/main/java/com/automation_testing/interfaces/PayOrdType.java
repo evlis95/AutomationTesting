@@ -1,6 +1,6 @@
-package com.autotest.interfaces;
+package com.automation_testing.interfaces;
 
-import com.autotest.parsingxml.UniversalResponseRootTag;
+import com.automation_testing.parsingxml.UniversalResponseRootTag;
 
 public interface PayOrdType {
 

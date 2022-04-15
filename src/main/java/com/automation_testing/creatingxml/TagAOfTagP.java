@@ -1,4 +1,4 @@
-package com.autotest.creatingxml;
+package com.automation_testing.creatingxml;
 
 import javax.xml.bind.annotation.XmlAttribute;
 

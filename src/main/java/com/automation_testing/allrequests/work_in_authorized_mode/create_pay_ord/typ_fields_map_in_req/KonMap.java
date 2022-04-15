@@ -1,8 +1,8 @@
-package com.autotest.allrequests.work_in_authorized_mode.create_pay_ord.typ_fields_map_in_req;
+package com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.typ_fields_map_in_req;
 
-import com.autotest.allrequests.authorization.UserAccount;
-import com.autotest.allrequests.authorization.UserFilter;
-import com.autotest.allrequests.work_in_authorized_mode.dictionary.GetFullBankRuKon;
+import com.automation_testing.allrequests.authorization.UserAccount;
+import com.automation_testing.allrequests.authorization.UserFilter;
+import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.GetFullBankRuKon;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedHashMap;

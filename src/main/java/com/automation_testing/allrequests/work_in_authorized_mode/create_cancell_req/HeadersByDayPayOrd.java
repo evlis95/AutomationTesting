@@ -1,12 +1,12 @@
-package com.autotest.allrequests.work_in_authorized_mode.create_cancell_req;
+package com.automation_testing.allrequests.work_in_authorized_mode.create_cancell_req;
 
-import com.autotest.allrequests.authorization.AuthLogin;
-import com.autotest.allrequests.authorization.UserAccount;
-import com.autotest.allrequests.authorization.UserFilter;
-import com.autotest.checks.Check;
-import com.autotest.post_request_type.Post;
-import com.autotest.creatingxml.*;
-import com.autotest.parsingxml.UniversalResponseRootTag;
+import com.automation_testing.allrequests.authorization.AuthLogin;
+import com.automation_testing.allrequests.authorization.UserAccount;
+import com.automation_testing.allrequests.authorization.UserFilter;
+import com.automation_testing.checks.Check;
+import com.automation_testing.post_request_type.Post;
+import com.automation_testing.creatingxml.*;
+import com.automation_testing.parsingxml.UniversalResponseRootTag;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;

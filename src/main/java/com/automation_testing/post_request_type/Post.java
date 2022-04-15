@@ -1,11 +1,11 @@
-package com.autotest.post_request_type;
+package com.automation_testing.post_request_type;
 
-import com.autotest.checks.Check;
+import com.automation_testing.checks.Check;
 import com.sun.xml.bind.marshaller.CharacterEscapeHandler;
-import com.autotest.creatingxml.UniversalRequestRootTag;
-import com.autotest.jaxbsettings.CustomCharacterEscapeHandler;
-import com.autotest.parsingxml.UniversalResponseRootTag;
-import com.autotest.generalsettings.Settings;
+import com.automation_testing.creatingxml.UniversalRequestRootTag;
+import com.automation_testing.jaxbsettings.CustomCharacterEscapeHandler;
+import com.automation_testing.parsingxml.UniversalResponseRootTag;
+import com.automation_testing.generalsettings.Settings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -57,18 +57,18 @@ public abstract class Post {
         marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
         marshaller.setProperty("com.sun.xml.bind.xmlHeaders", "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         marshaller.setProperty(CharacterEscapeHandler.class.getName(), new CustomCharacterEscapeHandler());
-        marshaller.marshal(rootTag, new File(".\\src\\main\\java\\com\\autotest\\xmlfile\\request.xml"));
+        marshaller.marshal(rootTag, new File(".\\src\\main\\java\\com\\automation_testing\\xmlfile\\request.xml"));
     }
 
     protected UniversalResponseRootTag unmarshallSetting(UniversalResponseRootTag a) throws JAXBException {
         JAXBContext jcParse = JAXBContext.newInstance(UniversalResponseRootTag.class);
         Unmarshaller unmarshall = jcParse.createUnmarshaller();
-        a = (UniversalResponseRootTag) unmarshall.unmarshal(new File(".\\src\\main\\java\\com\\autotest\\xmlfile\\response.xml"));
+        a = (UniversalResponseRootTag) unmarshall.unmarshal(new File(".\\src\\main\\java\\com\\automation_testing\\xmlfile\\response.xml"));
         return a;
     }
 
     protected void writeBodyResponseInFile() {
-        try (FileWriter writer = new FileWriter(".\\src\\main\\java\\com\\autotest\\xmlfile\\response.xml", false)) {
+        try (FileWriter writer = new FileWriter(".\\src\\main\\java\\com\\automation_testing\\xmlfile\\response.xml", false)) {
             writer.write(bodyResponse);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -78,7 +78,7 @@ public abstract class Post {
     protected void request() throws IOException, InterruptedException {
 
         request = HttpRequest.newBuilder()
-                .POST(HttpRequest.BodyPublishers.ofFile(Path.of(".\\src\\main\\java\\com\\autotest\\xmlfile\\request.xml")))
+                .POST(HttpRequest.BodyPublishers.ofFile(Path.of(".\\src\\main\\java\\com\\automation_testing\\xmlfile\\request.xml")))
                 .uri(URI.create(Settings.uriPost))
                 .setHeader("Accept-Encoding", "gzip")
                 .setHeader("Content-Type", "text/xml")
@@ -104,7 +104,7 @@ public abstract class Post {
 
     protected void failedResponseMessage() throws IOException {
         Check.quantityFAILED++;
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(".\\src\\main\\java\\com\\autotest\\xmlfile\\request.xml"));
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(".\\src\\main\\java\\com\\automation_testing\\xmlfile\\request.xml"));
         StringBuilder stringBuffer = new StringBuilder("");
         String line = "";
         log.error("Запрос:");

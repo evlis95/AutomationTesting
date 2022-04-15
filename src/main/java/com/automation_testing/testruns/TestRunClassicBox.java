@@ -1,17 +1,17 @@
-package com.autotest.testruns;
+package com.automation_testing.testruns;
 
-import com.autotest.allrequests.authorization.*;
-import com.autotest.allrequests.connect.*;
-import com.autotest.allrequests.managedevice.*;
-import com.autotest.allrequests.work_in_authorized_mode.create_cancell_req.HeadersByDayPayOrd;
-import com.autotest.allrequests.work_in_authorized_mode.create_pay_ord.*;
-import com.autotest.allrequests.work_in_authorized_mode.dictionary.GetDictRemoteCorrespDictionary;
-import com.autotest.allrequests.work_in_authorized_mode.dictionary.*;
-import com.autotest.allrequests.work_in_authorized_mode.docnumber.DocNumPaymOrder;
-import com.autotest.allrequests.work_in_authorized_mode.mydocs.CountAllAllDocsDoc;
-import com.autotest.allrequests.work_in_authorized_mode.mydocs.HeadersAllDocsDoc;
-import com.autotest.checks.Check;
-import com.autotest.post_request_type.Post;
+import com.automation_testing.allrequests.authorization.*;
+import com.automation_testing.allrequests.connect.*;
+import com.automation_testing.allrequests.managedevice.*;
+import com.automation_testing.allrequests.work_in_authorized_mode.create_cancell_req.HeadersByDayPayOrd;
+import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.*;
+import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.GetDictRemoteCorrespDictionary;
+import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.*;
+import com.automation_testing.allrequests.work_in_authorized_mode.docnumber.DocNumPaymOrder;
+import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.CountAllAllDocsDoc;
+import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.HeadersAllDocsDoc;
+import com.automation_testing.checks.Check;
+import com.automation_testing.post_request_type.Post;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
