@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) {
         new TestRunClassicBox().run();
         System.out.println("Test");
+        System.out.println("Commit");
 
 
     }
