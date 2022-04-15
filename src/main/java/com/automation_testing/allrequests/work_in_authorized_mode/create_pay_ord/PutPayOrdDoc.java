@@ -68,19 +68,19 @@ public class PutPayOrdDoc extends Post {
         put.setV(3.2);
         put.setS(AuthLogin.sessionID);
         fieldsAndValues.replace("DocumentNumber", TestRunClassicBox.docNumPayOrd.getDocNum());
-        for (Map.Entry map : fieldsAndValues.entrySet()) {
+        fieldsAndValues.forEach((key, value) -> {
             TagPOfUnivReq p = new TagPOfUnivReq();
-            p.setN(map.getKey().toString());
-            p.setV(map.getValue().toString());
+            p.setN(key);
+            p.setV(value);
             listP.add(p);
-        }
+        });
         put.setListP(listP);
         marshallSetting(put);
     }
 
 
     private void info() throws IOException {
-        String line = "";
+        String line;
         StringBuilder stringBuilder = new StringBuilder();
         String messagePass = "\n\nПП создано \n" +
                 "Идентификатор документа в банковской системе: " + documentBankID + "\n" +
