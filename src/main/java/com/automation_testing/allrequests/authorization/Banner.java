@@ -1,0 +1,46 @@
+package com.autotest.allrequests.authorization;
+
+import com.autotest.checks.Check;
+import com.autotest.creatingxml.UniversalRequestRootTag;
+import com.autotest.parsingxml.UniversalResponseRootTag;
+import com.autotest.post_request_type.Post;
+
+import javax.xml.bind.JAXBException;
+import java.io.*;
+
+public class Banner extends Post {
+
+    public static UniversalResponseRootTag rootTag;
+
+    private void checkTest() throws IOException {
+        Check.checkCode200(getCodeStatusResponse(), "Banner");
+    }
+
+
+    @Override
+    protected void createXmlBodyRequest() throws JAXBException {
+        UniversalRequestRootTag banner = new UniversalRequestRootTag();
+        banner.setC("");
+        banner.setT("dictionary");
+        banner.setN("banner");
+        banner.setV(1.0);
+        banner.setS(AuthLogin.sessionID);
+
+
+        marshallSetting(banner);
+    }
+
+    @Override
+    public void run() throws IOException, InterruptedException, JAXBException {
+        createXmlBodyRequest();
+        request();
+        writeBodyResponseInFile();
+        if (getCodeStatusResponse() == 200) {
+            rootTag = parseXmlBodyResponse();
+            checkTest();
+        } else {
+            failedResponseMessage();
+        }
+    }
+}
+

@@ -1,0 +1,99 @@
+package com.autotest.allrequests.work_in_authorized_mode.create_pay_ord;
+
+import com.autotest.allrequests.authorization.AuthLogin;
+
+import com.autotest.checks.Check;
+
+import com.autotest.creatingxml.TagReqActOfUnivReq;
+import com.autotest.creatingxml.UniversalRequestRootTag;
+import com.autotest.parsingxml.UniversalResponseRootTag;
+import com.autotest.post_request_type.Post;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import javax.xml.bind.JAXBException;
+import java.io.*;
+
+public class PutPaymentOrderDocCHECKCODE extends Post {
+    private final static Logger log = LogManager.getLogger(PutPaymentOrderDocCHECKCODE.class);
+    private final String nameRequestAndActionForLog;
+    private final String documentID;
+    private final String statusCodeForCheck;
+    private String documentBankID;
+
+    //реквизиты сохраненного ПП
+    private String documentStatusCode;
+    private String documentNumber;
+    public static UniversalResponseRootTag rootTag;
+
+    public PutPaymentOrderDocCHECKCODE(String nameRequestAndActionForLog, String documentID, String statusCodeForCheck) {
+        this.nameRequestAndActionForLog = nameRequestAndActionForLog;
+        this.documentID = documentID;
+        this.statusCodeForCheck = statusCodeForCheck;
+    }
+
+    public String getDocumentBankID() {
+        return documentBankID;
+    }
+
+
+    private void checkTest() throws IOException {
+        Check.checkCode200(getCodeStatusResponse(), "CHECKCODE");
+
+        if (documentStatusCode.equals(statusCodeForCheck)) {
+            log.info("Проверка присвоения статус кода " + statusCodeForCheck + " платежному поручению - PASS");
+            Check.quantityPASS++;
+        } else {
+            log.error("Проверка присвоения статус кода " + statusCodeForCheck + " платежному поручению - FAILED");
+            Check.quantityFAILED++;
+        }
+    }
+
+    @Override
+    protected void createXmlBodyRequest() throws JAXBException {
+        UniversalRequestRootTag checkCode = new UniversalRequestRootTag();
+        TagReqActOfUnivReq tagReqAct = new TagReqActOfUnivReq();
+        checkCode.setC("put");
+        checkCode.setT("document");
+        checkCode.setN("PaymentOrder");
+        checkCode.setV(3.1);
+        checkCode.setS(AuthLogin.sessionID);
+        checkCode.setTagC("1");
+        tagReqAct.setV("CHECKCODE");
+        tagReqAct.setDocID(documentID);
+        checkCode.setTagReqAct(tagReqAct);
+        marshallSetting(checkCode);
+    }
+
+    private void info() throws IOException {
+        StringBuilder stringBuilder = new StringBuilder("");
+        String messageText = String.format("\n\n%s\n" +
+                "Идентификатор документа в банковской системе: " + documentBankID + "\n" +
+                "Cтатус код: " + documentStatusCode + "\n" +
+                "Номер документа: " + documentNumber + "\n", nameRequestAndActionForLog);
+        BufferedReader bufferedReader = new BufferedReader(new StringReader(messageText));
+        String line = "";
+        while ((line = bufferedReader.readLine()) != null) {
+            stringBuilder.append(line).append("\n");
+        }
+        bufferedReader.close();
+        log.info(stringBuilder.toString());
+    }
+
+    public void run() throws IOException, InterruptedException, JAXBException {
+        createXmlBodyRequest();
+        request();
+        writeBodyResponseInFile();
+        if (getCodeStatusResponse() == 200) {
+            rootTag = parseXmlBodyResponse();
+            documentBankID = rootTag.getListF().get(0).getI();
+            documentNumber = rootTag.getListF().get(0).getN();
+            documentStatusCode = rootTag.getListF().get(0).getS();
+            checkTest();
+            info();
+
+        } else {
+            failedResponseMessage();
+        }
+    }
+}
