@@ -159,7 +159,7 @@ public class TestRunClassicBox {
                     case "DocNumPaymOrderYSSAve":
                     case "DocNumPaymOrderYSSign":
                     case "DocNumPaymOrderYSSignGo":
-                        if (!Check.checkCountAvailableAccounts810()) {
+                        if (Check.checkCountAvailableAccounts810()) {
                             log.warn("""
                                     У пользователя нет 2 доступного счета в рублях, чтобы осуществить платеж Себе.
                                     Запрос нового документа не будет произведен.
@@ -231,7 +231,7 @@ public class TestRunClassicBox {
                         payOrdDoc.run();
                         break;
                     case "PutPaymentOrderDoсYSSave":
-                        if (!Check.checkCountAvailableAccounts810()) {
+                        if (Check.checkCountAvailableAccounts810()) {
                             log.warn("""
                                     У пользователя нет 2 доступного счета в рублях, чтобы осуществить платеж Себе.
                                     Платеж себе не будет создан.
@@ -242,7 +242,7 @@ public class TestRunClassicBox {
                         }
                         break;
                     case "PutPaymentOrderDoсYSSign":
-                        if (!Check.checkCountAvailableAccounts810()) {
+                        if (Check.checkCountAvailableAccounts810()) {
                             log.warn("""
                                     У пользователя нет 2 доступного счета в рублях, чтобы осуществить платеж Себе.
                                     Платеж себе не будет создан и подписан.
@@ -253,7 +253,7 @@ public class TestRunClassicBox {
                         }
                         break;
                     case "PutPaymentOrderDoсYSSignGo":
-                        if (!Check.checkCountAvailableAccounts810()) {
+                        if (Check.checkCountAvailableAccounts810()) {
                             log.warn("""
                                     У пользователя нет 2 доступного счета в рублях, чтобы осуществить платеж Себе.
                                     Платеж себе не будет создан и подписан и отправлен.

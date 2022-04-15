@@ -29,11 +29,7 @@ public class Check {
             if (UserAccount.rootTag.getListA().get(i).getT().equals("1") & UserAccount.rootTag.getListA().get(i).getV().equals("810"))
                 accAvailable810++;
         }
-        if (accAvailable810 > 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return accAvailable810 <= 1;
     }
 
     public static void checkCountAvailableSPForce(UniversalResponseRootTag rootTag) {

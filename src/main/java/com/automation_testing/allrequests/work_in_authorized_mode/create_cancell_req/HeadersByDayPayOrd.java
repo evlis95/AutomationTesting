@@ -58,10 +58,10 @@ public class HeadersByDayPayOrd extends Post {
         for (String s : payOrdStatCode) {
             listA.add(new TagAOfTagP(s));
         }
-        for (Entry map : mapAccAndBic.entrySet()) {
-            TagSOfTagF tagS = new TagSOfTagF(map.getKey().toString(), map.getValue().toString());
+        mapAccAndBic.forEach((key, value) -> {
+            TagSOfTagF tagS = new TagSOfTagF(key, value);
             listS.add(tagS);
-        }
+        });
 
 
         TagFOfTagP tagF = new TagFOfTagP("0", "0", listS);
