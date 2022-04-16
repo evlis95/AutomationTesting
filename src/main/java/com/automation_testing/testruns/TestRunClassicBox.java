@@ -148,26 +148,28 @@ public class TestRunClassicBox {
         try {
             for (Entry map : requestMap.entrySet())
                 switch (map.getKey().toString()) {
-                    case "DocNumPaymOrderKonSave", "DocNumPaymOrderKonSign", "DocNumPaymOrderKonSignGo", "DocNumPaymOrderBudSave", "DocNumPaymOrderBudSign", "DocNumPaymOrderBudSignGo", "DocNumCanReq" -> {
-                        docNumber = new DocumentNumber();
-                        docNumber.run();
-                    }
+                    case "DocNumPaymOrderKonSave",
+                            "DocNumPaymOrderKonSign",
+                            "DocNumPaymOrderKonSignGo",
+                            "DocNumPaymOrderBudSave",
+                            "DocNumPaymOrderBudSign",
+                            "DocNumPaymOrderBudSignGo",
+                            "DocNumCanReq" -> new DocumentNumber().run();
 
-                    case "DocNumPaymOrderYSSAve", "DocNumPaymOrderYSSign", "DocNumPaymOrderYSSignGo" -> {
+                    case "DocNumPaymOrderYSSAve",
+                            "DocNumPaymOrderYSSign",
+                            "DocNumPaymOrderYSSignGo" -> {
                         if (Check.checkCountAvailableAccounts810()) {
                             log.warn("""
                                     У пользователя нет 2 доступного счета в рублях, чтобы осуществить платеж Себе.
                                     Запрос нового документа не будет произведен.
                                     """);
                         } else {
-                            docNumber = new DocumentNumber();
-                            docNumber.run();
+                            new DocumentNumber().run();
                         }
                     }
-
-                    case "UserFilter" -> {
-                        userFilter.run();
-                        boolean result = false;
+                    case "UserFilter" -> userFilter.run();
+/*                        boolean result = false;  /// убрать проверку в класс Check
                         for (int j = 0; j < UserFilter.rootTag.getListV().size(); j++) {
                             if (UserFilter.rootTag.getListV().get(j).getAdv().equals("1")) {
                                 result = true;
@@ -181,8 +183,7 @@ public class TestRunClassicBox {
                             log.error("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - FAILED. Тестирование будет заверщено.\n");
                             Check.quantityFAILED++;
                             return;
-                        }
-                    }
+                        }*/
                     case "SmsAuthCode" -> {
                         if (Check.checkAvailableSignatureToolOTP()) {
                             smsAuthCode.run();
@@ -201,32 +202,21 @@ public class TestRunClassicBox {
                             return;
                         }
                     }
-                    case "PutPaymentOrderDocKonSave" -> {
-                        putDoc = new PutDocAction(DocumentAction.SAVE, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY).creating(), DocumentType.PAYMENT_ORDER);
-                        putDoc.run();
-                    }
-                    case "PutPaymentOrderDocKonSign" -> {
-                        putDoc = new PutDocAction(DocumentAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY).creating(), DocumentType.PAYMENT_ORDER);
-                        putDoc.run();
-                    }
-                    case "PutPaymentOrderDocKonSignGo" -> {
-                        putDoc = new PutDocAction(DocumentAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY).creating(), DocumentType.PAYMENT_ORDER);
-                        putDoc.run();
-                    }
-                    case "PutPaymentOrderDocBudSave" -> {
-                        putDoc = new PutDocAction(DocumentAction.SAVE, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_BUDGET).creating(), DocumentType.PAYMENT_ORDER);
-                        putDoc.run();
-                    }
-                    case "PutPaymentOrderDocBudSign" -> {
-                        putDoc = new PutDocAction(DocumentAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_BUDGET).creating(), DocumentType.PAYMENT_ORDER);
-                        putDoc.run();
-                    }
-                    case "PutPaymentOrderDocBudSignGo" -> {
-                        putDoc = new PutDocAction(DocumentAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_BUDGET).creating(), DocumentType.PAYMENT_ORDER);
-                        putDoc.run();
-                    }
+                    case "PutPaymentOrderDocKonSave" -> new PutDocAction(DocumentAction.SAVE, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY).creating(), DocumentType.PAYMENT_ORDER).run();
 
-                    case "PutPaymentOrderDoсYSSave", "PutPaymentOrderDoсYSSign", "PutPaymentOrderDoсYSSignGo" -> {
+                    case "PutPaymentOrderDocKonSign" -> new PutDocAction(DocumentAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY).creating(), DocumentType.PAYMENT_ORDER).run();
+
+                    case "PutPaymentOrderDocKonSignGo" -> new PutDocAction(DocumentAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY).creating(), DocumentType.PAYMENT_ORDER).run();
+
+                    case "PutPaymentOrderDocBudSave" -> new PutDocAction(DocumentAction.SAVE, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_BUDGET).creating(), DocumentType.PAYMENT_ORDER).run();
+
+                    case "PutPaymentOrderDocBudSign" -> new PutDocAction(DocumentAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_BUDGET).creating(), DocumentType.PAYMENT_ORDER).run();
+
+                    case "PutPaymentOrderDocBudSignGo" -> new PutDocAction(DocumentAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_BUDGET).creating(), DocumentType.PAYMENT_ORDER).run();
+
+                    case "PutPaymentOrderDoсYSSave",
+                            "PutPaymentOrderDoсYSSign",
+                            "PutPaymentOrderDoсYSSignGo" -> {
                         if (Check.checkCountAvailableAccounts810()) {
                             log.warn("""
                                     У пользователя нет 2 доступного счета в рублях, чтобы осуществить платеж Себе.
@@ -234,18 +224,12 @@ public class TestRunClassicBox {
                                     """);
                         } else {
                             switch (map.getKey().toString()) {
-                                case "PutPaymentOrderDoсYSSave" -> {
-                                    putDoc = new PutDocAction(DocumentAction.SAVE, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER);
-                                    putDoc.run();
-                                }
-                                case "PutPaymentOrderDoсYSSign" -> {
-                                    putDoc = new PutDocAction(DocumentAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER);
-                                    putDoc.run();
-                                }
-                                case "PutPaymentOrderDoсYSSignGo" -> {
-                                    putDoc = new PutDocAction(DocumentAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER);
-                                    putDoc.run();
-                                }
+                                case "PutPaymentOrderDoсYSSave" -> new PutDocAction(DocumentAction.SAVE, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER).run();
+
+                                case "PutPaymentOrderDoсYSSign" -> new PutDocAction(DocumentAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER).run();
+
+                                case "PutPaymentOrderDoсYSSignGo" -> new PutDocAction(DocumentAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER).run();
+
                             }
                         }
                     }

@@ -30,9 +30,7 @@ public abstract class Post {
     private final static Logger log = LogManager.getLogger(Post.class);
     private String bodyResponse;
     private Integer codeStatusResponse;
-
     private HttpRequest request;
-
     private final String hostProxy = Settings.hostProxy;
     private final Integer portProxy = Settings.portProxy;
     private final HttpClient httpClient = HttpClient.newBuilder()
@@ -41,7 +39,6 @@ public abstract class Post {
             .connectTimeout(Duration.ofSeconds(10))
             .build();
 
-
     public Integer getCodeStatusResponse() {
         return codeStatusResponse;
     }
@@ -49,7 +46,6 @@ public abstract class Post {
     public HttpRequest getRequest() {
         return request;
     }
-
 
     protected void marshallSetting(UniversalRequestRootTag rootTag) throws JAXBException {
         JAXBContext jcCreate = JAXBContext.newInstance(UniversalRequestRootTag.class);
