@@ -148,20 +148,12 @@ public class TestRunClassicBox {
         try {
             for (Entry map : requestMap.entrySet())
                 switch (map.getKey().toString()) {
-                    case "DocNumPaymOrderKonSave":
-                    case "DocNumPaymOrderKonSign":
-                    case "DocNumPaymOrderKonSignGo":
-                    case "DocNumPaymOrderBudSave":
-                    case "DocNumPaymOrderBudSign":
-                    case "DocNumPaymOrderBudSignGo":
-                    case "DocNumCanReq":
+                    case "DocNumPaymOrderKonSave", "DocNumPaymOrderKonSign", "DocNumPaymOrderKonSignGo", "DocNumPaymOrderBudSave", "DocNumPaymOrderBudSign", "DocNumPaymOrderBudSignGo", "DocNumCanReq" -> {
                         docNumber = new DocumentNumber();
                         docNumber.run();
-                        break;
+                    }
 
-                    case "DocNumPaymOrderYSSAve":
-                    case "DocNumPaymOrderYSSign":
-                    case "DocNumPaymOrderYSSignGo":
+                    case "DocNumPaymOrderYSSAve", "DocNumPaymOrderYSSign", "DocNumPaymOrderYSSignGo" -> {
                         if (Check.checkCountAvailableAccounts810()) {
                             log.warn("""
                                     У пользователя нет 2 доступного счета в рублях, чтобы осуществить платеж Себе.
@@ -171,9 +163,9 @@ public class TestRunClassicBox {
                             docNumber = new DocumentNumber();
                             docNumber.run();
                         }
-                        break;
+                    }
 
-                    case "UserFilter":
+                    case "UserFilter" -> {
                         userFilter.run();
                         boolean result = false;
                         for (int j = 0; j < UserFilter.rootTag.getListV().size(); j++) {
@@ -190,15 +182,15 @@ public class TestRunClassicBox {
                             Check.quantityFAILED++;
                             return;
                         }
-                        break;
-                    case "SmsAuthCode":
-                        if (Check.checkAvailableSignatureToolOTPAuthoriz()) {
+                    }
+                    case "SmsAuthCode" -> {
+                        if (Check.checkAvailableSignatureToolOTP()) {
                             smsAuthCode.run();
                         } else {
                             return;
                         }
-                        break;
-                    case "AuthAccess":
+                    }
+                    case "AuthAccess" -> {
                         authAccess.run();
                         if (!(AuthAccess.rootTag.getListS().get(0).getZ().equals("2") | AuthAccess.rootTag.getListS().get(0).getZ().equals("0"))) {
                             unBindManageDevice.run();
@@ -208,73 +200,65 @@ public class TestRunClassicBox {
                         if (!BindManageDevice.resultBinding) {
                             return;
                         }
-                        break;
-                    case "PutPaymentOrderDocKonSave":
+                    }
+                    case "PutPaymentOrderDocKonSave" -> {
                         putDoc = new PutDocAction(DocumentAction.SAVE, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY).creating(), DocumentType.PAYMENT_ORDER);
                         putDoc.run();
-                        break;
-                    case "PutPaymentOrderDocKonSign":
+                    }
+                    case "PutPaymentOrderDocKonSign" -> {
                         putDoc = new PutDocAction(DocumentAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY).creating(), DocumentType.PAYMENT_ORDER);
                         putDoc.run();
-                        break;
-                    case "PutPaymentOrderDocKonSignGo":
+                    }
+                    case "PutPaymentOrderDocKonSignGo" -> {
                         putDoc = new PutDocAction(DocumentAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY).creating(), DocumentType.PAYMENT_ORDER);
                         putDoc.run();
-                        break;
-                    case "PutPaymentOrderDocBudSave":
+                    }
+                    case "PutPaymentOrderDocBudSave" -> {
                         putDoc = new PutDocAction(DocumentAction.SAVE, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_BUDGET).creating(), DocumentType.PAYMENT_ORDER);
                         putDoc.run();
-                        break;
-                    case "PutPaymentOrderDocBudSign":
+                    }
+                    case "PutPaymentOrderDocBudSign" -> {
                         putDoc = new PutDocAction(DocumentAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_BUDGET).creating(), DocumentType.PAYMENT_ORDER);
                         putDoc.run();
-                        break;
-                    case "PutPaymentOrderDocBudSignGo":
+                    }
+                    case "PutPaymentOrderDocBudSignGo" -> {
                         putDoc = new PutDocAction(DocumentAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_BUDGET).creating(), DocumentType.PAYMENT_ORDER);
                         putDoc.run();
-                        break;
-                    case "PutPaymentOrderDoсYSSave":
+                    }
+
+                    case "PutPaymentOrderDoсYSSave", "PutPaymentOrderDoсYSSign", "PutPaymentOrderDoсYSSignGo" -> {
                         if (Check.checkCountAvailableAccounts810()) {
                             log.warn("""
                                     У пользователя нет 2 доступного счета в рублях, чтобы осуществить платеж Себе.
                                     Платеж себе не будет создан.
                                     """);
                         } else {
-                            putDoc = new PutDocAction(DocumentAction.SAVE, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER);
-                            putDoc.run();
+                            switch (map.getKey().toString()) {
+                                case "PutPaymentOrderDoсYSSave" -> {
+                                    putDoc = new PutDocAction(DocumentAction.SAVE, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER);
+                                    putDoc.run();
+                                }
+                                case "PutPaymentOrderDoсYSSign" -> {
+                                    putDoc = new PutDocAction(DocumentAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER);
+                                    putDoc.run();
+                                }
+                                case "PutPaymentOrderDoсYSSignGo" -> {
+                                    putDoc = new PutDocAction(DocumentAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER);
+                                    putDoc.run();
+                                }
+                            }
                         }
-                        break;
-                    case "PutPaymentOrderDoсYSSign":
-                        if (Check.checkCountAvailableAccounts810()) {
-                            log.warn("""
-                                    У пользователя нет 2 доступного счета в рублях, чтобы осуществить платеж Себе.
-                                    Платеж себе не будет создан и подписан.
-                                    """);
-                        } else {
-                            putDoc = new PutDocAction(DocumentAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER);
-                            putDoc.run();
-                        }
-                        break;
-                    case "PutPaymentOrderDoсYSSignGo":
-                        if (Check.checkCountAvailableAccounts810()) {
-                            log.warn("""
-                                    У пользователя нет 2 доступного счета в рублях, чтобы осуществить платеж Себе.
-                                    Платеж себе не будет создан и подписан и отправлен.
-                                    """);
-                        } else {
-                            putDoc = new PutDocAction(DocumentAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER);
-                            putDoc.run();
-                        }
-                        break;
+                    }
                     ////////////////////////////////////////////////////////////////////////////////////
-                    default:
+                    default -> {
                         Post post = (Post) map.getValue();
                         post.run();
-                        break;
+                    }
                 }
             log.info("Тестирование завершено");
             log.info("Количество успешных тестов - " + Check.quantityPASS + ". Количество проваленных - " + Check.quantityFAILED + ".");
-        } catch (IOException | JAXBException | InterruptedException e) {
+        } catch (IOException | JAXBException |
+                InterruptedException e) {
             e.printStackTrace();
         }
     }

@@ -87,7 +87,7 @@ public class Check {
         }
     }
 
-    public static boolean checkAvailableSignatureToolOTPAuthoriz() throws IOException {
+    public static boolean checkAvailableSignatureToolOTP() throws IOException {
         boolean result = true;
         if (AuthCryptoprofCode.rootTag.getListS() != null) {
             for (int i = 0; i < AuthCryptoprofCode.rootTag.getListS().size(); i++) {
