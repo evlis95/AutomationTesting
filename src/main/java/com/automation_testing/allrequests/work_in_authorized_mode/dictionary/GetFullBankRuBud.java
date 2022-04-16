@@ -39,6 +39,13 @@ public class GetFullBankRuBud extends Post {
         marshallSetting(getFull);
     }
 
+    private void initializationData() {
+        receiverBankName = rootTag.getListR().get(0).getX();
+        receiverGeneralBIC = rootTag.getListR().get(0).getD();
+        receiverPlace = rootTag.getListR().get(0).getV();
+        receiverPlaceType = rootTag.getListR().get(0).getB();
+    }
+
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
         createXmlBodyRequest();
@@ -46,10 +53,7 @@ public class GetFullBankRuBud extends Post {
         writeBodyResponseInFile();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
-            receiverBankName = rootTag.getListR().get(0).getX();
-            receiverGeneralBIC = rootTag.getListR().get(0).getD();
-            receiverPlace = rootTag.getListR().get(0).getV();
-            receiverPlaceType = rootTag.getListR().get(0).getB();
+            initializationData();
             checkTest();
         } else {
             failedResponseMessage();

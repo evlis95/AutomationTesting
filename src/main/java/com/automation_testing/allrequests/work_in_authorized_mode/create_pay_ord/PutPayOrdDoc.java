@@ -1,17 +1,13 @@
 package com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord;
 
 import com.automation_testing.allrequests.authorization.AuthLogin;
-import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.typ_fields_map_in_req.BudMap;
-import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.typ_fields_map_in_req.KonMap;
-import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.typ_fields_map_in_req.YSMap;
-import com.automation_testing.allrequests.work_in_authorized_mode.getdoc.ReqToReceiveADoc;
+import com.automation_testing.allrequests.work_in_authorized_mode.getdoc.GetDocument;
 import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.TagPOfUnivReq;
 import com.automation_testing.creatingxml.TagReqActOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_type.Post;
-import com.automation_testing.testruns.TestRunClassicBox;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,10 +21,9 @@ import java.util.Map;
 
 public class PutPayOrdDoc extends Post {
 
-    private Map<String, String> fieldsAndValues;
+    private final Map<String, String> fieldsAndValues;
     public static UniversalResponseRootTag rootTag;
     private final static Logger log = LogManager.getLogger(PutPayOrdDoc.class);
-    private final PaymentOrderTarget paymentOrderTarget;
     private final PaymentOrderAction paymentOrderAction;
     private String documentID;
     private String documentBankID;
@@ -38,9 +33,9 @@ public class PutPayOrdDoc extends Post {
     private final String statusCodeForCheckRequest;
 
 
-    public PutPayOrdDoc(PaymentOrderAction paymentOrderAction, PaymentOrderTarget paymentOrderTarget, String nameSuccessfullyActForCheckRequest, String statusCodeForCheckRequest) {
+    public PutPayOrdDoc(PaymentOrderAction paymentOrderAction, Map<String, String> fieldsMap, String nameSuccessfullyActForCheckRequest, String statusCodeForCheckRequest) {
         this.paymentOrderAction = paymentOrderAction;
-        this.paymentOrderTarget = paymentOrderTarget;
+        this.fieldsAndValues = fieldsMap;
         this.nameSuccessfullyActForCheckRequest = nameSuccessfullyActForCheckRequest;
         this.statusCodeForCheckRequest = statusCodeForCheckRequest;
     }
@@ -51,30 +46,27 @@ public class PutPayOrdDoc extends Post {
 
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
-        switch (paymentOrderTarget) {
-            case PAYMENT_TO_COUNTERPARTY -> fieldsAndValues = new KonMap().getMapKon();
-            case PAYMENT_TO_BUDGET -> fieldsAndValues = new BudMap().getMapBud();
-            case PAYMENT_TO_YOURSELF -> fieldsAndValues = new YSMap().getMapYourSelf();
-        }
-
         UniversalRequestRootTag put = new UniversalRequestRootTag();
-        TagReqActOfUnivReq tagReqAct = new TagReqActOfUnivReq();
+
         List<TagPOfUnivReq> listP = new ArrayList<>();
-        tagReqAct.setV(paymentOrderAction.toString());
-        put.setTagReqAct(tagReqAct);
+
+        put.setTagReqAct(new TagReqActOfUnivReq(paymentOrderAction.toString()));
+
         put.setC("put");
         put.setT("document");
         put.setN("PaymentOrder");
         put.setV(3.2);
         put.setS(AuthLogin.sessionID);
-        fieldsAndValues.replace("DocumentNumber", TestRunClassicBox.docNumPayOrd.getDocNum());
+
         fieldsAndValues.forEach((key, value) -> {
             TagPOfUnivReq p = new TagPOfUnivReq();
             p.setN(key);
             p.setV(value);
             listP.add(p);
         });
+
         put.setListP(listP);
+
         marshallSetting(put);
     }
 
@@ -176,16 +168,16 @@ public class PutPayOrdDoc extends Post {
 
     private class ExecutingSaveDocPayOrd {
         PutPaymentOrderDocFORCE force;
-        ReqToReceiveADoc getDoc;
+        GetDocument getDoc;
 
         private void executing() throws JAXBException, IOException, InterruptedException {
             if (rootTag.getListC() != null) {
                 force = new PutPaymentOrderDocFORCE(documentID);
                 force.run();
-                getDoc = new ReqToReceiveADoc(force.getDocumentBankID());
+                getDoc = new GetDocument(force.getDocumentBankID());
                 getDoc.run();
             } else {
-                getDoc = new ReqToReceiveADoc(documentBankID);
+                getDoc = new GetDocument(documentBankID);
                 getDoc.run();
             }
         }
@@ -195,14 +187,14 @@ public class PutPayOrdDoc extends Post {
         PutPaymentOrderDocCHECKCODE check;
         PutPaymentOrderDocDATAFORSIGN dataForSign;
         PutPaymentOrderDocFORCE force;
-        ReqToReceiveADoc getDoc;
+        GetDocument getDoc;
 
         private void executing() throws JAXBException, IOException, InterruptedException {
             if (rootTag.getListC() != null) {
                 if (rootTag.getListC().get(0).getCe().equals("1")) {
                     force = new PutPaymentOrderDocFORCE(documentID);
                     force.run();
-                    getDoc = new ReqToReceiveADoc(force.getDocumentBankID());
+                    getDoc = new GetDocument(force.getDocumentBankID());
                     getDoc.run();
                 } else {
                     Check.checkCountAvailableSPSign(rootTag);
@@ -213,7 +205,7 @@ public class PutPayOrdDoc extends Post {
                     dataForSign.run();
                     check = new PutPaymentOrderDocCHECKCODE(nameSuccessfullyActForCheckRequest, documentID, statusCodeForCheckRequest);
                     check.run();
-                    getDoc = new ReqToReceiveADoc(check.getDocumentBankID());
+                    getDoc = new GetDocument(check.getDocumentBankID());
                     getDoc.run();
                 }
             } else {
@@ -222,7 +214,7 @@ public class PutPayOrdDoc extends Post {
                 dataForSign.run();
                 check = new PutPaymentOrderDocCHECKCODE(nameSuccessfullyActForCheckRequest, documentID, statusCodeForCheckRequest);
                 check.run();
-                getDoc = new ReqToReceiveADoc(check.getDocumentBankID());
+                getDoc = new GetDocument(check.getDocumentBankID());
                 getDoc.run();
             }
         }

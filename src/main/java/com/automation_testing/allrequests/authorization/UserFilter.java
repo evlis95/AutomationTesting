@@ -15,6 +15,9 @@ public class UserFilter extends Post {
     private final static Logger log = LogManager.getLogger(UserFilter.class);
     public static UniversalResponseRootTag rootTag;
     public static String orgId;
+    public static String orgKPP;
+    public static String orgINN;
+    public static String orgName;
 
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
@@ -39,14 +42,7 @@ public class UserFilter extends Post {
         ////
         //организации
         stringBuffer.append("\n\nКоличество организаций пользователя - " + rootTag.getListC().size() + "\n");
-        if (rootTag.getListC().size() == 1) {
-            stringBuffer.append("Организация пользователя - " + rootTag.getListC().get(0).getN() + " идентификатор - " + rootTag.getListC().get(0).getI() + "\n");
-        } else {
-            for (int i = 1; i < rootTag.getListC().size() + 1; i++) {
-                String line = String.format("Наименование %s организации: " + rootTag.getListF().get(i - 1).getN(), i);
-                stringBuffer.append(line + " идентификатор - " + rootTag.getListC().get(i).getI() + "\n");
-            }
-        }
+        stringBuffer.append("Организация пользователя - " + rootTag.getListC().get(0).getN() + " идентификатор - " + rootTag.getListC().get(0).getI() + "\n");
 
         //подразделения
         stringBuffer.append("Количество подразделений - " + rootTag.getListF().size() + "\n");
@@ -237,16 +233,18 @@ public class UserFilter extends Post {
                         if (rootTag.getListV().get(j).getMinBalance().equals("1")) {
                             stringBuffer.append("D2BM. НСО\n");
                         }
-
-
                     }
-
                 }
-
             }
-
         }
         log.info(stringBuffer.toString());
+    }
+
+    private void identificationOfOrgData() {
+        orgId = rootTag.getListC().get(0).getI();
+        orgKPP = rootTag.getListC().get(0).getW();
+        orgINN = rootTag.getListC().get(0).getA();
+        orgName = rootTag.getListC().get(0).getN();
     }
 
     @Override
@@ -256,10 +254,9 @@ public class UserFilter extends Post {
         writeBodyResponseInFile();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
-            orgId = rootTag.getListC().get(0).getI();
+            identificationOfOrgData();
             checkTest();
             info();
-
         } else {
             failedResponseMessage();
         }

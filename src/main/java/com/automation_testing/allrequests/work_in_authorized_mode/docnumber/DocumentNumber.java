@@ -12,14 +12,10 @@ import com.automation_testing.post_request_type.Post;
 import javax.xml.bind.JAXBException;
 import java.io.*;
 
-public class DocNumPaymOrder extends Post {
+public class DocumentNumber extends Post {
 
-    private String docNum;
+    public static String docNum;
     public static UniversalResponseRootTag rootTag;
-
-    public String getDocNum() {
-        return docNum;
-    }
 
     private @NotNull String createTime() {
         long currentTime = System.currentTimeMillis();
@@ -29,7 +25,7 @@ public class DocNumPaymOrder extends Post {
     }
 
     private void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "DocumentNumberPaymentOrder");
+        Check.checkCode200(getCodeStatusResponse(), "DocumentNumber");
     }
 
     @Override

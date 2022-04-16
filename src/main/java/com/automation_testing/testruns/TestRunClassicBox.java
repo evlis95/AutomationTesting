@@ -7,7 +7,7 @@ import com.automation_testing.allrequests.work_in_authorized_mode.create_cancell
 import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.*;
 import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.GetDictRemoteCorrespDictionary;
 import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.*;
-import com.automation_testing.allrequests.work_in_authorized_mode.docnumber.DocNumPaymOrder;
+import com.automation_testing.allrequests.work_in_authorized_mode.docnumber.DocumentNumber;
 import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.CountAllAllDocsDoc;
 import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.HeadersAllDocsDoc;
 import com.automation_testing.checks.Check;
@@ -62,7 +62,7 @@ public class TestRunClassicBox {
     final HeadersAllDocsDoc headersAllDocsOfMyDocs = new HeadersAllDocsDoc();
     final HeadersByDayPayOrd headersByDayPayOrd = new HeadersByDayPayOrd();
     public static PutPayOrdDoc payOrdDoc;
-    public static DocNumPaymOrder docNumPayOrd;
+    public static DocumentNumber docNumPayOrd;
 
     public TestRunClassicBox() {
     }
@@ -152,7 +152,7 @@ public class TestRunClassicBox {
                     case "DocNumPaymOrderBudSign":
                     case "DocNumPaymOrderBudSignGo":
                     case "DocNumCanReq":
-                        docNumPayOrd = new DocNumPaymOrder();
+                        docNumPayOrd = new DocumentNumber();
                         docNumPayOrd.run();
                         break;
 
@@ -165,7 +165,7 @@ public class TestRunClassicBox {
                                     Запрос нового документа не будет произведен.
                                     """);
                         } else {
-                            docNumPayOrd = new DocNumPaymOrder();
+                            docNumPayOrd = new DocumentNumber();
                             docNumPayOrd.run();
                         }
                         break;
@@ -207,27 +207,27 @@ public class TestRunClassicBox {
                         }
                         break;
                     case "PutPaymentOrderDocKonSave":
-                        payOrdDoc = new PutPayOrdDoc(PaymentOrderAction.SAVE, PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY, "ПП Контрагенту успешно создано", "3");
+                        payOrdDoc = new PutPayOrdDoc(PaymentOrderAction.SAVE, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY).creating(), "ПП Контрагенту успешно создано", "3");
                         payOrdDoc.run();
                         break;
                     case "PutPaymentOrderDocKonSign":
-                        payOrdDoc = new PutPayOrdDoc(PaymentOrderAction.SIGN, PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY, "ПП Контрагенту успешно подписано", "6");
+                        payOrdDoc = new PutPayOrdDoc(PaymentOrderAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY).creating(), "ПП Контрагенту успешно подписано", "6");
                         payOrdDoc.run();
                         break;
                     case "PutPaymentOrderDocKonSignGo":
-                        payOrdDoc = new PutPayOrdDoc(PaymentOrderAction.SIGN_GO, PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY, "ПП Контрагенту успешно подписано и отправлено", "43");
+                        payOrdDoc = new PutPayOrdDoc(PaymentOrderAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY).creating(), "ПП Контрагенту успешно подписано и отправлено", "43");
                         payOrdDoc.run();
                         break;
                     case "PutPaymentOrderDocBudSave":
-                        payOrdDoc = new PutPayOrdDoc(PaymentOrderAction.SAVE, PaymentOrderTarget.PAYMENT_TO_BUDGET, "ПП В бюджет успешно создано", "3");
+                        payOrdDoc = new PutPayOrdDoc(PaymentOrderAction.SAVE, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_BUDGET).creating(), "ПП В бюджет успешно создано", "3");
                         payOrdDoc.run();
                         break;
                     case "PutPaymentOrderDocBudSign":
-                        payOrdDoc = new PutPayOrdDoc(PaymentOrderAction.SIGN, PaymentOrderTarget.PAYMENT_TO_BUDGET, "ПП В бюджет успешно подписано", "6");
+                        payOrdDoc = new PutPayOrdDoc(PaymentOrderAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_BUDGET).creating(), "ПП В бюджет успешно подписано", "6");
                         payOrdDoc.run();
                         break;
                     case "PutPaymentOrderDocBudSignGo":
-                        payOrdDoc = new PutPayOrdDoc(PaymentOrderAction.SIGN_GO, PaymentOrderTarget.PAYMENT_TO_BUDGET, "ПП В бюджет успешно подписано и отправлено", "43");
+                        payOrdDoc = new PutPayOrdDoc(PaymentOrderAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_BUDGET).creating(), "ПП В бюджет успешно подписано и отправлено", "43");
                         payOrdDoc.run();
                         break;
                     case "PutPaymentOrderDoсYSSave":
@@ -237,7 +237,7 @@ public class TestRunClassicBox {
                                     Платеж себе не будет создан.
                                     """);
                         } else {
-                            payOrdDoc = new PutPayOrdDoc(PaymentOrderAction.SAVE, PaymentOrderTarget.PAYMENT_TO_YOURSELF, "ПП Себе успешно создано", "3");
+                            payOrdDoc = new PutPayOrdDoc(PaymentOrderAction.SAVE, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), "ПП Себе успешно создано", "3");
                             payOrdDoc.run();
                         }
                         break;
@@ -248,7 +248,7 @@ public class TestRunClassicBox {
                                     Платеж себе не будет создан и подписан.
                                     """);
                         } else {
-                            payOrdDoc = new PutPayOrdDoc(PaymentOrderAction.SIGN, PaymentOrderTarget.PAYMENT_TO_YOURSELF, "ПП Себе успешно подписано", "6");
+                            payOrdDoc = new PutPayOrdDoc(PaymentOrderAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), "ПП Себе успешно подписано", "6");
                             payOrdDoc.run();
                         }
                         break;
@@ -259,7 +259,7 @@ public class TestRunClassicBox {
                                     Платеж себе не будет создан и подписан и отправлен.
                                     """);
                         } else {
-                            payOrdDoc = new PutPayOrdDoc(PaymentOrderAction.SIGN_GO, PaymentOrderTarget.PAYMENT_TO_YOURSELF, "ПП Себе успешно подписано и отправлено", "43");
+                            payOrdDoc = new PutPayOrdDoc(PaymentOrderAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), "ПП Себе успешно подписано и отправлено", "43");
                             payOrdDoc.run();
                         }
                         break;

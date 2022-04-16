@@ -10,17 +10,17 @@ import com.automation_testing.post_request_type.Post;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
-public class ReqToReceiveADoc extends Post {
+public class GetDocument extends Post {
 
     public static UniversalResponseRootTag rootTag;
     private final String documentBankID;
 
-    public ReqToReceiveADoc(String documentBankID) {
+    public GetDocument(String documentBankID) {
         this.documentBankID = documentBankID;
     }
 
     private void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "ReqToReceiveADoc");
+        Check.checkCode200(getCodeStatusResponse(), "GetDocument");
     }
 
     @Override
