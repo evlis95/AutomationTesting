@@ -1,4 +1,4 @@
-package com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord;
+package com.automation_testing.allrequests.work_in_authorized_mode.put_document;
 
 import com.automation_testing.allrequests.authorization.AuthLogin;
 import com.automation_testing.checks.Check;
@@ -14,15 +14,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 
-public class PutPaymentOrderDocDATAFORSIGN extends Post {
-    private final static Logger log = LogManager.getLogger(PutPaymentOrderDocDATAFORSIGN.class);
+public class PutDocDATAFORSIGN extends Post {
+    private final static Logger log = LogManager.getLogger(PutDocDATAFORSIGN.class);
     private final UniversalResponseRootTag universalResponseRootTag;
     private final String documentID;
     private String documentNameSP;
     private String documentUIDSP;
     public static UniversalResponseRootTag rootTag;
 
-    public PutPaymentOrderDocDATAFORSIGN(UniversalResponseRootTag universalResponseRootTag, String documentID) {
+    public PutDocDATAFORSIGN(UniversalResponseRootTag universalResponseRootTag, String documentID) {
         this.universalResponseRootTag = universalResponseRootTag;
         this.documentID = documentID;
     }

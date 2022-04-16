@@ -2,7 +2,7 @@ package com.automation_testing.checks;
 
 import com.automation_testing.allrequests.authorization.AuthCryptoprofCode;
 import com.automation_testing.allrequests.authorization.UserAccount;
-import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.PutPayOrdDoc;
+import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocAction;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,8 +33,8 @@ public class Check {
     }
 
     public static void checkCountAvailableSPForce(UniversalResponseRootTag rootTag) {
-        if (PutPayOrdDoc.rootTag.getListC() != null) {
-            if (PutPayOrdDoc.rootTag.getListC().get(0).getCe().equals("0")) {
+        if (PutDocAction.rootTag.getListC() != null) {
+            if (PutDocAction.rootTag.getListC().get(0).getCe().equals("0")) {
                 if (rootTag.getListK() != null) {
                     count = 0;
                     for (int i = 0; i < rootTag.getListK().size(); i++) {

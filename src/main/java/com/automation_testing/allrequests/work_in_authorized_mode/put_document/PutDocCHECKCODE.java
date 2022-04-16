@@ -1,4 +1,4 @@
-package com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord;
+package com.automation_testing.allrequests.work_in_authorized_mode.put_document;
 
 import com.automation_testing.allrequests.authorization.AuthLogin;
 
@@ -14,8 +14,8 @@ import org.apache.logging.log4j.Logger;
 import javax.xml.bind.JAXBException;
 import java.io.*;
 
-public class PutPaymentOrderDocCHECKCODE extends Post {
-    private final static Logger log = LogManager.getLogger(PutPaymentOrderDocCHECKCODE.class);
+public class PutDocCHECKCODE extends Post {
+    private final static Logger log = LogManager.getLogger(PutDocCHECKCODE.class);
     private final String nameRequestAndActionForLog;
     private final String documentID;
     private final String statusCodeForCheck;
@@ -26,7 +26,7 @@ public class PutPaymentOrderDocCHECKCODE extends Post {
     private String documentNumber;
     public static UniversalResponseRootTag rootTag;
 
-    public PutPaymentOrderDocCHECKCODE(String nameRequestAndActionForLog, String documentID, String statusCodeForCheck) {
+    public PutDocCHECKCODE(String nameRequestAndActionForLog, String documentID, String statusCodeForCheck) {
         this.nameRequestAndActionForLog = nameRequestAndActionForLog;
         this.documentID = documentID;
         this.statusCodeForCheck = statusCodeForCheck;

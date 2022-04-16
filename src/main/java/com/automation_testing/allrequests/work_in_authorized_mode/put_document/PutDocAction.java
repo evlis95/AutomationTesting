@@ -1,4 +1,4 @@
-package com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord;
+package com.automation_testing.allrequests.work_in_authorized_mode.put_document;
 
 import com.automation_testing.allrequests.authorization.AuthLogin;
 import com.automation_testing.allrequests.work_in_authorized_mode.getdoc.GetDocument;
@@ -19,12 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class PutPayOrdDoc extends Post {
+public class PutDocAction extends Post {
 
     private final Map<String, String> fieldsAndValues;
     public static UniversalResponseRootTag rootTag;
-    private final static Logger log = LogManager.getLogger(PutPayOrdDoc.class);
-    private final PaymentOrderAction paymentOrderAction;
+    private final static Logger log = LogManager.getLogger(PutDocAction.class);
+    private final DocumentAction documentAction;
     private String documentID;
     private String documentBankID;
     private final String nameSuccessfullyActForCheckRequest;
@@ -33,8 +33,8 @@ public class PutPayOrdDoc extends Post {
     private final String statusCodeForCheckRequest;
 
 
-    public PutPayOrdDoc(PaymentOrderAction paymentOrderAction, Map<String, String> fieldsMap, String nameSuccessfullyActForCheckRequest, String statusCodeForCheckRequest) {
-        this.paymentOrderAction = paymentOrderAction;
+    public PutDocAction(DocumentAction documentAction, Map<String, String> fieldsMap, String nameSuccessfullyActForCheckRequest, String statusCodeForCheckRequest) {
+        this.documentAction = documentAction;
         this.fieldsAndValues = fieldsMap;
         this.nameSuccessfullyActForCheckRequest = nameSuccessfullyActForCheckRequest;
         this.statusCodeForCheckRequest = statusCodeForCheckRequest;
@@ -50,7 +50,7 @@ public class PutPayOrdDoc extends Post {
 
         List<TagPOfUnivReq> listP = new ArrayList<>();
 
-        put.setTagReqAct(new TagReqActOfUnivReq(paymentOrderAction.toString()));
+        put.setTagReqAct(new TagReqActOfUnivReq(documentAction.toString()));
 
         put.setC("put");
         put.setT("document");
@@ -159,7 +159,7 @@ public class PutPayOrdDoc extends Post {
         } else {
             failedResponseMessage();
         }
-        switch (paymentOrderAction) {
+        switch (documentAction) {
             case SAVE -> new ExecutingSaveDocPayOrd().executing();
             case SIGN, SIGN_GO -> new ExecutingSignAndSignGoDocPayOrd().executing();
         }
@@ -167,12 +167,12 @@ public class PutPayOrdDoc extends Post {
 
 
     private class ExecutingSaveDocPayOrd {
-        PutPaymentOrderDocFORCE force;
+        PutDocFORCE force;
         GetDocument getDoc;
 
         private void executing() throws JAXBException, IOException, InterruptedException {
             if (rootTag.getListC() != null) {
-                force = new PutPaymentOrderDocFORCE(documentID);
+                force = new PutDocFORCE(documentID);
                 force.run();
                 getDoc = new GetDocument(force.getDocumentBankID());
                 getDoc.run();
@@ -184,35 +184,35 @@ public class PutPayOrdDoc extends Post {
     }
 
     private class ExecutingSignAndSignGoDocPayOrd {
-        PutPaymentOrderDocCHECKCODE check;
-        PutPaymentOrderDocDATAFORSIGN dataForSign;
-        PutPaymentOrderDocFORCE force;
+        PutDocCHECKCODE check;
+        PutDocDATAFORSIGN dataForSign;
+        PutDocFORCE force;
         GetDocument getDoc;
 
         private void executing() throws JAXBException, IOException, InterruptedException {
             if (rootTag.getListC() != null) {
                 if (rootTag.getListC().get(0).getCe().equals("1")) {
-                    force = new PutPaymentOrderDocFORCE(documentID);
+                    force = new PutDocFORCE(documentID);
                     force.run();
                     getDoc = new GetDocument(force.getDocumentBankID());
                     getDoc.run();
                 } else {
                     Check.checkCountAvailableSPSign(rootTag);
-                    force = new PutPaymentOrderDocFORCE(documentID);
+                    force = new PutDocFORCE(documentID);
                     force.run();
                     Check.checkCountAvailableSPForce(force.getRootTag());
-                    dataForSign = new PutPaymentOrderDocDATAFORSIGN(force.getRootTag(), documentID);
+                    dataForSign = new PutDocDATAFORSIGN(force.getRootTag(), documentID);
                     dataForSign.run();
-                    check = new PutPaymentOrderDocCHECKCODE(nameSuccessfullyActForCheckRequest, documentID, statusCodeForCheckRequest);
+                    check = new PutDocCHECKCODE(nameSuccessfullyActForCheckRequest, documentID, statusCodeForCheckRequest);
                     check.run();
                     getDoc = new GetDocument(check.getDocumentBankID());
                     getDoc.run();
                 }
             } else {
                 Check.checkCountAvailableSPSign(rootTag);
-                dataForSign = new PutPaymentOrderDocDATAFORSIGN(rootTag, documentID);
+                dataForSign = new PutDocDATAFORSIGN(rootTag, documentID);
                 dataForSign.run();
-                check = new PutPaymentOrderDocCHECKCODE(nameSuccessfullyActForCheckRequest, documentID, statusCodeForCheckRequest);
+                check = new PutDocCHECKCODE(nameSuccessfullyActForCheckRequest, documentID, statusCodeForCheckRequest);
                 check.run();
                 getDoc = new GetDocument(check.getDocumentBankID());
                 getDoc.run();

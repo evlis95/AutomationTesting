@@ -1,4 +1,4 @@
-package com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord;
+package com.automation_testing.allrequests.work_in_authorized_mode.put_document;
 
 import com.automation_testing.allrequests.authorization.AuthLogin;
 import com.automation_testing.checks.Check;
@@ -10,7 +10,7 @@ import com.automation_testing.post_request_type.Post;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
-public class PutPaymentOrderDocFORCE extends Post {
+public class PutDocFORCE extends Post {
 
     private final String documentID;
     private String documentBankID;
@@ -24,7 +24,7 @@ public class PutPaymentOrderDocFORCE extends Post {
         return documentBankID;
     }
 
-    public PutPaymentOrderDocFORCE(String documentID) {
+    public PutDocFORCE(String documentID) {
         this.documentID = documentID;
     }
 
