@@ -64,8 +64,8 @@ public class TestRunClassicBox {
     final CountAllAllDocsDoc countAllMyDocs = new CountAllAllDocsDoc();
     final HeadersAllDocsDoc headersAllDocsOfMyDocs = new HeadersAllDocsDoc();
     final HeadersByDayPayOrd headersByDayPayOrd = new HeadersByDayPayOrd();
-    public static PutDocAction payOrdDoc;
-    public static DocumentNumber docNumPayOrd;
+    public static PutDocAction putDoc;
+    public static DocumentNumber docNumber;
 
     public TestRunClassicBox() {
     }
@@ -111,37 +111,37 @@ public class TestRunClassicBox {
         //запрос необходимый для блока запросов в бюджет
         requestMap.put("GetFullBankRuBud", getFullBankRuBud);
         //блок сохранение документа контрагенту
-        requestMap.put("DocNumPaymOrderKonSave", docNumPayOrd);
-        requestMap.put("PutPaymentOrderDocKonSave", payOrdDoc);
+        requestMap.put("DocNumPaymOrderKonSave", docNumber);
+        requestMap.put("PutPaymentOrderDocKonSave", putDoc);
         //блок подписи документа контрагенту
-        requestMap.put("DocNumPaymOrderKonSign", docNumPayOrd);
-        requestMap.put("PutPaymentOrderDocKonSign", payOrdDoc);
+        requestMap.put("DocNumPaymOrderKonSign", docNumber);
+        requestMap.put("PutPaymentOrderDocKonSign", putDoc);
         //блок подписи и отправки документа контрагенту
-        requestMap.put("DocNumPaymOrderKonSignGo", docNumPayOrd);
-        requestMap.put("PutPaymentOrderDocKonSignGo", payOrdDoc);
+        requestMap.put("DocNumPaymOrderKonSignGo", docNumber);
+        requestMap.put("PutPaymentOrderDocKonSignGo", putDoc);
         //блок сохранение документа в бюджет
-        requestMap.put("DocNumPaymOrderBudSave", docNumPayOrd);
-        requestMap.put("PutPaymentOrderDocBudSave", payOrdDoc);
+        requestMap.put("DocNumPaymOrderBudSave", docNumber);
+        requestMap.put("PutPaymentOrderDocBudSave", putDoc);
         //блок подписи документа в бюджет
-        requestMap.put("DocNumPaymOrderBudSign", docNumPayOrd);
-        requestMap.put("PutPaymentOrderDocBudSign", payOrdDoc);
+        requestMap.put("DocNumPaymOrderBudSign", docNumber);
+        requestMap.put("PutPaymentOrderDocBudSign", putDoc);
         //блок подписи и отправки документа в бюджет
-        requestMap.put("DocNumPaymOrderBudSignGo", docNumPayOrd);
-        requestMap.put("PutPaymentOrderDocBudSignGo", payOrdDoc);
+        requestMap.put("DocNumPaymOrderBudSignGo", docNumber);
+        requestMap.put("PutPaymentOrderDocBudSignGo", putDoc);
         //блок сохранение документа себе
-        requestMap.put("DocNumPaymOrderYSSAve", docNumPayOrd);
-        requestMap.put("PutPaymentOrderDoсYSSave", payOrdDoc);
+        requestMap.put("DocNumPaymOrderYSSAve", docNumber);
+        requestMap.put("PutPaymentOrderDoсYSSave", putDoc);
         //блок подписи документа себе
-        requestMap.put("DocNumPaymOrderYSSign", docNumPayOrd);
-        requestMap.put("PutPaymentOrderDoсYSSign", payOrdDoc);
+        requestMap.put("DocNumPaymOrderYSSign", docNumber);
+        requestMap.put("PutPaymentOrderDoсYSSign", putDoc);
         //блок подписи и отправки документа себе
-        requestMap.put("DocNumPaymOrderYSSignGo", docNumPayOrd);
-        requestMap.put("PutPaymentOrderDoсYSSignGo", payOrdDoc);
+        requestMap.put("DocNumPaymOrderYSSignGo", docNumber);
+        requestMap.put("PutPaymentOrderDoсYSSignGo", putDoc);
         // мои документы
         requestMap.put("CountAllAllDocsDoc", countAllMyDocs);
         requestMap.put("HeadersAllDocsDocOfMyDocs", headersAllDocsOfMyDocs);
         // создание запроса на отзыв
-        requestMap.put("DocNumCanReq", docNumPayOrd);
+        requestMap.put("DocNumCanReq", docNumber);
         requestMap.put("HeadersByDayPayOrd", headersByDayPayOrd);
 
         log.info("Teстирование выполняется\n");
@@ -155,8 +155,8 @@ public class TestRunClassicBox {
                     case "DocNumPaymOrderBudSign":
                     case "DocNumPaymOrderBudSignGo":
                     case "DocNumCanReq":
-                        docNumPayOrd = new DocumentNumber();
-                        docNumPayOrd.run();
+                        docNumber = new DocumentNumber();
+                        docNumber.run();
                         break;
 
                     case "DocNumPaymOrderYSSAve":
@@ -168,8 +168,8 @@ public class TestRunClassicBox {
                                     Запрос нового документа не будет произведен.
                                     """);
                         } else {
-                            docNumPayOrd = new DocumentNumber();
-                            docNumPayOrd.run();
+                            docNumber = new DocumentNumber();
+                            docNumber.run();
                         }
                         break;
 
@@ -210,28 +210,28 @@ public class TestRunClassicBox {
                         }
                         break;
                     case "PutPaymentOrderDocKonSave":
-                        payOrdDoc = new PutDocAction(DocumentAction.SAVE, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY).creating(), DocumentType.PAYMENT_ORDER);
-                        payOrdDoc.run();
+                        putDoc = new PutDocAction(DocumentAction.SAVE, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY).creating(), DocumentType.PAYMENT_ORDER);
+                        putDoc.run();
                         break;
                     case "PutPaymentOrderDocKonSign":
-                        payOrdDoc = new PutDocAction(DocumentAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY).creating(), DocumentType.PAYMENT_ORDER);
-                        payOrdDoc.run();
+                        putDoc = new PutDocAction(DocumentAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY).creating(), DocumentType.PAYMENT_ORDER);
+                        putDoc.run();
                         break;
                     case "PutPaymentOrderDocKonSignGo":
-                        payOrdDoc = new PutDocAction(DocumentAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY).creating(), DocumentType.PAYMENT_ORDER);
-                        payOrdDoc.run();
+                        putDoc = new PutDocAction(DocumentAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY).creating(), DocumentType.PAYMENT_ORDER);
+                        putDoc.run();
                         break;
                     case "PutPaymentOrderDocBudSave":
-                        payOrdDoc = new PutDocAction(DocumentAction.SAVE, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_BUDGET).creating(), DocumentType.PAYMENT_ORDER);
-                        payOrdDoc.run();
+                        putDoc = new PutDocAction(DocumentAction.SAVE, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_BUDGET).creating(), DocumentType.PAYMENT_ORDER);
+                        putDoc.run();
                         break;
                     case "PutPaymentOrderDocBudSign":
-                        payOrdDoc = new PutDocAction(DocumentAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_BUDGET).creating(), DocumentType.PAYMENT_ORDER);
-                        payOrdDoc.run();
+                        putDoc = new PutDocAction(DocumentAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_BUDGET).creating(), DocumentType.PAYMENT_ORDER);
+                        putDoc.run();
                         break;
                     case "PutPaymentOrderDocBudSignGo":
-                        payOrdDoc = new PutDocAction(DocumentAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_BUDGET).creating(), DocumentType.PAYMENT_ORDER);
-                        payOrdDoc.run();
+                        putDoc = new PutDocAction(DocumentAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_BUDGET).creating(), DocumentType.PAYMENT_ORDER);
+                        putDoc.run();
                         break;
                     case "PutPaymentOrderDoсYSSave":
                         if (Check.checkCountAvailableAccounts810()) {
@@ -240,8 +240,8 @@ public class TestRunClassicBox {
                                     Платеж себе не будет создан.
                                     """);
                         } else {
-                            payOrdDoc = new PutDocAction(DocumentAction.SAVE, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER);
-                            payOrdDoc.run();
+                            putDoc = new PutDocAction(DocumentAction.SAVE, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER);
+                            putDoc.run();
                         }
                         break;
                     case "PutPaymentOrderDoсYSSign":
@@ -251,8 +251,8 @@ public class TestRunClassicBox {
                                     Платеж себе не будет создан и подписан.
                                     """);
                         } else {
-                            payOrdDoc = new PutDocAction(DocumentAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER);
-                            payOrdDoc.run();
+                            putDoc = new PutDocAction(DocumentAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER);
+                            putDoc.run();
                         }
                         break;
                     case "PutPaymentOrderDoсYSSignGo":
@@ -262,8 +262,8 @@ public class TestRunClassicBox {
                                     Платеж себе не будет создан и подписан и отправлен.
                                     """);
                         } else {
-                            payOrdDoc = new PutDocAction(DocumentAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER);
-                            payOrdDoc.run();
+                            putDoc = new PutDocAction(DocumentAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER);
+                            putDoc.run();
                         }
                         break;
                     ////////////////////////////////////////////////////////////////////////////////////
