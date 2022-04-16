@@ -39,7 +39,7 @@ public class PutDocDATAFORSIGN extends Post {
 
         dataForSign.setC("put");
         dataForSign.setT("document");
-        dataForSign.setN("PaymentOrder");
+        dataForSign.setN(PutDocAction.documentTypeString);
         dataForSign.setV(3.1);
         dataForSign.setS(AuthLogin.sessionID);
         dataForSign.setTagU(documentUIDSP);

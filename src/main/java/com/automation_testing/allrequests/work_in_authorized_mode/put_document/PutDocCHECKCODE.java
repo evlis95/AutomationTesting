@@ -41,10 +41,10 @@ public class PutDocCHECKCODE extends Post {
         Check.checkCode200(getCodeStatusResponse(), "CHECKCODE");
 
         if (documentStatusCode.equals(statusCodeForCheck)) {
-            log.info("Проверка присвоения статус кода " + statusCodeForCheck + " платежному поручению - PASS");
+            log.info("Проверка присвоения статус кода " + statusCodeForCheck + " документу - PASS\n");
             Check.quantityPASS++;
         } else {
-            log.error("Проверка присвоения статус кода " + statusCodeForCheck + " платежному поручению - FAILED");
+            log.error("Проверка присвоения статус кода " + statusCodeForCheck + " документу - FAILED");
             Check.quantityFAILED++;
         }
     }
@@ -55,7 +55,7 @@ public class PutDocCHECKCODE extends Post {
         TagReqActOfUnivReq tagReqAct = new TagReqActOfUnivReq();
         checkCode.setC("put");
         checkCode.setT("document");
-        checkCode.setN("PaymentOrder");
+        checkCode.setN(PutDocAction.documentTypeString);
         checkCode.setV(3.1);
         checkCode.setS(AuthLogin.sessionID);
         checkCode.setTagC("1");

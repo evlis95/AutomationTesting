@@ -54,8 +54,6 @@ public class PutDocFORCE extends Post {
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             documentBankID = rootTag.getListF().get(0).getI();
-
-
             checkTest();
         } else {
             failedResponseMessage();
