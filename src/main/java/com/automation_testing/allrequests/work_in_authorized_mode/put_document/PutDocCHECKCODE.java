@@ -66,13 +66,13 @@ public class PutDocCHECKCODE extends Post {
     }
 
     private void info() throws IOException {
-        StringBuilder stringBuilder = new StringBuilder("");
+        StringBuilder stringBuilder = new StringBuilder();
         String messageText = String.format("\n\n%s\n" +
                 "Идентификатор документа в банковской системе: " + documentBankID + "\n" +
                 "Cтатус код: " + documentStatusCode + "\n" +
                 "Номер документа: " + documentNumber + "\n", nameRequestAndActionForLog);
         BufferedReader bufferedReader = new BufferedReader(new StringReader(messageText));
-        String line = "";
+        String line;
         while ((line = bufferedReader.readLine()) != null) {
             stringBuilder.append(line).append("\n");
         }
