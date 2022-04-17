@@ -61,7 +61,7 @@ public class PutDocDATAFORSIGN extends Post {
 
     private void info() throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
-        String line = "";
+        String line;
         String message = "\n\nВыбрано СП: " + documentNameSP + "\n" +
                 "Идентификатор: " + documentUIDSP + "\n";
         BufferedReader bufferedReader = new BufferedReader(new StringReader(message));

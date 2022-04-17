@@ -1,11 +1,11 @@
 package com.automation_testing.post_request_type;
 
 import com.automation_testing.checks.Check;
-import com.sun.xml.bind.marshaller.CharacterEscapeHandler;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.jaxbsettings.CustomCharacterEscapeHandler;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.generalsettings.Settings;
+import com.sun.xml.bind.marshaller.CharacterEscapeHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
