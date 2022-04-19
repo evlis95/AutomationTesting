@@ -2,6 +2,7 @@ package com.automation_testing.allrequests.work_in_authorized_mode.put_document;
 
 import com.automation_testing.allrequests.authorization.AuthLogin;
 
+import com.automation_testing.allrequests.authorization.UserFilter;
 import com.automation_testing.checks.Check;
 
 import com.automation_testing.creatingxml.TagReqActOfUnivReq;
@@ -13,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.xml.bind.JAXBException;
 import java.io.*;
+import java.util.ArrayList;
 
 public class PutDocCHECKCODE extends Post {
     private final static Logger log = LogManager.getLogger(PutDocCHECKCODE.class);
@@ -20,7 +22,7 @@ public class PutDocCHECKCODE extends Post {
     private final String documentID;
     private final String statusCodeForCheck;
     private String documentBankID;
-
+    public static ArrayList<String> listDocBankID;
     //реквизиты сохраненного ПП
     private String documentStatusCode;
     private String documentNumber;
@@ -80,15 +82,26 @@ public class PutDocCHECKCODE extends Post {
         log.info(stringBuilder.toString());
     }
 
+    private void initializationFields() {
+        documentBankID = rootTag.getListF().get(0).getI();
+        documentNumber = rootTag.getListF().get(0).getN();
+        documentStatusCode = rootTag.getListF().get(0).getS();
+        if (documentStatusCode.equals("43")) {
+            for (int i = 0; i < UserFilter.rootTag.getListV().size(); i++) {
+                if(UserFilter.rootTag.getListV().get(i).getAdv().equals("1") & UserFilter.rootTag.getListV().get(i).getReq().equals("1")) {
+                    listDocBankID.add(documentBankID);
+                }
+            }
+        }
+    }
+
     public void run() throws IOException, InterruptedException, JAXBException {
         createXmlBodyRequest();
         request();
         writeBodyResponseInFile();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
-            documentBankID = rootTag.getListF().get(0).getI();
-            documentNumber = rootTag.getListF().get(0).getN();
-            documentStatusCode = rootTag.getListF().get(0).getS();
+            initializationFields();
             checkTest();
             info();
 

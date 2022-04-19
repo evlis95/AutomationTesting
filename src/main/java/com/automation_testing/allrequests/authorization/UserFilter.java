@@ -33,6 +33,7 @@ public class UserFilter extends Post {
 
     private void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "UserFilter");
+        Check.checkEnabledServiceD2BMAdvanced();
     }
 
 

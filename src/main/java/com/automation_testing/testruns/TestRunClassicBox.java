@@ -3,6 +3,7 @@ package com.automation_testing.testruns;
 import com.automation_testing.allrequests.authorization.*;
 import com.automation_testing.allrequests.connect.*;
 import com.automation_testing.allrequests.managedevice.*;
+import com.automation_testing.allrequests.work_in_authorized_mode.create_cancell_req.AvailableDocument;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.DocumentAction;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.DocumentType;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocAction;
@@ -13,6 +14,7 @@ import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.*;
 import com.automation_testing.allrequests.work_in_authorized_mode.docnumber.DocumentNumber;
 import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.CountAllAllDocsDoc;
 import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.HeadersAllDocsDoc;
+import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocCHECKCODE;
 import com.automation_testing.checks.Check;
 import com.automation_testing.post_request_type.Post;
 import org.apache.logging.log4j.LogManager;
@@ -66,6 +68,7 @@ public class TestRunClassicBox {
     final HeadersByDayPayOrd headersByDayPayOrd = new HeadersByDayPayOrd();
     public static PutDocAction putDoc;
     public static DocumentNumber docNumber;
+    public static AvailableDocument availableDocument;
 
     public TestRunClassicBox() {
     }
@@ -140,9 +143,10 @@ public class TestRunClassicBox {
         // мои документы
         requestMap.put("CountAllAllDocsDoc", countAllMyDocs);
         requestMap.put("HeadersAllDocsDocOfMyDocs", headersAllDocsOfMyDocs);
-        // создание запроса на отзыв
+        // создание запроса на отзыв ПП
         requestMap.put("DocNumCanReq", docNumber);
         requestMap.put("HeadersByDayPayOrd", headersByDayPayOrd);
+        requestMap.put("AvailableDocumentPayOrd", availableDocument);
 
         log.info("Teстирование выполняется\n");
         try {
@@ -168,22 +172,6 @@ public class TestRunClassicBox {
                             new DocumentNumber().run();
                         }
                     }
-                    case "UserFilter" -> userFilter.run();
-/*                        boolean result = false;  /// убрать проверку в класс Check
-                        for (int j = 0; j < UserFilter.rootTag.getListV().size(); j++) {
-                            if (UserFilter.rootTag.getListV().get(j).getAdv().equals("1")) {
-                                result = true;
-                                break;
-                            }
-                        }
-                        if (result) {
-                            log.info("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - PASS\n");
-                            Check.quantityPASS++;
-                        } else {
-                            log.error("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - FAILED. Тестирование будет заверщено.\n");
-                            Check.quantityFAILED++;
-                            return;
-                        }*/
                     case "SmsAuthCode" -> {
                         if (Check.checkAvailableSignatureToolOTP()) {
                             smsAuthCode.run();
@@ -233,6 +221,7 @@ public class TestRunClassicBox {
                             }
                         }
                     }
+                    case "AvailableDocumentPayOrd" -> (availableDocument = new AvailableDocument("PaymentOrder", PutDocCHECKCODE.listDocBankID.get(0))).run();
                     ////////////////////////////////////////////////////////////////////////////////////
                     default -> {
                         Post post = (Post) map.getValue();
