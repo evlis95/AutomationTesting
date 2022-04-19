@@ -2,6 +2,7 @@ package com.automation_testing.checks;
 
 import com.automation_testing.allrequests.authorization.AuthCryptoprofCode;
 import com.automation_testing.allrequests.authorization.UserAccount;
+import com.automation_testing.allrequests.authorization.UserFilter;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocAction;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import org.apache.logging.log4j.LogManager;
@@ -30,6 +31,23 @@ public class Check {
                 accAvailable810++;
         }
         return accAvailable810 <= 1;
+    }
+
+    public static void checkEnabledServiceD2BMAdvanced() {
+        boolean result = false;
+        for (int j = 0; j < UserFilter.rootTag.getListV().size(); j++) {
+            if (UserFilter.rootTag.getListV().get(j).getAdv().equals("1")) {
+                result = true;
+                break;
+            }
+        }
+        if (result) {
+            log.info("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - PASS\n");
+            Check.quantityPASS++;
+        } else {
+            log.error("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - FAILED. ВНИМАНИЕ!!!.\n");
+            Check.quantityFAILED++;
+        }
     }
 
     public static void checkCountAvailableSPForce(UniversalResponseRootTag rootTag) {
