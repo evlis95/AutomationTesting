@@ -48,7 +48,7 @@ public class GetFullBankRuKon extends Post {
             rootTag = parseXmlBodyResponse();
             receiverBankName = rootTag.getListR().get(0).getX();
             receiverBIC = rootTag.getListR().get(0).getD();
-            receiverCorrAcc = rootTag.getListR().get(0).getTagCorrAcc().get(0).getA();
+            receiverCorrAcc = rootTag.getListR().get(0).getH();
             receiverPlace = rootTag.getListR().get(0).getV();
             receiverPlaceType = rootTag.getListR().get(0).getB();
             checkTest();

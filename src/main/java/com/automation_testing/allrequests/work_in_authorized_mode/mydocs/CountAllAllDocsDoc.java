@@ -61,7 +61,7 @@ public class CountAllAllDocsDoc extends Post {
             if (UserFilter.rootTag.getListV().get(i).getReq().equals("1")) {
                 setTOfTagP.add(new TagTOfTagP("CancellationRequest"));
             }
-            if (UserFilter.rootTag.getListV().get(i).getDcc().equals("1") || UserFilter.rootTag.getListV().get(i).getCc().equals("1")) {
+            if (/*UserFilter.rootTag.getListV().get(i).getDcc().equals("1") ||*/ UserFilter.rootTag.getListV().get(i).getCc().equals("1")) {
                 setTOfTagP.add(new TagTOfTagP("CorpCardNew"));
                 setTOfTagP.add(new TagTOfTagP("CorpCardBlock"));
                 setTOfTagP.add(new TagTOfTagP("CorpCardUnblock"));
@@ -75,10 +75,10 @@ public class CountAllAllDocsDoc extends Post {
             if (UserFilter.rootTag.getListV().get(i).getCtr().equals("1")) {
                 setTOfTagP.add(new TagTOfTagP("CurTransfer"));
             }
-            if (UserFilter.rootTag.getListV().get(i).getMinBalance().equals("1")) {
+            /*if (UserFilter.rootTag.getListV().get(i).getMinBalance().equals("1")) {
                 setTOfTagP.add(new TagTOfTagP("MinBalance"));
-            }
-            if (UserFilter.rootTag.getListV().get(i).getAddAcc().equals("1")) {
+            }*/
+            /*if (UserFilter.rootTag.getListV().get(i).getAddAcc().equals("1")) {
                 setTOfTagP.add(new TagTOfTagP("AdditionalAcc"));
             }
             if (UserFilter.rootTag.getListV().get(i).getOffer().equals("1")) {
@@ -92,28 +92,28 @@ public class CountAllAllDocsDoc extends Post {
             }
             if (UserFilter.rootTag.getListV().get(i).getNewqr().equals("1")) {
                 setTOfTagP.add(new TagTOfTagP("SystemFastPayQR"));
-            }
+            }*/
             if (UserFilter.rootTag.getListV().get(i).getDep().equals("1")) {
                 setTOfTagP.add(new TagTOfTagP("NewDepositPetition"));
             }
-            if (UserFilter.rootTag.getListV().get(i).getCr().equals("1")) {
+            /*if (UserFilter.rootTag.getListV().get(i).getCr().equals("1")) {
                 setTOfTagP.add(new TagTOfTagP("CreditApplication "));
                 setTOfTagP.add(new TagTOfTagP("CreditTerms"));
-            }
+            }*/
             /*if (UserFilter.rootTag.getListV().get(i).getDepAdv().equals("1")) { // убрать комментарий когда запилят услугу D2BM. depAdv
                 setTOfTagP.add(new TagTOfTagP("DepositPartialWithdrawal"));
                 setTOfTagP.add(new TagTOfTagP("DepositProlongation"));
                 setTOfTagP.add(new TagTOfTagP("DepositReplenishment"));
                 setTOfTagP.add(new TagTOfTagP("DepositTermination"));
             }*/
-            if (UserFilter.rootTag.getListV().get(i).getSm().equals("1")) {
+          /*  if (UserFilter.rootTag.getListV().get(i).getSm().equals("1")) {
                 setTOfTagP.add(new TagTOfTagP("ServiceСonnection"));
                 if (UserFilter.rootTag.getListV().get(i).getListContract() != null) {
                     if (UserFilter.rootTag.getListV().get(i).getListContract().get(i).getTariff().equals("1")) {
                         setTOfTagP.add(new TagTOfTagP("ServiceСonnection"));
                     }
                 }
-            }
+            }*/
             tagTQuantity = setTOfTagP.size();
         }
         TagPOfUnivReq tagP = new TagPOfUnivReq();

@@ -17,6 +17,7 @@ public class GetFullBankRuBud extends Post {
     public static String receiverGeneralBIC;
     public static String receiverPlace;
     public static String receiverPlaceType;
+    public static String receiverCorrAcc;
 
     private void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "GetFullBankRuDict");
@@ -32,7 +33,7 @@ public class GetFullBankRuBud extends Post {
         getFull.setN("bankru");
         getFull.setV(1.0);
         getFull.setS(AuthLogin.sessionID);
-        tagP.setD("044525000");
+        tagP.setD("044525225");
 
         getFull.setTagP(tagP);
 
@@ -40,6 +41,7 @@ public class GetFullBankRuBud extends Post {
     }
 
     private void initializationData() {
+        receiverCorrAcc = rootTag.getListR().get(0).getH();
         receiverBankName = rootTag.getListR().get(0).getX();
         receiverGeneralBIC = rootTag.getListR().get(0).getD();
         receiverPlace = rootTag.getListR().get(0).getV();

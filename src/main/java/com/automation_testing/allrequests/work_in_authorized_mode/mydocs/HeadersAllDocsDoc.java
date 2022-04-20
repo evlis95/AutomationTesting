@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -70,13 +71,20 @@ public class HeadersAllDocsDoc extends Post {
     }
 
     private void checkAvailabilityDocPayOrdInRes() {
+        SimpleDateFormat format = new SimpleDateFormat("dd");
+        Date date = new Date();
+        String data = format.format(date);
         if (rootTag.getListDS() != null) {
             if (rootTag.getListDS().get(0).getListM() != null) {
                 boolean result = false;
-                for (int i = 0; i < rootTag.getListDS().get(0).getListM().get(0).getListD().size(); i++) {
-                    if (rootTag.getListDS().get(0).getListM().get(0).getListD().get(i).getType().equals("PaymentOrder")) {
-                        result = true;
-                        break;
+                for (int i = 0; i < rootTag.getListDS().get(0).getListM().size(); i++) {
+                    if(rootTag.getListDS().get(0).getListM().get(i).getN().contains(data)) {
+                        for (int j = 0; j < rootTag.getListDS().get(0).getListM().get(i).getListD().size(); j++) {
+                            if (rootTag.getListDS().get(0).getListM().get(i).getListD().get(j).getType().equals("PaymentOrder")) {
+                                result = true;
+                                break;
+                            }
+                        }
                     }
                 }
                 if (result) {
@@ -117,20 +125,20 @@ public class HeadersAllDocsDoc extends Post {
                 addObjectInMap("CorpCardUnblock", corpCardStatCode);
                 addObjectInMap("CorpCardAbroadOperReq", corpCardStatCode);
             }
-            if (UserFilter.rootTag.getListV().get(i).getOffer().equals("1")) {
+            /*if (UserFilter.rootTag.getListV().get(i).getOffer().equals("1")) {
                 addObjectInMap("DocFromBank", docFromBankStatCode);
-            }
-            if (UserFilter.rootTag.getListV().get(i).getMinBalance().equals("1")) {
+            }*/
+            /*if (UserFilter.rootTag.getListV().get(i).getMinBalance().equals("1")) {
                 addObjectInMap("MinBalance", minBalanceStatCode);
             }
             if (UserFilter.rootTag.getListV().get(i).getCr().equals("1")) {
                 addObjectInMap("CreditApplication", credStatCode);
                 addObjectInMap("CreditTerms", credStatCode);
-            }
+            }*/
             if (UserFilter.rootTag.getListV().get(i).getDep().equals("1")) {
                 addObjectInMap("NewDepositPetition", depLightStatCode);
             }
-            if (UserFilter.rootTag.getListV().get(i).getSm().equals("1")) {
+            /*if (UserFilter.rootTag.getListV().get(i).getSm().equals("1")) {
                 addObjectInMap("ServiceСonnection", serConnStatCode);
                 if (UserFilter.rootTag.getListV().get(i).getListContract() != null) {
                     if (UserFilter.rootTag.getListV().get(i).getListContract().get(i).getTar().equals("1")) {
@@ -146,16 +154,16 @@ public class HeadersAllDocsDoc extends Post {
             }
             if (UserFilter.rootTag.getListV().get(i).getPaybc().equals("1")) {
                 addObjectInMap("SystemFastPay", sysFastPayStatCode);
-            }
+            }*/
            /* if (UserFilter.rootTag.getListV().get(i).getDepAdv().equals("1")) { // убрать комментарий когда появится услуга D2BM. DepAdv
                 addObjectInMap("DepositPartialWithdrawal", depAdvStatCode);
                 addObjectInMap("DepositProlongation", depAdvStatCode);
                 addObjectInMap("DepositReplenishment", depAdvStatCode);
                 addObjectInMap("DepositTermination", depAdvStatCode);
             }*/
-            if (UserFilter.rootTag.getListV().get(i).getAddAcc().equals("1")) {
+            /*if (UserFilter.rootTag.getListV().get(i).getAddAcc().equals("1")) {
                 addObjectInMap("AdditionalAcc", addAccStatCode);
-            }
+            }*/
 
 
         }

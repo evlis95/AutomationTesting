@@ -170,7 +170,7 @@ public class UserFilter extends Post {
                         if (rootTag.getListV().get(j).getCc().equals("1")) {
                             stringBuffer.append("D2BM. Корпоративные карты\n");
                         }
-                        if (rootTag.getListV().get(j).getBn().equals("1")) {
+                      /*  if (rootTag.getListV().get(j).getBn().equals("1")) {
                             stringBuffer.append("D2BM. Канал продаж\n");
                         }
                         if (rootTag.getListV().get(j).getDep().equals("1")) {
@@ -232,7 +232,7 @@ public class UserFilter extends Post {
                         }
                         if (rootTag.getListV().get(j).getMinBalance().equals("1")) {
                             stringBuffer.append("D2BM. НСО\n");
-                        }
+                        }*/
                     }
                 }
             }

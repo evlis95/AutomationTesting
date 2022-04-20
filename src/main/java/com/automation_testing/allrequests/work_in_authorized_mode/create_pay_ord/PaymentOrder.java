@@ -188,7 +188,7 @@ public class PaymentOrder {
         receiverAccount = "12345810611111111111";
         receiverBIC = GetFullBankRuKon.receiverBIC;
         receiverBankName = GetFullBankRuKon.receiverBankName.replaceAll("\"", "&quot;");
-        receiverINN = "1126587769";
+        receiverINN = "7726587769";
         ground = "\nВ том числе НДС 20.00 % - 200.00 р.";
         receiverBankType = "20";
         receiverCorrAccount = GetFullBankRuKon.receiverCorrAcc;
@@ -206,13 +206,13 @@ public class PaymentOrder {
         cbcCode = GetFilterPartCBCCodes.cbcCodeValue;
         nds = "";
         receiver = "Федеральное казначейство";
-        receiverAccount = "40702810011111111111";
+        receiverAccount = "40701810911111111111";
         receiverBIC = GetFullBankRuBud.receiverGeneralBIC;
         receiverBankName = GetFullBankRuBud.receiverBankName.replaceAll("\"", "&quot;");
-        receiverINN = "1110568760";
+        receiverINN = "7710568760";
         ground = "\nНДС не облагается";
         receiverBankType = "00";
-        receiverCorrAccount = "";
+        receiverCorrAccount = GetFullBankRuBud.receiverCorrAcc;
         receiverKPP = "770101001";
         receiverPlace = GetFullBankRuBud.receiverPlace;
         receiverPlaceType = GetFullBankRuBud.receiverPlaceType;
