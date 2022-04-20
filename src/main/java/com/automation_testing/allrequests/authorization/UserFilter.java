@@ -2,10 +2,16 @@ package com.automation_testing.allrequests.authorization;
 
 import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
+import com.automation_testing.hibernate.pojo.Divisions;
+import com.automation_testing.hibernate.pojo.Organizations;
+import com.automation_testing.hibernate.pojo.ServicesMobile;
+import com.automation_testing.hibernate.utils.HibernateUtils;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_type.Post;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import javax.xml.bind.JAXBException;
 import java.io.*;
@@ -241,6 +247,14 @@ public class UserFilter extends Post {
         log.info(stringBuffer.toString());
     }
 
+    /*private void parsingDataAndSaveInBD() {
+        Session session = HibernateUtils.sessionFactory.openSession();
+        Transaction tx1 = session.beginTransaction();
+        session.save(new Organizations(orgId, orgName, orgKPP, orgINN));
+        tx1.commit();
+        session.close();
+    }*/
+
     private void identificationOfOrgData() {
         orgId = rootTag.getListC().get(0).getI();
         orgKPP = rootTag.getListC().get(0).getW();
@@ -256,6 +270,7 @@ public class UserFilter extends Post {
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             identificationOfOrgData();
+            /*parsingDataAndSaveInBD();*/
             checkTest();
             info();
         } else {

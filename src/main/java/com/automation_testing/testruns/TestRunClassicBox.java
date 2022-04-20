@@ -27,16 +27,16 @@ import java.util.Map.Entry;
 
 public class TestRunClassicBox {
 
-    final static Logger log = LogManager.getLogger(TestRunClassicBox.class);
+    final static Logger LOG = LogManager.getLogger(TestRunClassicBox.class);
 
-    final Bank bank = new Bank();
-    final Localization localization = new Localization();
-    final ManagePushBind managePushBind = new ManagePushBind();
-    final Style40 style40 = new Style40();
-    final VersionInfo versionInfo = new VersionInfo();
-    final AuthLogin authLogin = new AuthLogin();
-    final AuthMacIp authMacIp = new AuthMacIp();
-    final AuthCryptoprofCode authCryptoprofilesCode = new AuthCryptoprofCode();
+    final Bank BANK = new Bank();
+    final Localization LOCALIZATION = new Localization();
+    final ManagePushBind MANAGEPUSHBIND = new ManagePushBind();
+    final Style40 STYLE40 = new Style40();
+    final VersionInfo VERSIONINFO = new VersionInfo();
+    final AuthLogin AUTHLOGIN = new AuthLogin();
+    final AuthMacIp AUTHMACIP = new AuthMacIp();
+    final AuthCryptoprofCode AUTH_CRYPTO_PROFILES_CODE = new AuthCryptoprofCode();
     final SmsAuthCode smsAuthCode = new SmsAuthCode();
     final SendAuthCode sendAuthCode = new SendAuthCode();
     final AuthAccess authAccess = new AuthAccess();
@@ -77,15 +77,15 @@ public class TestRunClassicBox {
         //порядов запросов
         Map<String, Post> requestMap = new LinkedHashMap<>();
         //блок connect
-        requestMap.put("Bank", bank);
-        requestMap.put("Localization", localization);
-        requestMap.put("ManagePushBind", managePushBind);
-        requestMap.put("Style40", style40);
-        requestMap.put("VersionInfo", versionInfo);
+        requestMap.put("Bank", BANK);
+        requestMap.put("Localization", LOCALIZATION);
+        requestMap.put("ManagePushBind", MANAGEPUSHBIND);
+        requestMap.put("Style40", STYLE40);
+        requestMap.put("VersionInfo", VERSIONINFO);
         //блок authorization
-        requestMap.put("AuthLogin", authLogin);
-        requestMap.put("AuthMacIp", authMacIp);
-        requestMap.put("AuthCryptoprofCode", authCryptoprofilesCode);
+        requestMap.put("AuthLogin", AUTHLOGIN);
+        requestMap.put("AuthMacIp", AUTHMACIP);
+        requestMap.put("AuthCryptoprofCode", AUTH_CRYPTO_PROFILES_CODE);
         requestMap.put("SmsAuthCode", smsAuthCode);
         requestMap.put("SendAuthCode", sendAuthCode);
         requestMap.put("AuthAccess", authAccess);
@@ -146,9 +146,9 @@ public class TestRunClassicBox {
         // создание запроса на отзыв ПП
         requestMap.put("DocNumCanReq", docNumber);
         requestMap.put("HeadersByDayPayOrd", headersByDayPayOrd);
-        requestMap.put("AvailableDocumentPayOrd", availableDocument);
+        /*requestMap.put("AvailableDocumentPayOrd", availableDocument);*/
 
-        log.info("Teстирование выполняется\n");
+        LOG.info("Teстирование выполняется\n");
         try {
             for (Entry map : requestMap.entrySet())
                 switch (map.getKey().toString()) {
@@ -164,7 +164,7 @@ public class TestRunClassicBox {
                             "DocNumPaymOrderYSSign",
                             "DocNumPaymOrderYSSignGo" -> {
                         if (Check.checkCountAvailableAccounts810()) {
-                            log.warn("""
+                            LOG.warn("""
                                     У пользователя нет 2 доступного счета в рублях, чтобы осуществить платеж Себе.
                                     Запрос нового документа не будет произведен.
                                     """);
@@ -206,7 +206,7 @@ public class TestRunClassicBox {
                             "PutPaymentOrderDoсYSSign",
                             "PutPaymentOrderDoсYSSignGo" -> {
                         if (Check.checkCountAvailableAccounts810()) {
-                            log.warn("""
+                            LOG.warn("""
                                     У пользователя нет 2 доступного счета в рублях, чтобы осуществить платеж Себе.
                                     Платеж себе не будет создан.
                                     """);
@@ -228,8 +228,8 @@ public class TestRunClassicBox {
                         post.run();
                     }
                 }
-            log.info("Тестирование завершено");
-            log.info("Количество успешных тестов - " + Check.quantityPASS + ". Количество проваленных - " + Check.quantityFAILED + ".");
+            LOG.info("Тестирование завершено");
+            LOG.info("Количество успешных тестов - " + Check.quantityPASS + ". Количество проваленных - " + Check.quantityFAILED + ".");
         } catch (IOException | JAXBException |
                 InterruptedException e) {
             e.printStackTrace();

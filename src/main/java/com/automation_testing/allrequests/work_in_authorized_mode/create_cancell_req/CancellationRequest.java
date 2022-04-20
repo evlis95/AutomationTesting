@@ -24,6 +24,7 @@ public class CancellationRequest {
     private String cancelDocTariff;
 
     public Map<String,String> creating() {
-        
+
+        return null;
     }
 }
