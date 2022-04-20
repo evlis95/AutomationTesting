@@ -247,13 +247,14 @@ public class UserFilter extends Post {
         log.info(stringBuffer.toString());
     }
 
-    /*private void parsingDataAndSaveInBD() {
+    private void parsingDataAndSaveInBD() {
         Session session = HibernateUtils.sessionFactory.openSession();
         Transaction tx1 = session.beginTransaction();
         session.save(new Organizations(orgId, orgName, orgKPP, orgINN));
         tx1.commit();
         session.close();
-    }*/
+        HibernateUtils.sessionFactory.close();
+    }
 
     private void identificationOfOrgData() {
         orgId = rootTag.getListC().get(0).getI();
@@ -270,7 +271,7 @@ public class UserFilter extends Post {
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             identificationOfOrgData();
-            /*parsingDataAndSaveInBD();*/
+            parsingDataAndSaveInBD();
             checkTest();
             info();
         } else {

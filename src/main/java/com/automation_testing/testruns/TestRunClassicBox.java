@@ -16,6 +16,7 @@ import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.CountAl
 import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.HeadersAllDocsDoc;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocCHECKCODE;
 import com.automation_testing.checks.Check;
+import com.automation_testing.hibernate.utils.HibernateUtils;
 import com.automation_testing.post_request_type.Post;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -150,7 +151,7 @@ public class TestRunClassicBox {
 
         LOG.info("Teстирование выполняется\n");
         try {
-            for (Entry map : requestMap.entrySet())
+            for (Entry map : requestMap.entrySet()) {
                 switch (map.getKey().toString()) {
                     case "DocNumPaymOrderKonSave",
                             "DocNumPaymOrderKonSign",
@@ -228,6 +229,7 @@ public class TestRunClassicBox {
                         post.run();
                     }
                 }
+            }
             LOG.info("Тестирование завершено");
             LOG.info("Количество успешных тестов - " + Check.quantityPASS + ". Количество проваленных - " + Check.quantityFAILED + ".");
         } catch (IOException | JAXBException |

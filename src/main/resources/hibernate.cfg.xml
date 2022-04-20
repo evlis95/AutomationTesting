@@ -5,11 +5,11 @@
 <hibernate-configuration>
     <session-factory>
         <property name="connection.url">jdbc:postgresql://localhost:5432/Automation_testing</property>
-        <property name="connection.username">postgres</property>
-        <property name="connection.password">sql</property>
-
+        <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
-
-        <mapping package="com.automation_testing.hibernate.pojo"/>
+        <mapping class="com.automation_testing.hibernate.pojo.Accounts"/>
+        <mapping class="com.automation_testing.hibernate.pojo.Divisions"/>
+        <mapping class="com.automation_testing.hibernate.pojo.Organizations"/>
+        <mapping class="com.automation_testing.hibernate.pojo.ServicesMobile"/>
     </session-factory>
 </hibernate-configuration>
