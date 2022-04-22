@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class CrypProfCodeManagDev extends Post {
 
-    private final static Logger log = LogManager.getLogger(CrypProfCodeManagDev.class);
+    private final Logger LOG = LogManager.getLogger(CrypProfCodeManagDev.class);
     public static UniversalResponseRootTag rootTag;
     public static String spID;
 
@@ -41,7 +41,7 @@ public class CrypProfCodeManagDev extends Post {
                 }
             }
         } else {
-            log.error("Проверка наличия хотя бы 1 СП OTP для подписи действия с доверенными устройствами - FAILED");
+           LOG.error("Проверка наличия хотя бы 1 СП OTP для подписи действия с доверенными устройствами - FAILED");
         }
     }
 

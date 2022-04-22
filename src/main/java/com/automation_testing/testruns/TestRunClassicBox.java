@@ -144,7 +144,7 @@ public class TestRunClassicBox {
         requestMap.put("DocNumCanReq", docNumber);
         requestMap.put("HeadersByDayPayOrd", HEADERS_BY_DAY_PAY_ORD);
 
-        LOG.info("Teстирование выполняется\n");
+       LOG.info("Teстирование выполняется\n");
         try {
             for (Entry map : requestMap.entrySet())
                 switch (map.getKey().toString()) {
@@ -160,7 +160,7 @@ public class TestRunClassicBox {
                             "DocNumPaymOrderYSSign",
                             "DocNumPaymOrderYSSignGo" -> {
                         if (Check.checkCountAvailableAccounts810()) {
-                            LOG.warn("""
+                           LOG.warn("""
                                     У пользователя нет 2 доступного счета в рублях, чтобы осуществить платеж Себе.
                                     Запрос нового документа не будет произведен.
                                     """);
@@ -177,10 +177,10 @@ public class TestRunClassicBox {
                             }
                         }
                         if (result) {
-                            log.info("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - PASS\n");
+                           LOG.info("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - PASS\n");
                             Check.quantityPASS++;
                         } else {
-                            log.error("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - FAILED. Тестирование будет заверщено.\n");
+                           LOG.error("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - FAILED. Тестирование будет заверщено.\n");
                             Check.quantityFAILED++;
                             return;
                         }*/
@@ -218,7 +218,7 @@ public class TestRunClassicBox {
                             "PutPaymentOrderDoсYSSign",
                             "PutPaymentOrderDoсYSSignGo" -> {
                         if (Check.checkCountAvailableAccounts810()) {
-                            LOG.warn("""
+                           LOG.warn("""
                                     У пользователя нет 2 доступного счета в рублях, чтобы осуществить платеж Себе.
                                     Платеж себе не будет создан.
                                     """);
@@ -239,8 +239,8 @@ public class TestRunClassicBox {
                         post.run();
                     }
                 }
-            LOG.info("Тестирование завершено");
-            LOG.info("Количество успешных тестов - " + Check.quantityPASS + ". Количество проваленных - " + Check.quantityFAILED + ".");
+           LOG.info("Тестирование завершено");
+           LOG.info("Количество успешных тестов - " + Check.quantityPASS + ". Количество проваленных - " + Check.quantityFAILED + ".");
         } catch (IOException | JAXBException |
                 InterruptedException e) {
             e.printStackTrace();

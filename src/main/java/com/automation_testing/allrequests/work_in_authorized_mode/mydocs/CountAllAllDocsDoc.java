@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Set;
 
 public class CountAllAllDocsDoc extends Post {
-    private final static Logger log = LogManager.getLogger(CountAllAllDocsDoc.class);
+    private final Logger LOG = LogManager.getLogger(CountAllAllDocsDoc.class);
     private int tagTQuantity;
     public static UniversalResponseRootTag rootTag;
 
@@ -29,10 +29,10 @@ public class CountAllAllDocsDoc extends Post {
         Check.checkCode200(getCodeStatusResponse(), "CountAllAllDocsDocument");
         if (rootTag.getListD() != null) {
             if (tagTQuantity == rootTag.getListD().size()) {
-                log.info("Проверка количества пришедших типов документов в ответе на запрос CountAllAllDocsDoc, в зависимости от тех, которые ушли в запросе - PASS\n");
+               LOG.info("Проверка количества пришедших типов документов в ответе на запрос CountAllAllDocsDoc, в зависимости от тех, которые ушли в запросе - PASS\n");
                 Check.quantityPASS++;
             } else {
-                log.error("Проверка количества пришедших типов документов в ответе на запрос CountAllAllDocsDoc, в зависимости от тех, которые ушли в запросе - FAILED\n");
+               LOG.error("Проверка количества пришедших типов документов в ответе на запрос CountAllAllDocsDoc, в зависимости от тех, которые ушли в запросе - FAILED\n");
                 Check.quantityFAILED++;
             }
         }

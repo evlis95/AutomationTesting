@@ -18,7 +18,7 @@ public class UnBindManageDevice extends Post {
     private final BindManageDevice bindManageDevice = new BindManageDevice();
     private final SmsCodeManageDev smsCodeManageDev = new SmsCodeManageDev();
     private final SendCodeManageDev sendCodeManageDev = new SendCodeManageDev();
-    private final Logger log = LogManager.getLogger(UnBindManageDevice.class);
+    private final Logger LOG = LogManager.getLogger(UnBindManageDevice.class);
     public static UniversalResponseRootTag rootTag;
 
     private void checkTest() throws IOException {
@@ -44,11 +44,11 @@ public class UnBindManageDevice extends Post {
         smsCodeManageDev.run();
         sendCodeManageDev.run();
         if (SendCodeManageDev.condition.equals("0") || (SendCodeManageDev.condition.equals("2"))) {
-            log.info("Проверка на отвязку устройства - PASS\n");
+           LOG.info("Проверка на отвязку устройства - PASS\n");
             Check.quantityPASS++;
             bindManageDevice.run();
         } else {
-            log.error("Проверка на отвязку устройства - FAILED\n");
+           LOG.error("Проверка на отвязку устройства - FAILED\n");
             Check.quantityFAILED++;
         }
     }
