@@ -248,12 +248,6 @@ public class UserFilter extends Post {
     }
 
     private void parsingDataAndSaveInBD() {
-        Session session = HibernateUtils.sessionFactory.openSession();
-        Transaction tx1 = session.beginTransaction();
-        session.save(new Organizations(orgId, orgName, orgKPP, orgINN));
-        tx1.commit();
-        session.close();
-        HibernateUtils.sessionFactory.close();
     }
 
     private void identificationOfOrgData() {

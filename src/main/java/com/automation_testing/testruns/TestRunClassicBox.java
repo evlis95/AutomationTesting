@@ -3,7 +3,6 @@ package com.automation_testing.testruns;
 import com.automation_testing.allrequests.authorization.*;
 import com.automation_testing.allrequests.connect.*;
 import com.automation_testing.allrequests.managedevice.*;
-import com.automation_testing.allrequests.work_in_authorized_mode.create_cancell_req.AvailableDocument;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.DocumentAction;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.DocumentType;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocAction;
@@ -14,9 +13,7 @@ import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.*;
 import com.automation_testing.allrequests.work_in_authorized_mode.docnumber.DocumentNumber;
 import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.CountAllAllDocsDoc;
 import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.HeadersAllDocsDoc;
-import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocCHECKCODE;
 import com.automation_testing.checks.Check;
-import com.automation_testing.hibernate.utils.HibernateUtils;
 import com.automation_testing.post_request_type.Post;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,44 +29,43 @@ public class TestRunClassicBox {
 
     final Bank BANK = new Bank();
     final Localization LOCALIZATION = new Localization();
-    final ManagePushBind MANAGEPUSHBIND = new ManagePushBind();
+    final ManagePushBind MANAGE_PUSH_BIND = new ManagePushBind();
     final Style40 STYLE40 = new Style40();
-    final VersionInfo VERSIONINFO = new VersionInfo();
-    final AuthLogin AUTHLOGIN = new AuthLogin();
-    final AuthMacIp AUTHMACIP = new AuthMacIp();
+    final VersionInfo VERSION_INFO = new VersionInfo();
+    final AuthLogin AUTH_LOGIN = new AuthLogin();
+    final AuthMacIp AUTH_MAC_IP = new AuthMacIp();
     final AuthCryptoprofCode AUTH_CRYPTO_PROFILES_CODE = new AuthCryptoprofCode();
-    final SmsAuthCode smsAuthCode = new SmsAuthCode();
-    final SendAuthCode sendAuthCode = new SendAuthCode();
-    final AuthAccess authAccess = new AuthAccess();
-    final BindManageDevice bindManageDevice = new BindManageDevice();
-    final UnBindManageDevice unBindManageDevice = new UnBindManageDevice();
-    final MenuItem menuItem = new MenuItem();
-    final PushManagePushUserBind pushManagePushUserBind = new PushManagePushUserBind();
-    final UserFilter userFilter = new UserFilter();
-    final Banner banner = new Banner();
-    final NotificationMandatoryCount notificationMandatoryCount = new NotificationMandatoryCount();
-    final UserAccount userAccount = new UserAccount();
-    final StatementDocsByDay statementDocsByDay = new StatementDocsByDay();
-    final CountAllDocsDocPayOrd countAllDocsDocumentPaymentOrder = new CountAllDocsDocPayOrd();
-    final GetDictRemoteCorrespDictionary getDicRemoteCorresp = new GetDictRemoteCorrespDictionary();
-    final GetDictPaySendType getDictPaySendType = new GetDictPaySendType();
-    final GetDictNDSCalType getDictNDSCalType = new GetDictNDSCalType();
-    final GetDictCustomerKPP getDictCustomerKPP = new GetDictCustomerKPP();
-    final GetDictSalaryAcc getDictSalaryAcc = new GetDictSalaryAcc();
-    final TooltipPaymentOrder tooltipPaymentOrder = new TooltipPaymentOrder();
-    final GetFilterPartBankRu getFilterPartBankRu = new GetFilterPartBankRu();
-    final GetFullBankRuKon getFullBankRuKon = new GetFullBankRuKon();
-    final GetDictStat1256 getDictStat1256 = new GetDictStat1256();
-    final GetDictPayGrndParam getDictPayGrndParam = new GetDictPayGrndParam();
-    final GetDictMessageType getDictMessageType = new GetDictMessageType();
-    final GetFilterPartCBCCodes getFilterPartCBCCodes = new GetFilterPartCBCCodes();
-    final GetFullBankRuBud getFullBankRuBud = new GetFullBankRuBud();
-    final CountAllAllDocsDoc countAllMyDocs = new CountAllAllDocsDoc();
-    final HeadersAllDocsDoc headersAllDocsOfMyDocs = new HeadersAllDocsDoc();
-    final HeadersByDayPayOrd headersByDayPayOrd = new HeadersByDayPayOrd();
+    final SmsAuthCode SMS_AUTH_CODE = new SmsAuthCode();
+    final SendAuthCode SEND_AUTH_CODE = new SendAuthCode();
+    final AuthAccess AUTH_ACCESS = new AuthAccess();
+    final BindManageDevice BIND_MANAGE_DEVICE = new BindManageDevice();
+    final UnBindManageDevice UNBIND_MANAGE_DEVICE = new UnBindManageDevice();
+    final MenuItem MENU_ITEM = new MenuItem();
+    final PushManagePushUserBind PUSH_MANAGE_PUSH_USER_BIND = new PushManagePushUserBind();
+    final UserFilter USER_FILTER = new UserFilter();
+    final Banner BANNER = new Banner();
+    final NotificationMandatoryCount NOTIFICATION_MANDATORY_COUNT = new NotificationMandatoryCount();
+    final UserAccount USER_ACCOUNT = new UserAccount();
+    final StatementDocsByDay STATEMENT_DOCS_BY_DAY = new StatementDocsByDay();
+    final CountAllDocsDocPayOrd COUNT_ALL_DOCS_DOCUMENT_PAYMENT_ORDER = new CountAllDocsDocPayOrd();
+    final GetDictRemoteCorrespDictionary GET_DICT_REMOTE_CORR = new GetDictRemoteCorrespDictionary();
+    final GetDictPaySendType GET_DICT_PAY_SEND_TYPE = new GetDictPaySendType();
+    final GetDictNDSCalType GET_DICT_NDS_CAL_TYPE = new GetDictNDSCalType();
+    final GetDictCustomerKPP GET_DICT_CUSTOMER_KPP = new GetDictCustomerKPP();
+    final GetDictSalaryAcc GET_DICT_SALARY_ACC = new GetDictSalaryAcc();
+    final TooltipPaymentOrder TOOLTIP_PAYMENT_ORDER = new TooltipPaymentOrder();
+    final GetFilterPartBankRu GET_FILTER_PART_BANK_RU = new GetFilterPartBankRu();
+    final GetFullBankRuKon GET_FULL_BANKRU_KON = new GetFullBankRuKon();
+    final GetDictStat1256 GET_DICT_STAT_1256 = new GetDictStat1256();
+    final GetDictPayGrndParam GET_DICT_PAY_GRND_PARAM = new GetDictPayGrndParam();
+    final GetDictMessageType GET_DICT_MESSAGE_TYPE = new GetDictMessageType();
+    final GetFilterPartCBCCodes GET_FILTER_PART_CBC_CODES = new GetFilterPartCBCCodes();
+    final GetFullBankRuBud GET_FULL_BANKRU_BUD = new GetFullBankRuBud();
+    final CountAllAllDocsDoc COUNT_ALL_MY_DOCS = new CountAllAllDocsDoc();
+    final HeadersAllDocsDoc HEADERS_ALL_DOCS_OF_MY_DOCS = new HeadersAllDocsDoc();
+    final HeadersByDayPayOrd HEADERS_BY_DAY_PAY_ORD = new HeadersByDayPayOrd();
     public static PutDocAction putDoc;
     public static DocumentNumber docNumber;
-    public static AvailableDocument availableDocument;
 
     public TestRunClassicBox() {
     }
@@ -80,40 +76,40 @@ public class TestRunClassicBox {
         //блок connect
         requestMap.put("Bank", BANK);
         requestMap.put("Localization", LOCALIZATION);
-        requestMap.put("ManagePushBind", MANAGEPUSHBIND);
+        requestMap.put("ManagePushBind", MANAGE_PUSH_BIND);
         requestMap.put("Style40", STYLE40);
-        requestMap.put("VersionInfo", VERSIONINFO);
+        requestMap.put("VersionInfo", VERSION_INFO);
         //блок authorization
-        requestMap.put("AuthLogin", AUTHLOGIN);
-        requestMap.put("AuthMacIp", AUTHMACIP);
+        requestMap.put("AuthLogin", AUTH_LOGIN);
+        requestMap.put("AuthMacIp", AUTH_MAC_IP);
         requestMap.put("AuthCryptoprofCode", AUTH_CRYPTO_PROFILES_CODE);
-        requestMap.put("SmsAuthCode", smsAuthCode);
-        requestMap.put("SendAuthCode", sendAuthCode);
-        requestMap.put("AuthAccess", authAccess);
-        requestMap.put("MenuItem", menuItem);
-        requestMap.put("PushManagePushUserBind", pushManagePushUserBind);
-        requestMap.put("UserFilter", userFilter);
-        requestMap.put("Banner", banner);
-        requestMap.put("NotificationMandatoryCount", notificationMandatoryCount);
-        requestMap.put("UserAccount", userAccount);
-        requestMap.put("StatementDocsByDay", statementDocsByDay);
-        requestMap.put("CountAllDocsDocPayOrd", countAllDocsDocumentPaymentOrder);
+        requestMap.put("SmsAuthCode", SMS_AUTH_CODE);
+        requestMap.put("SendAuthCode", SEND_AUTH_CODE);
+        requestMap.put("AuthAccess", AUTH_ACCESS);
+        requestMap.put("MenuItem", MENU_ITEM);
+        requestMap.put("PushManagePushUserBind", PUSH_MANAGE_PUSH_USER_BIND);
+        requestMap.put("UserFilter", USER_FILTER);
+        requestMap.put("Banner", BANNER);
+        requestMap.put("NotificationMandatoryCount", NOTIFICATION_MANDATORY_COUNT);
+        requestMap.put("UserAccount", USER_ACCOUNT);
+        requestMap.put("StatementDocsByDay", STATEMENT_DOCS_BY_DAY);
+        requestMap.put("CountAllDocsDocPayOrd", COUNT_ALL_DOCS_DOCUMENT_PAYMENT_ORDER);
         //справочники
-        requestMap.put("GetDictRemoteCorrespDictionary", getDicRemoteCorresp);
-        requestMap.put("GetDictPaySendType", getDictPaySendType);
-        requestMap.put("GetDictNDSCalType", getDictNDSCalType);
-        requestMap.put("GetDictCustomerKPP", getDictCustomerKPP);
-        requestMap.put("TooltipPaymentOrder", getDictSalaryAcc);
-        requestMap.put("GetDictSalaryAcc", tooltipPaymentOrder);
-        requestMap.put("GetFilterPartBankRu", getFilterPartBankRu);
-        requestMap.put("GetDictStat1256", getDictStat1256);
-        requestMap.put("GetDictPayGrndParam", getDictPayGrndParam);
-        requestMap.put("GetDictMessageType", getDictMessageType);
-        requestMap.put("GetFilterPartCBCCodes", getFilterPartCBCCodes);
+        requestMap.put("GetDictRemoteCorrespDictionary", GET_DICT_REMOTE_CORR);
+        requestMap.put("GetDictPaySendType", GET_DICT_PAY_SEND_TYPE);
+        requestMap.put("GetDictNDSCalType", GET_DICT_NDS_CAL_TYPE);
+        requestMap.put("GetDictCustomerKPP", GET_DICT_CUSTOMER_KPP);
+        requestMap.put("TooltipPaymentOrder", GET_DICT_SALARY_ACC);
+        requestMap.put("GetDictSalaryAcc", TOOLTIP_PAYMENT_ORDER);
+        requestMap.put("GetFilterPartBankRu", GET_FILTER_PART_BANK_RU);
+        requestMap.put("GetDictStat1256", GET_DICT_STAT_1256);
+        requestMap.put("GetDictPayGrndParam", GET_DICT_PAY_GRND_PARAM);
+        requestMap.put("GetDictMessageType", GET_DICT_MESSAGE_TYPE);
+        requestMap.put("GetFilterPartCBCCodes", GET_FILTER_PART_CBC_CODES);
         //запрос необходимый для блока запросов контрагенту
-        requestMap.put("GetFullBankRuKon", getFullBankRuKon);
+        requestMap.put("GetFullBankRuKon", GET_FULL_BANKRU_KON);
         //запрос необходимый для блока запросов в бюджет
-        requestMap.put("GetFullBankRuBud", getFullBankRuBud);
+        requestMap.put("GetFullBankRuBud", GET_FULL_BANKRU_BUD);
         //блок сохранение документа контрагенту
         requestMap.put("DocNumPaymOrderKonSave", docNumber);
         requestMap.put("PutPaymentOrderDocKonSave", putDoc);
@@ -142,12 +138,11 @@ public class TestRunClassicBox {
         requestMap.put("DocNumPaymOrderYSSignGo", docNumber);
         requestMap.put("PutPaymentOrderDoсYSSignGo", putDoc);
         // мои документы
-        requestMap.put("CountAllAllDocsDoc", countAllMyDocs);
-        requestMap.put("HeadersAllDocsDocOfMyDocs", headersAllDocsOfMyDocs);
-        // создание запроса на отзыв ПП
+        requestMap.put("CountAllAllDocsDoc", COUNT_ALL_MY_DOCS);
+        requestMap.put("HeadersAllDocsDocOfMyDocs", HEADERS_ALL_DOCS_OF_MY_DOCS);
+        // создание запроса на отзыв
         requestMap.put("DocNumCanReq", docNumber);
-        requestMap.put("HeadersByDayPayOrd", headersByDayPayOrd);
-        /*requestMap.put("AvailableDocumentPayOrd", availableDocument);*/
+        requestMap.put("HeadersByDayPayOrd", HEADERS_BY_DAY_PAY_ORD);
 
         LOG.info("Teстирование выполняется\n");
         try {
@@ -173,19 +168,35 @@ public class TestRunClassicBox {
                             new DocumentNumber().run();
                         }
                     }
+                    case "UserFilter" -> USER_FILTER.run();
+/*                        boolean result = false;  /// убрать проверку в класс Check
+                        for (int j = 0; j < UserFilter.rootTag.getListV().size(); j++) {
+                            if (UserFilter.rootTag.getListV().get(j).getAdv().equals("1")) {
+                                result = true;
+                                break;
+                            }
+                        }
+                        if (result) {
+                            log.info("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - PASS\n");
+                            Check.quantityPASS++;
+                        } else {
+                            log.error("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - FAILED. Тестирование будет заверщено.\n");
+                            Check.quantityFAILED++;
+                            return;
+                        }*/
                     case "SmsAuthCode" -> {
                         if (Check.checkAvailableSignatureToolOTP()) {
-                            smsAuthCode.run();
+                            SMS_AUTH_CODE.run();
                         } else {
                             return;
                         }
                     }
                     case "AuthAccess" -> {
-                        authAccess.run();
+                        AUTH_ACCESS.run();
                         if (!(AuthAccess.rootTag.getListS().get(0).getZ().equals("2") | AuthAccess.rootTag.getListS().get(0).getZ().equals("0"))) {
-                            unBindManageDevice.run();
+                            UNBIND_MANAGE_DEVICE.run();
                         } else {
-                            bindManageDevice.run();
+                            BIND_MANAGE_DEVICE.run();
                         }
                         if (!BindManageDevice.resultBinding) {
                             return;
@@ -222,16 +233,15 @@ public class TestRunClassicBox {
                             }
                         }
                     }
-                    case "AvailableDocumentPayOrd" -> (availableDocument = new AvailableDocument("PaymentOrder", PutDocCHECKCODE.listDocBankID.get(0))).run();
                     ////////////////////////////////////////////////////////////////////////////////////
                     default -> {
                         Post post = (Post) map.getValue();
                         post.run();
                     }
                 }
+                LOG.info("Тестирование завершено");
+                LOG.info("Количество успешных тестов - " + Check.quantityPASS + ". Количество проваленных - " + Check.quantityFAILED + ".");
             }
-            LOG.info("Тестирование завершено");
-            LOG.info("Количество успешных тестов - " + Check.quantityPASS + ". Количество проваленных - " + Check.quantityFAILED + ".");
         } catch (IOException | JAXBException |
                 InterruptedException e) {
             e.printStackTrace();

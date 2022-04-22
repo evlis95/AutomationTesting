@@ -10,11 +10,9 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
-@Table(name = "organizations")
+@Getter @Setter
+@Table(name = "organizations", schema = "public", catalog = "Automation_testing")
 public class Organizations implements Serializable {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false, length = 255)
     private String id;
@@ -27,52 +25,8 @@ public class Organizations implements Serializable {
     @Basic
     @Column(name = "inn", nullable = true, length = 255)
     private String inn;
-    @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
-    @OneToMany(mappedBy = "org_id", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Divisions> divisions;
 
-    public Organizations(String id, String name, String kpp, String inn) {
-        this.id = id;
-        this.name = name;
-        this.kpp = kpp;
-        this.inn = inn;
-    }
 
-    public Organizations() {
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getKpp() {
-        return kpp;
-    }
-
-    public void setKpp(String kpp) {
-        this.kpp = kpp;
-    }
-
-    public String getInn() {
-        return inn;
-    }
-
-    public void setInn(String inn) {
-        this.inn = inn;
-    }
 
     @Override
     public boolean equals(Object o) {
