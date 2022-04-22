@@ -25,45 +25,45 @@ import java.util.Map.Entry;
 
 public class TestRunClassicBox {
 
-    final static Logger log = LogManager.getLogger(TestRunClassicBox.class);
+    final static Logger LOG = LogManager.getLogger(TestRunClassicBox.class);
 
-    final Bank bank = new Bank();
-    final Localization localization = new Localization();
-    final ManagePushBind managePushBind = new ManagePushBind();
-    final Style40 style40 = new Style40();
-    final VersionInfo versionInfo = new VersionInfo();
-    final AuthLogin authLogin = new AuthLogin();
-    final AuthMacIp authMacIp = new AuthMacIp();
-    final AuthCryptoprofCode authCryptoprofilesCode = new AuthCryptoprofCode();
-    final SmsAuthCode smsAuthCode = new SmsAuthCode();
-    final SendAuthCode sendAuthCode = new SendAuthCode();
-    final AuthAccess authAccess = new AuthAccess();
-    final BindManageDevice bindManageDevice = new BindManageDevice();
-    final UnBindManageDevice unBindManageDevice = new UnBindManageDevice();
-    final MenuItem menuItem = new MenuItem();
-    final PushManagePushUserBind pushManagePushUserBind = new PushManagePushUserBind();
-    final UserFilter userFilter = new UserFilter();
-    final Banner banner = new Banner();
-    final NotificationMandatoryCount notificationMandatoryCount = new NotificationMandatoryCount();
-    final UserAccount userAccount = new UserAccount();
-    final StatementDocsByDay statementDocsByDay = new StatementDocsByDay();
-    final CountAllDocsDocPayOrd countAllDocsDocumentPaymentOrder = new CountAllDocsDocPayOrd();
-    final GetDictRemoteCorrespDictionary getDicRemoteCorresp = new GetDictRemoteCorrespDictionary();
-    final GetDictPaySendType getDictPaySendType = new GetDictPaySendType();
-    final GetDictNDSCalType getDictNDSCalType = new GetDictNDSCalType();
-    final GetDictCustomerKPP getDictCustomerKPP = new GetDictCustomerKPP();
-    final GetDictSalaryAcc getDictSalaryAcc = new GetDictSalaryAcc();
-    final TooltipPaymentOrder tooltipPaymentOrder = new TooltipPaymentOrder();
-    final GetFilterPartBankRu getFilterPartBankRu = new GetFilterPartBankRu();
-    final GetFullBankRuKon getFullBankRuKon = new GetFullBankRuKon();
-    final GetDictStat1256 getDictStat1256 = new GetDictStat1256();
-    final GetDictPayGrndParam getDictPayGrndParam = new GetDictPayGrndParam();
-    final GetDictMessageType getDictMessageType = new GetDictMessageType();
-    final GetFilterPartCBCCodes getFilterPartCBCCodes = new GetFilterPartCBCCodes();
-    final GetFullBankRuBud getFullBankRuBud = new GetFullBankRuBud();
-    final CountAllAllDocsDoc countAllMyDocs = new CountAllAllDocsDoc();
-    final HeadersAllDocsDoc headersAllDocsOfMyDocs = new HeadersAllDocsDoc();
-    final HeadersByDayPayOrd headersByDayPayOrd = new HeadersByDayPayOrd();
+    final Bank BANK = new Bank();
+    final Localization LOCALIZATION = new Localization();
+    final ManagePushBind MANAGE_PUSH_BIND = new ManagePushBind();
+    final Style40 STYLE40 = new Style40();
+    final VersionInfo VERSION_INFO = new VersionInfo();
+    final AuthLogin AUTH_LOGIN = new AuthLogin();
+    final AuthMacIp AUTH_MAC_IP = new AuthMacIp();
+    final AuthCryptoprofCode AUTH_CRYPTO_PROFILES_CODE = new AuthCryptoprofCode();
+    final SmsAuthCode SMS_AUTH_CODE = new SmsAuthCode();
+    final SendAuthCode SEND_AUTH_CODE = new SendAuthCode();
+    final AuthAccess AUTH_ACCESS = new AuthAccess();
+    final BindManageDevice BIND_MANAGE_DEVICE = new BindManageDevice();
+    final UnBindManageDevice UNBIND_MANAGE_DEVICE = new UnBindManageDevice();
+    final MenuItem MENU_ITEM = new MenuItem();
+    final PushManagePushUserBind PUSH_MANAGE_PUSH_USER_BIND = new PushManagePushUserBind();
+    final UserFilter USER_FILTER = new UserFilter();
+    final Banner BANNER = new Banner();
+    final NotificationMandatoryCount NOTIFICATION_MANDATORY_COUNT = new NotificationMandatoryCount();
+    final UserAccount USER_ACCOUNT = new UserAccount();
+    final StatementDocsByDay STATEMENT_DOCS_BY_DAY = new StatementDocsByDay();
+    final CountAllDocsDocPayOrd COUNT_ALL_DOCS_DOCUMENT_PAYMENT_ORDER = new CountAllDocsDocPayOrd();
+    final GetDictRemoteCorrespDictionary GET_DICT_REMOTE_CORR = new GetDictRemoteCorrespDictionary();
+    final GetDictPaySendType GET_DICT_PAY_SEND_TYPE = new GetDictPaySendType();
+    final GetDictNDSCalType GET_DICT_NDS_CAL_TYPE = new GetDictNDSCalType();
+    final GetDictCustomerKPP GET_DICT_CUSTOMER_KPP = new GetDictCustomerKPP();
+    final GetDictSalaryAcc GET_DICT_SALARY_ACC = new GetDictSalaryAcc();
+    final TooltipPaymentOrder TOOLTIP_PAYMENT_ORDER = new TooltipPaymentOrder();
+    final GetFilterPartBankRu GET_FILTER_PART_BANK_RU = new GetFilterPartBankRu();
+    final GetFullBankRuKon GET_FULL_BANKRU_KON = new GetFullBankRuKon();
+    final GetDictStat1256 GET_DICT_STAT_1256 = new GetDictStat1256();
+    final GetDictPayGrndParam GET_DICT_PAY_GRND_PARAM = new GetDictPayGrndParam();
+    final GetDictMessageType GET_DICT_MESSAGE_TYPE = new GetDictMessageType();
+    final GetFilterPartCBCCodes GET_FILTER_PART_CBC_CODES = new GetFilterPartCBCCodes();
+    final GetFullBankRuBud GET_FULL_BANKRU_BUD = new GetFullBankRuBud();
+    final CountAllAllDocsDoc COUNT_ALL_MY_DOCS = new CountAllAllDocsDoc();
+    final HeadersAllDocsDoc HEADERS_ALL_DOCS_OF_MY_DOCS = new HeadersAllDocsDoc();
+    final HeadersByDayPayOrd HEADERS_BY_DAY_PAY_ORD = new HeadersByDayPayOrd();
     public static PutDocAction putDoc;
     public static DocumentNumber docNumber;
 
@@ -74,42 +74,42 @@ public class TestRunClassicBox {
         //порядов запросов
         Map<String, Post> requestMap = new LinkedHashMap<>();
         //блок connect
-        requestMap.put("Bank", bank);
-        requestMap.put("Localization", localization);
-        requestMap.put("ManagePushBind", managePushBind);
-        requestMap.put("Style40", style40);
-        requestMap.put("VersionInfo", versionInfo);
+        requestMap.put("Bank", BANK);
+        requestMap.put("Localization", LOCALIZATION);
+        requestMap.put("ManagePushBind", MANAGE_PUSH_BIND);
+        requestMap.put("Style40", STYLE40);
+        requestMap.put("VersionInfo", VERSION_INFO);
         //блок authorization
-        requestMap.put("AuthLogin", authLogin);
-        requestMap.put("AuthMacIp", authMacIp);
-        requestMap.put("AuthCryptoprofCode", authCryptoprofilesCode);
-        requestMap.put("SmsAuthCode", smsAuthCode);
-        requestMap.put("SendAuthCode", sendAuthCode);
-        requestMap.put("AuthAccess", authAccess);
-        requestMap.put("MenuItem", menuItem);
-        requestMap.put("PushManagePushUserBind", pushManagePushUserBind);
-        requestMap.put("UserFilter", userFilter);
-        requestMap.put("Banner", banner);
-        requestMap.put("NotificationMandatoryCount", notificationMandatoryCount);
-        requestMap.put("UserAccount", userAccount);
-        requestMap.put("StatementDocsByDay", statementDocsByDay);
-        requestMap.put("CountAllDocsDocPayOrd", countAllDocsDocumentPaymentOrder);
+        requestMap.put("AuthLogin", AUTH_LOGIN);
+        requestMap.put("AuthMacIp", AUTH_MAC_IP);
+        requestMap.put("AuthCryptoprofCode", AUTH_CRYPTO_PROFILES_CODE);
+        requestMap.put("SmsAuthCode", SMS_AUTH_CODE);
+        requestMap.put("SendAuthCode", SEND_AUTH_CODE);
+        requestMap.put("AuthAccess", AUTH_ACCESS);
+        requestMap.put("MenuItem", MENU_ITEM);
+        requestMap.put("PushManagePushUserBind", PUSH_MANAGE_PUSH_USER_BIND);
+        requestMap.put("UserFilter", USER_FILTER);
+        requestMap.put("Banner", BANNER);
+        requestMap.put("NotificationMandatoryCount", NOTIFICATION_MANDATORY_COUNT);
+        requestMap.put("UserAccount", USER_ACCOUNT);
+        requestMap.put("StatementDocsByDay", STATEMENT_DOCS_BY_DAY);
+        requestMap.put("CountAllDocsDocPayOrd", COUNT_ALL_DOCS_DOCUMENT_PAYMENT_ORDER);
         //справочники
-        requestMap.put("GetDictRemoteCorrespDictionary", getDicRemoteCorresp);
-        requestMap.put("GetDictPaySendType", getDictPaySendType);
-        requestMap.put("GetDictNDSCalType", getDictNDSCalType);
-        requestMap.put("GetDictCustomerKPP", getDictCustomerKPP);
-        requestMap.put("TooltipPaymentOrder", getDictSalaryAcc);
-        requestMap.put("GetDictSalaryAcc", tooltipPaymentOrder);
-        requestMap.put("GetFilterPartBankRu", getFilterPartBankRu);
-        requestMap.put("GetDictStat1256", getDictStat1256);
-        requestMap.put("GetDictPayGrndParam", getDictPayGrndParam);
-        requestMap.put("GetDictMessageType", getDictMessageType);
-        requestMap.put("GetFilterPartCBCCodes", getFilterPartCBCCodes);
+        requestMap.put("GetDictRemoteCorrespDictionary", GET_DICT_REMOTE_CORR);
+        requestMap.put("GetDictPaySendType", GET_DICT_PAY_SEND_TYPE);
+        requestMap.put("GetDictNDSCalType", GET_DICT_NDS_CAL_TYPE);
+        requestMap.put("GetDictCustomerKPP", GET_DICT_CUSTOMER_KPP);
+        requestMap.put("TooltipPaymentOrder", GET_DICT_SALARY_ACC);
+        requestMap.put("GetDictSalaryAcc", TOOLTIP_PAYMENT_ORDER);
+        requestMap.put("GetFilterPartBankRu", GET_FILTER_PART_BANK_RU);
+        requestMap.put("GetDictStat1256", GET_DICT_STAT_1256);
+        requestMap.put("GetDictPayGrndParam", GET_DICT_PAY_GRND_PARAM);
+        requestMap.put("GetDictMessageType", GET_DICT_MESSAGE_TYPE);
+        requestMap.put("GetFilterPartCBCCodes", GET_FILTER_PART_CBC_CODES);
         //запрос необходимый для блока запросов контрагенту
-        requestMap.put("GetFullBankRuKon", getFullBankRuKon);
+        requestMap.put("GetFullBankRuKon", GET_FULL_BANKRU_KON);
         //запрос необходимый для блока запросов в бюджет
-        requestMap.put("GetFullBankRuBud", getFullBankRuBud);
+        requestMap.put("GetFullBankRuBud", GET_FULL_BANKRU_BUD);
         //блок сохранение документа контрагенту
         requestMap.put("DocNumPaymOrderKonSave", docNumber);
         requestMap.put("PutPaymentOrderDocKonSave", putDoc);
@@ -138,13 +138,13 @@ public class TestRunClassicBox {
         requestMap.put("DocNumPaymOrderYSSignGo", docNumber);
         requestMap.put("PutPaymentOrderDoсYSSignGo", putDoc);
         // мои документы
-        requestMap.put("CountAllAllDocsDoc", countAllMyDocs);
-        requestMap.put("HeadersAllDocsDocOfMyDocs", headersAllDocsOfMyDocs);
+        requestMap.put("CountAllAllDocsDoc", COUNT_ALL_MY_DOCS);
+        requestMap.put("HeadersAllDocsDocOfMyDocs", HEADERS_ALL_DOCS_OF_MY_DOCS);
         // создание запроса на отзыв
         requestMap.put("DocNumCanReq", docNumber);
-        requestMap.put("HeadersByDayPayOrd", headersByDayPayOrd);
+        requestMap.put("HeadersByDayPayOrd", HEADERS_BY_DAY_PAY_ORD);
 
-        log.info("Teстирование выполняется\n");
+        LOG.info("Teстирование выполняется\n");
         try {
             for (Entry map : requestMap.entrySet())
                 switch (map.getKey().toString()) {
@@ -160,7 +160,7 @@ public class TestRunClassicBox {
                             "DocNumPaymOrderYSSign",
                             "DocNumPaymOrderYSSignGo" -> {
                         if (Check.checkCountAvailableAccounts810()) {
-                            log.warn("""
+                            LOG.warn("""
                                     У пользователя нет 2 доступного счета в рублях, чтобы осуществить платеж Себе.
                                     Запрос нового документа не будет произведен.
                                     """);
@@ -168,7 +168,7 @@ public class TestRunClassicBox {
                             new DocumentNumber().run();
                         }
                     }
-                    case "UserFilter" -> userFilter.run();
+                    case "UserFilter" -> USER_FILTER.run();
 /*                        boolean result = false;  /// убрать проверку в класс Check
                         for (int j = 0; j < UserFilter.rootTag.getListV().size(); j++) {
                             if (UserFilter.rootTag.getListV().get(j).getAdv().equals("1")) {
@@ -186,17 +186,17 @@ public class TestRunClassicBox {
                         }*/
                     case "SmsAuthCode" -> {
                         if (Check.checkAvailableSignatureToolOTP()) {
-                            smsAuthCode.run();
+                            SMS_AUTH_CODE.run();
                         } else {
                             return;
                         }
                     }
                     case "AuthAccess" -> {
-                        authAccess.run();
+                        AUTH_ACCESS.run();
                         if (!(AuthAccess.rootTag.getListS().get(0).getZ().equals("2") | AuthAccess.rootTag.getListS().get(0).getZ().equals("0"))) {
-                            unBindManageDevice.run();
+                            UNBIND_MANAGE_DEVICE.run();
                         } else {
-                            bindManageDevice.run();
+                            BIND_MANAGE_DEVICE.run();
                         }
                         if (!BindManageDevice.resultBinding) {
                             return;
@@ -218,7 +218,7 @@ public class TestRunClassicBox {
                             "PutPaymentOrderDoсYSSign",
                             "PutPaymentOrderDoсYSSignGo" -> {
                         if (Check.checkCountAvailableAccounts810()) {
-                            log.warn("""
+                            LOG.warn("""
                                     У пользователя нет 2 доступного счета в рублях, чтобы осуществить платеж Себе.
                                     Платеж себе не будет создан.
                                     """);
@@ -239,8 +239,8 @@ public class TestRunClassicBox {
                         post.run();
                     }
                 }
-            log.info("Тестирование завершено");
-            log.info("Количество успешных тестов - " + Check.quantityPASS + ". Количество проваленных - " + Check.quantityFAILED + ".");
+            LOG.info("Тестирование завершено");
+            LOG.info("Количество успешных тестов - " + Check.quantityPASS + ". Количество проваленных - " + Check.quantityFAILED + ".");
         } catch (IOException | JAXBException |
                 InterruptedException e) {
             e.printStackTrace();
