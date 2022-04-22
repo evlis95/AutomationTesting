@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.io.StringReader;
 
 public class PutDocDATAFORSIGN extends Post {
-    private final static Logger log = LogManager.getLogger(PutDocDATAFORSIGN.class);
+    private final Logger LOG = LogManager.getLogger(PutDocDATAFORSIGN.class);
     private final UniversalResponseRootTag universalResponseRootTag;
     private final String documentID;
     private String documentNameSP;
@@ -69,7 +69,7 @@ public class PutDocDATAFORSIGN extends Post {
             stringBuilder.append(line).append("\n");
         }
         bufferedReader.close();
-        log.info(stringBuilder.toString());
+       LOG.info(stringBuilder.toString());
     }
 
 

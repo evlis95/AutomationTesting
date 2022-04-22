@@ -15,7 +15,7 @@ import java.io.IOException;
 public class BindManageDevice extends Post {
 
     public static boolean resultBinding;
-    final static Logger log = LogManager.getLogger(BindManageDevice.class);
+    final static Logger LOG = LogManager.getLogger(BindManageDevice.class);
     public static UniversalResponseRootTag rootTag;
     private final CrypProfCodeManagDev crypProfCodeManagDev = new CrypProfCodeManagDev();
     private final SmsCodeManageDev smsCodeManageDev = new SmsCodeManageDev();
@@ -40,7 +40,7 @@ public class BindManageDevice extends Post {
 
     private void bindingDevice() throws JAXBException, IOException, InterruptedException {
         if (rootTag.getListA().get(0).getV().equals("0")) {
-            log.error("""
+           LOG.error("""
                     Внимание! Добавление/удаление устройства в списке доверенных невозможно.
                     За дополнительной информацией, пожалуйста, обратитесь в банк.
                     Настройка Конфигурация ДБО. Мобильный клиент. Доступность работы с доверенными устройствами значение false.
@@ -48,18 +48,18 @@ public class BindManageDevice extends Post {
 
 
         } else if (rootTag.getListA().get(0).getV().equals("11")) {
-            log.error("Доступно подтверждение только через сервис PayControl.");
+           LOG.error("Доступно подтверждение только через сервис PayControl.");
 
         } else {
             crypProfCodeManagDev.run();
             smsCodeManageDev.run();
             sendCodeManageDev.run();
             if (SendCodeManageDev.condition.equals("1")) {
-                log.info("Доступ разрешен (устройство привязано). Проверка на привязку устройства - PASS.\n");
+               LOG.info("Доступ разрешен (устройство привязано). Проверка на привязку устройства - PASS.\n");
                 Check.quantityPASS++;
                 resultBinding = true;
             } else {
-                log.error("Проверка привязки устройства - FAILED.");
+               LOG.error("Проверка привязки устройства - FAILED.");
                 Check.quantityFAILED++;
                 resultBinding = false;
             }

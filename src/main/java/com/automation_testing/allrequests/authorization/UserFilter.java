@@ -18,7 +18,7 @@ import java.io.*;
 
 public class UserFilter extends Post {
 
-    private final static Logger log = LogManager.getLogger(UserFilter.class);
+    private final Logger LOG = LogManager.getLogger(UserFilter.class);
     public static UniversalResponseRootTag rootTag;
     public static String orgId;
     public static String orgKPP;
@@ -244,7 +244,7 @@ public class UserFilter extends Post {
                 }
             }
         }
-        log.info(stringBuffer.toString());
+       LOG.info(stringBuffer.toString());
     }
 
     private void parsingDataAndSaveInBD() {

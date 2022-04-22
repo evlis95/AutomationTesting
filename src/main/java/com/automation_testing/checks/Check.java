@@ -12,14 +12,14 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 
 public class Check {
-    private final static Logger log = LogManager.getLogger(Check.class);
+    private static final Logger LOG = LogManager.getLogger(Check.class);
     public static int quantityPASS;
     public static int quantityFAILED;
     private static int count;
 
     public static void checkCode200(@NotNull Integer value, String nameRequest) throws IOException {
         if (value.equals(200)) {
-            log.info(String.format("Проверка кода 200 у ответа на запрос %s - PASS!\n", nameRequest));
+           LOG.info(String.format("Проверка кода 200 у ответа на запрос %s - PASS!\n", nameRequest));
             quantityPASS++;
         }
     }
@@ -61,15 +61,15 @@ public class Check {
                         }
                     }
                     if (count > 0) {
-                        log.info("Проверка на наличие хотя бы одного СП OTP для операции подписи - PASS\n");
+                       LOG.info("Проверка на наличие хотя бы одного СП OTP для операции подписи - PASS\n");
                         quantityPASS++;
                     } else {
-                        log.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED\n");
+                       LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED\n");
                         quantityFAILED++;
                     }
                 } else {
                     quantityFAILED++;
-                    log.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED\n");
+                   LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED\n");
                 }
             }
         }
@@ -77,7 +77,7 @@ public class Check {
 
     public static void checkCountAvailableSPSign(@NotNull UniversalResponseRootTag rootTag) {
         if (rootTag.getListK() == null & rootTag.getListC() == null) {
-            log.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED\n");
+           LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED\n");
             quantityFAILED++;
 
         } else if (rootTag.getListK() != null & rootTag.getListC() == null) {
@@ -88,19 +88,19 @@ public class Check {
                 }
             }
             if (count > 0) {
-                log.info("Проверка на наличие хотя бы одного СП OTP для операции подписи - PASS\n");
+               LOG.info("Проверка на наличие хотя бы одного СП OTP для операции подписи - PASS\n");
                 quantityPASS++;
             } else {
-                log.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED\n");
+               LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED\n");
 
                 quantityFAILED++;
             }
 
         } else if (rootTag.getListK() == null & rootTag.getListC() != null) {
             if (rootTag.getListC().get(0).getCe().equals("1")) {
-                log.warn("Проверка на наличие хотя бы одного СП OTP для операции подписи не проводится, из за наличия жестких контролей\n");
+               LOG.warn("Проверка на наличие хотя бы одного СП OTP для операции подписи не проводится, из за наличия жестких контролей\n");
             } else {
-                log.warn("Проверка на наличие хотя бы одного СП OTP для операции подписи не будет проведена из за наличия мягких контролей(данные СП будут в запросе FORCE)\n");
+               LOG.warn("Проверка на наличие хотя бы одного СП OTP для операции подписи не будет проведена из за наличия мягких контролей(данные СП будут в запросе FORCE)\n");
             }
         }
     }
@@ -110,11 +110,11 @@ public class Check {
         if (AuthCryptoprofCode.rootTag.getListS() != null) {
             for (int i = 0; i < AuthCryptoprofCode.rootTag.getListS().size(); i++) {
                 if (AuthCryptoprofCode.rootTag.getListS().get(i).getT().equals("1")) {
-                    log.info("Проверка на наличие хотя бы одного СП OTP для операции подписи - PASS\n");
+                   LOG.info("Проверка на наличие хотя бы одного СП OTP для операции подписи - PASS\n");
                     quantityPASS++;
                     break;
                 } else {
-                    log.error("Проверка на наличие хотя бы одного СП OTP - FAILED" +
+                   LOG.error("Проверка на наличие хотя бы одного СП OTP - FAILED" +
                             "Тестирование будет прервано");
                     quantityFAILED++;
                     result = false;
@@ -122,7 +122,7 @@ public class Check {
             }
         } else {
             result = false;
-            log.error("Проверка на наличие хотя бы одного СП OTP - FAILED" +
+           LOG.error("Проверка на наличие хотя бы одного СП OTP - FAILED" +
                     "Тестирование будет прервано");
             quantityFAILED++;
         }

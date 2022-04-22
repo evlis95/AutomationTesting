@@ -31,7 +31,7 @@ public class HeadersAllDocsDoc extends Post {
     private final String[] addAccStatCode = new String[]{"39", "10", "3", "42", "12", "6", "17", "15", "11", "9", "43", "44", "8", "71", "10"};
     /*private final String[] depAdvStatCode = new String[]{"39", "1", "3", "42", "43", "6", "44", "11", "12", "15", "17", "9", "10"};*/
     private Map<String, TagTOfTagP> mapTagT;
-    private final static Logger log = LogManager.getLogger(HeadersAllDocsDoc.class);
+    private final Logger LOG = LogManager.getLogger(HeadersAllDocsDoc.class);
     private UniversalResponseRootTag rootTag;
 
     public UniversalResponseRootTag getRootTag() {
@@ -81,18 +81,18 @@ public class HeadersAllDocsDoc extends Post {
                 }
                 if (result) {
                     Check.quantityPASS++;
-                    log.info("Проверка на наличие документов ПП в ответе на запрос HeadersAllDocsDoc - PASS\n");
+                   LOG.info("Проверка на наличие документов ПП в ответе на запрос HeadersAllDocsDoc - PASS\n");
                 } else {
                     Check.quantityFAILED++;
-                    log.error("Проверка на наличие документов ПП в ответе на запрос HeadersAllDocsDoc - FAILED\n");
+                   LOG.error("Проверка на наличие документов ПП в ответе на запрос HeadersAllDocsDoc - FAILED\n");
                 }
             } else {
                 Check.quantityFAILED++;
-                log.error("Проверка на наличие документов в ответе на запрос HeadersAllDocsDoc - FAILED\n");
+               LOG.error("Проверка на наличие документов в ответе на запрос HeadersAllDocsDoc - FAILED\n");
             }
         } else {
             Check.quantityFAILED++;
-            log.error("Проверка на наличие документов в ответе на запрос HeadersAllDocsDoc - FAILED\n");
+           LOG.error("Проверка на наличие документов в ответе на запрос HeadersAllDocsDoc - FAILED\n");
         }
     }
 

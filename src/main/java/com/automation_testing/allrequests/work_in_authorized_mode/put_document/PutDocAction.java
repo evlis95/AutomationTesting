@@ -24,7 +24,7 @@ public class PutDocAction extends Post {
     public static String documentTypeString;
     private final Map<String, String> fieldsAndValues;
     public static UniversalResponseRootTag rootTag;
-    private final static Logger log = LogManager.getLogger(PutDocAction.class);
+    private final Logger LOG = LogManager.getLogger(PutDocAction.class);
     private final DocumentAction documentAction;
     private String documentID;
     private String documentBankID;
@@ -95,7 +95,7 @@ public class PutDocAction extends Post {
                 stringBuilder.append(line).append("\n");
             }
             bufferedReader.close();
-            log.info(stringBuilder.toString());
+           LOG.info(stringBuilder.toString());
         } else {
             if (rootTag.getListC().get(0).getCe().equals("1")) {
                 bufferedReader = new BufferedReader(new StringReader(messageFail));
@@ -110,7 +110,7 @@ public class PutDocAction extends Post {
                             "Сообщение: " + rootTag.getListError().get(i).getMessage() + "\n" +
                             "Тип важности контроля: " + rootTag.getListError().get(i).getType() + "\n");
                 }
-                log.error(stringBuilder.toString());
+               LOG.error(stringBuilder.toString());
             } else {
                 bufferedReader = new BufferedReader(new StringReader(messageWithSoftControls));
                 while ((line = bufferedReader.readLine()) != null) {
@@ -123,7 +123,7 @@ public class PutDocAction extends Post {
                             "Сообщение: " + rootTag.getListError().get(i).getMessage() + "\n" +
                             "Тип важности контроля: " + rootTag.getListError().get(i).getType() + "\n");
                 }
-                log.warn(stringBuilder.toString());
+               LOG.warn(stringBuilder.toString());
             }
         }
     }

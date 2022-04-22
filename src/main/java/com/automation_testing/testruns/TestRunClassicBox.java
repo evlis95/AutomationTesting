@@ -146,7 +146,7 @@ public class TestRunClassicBox {
 
         LOG.info("Teстирование выполняется\n");
         try {
-            for (Entry map : requestMap.entrySet()) {
+            for (Entry map : requestMap.entrySet())
                 switch (map.getKey().toString()) {
                     case "DocNumPaymOrderKonSave",
                             "DocNumPaymOrderKonSign",
@@ -177,10 +177,10 @@ public class TestRunClassicBox {
                             }
                         }
                         if (result) {
-                            log.info("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - PASS\n");
+                           LOG.info("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - PASS\n");
                             Check.quantityPASS++;
                         } else {
-                            log.error("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - FAILED. Тестирование будет заверщено.\n");
+                           LOG.error("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - FAILED. Тестирование будет заверщено.\n");
                             Check.quantityFAILED++;
                             return;
                         }*/
@@ -239,9 +239,8 @@ public class TestRunClassicBox {
                         post.run();
                     }
                 }
-                LOG.info("Тестирование завершено");
-                LOG.info("Количество успешных тестов - " + Check.quantityPASS + ". Количество проваленных - " + Check.quantityFAILED + ".");
-            }
+            LOG.info("Тестирование завершено");
+            LOG.info("Количество успешных тестов - " + Check.quantityPASS + ". Количество проваленных - " + Check.quantityFAILED + ".");
         } catch (IOException | JAXBException |
                 InterruptedException e) {
             e.printStackTrace();

@@ -27,7 +27,7 @@ import java.time.Duration;
 
 public abstract class Post {
 
-    private final static Logger log = LogManager.getLogger(Post.class);
+    private final Logger LOG = LogManager.getLogger(Post.class);
     private String bodyResponse;
     private Integer codeStatusResponse;
     private HttpRequest request;
@@ -103,21 +103,21 @@ public abstract class Post {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(".\\src\\main\\java\\com\\automation_testing\\xmlfile\\request.xml"));
         StringBuilder stringBuffer = new StringBuilder("");
         String line = "";
-        log.error("Запрос:");
+       LOG.error("Запрос:");
         while ((line = bufferedReader.readLine()) != null) {
             stringBuffer.append(line).append("\n");
         }
         bufferedReader.close();
-        log.error(stringBuffer.toString());
+       LOG.error(stringBuffer.toString());
 
-        log.error("Ответ:");
+       LOG.error("Ответ:");
         StringBuilder stringBuffer1 = new StringBuilder("");
         bufferedReader = new BufferedReader(new StringReader(bodyResponse));
         while ((line = bufferedReader.readLine()) != null) {
             stringBuffer1.append(line).append("\n");
         }
         bufferedReader.close();
-        log.error(stringBuffer1.toString());
+       LOG.error(stringBuffer1.toString());
     }
 
 

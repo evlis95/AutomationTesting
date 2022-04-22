@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class SendCodeManageDev extends Post {
 
-    private final static Logger log = LogManager.getLogger(SendCodeManageDev.class);
+    private final Logger LOG = LogManager.getLogger(SendCodeManageDev.class);
     public static UniversalResponseRootTag rootTag;
     public static String successfullyCode;
     public static String condition;
@@ -42,10 +42,10 @@ public class SendCodeManageDev extends Post {
         successfullyCode = rootTag.getListS().get(0).getV();
         condition = rootTag.getListS().get(0).getZ();
         if (successfullyCode.equals("1")) {
-            log.info("Проверка кода подтверждения операции - PASS\n");
+           LOG.info("Проверка кода подтверждения операции - PASS\n");
             Check.quantityPASS++;
         } else {
-            log.error("Проверка кода подтверждения операции - FAILED\n");
+           LOG.error("Проверка кода подтверждения операции - FAILED\n");
             Check.quantityFAILED++;
         }
     }

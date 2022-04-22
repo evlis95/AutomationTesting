@@ -17,7 +17,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class PutDocCHECKCODE extends Post {
-    private final static Logger log = LogManager.getLogger(PutDocCHECKCODE.class);
+    private final Logger LOG = LogManager.getLogger(PutDocCHECKCODE.class);
     private final String nameRequestAndActionForLog;
     private final String documentID;
     private final String statusCodeForCheck;
@@ -43,10 +43,10 @@ public class PutDocCHECKCODE extends Post {
         Check.checkCode200(getCodeStatusResponse(), "CHECKCODE");
 
         if (documentStatusCode.equals(statusCodeForCheck)) {
-            log.info("Проверка присвоения статус кода " + statusCodeForCheck + " документу - PASS\n");
+           LOG.info("Проверка присвоения статус кода " + statusCodeForCheck + " документу - PASS\n");
             Check.quantityPASS++;
         } else {
-            log.error("Проверка присвоения статус кода " + statusCodeForCheck + " документу - FAILED");
+           LOG.error("Проверка присвоения статус кода " + statusCodeForCheck + " документу - FAILED");
             Check.quantityFAILED++;
         }
     }
@@ -79,7 +79,7 @@ public class PutDocCHECKCODE extends Post {
             stringBuilder.append(line).append("\n");
         }
         bufferedReader.close();
-        log.info(stringBuilder.toString());
+       LOG.info(stringBuilder.toString());
     }
 
     private void initializationFields() {
