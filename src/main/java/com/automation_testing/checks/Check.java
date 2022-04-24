@@ -42,10 +42,10 @@ public class Check {
             }
         }
         if (result) {
-            log.info("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - PASS\n");
+            LOG.info("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - PASS\n");
             Check.quantityPASS++;
         } else {
-            log.error("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - FAILED. ВНИМАНИЕ!!!.\n");
+            LOG.error("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - FAILED. ВНИМАНИЕ!!!.\n");
             Check.quantityFAILED++;
         }
     }

@@ -4,17 +4,20 @@ import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.hibernate.pojo.Divisions;
 import com.automation_testing.hibernate.pojo.Organizations;
-import com.automation_testing.hibernate.pojo.ServicesMobile;
 import com.automation_testing.hibernate.utils.HibernateUtils;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_type.Post;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
+
 
 import javax.xml.bind.JAXBException;
 import java.io.*;
+import java.sql.Struct;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class UserFilter extends Post {
 
@@ -24,6 +27,8 @@ public class UserFilter extends Post {
     public static String orgKPP;
     public static String orgINN;
     public static String orgName;
+
+    private Divisions division;
 
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
@@ -244,10 +249,35 @@ public class UserFilter extends Post {
                 }
             }
         }
-       LOG.info(stringBuffer.toString());
+        LOG.info(stringBuffer.toString());
     }
 
     private void parsingDataAndSaveInBD() {
+        Session session = HibernateUtils.sessionFactory.openSession();
+        session.getTransaction().begin();
+
+        Organizations org = new Organizations();
+        org.setId(orgId);
+        org.setKpp(orgKPP);
+        org.setInn(orgINN);
+        org.setName(orgName);
+
+
+        List<Divisions> divisionsList = new ArrayList<>();
+        for (int i = 0; i < UserFilter.rootTag.getListF().size(); i++) {
+            division = new Divisions();
+            division.setBic(rootTag.getListF().get(i).getB());
+            division.setCorrAcc(rootTag.getListF().get(i).getA());
+            division.setId(rootTag.getListF().get(i).getI());
+            division.setName(rootTag.getListF().get(i).getN());
+            division.setOrganization(org);
+            divisionsList.add(division);
+        }
+        org.setDivisionsList(divisionsList);
+        session.saveOrUpdate(org);
+        session.getTransaction().commit();
+
+        session.close();
     }
 
     private void identificationOfOrgData() {
