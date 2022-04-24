@@ -256,9 +256,11 @@ public class UserFilter extends Post {
             rootTag = parseXmlBodyResponse();
             identificationOfOrgData();
             checkTest();
-            info();
+            printReqAndResInLog();
+           // info();
         } else {
-            failedResponseMessage();
+            printReqAndResInLog();
+            Check.quantityFAILED++;
         }
     }
 }

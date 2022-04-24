@@ -98,26 +98,25 @@ public abstract class Post {
         return rootTag;
     }
 
-    protected void failedResponseMessage() throws IOException {
-        Check.quantityFAILED++;
+    protected void printReqAndResInLog() throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(".\\src\\main\\java\\com\\automation_testing\\xmlfile\\request.xml"));
         StringBuilder stringBuffer = new StringBuilder("");
         String line = "";
-       LOG.error("Запрос:");
+       LOG.warn("Запрос:");
         while ((line = bufferedReader.readLine()) != null) {
             stringBuffer.append(line).append("\n");
         }
         bufferedReader.close();
-       LOG.error(stringBuffer.toString());
+       LOG.warn(stringBuffer.toString());
 
-       LOG.error("Ответ:");
+       LOG.warn("Ответ:");
         StringBuilder stringBuffer1 = new StringBuilder("");
         bufferedReader = new BufferedReader(new StringReader(bodyResponse));
         while ((line = bufferedReader.readLine()) != null) {
             stringBuffer1.append(line).append("\n");
         }
         bufferedReader.close();
-       LOG.error(stringBuffer1.toString());
+       LOG.warn(stringBuffer1.toString());
     }
 
 

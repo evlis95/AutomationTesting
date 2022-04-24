@@ -52,8 +52,10 @@ public class AuthLogin extends Post {
             rootTag = parseXmlBodyResponse();
             sessionID = rootTag.getListS().get(0).getV();
             checkTest();
+            printReqAndResInLog();
         } else {
-            failedResponseMessage();
+            printReqAndResInLog();
+            Check.quantityFAILED++;
         }
     }
 }

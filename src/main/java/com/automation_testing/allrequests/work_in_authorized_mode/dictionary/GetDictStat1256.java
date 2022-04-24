@@ -38,8 +38,10 @@ public class GetDictStat1256 extends Post {
             if (getCodeStatusResponse() == 200) {
                 rootTag = parseXmlBodyResponse();
                 checkTest();
+                printReqAndResInLog();
             } else {
-                failedResponseMessage();
+                printReqAndResInLog();
+                Check.quantityFAILED++;
             }
     }
 }

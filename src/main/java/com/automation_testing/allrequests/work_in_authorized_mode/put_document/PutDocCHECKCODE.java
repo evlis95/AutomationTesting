@@ -90,10 +90,12 @@ public class PutDocCHECKCODE extends Post {
             documentNumber = rootTag.getListF().get(0).getN();
             documentStatusCode = rootTag.getListF().get(0).getS();
             checkTest();
-            info();
+            printReqAndResInLog();
+           // info();
 
         } else {
-            failedResponseMessage();
+            printReqAndResInLog();
+            Check.quantityFAILED++;
         }
     }
 }

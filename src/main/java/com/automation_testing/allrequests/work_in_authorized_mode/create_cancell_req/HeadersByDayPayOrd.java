@@ -78,8 +78,10 @@ public class HeadersByDayPayOrd extends Post {
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             checkTest();
+            printReqAndResInLog();
         } else {
-            failedResponseMessage();
+            printReqAndResInLog();
+            Check.quantityFAILED++;
         }
     }
 }

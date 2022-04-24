@@ -41,7 +41,8 @@ public class PushManagePushUserBind extends Post {
             rootTag = parseXmlBodyResponse();
             checkTest();
         } else {
-            failedResponseMessage();
+            printReqAndResInLog();
+            Check.quantityFAILED++;
         }
     }
 }

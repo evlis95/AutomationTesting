@@ -62,9 +62,11 @@ public class UnBindManageDevice extends Post {
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             checkTest();
+            printReqAndResInLog();
             unbindingAndBindingDevice();
         } else {
-            failedResponseMessage();
+            printReqAndResInLog();
+            Check.quantityFAILED++;
         }
     }
 }

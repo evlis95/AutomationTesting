@@ -47,8 +47,10 @@ public class GetDictManageDevList extends Post {
             rootTag = parseXmlBodyResponse();
             definingDeviceBankID();
             checkTest();
+            printReqAndResInLog();
         } else {
-            failedResponseMessage();
+            printReqAndResInLog();
+            Check.quantityFAILED++;
         }
     }
 }

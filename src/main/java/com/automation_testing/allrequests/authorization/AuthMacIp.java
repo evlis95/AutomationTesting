@@ -6,6 +6,7 @@ import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_type.Post;
 import com.automation_testing.generalsettings.Settings;
+
 import javax.xml.bind.JAXBException;
 import java.io.*;
 import java.util.ArrayList;
@@ -54,14 +55,17 @@ public class AuthMacIp extends Post {
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
 
-            createXmlBodyRequest();
-            request();
-            writeBodyResponseInFile();
-            if (getCodeStatusResponse() == 200) {
-                rootTag = parseXmlBodyResponse();
-                checkTest();
-            } else {
-                failedResponseMessage();
-            }
+        createXmlBodyRequest();
+        request();
+        writeBodyResponseInFile();
+        if (getCodeStatusResponse() == 200) {
+            rootTag = parseXmlBodyResponse();
+            checkTest();
+            printReqAndResInLog();
+        } else {
+            printReqAndResInLog();
+            Check.quantityFAILED++;
+
+        }
     }
 }

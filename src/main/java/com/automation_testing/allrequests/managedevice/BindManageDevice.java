@@ -75,8 +75,10 @@ public class BindManageDevice extends Post {
             rootTag = parseXmlBodyResponse();
             checkTest();
             bindingDevice();
+            printReqAndResInLog();
         } else {
-            failedResponseMessage();
+            printReqAndResInLog();
+            Check.quantityFAILED++;
         }
     }
 }

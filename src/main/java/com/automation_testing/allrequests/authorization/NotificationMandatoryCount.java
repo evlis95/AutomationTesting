@@ -63,8 +63,10 @@ public class NotificationMandatoryCount extends Post {
             if (getCodeStatusResponse() == 200) {
                 rootTag = parseXmlBodyResponse();
                 checkTest();
+                printReqAndResInLog();
             } else {
-                failedResponseMessage();
+                printReqAndResInLog();
+                Check.quantityFAILED++;
             }
     }
 }

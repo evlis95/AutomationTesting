@@ -54,8 +54,10 @@ public class CrypProfCodeManagDev extends Post {
             rootTag = parseXmlBodyResponse();
             definingSPID();
             checkTest();
+            printReqAndResInLog();
         } else {
-            failedResponseMessage();
+            printReqAndResInLog();
+            Check.quantityFAILED++;
         }
     }
 }

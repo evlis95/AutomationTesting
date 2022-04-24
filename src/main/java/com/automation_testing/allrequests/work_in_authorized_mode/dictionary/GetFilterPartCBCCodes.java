@@ -43,8 +43,10 @@ public class GetFilterPartCBCCodes extends Post {
             rootTag = parseXmlBodyResponse();
             cbcCodeValue = rootTag.getListP().get(0).getListR().get(0).getD();
             checkTest();
+            printReqAndResInLog();
         } else {
-            failedResponseMessage();
+            printReqAndResInLog();
+            Check.quantityFAILED++;
         }
     }
 }

@@ -141,26 +141,31 @@ public class PutDocAction extends Post {
                     documentID = rootTag.getListF().get(0).getD();
                     docNumber = rootTag.getListF().get(0).getN();
                     checkTest();
-                    info();
+                    printReqAndResInLog();
+                    Check.quantityFAILED++;
+                 //   info();
                 } else {
                     checkTest();
+                    printReqAndResInLog();
                     documentID = rootTag.getListF().get(0).getD();
                     documentStatusCode = rootTag.getListF().get(0).getS();
                     docNumber = rootTag.getListF().get(0).getN();
                     documentBankID = rootTag.getListF().get(0).getI();
-                    info();
+                    //info();
 
                 }
             } else {
                 checkTest();
+                printReqAndResInLog();
                 documentID = rootTag.getListF().get(0).getD();
                 documentStatusCode = rootTag.getListF().get(0).getS();
                 docNumber = rootTag.getListF().get(0).getN();
                 documentBankID = rootTag.getListF().get(0).getI();
-                info();
+               // info();
             }
         } else {
-            failedResponseMessage();
+            printReqAndResInLog();
+            Check.quantityFAILED++;
         }
         switch (docType) {
             case PAYMENT_ORDER -> {

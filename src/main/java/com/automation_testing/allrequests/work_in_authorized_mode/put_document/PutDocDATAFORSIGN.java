@@ -80,9 +80,11 @@ public class PutDocDATAFORSIGN extends Post {
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             checkTest();
-            info();
+            printReqAndResInLog();
+           // info();
         } else {
-            failedResponseMessage();
+            printReqAndResInLog();
+            Check.quantityFAILED++;
         }
     }
 

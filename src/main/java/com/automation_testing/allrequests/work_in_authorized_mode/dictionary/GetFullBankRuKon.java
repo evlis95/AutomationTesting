@@ -52,8 +52,10 @@ public class GetFullBankRuKon extends Post {
             receiverPlace = rootTag.getListR().get(0).getV();
             receiverPlaceType = rootTag.getListR().get(0).getB();
             checkTest();
+            printReqAndResInLog();
         } else {
-            failedResponseMessage();
+            printReqAndResInLog();
+            Check.quantityFAILED++;
         }
     }
 }

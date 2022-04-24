@@ -55,8 +55,10 @@ public class GetFullBankRuBud extends Post {
             rootTag = parseXmlBodyResponse();
             initializationData();
             checkTest();
+            printReqAndResInLog();
         } else {
-            failedResponseMessage();
+            printReqAndResInLog();
+            Check.quantityFAILED++;
         }
     }
 }
