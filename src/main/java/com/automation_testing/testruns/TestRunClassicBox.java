@@ -105,9 +105,8 @@ public class TestRunClassicBox {
         requestMap.put("GetDictPayGrndParam", GET_DICT_PAY_GRND_PARAM);
         requestMap.put("GetDictMessageType", GET_DICT_MESSAGE_TYPE);
         requestMap.put("GetFilterPartCBCCodes", GET_FILTER_PART_CBC_CODES);
-        //запрос необходимый для блока запросов контрагенту
+        //запрос необходимый для блока запросов контрагенту и в бюджет
         requestMap.put("GetFullBankRu", GET_FULL_BANK_RU);
-
         //блок сохранение документа контрагенту
         requestMap.put("DocNumPaymOrderKonSave", docNumber);
         requestMap.put("PutPaymentOrderDocKonSave", putDoc);
