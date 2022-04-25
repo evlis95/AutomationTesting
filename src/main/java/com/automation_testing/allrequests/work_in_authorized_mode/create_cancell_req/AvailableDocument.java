@@ -1,20 +1,24 @@
 package com.automation_testing.allrequests.work_in_authorized_mode.create_cancell_req;
 
 import com.automation_testing.allrequests.authorization.AuthLogin;
+import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocAction;
 import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.TagPOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_type.Post;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
 public class AvailableDocument extends Post {
+    private final Logger LOG = LogManager.getLogger(AvailableDocument.class);
     private final String docType;
     private final String docID;
     public static UniversalResponseRootTag rootTag;
-    public String result;
+    public static String result;
 
     public AvailableDocument(String docType, String docID) {
         this.docType = docType;
@@ -32,7 +36,7 @@ public class AvailableDocument extends Post {
 
         available.setC("Available");
         available.setT("document");
-        available.setN(docType);
+        available.setN("CancellationRequest");
         available.setV(1.0);
         available.setS(AuthLogin.sessionID);
 
@@ -49,12 +53,18 @@ public class AvailableDocument extends Post {
         request();
         writeBodyResponseInFile();
         printReqAndResInLog();
+        checkTest();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             result = rootTag.getListF().get(0).getV();
-            checkTest();
-        } else {
-            Check.quantityFAILED++;
+
+            if(result.equals("1")) {
+                LOG.info("Проверка на доступность отзыва документа - PASS\n");
+                Check.quantityPASS++;
+            } else {
+                LOG.error("Проверка на доступность отзыва документа - FAILED\n");
+                Check.quantityFAILED++;
+            }
         }
     }
 }

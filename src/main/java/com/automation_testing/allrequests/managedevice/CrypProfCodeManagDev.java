@@ -51,12 +51,10 @@ public class CrypProfCodeManagDev extends Post {
         request();
         writeBodyResponseInFile();
         printReqAndResInLog();
+        checkTest();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             definingSPID();
-            checkTest();
-        } else {
-            Check.quantityFAILED++;
         }
     }
 }

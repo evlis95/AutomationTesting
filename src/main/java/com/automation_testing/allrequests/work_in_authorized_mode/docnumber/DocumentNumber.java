@@ -49,12 +49,11 @@ public class DocumentNumber extends Post {
         request();
         writeBodyResponseInFile();
         printReqAndResInLog();
+        checkTest();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             docNum = rootTag.getListF().get(0).getV();
-            checkTest();
-        } else {
-            Check.quantityFAILED++;
         }
+
     }
 }

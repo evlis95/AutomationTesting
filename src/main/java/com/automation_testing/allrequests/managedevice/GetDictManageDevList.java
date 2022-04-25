@@ -44,12 +44,10 @@ public class GetDictManageDevList extends Post {
         request();
         writeBodyResponseInFile();
         printReqAndResInLog();
+        checkTest();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             definingDeviceBankID();
-            checkTest();
-        } else {
-            Check.quantityFAILED++;
         }
     }
 }

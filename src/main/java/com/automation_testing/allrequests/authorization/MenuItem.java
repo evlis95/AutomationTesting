@@ -33,16 +33,14 @@ public class MenuItem extends Post {
 
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
-            createXmlBodyRequest();
-            request();
-            writeBodyResponseInFile();
-            printReqAndResInLog();
-            if (getCodeStatusResponse() == 200) {
-                rootTag = parseXmlBodyResponse();
-                checkTest();
-            } else {
-                Check.quantityFAILED++;
-            }
+        createXmlBodyRequest();
+        request();
+        writeBodyResponseInFile();
+        printReqAndResInLog();
+        checkTest();
+        if (getCodeStatusResponse() == 200) {
+            rootTag = parseXmlBodyResponse();
+        }
     }
 }
 

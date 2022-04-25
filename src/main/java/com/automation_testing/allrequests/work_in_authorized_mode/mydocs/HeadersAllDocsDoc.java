@@ -39,10 +39,8 @@ public class HeadersAllDocsDoc extends Post {
     }
 
 
-
     protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "HeadersAllDocsDocument");
-        checkAvailabilityDocPayOrdInRes();
     }
 
     @Override
@@ -81,18 +79,18 @@ public class HeadersAllDocsDoc extends Post {
                 }
                 if (result) {
                     Check.quantityPASS++;
-                   LOG.info("Проверка на наличие документов ПП в ответе на запрос HeadersAllDocsDoc - PASS\n");
+                    LOG.info("Проверка на наличие документов ПП в ответе на запрос HeadersAllDocsDoc - PASS\n");
                 } else {
                     Check.quantityFAILED++;
-                   LOG.error("Проверка на наличие документов ПП в ответе на запрос HeadersAllDocsDoc - FAILED\n");
+                    LOG.error("Проверка на наличие документов ПП в ответе на запрос HeadersAllDocsDoc - FAILED\n");
                 }
             } else {
                 Check.quantityFAILED++;
-               LOG.error("Проверка на наличие документов в ответе на запрос HeadersAllDocsDoc - FAILED\n");
+                LOG.error("Проверка на наличие документов в ответе на запрос HeadersAllDocsDoc - FAILED\n");
             }
         } else {
             Check.quantityFAILED++;
-           LOG.error("Проверка на наличие документов в ответе на запрос HeadersAllDocsDoc - FAILED\n");
+            LOG.error("Проверка на наличие документов в ответе на запрос HeadersAllDocsDoc - FAILED\n");
         }
     }
 
@@ -180,11 +178,10 @@ public class HeadersAllDocsDoc extends Post {
         request();
         writeBodyResponseInFile();
         printReqAndResInLog();
+        checkTest();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
-            checkTest();
-        } else {
-            Check.quantityFAILED++;
+            checkAvailabilityDocPayOrdInRes();
         }
     }
 

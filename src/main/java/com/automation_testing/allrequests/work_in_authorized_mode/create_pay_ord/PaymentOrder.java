@@ -5,11 +5,13 @@ import com.automation_testing.allrequests.authorization.UserFilter;
 import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.GetFilterPartCBCCodes;
 import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.GetFullBankRu;
 import com.automation_testing.allrequests.work_in_authorized_mode.docnumber.DocumentNumber;
+import lombok.Getter;
+import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-
+@Getter
 public class PaymentOrder {
     private final PaymentOrderTarget paymentOrderTarget;
     private final Map<String, String> map = new LinkedHashMap<>();

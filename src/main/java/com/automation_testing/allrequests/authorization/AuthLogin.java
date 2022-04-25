@@ -49,12 +49,10 @@ public class AuthLogin extends Post {
         request();
         writeBodyResponseInFile();
         printReqAndResInLog();
+        checkTest();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             sessionID = rootTag.getListS().get(0).getV();
-            checkTest();
-        } else {
-            Check.quantityFAILED++;
         }
     }
 }

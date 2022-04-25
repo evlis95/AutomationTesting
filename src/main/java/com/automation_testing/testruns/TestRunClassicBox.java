@@ -3,6 +3,8 @@ package com.automation_testing.testruns;
 import com.automation_testing.allrequests.authorization.*;
 import com.automation_testing.allrequests.connect.*;
 import com.automation_testing.allrequests.managedevice.*;
+import com.automation_testing.allrequests.work_in_authorized_mode.create_cancell_req.AvailableDocument;
+import com.automation_testing.allrequests.work_in_authorized_mode.create_cancell_req.CancellationRequest;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.DocumentAction;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.DocumentType;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocAction;
@@ -13,6 +15,7 @@ import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.*;
 import com.automation_testing.allrequests.work_in_authorized_mode.docnumber.DocumentNumber;
 import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.CountAllAllDocsDoc;
 import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.HeadersAllDocsDoc;
+import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocCHECKCODE;
 import com.automation_testing.checks.Check;
 import com.automation_testing.post_request_type.Post;
 import org.apache.logging.log4j.LogManager;
@@ -63,6 +66,7 @@ public class TestRunClassicBox {
     final CountAllAllDocsDoc COUNT_ALL_MY_DOCS = new CountAllAllDocsDoc();
     final HeadersAllDocsDoc HEADERS_ALL_DOCS_OF_MY_DOCS = new HeadersAllDocsDoc();
     final HeadersByDayPayOrd HEADERS_BY_DAY_PAY_ORD = new HeadersByDayPayOrd();
+    public static AvailableDocument availableDocument;
     public static PutDocAction putDoc;
     public static DocumentNumber docNumber;
 
@@ -138,8 +142,10 @@ public class TestRunClassicBox {
         requestMap.put("CountAllAllDocsDoc", COUNT_ALL_MY_DOCS);
         requestMap.put("HeadersAllDocsDocOfMyDocs", HEADERS_ALL_DOCS_OF_MY_DOCS);
         // создание запроса на отзыв
-        requestMap.put("DocNumCanReq", docNumber);
         requestMap.put("HeadersByDayPayOrd", HEADERS_BY_DAY_PAY_ORD);
+        requestMap.put("AvailableDocument", availableDocument);
+        requestMap.put("DocNumCanReq", docNumber);
+        requestMap.put("PutCancellationRequestSignGo", putDoc);
 
         LOG.info("Teстирование выполняется\n");
         try {
@@ -220,6 +226,8 @@ public class TestRunClassicBox {
                             }
                         }
                     }
+                    case "AvailableDocument" -> (availableDocument = new AvailableDocument("PaymentOrder", PutDocCHECKCODE.documentBankID)).run();
+                    case "PutCancellationRequestSignGo" -> (putDoc = new PutDocAction(DocumentAction.SIGN_GO, new CancellationRequest().initialCalReqFields(),DocumentType.CANCELLATION_REQUEST)).run();
                     ////////////////////////////////////////////////////////////////////////////////////
                     default -> {
                         Post post = (Post) map.getValue();

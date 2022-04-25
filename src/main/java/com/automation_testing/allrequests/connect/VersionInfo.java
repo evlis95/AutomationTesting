@@ -32,11 +32,9 @@ public class VersionInfo extends Post {
             request();
             writeBodyResponseInFile();
             printReqAndResInLog();
+            checkTest();
             if (getCodeStatusResponse() == 200) {
                 rootTagA = parseXmlBodyResponse();
-                checkTest();
-            } else {
-                Check.quantityFAILED++;
             }
     }
 }

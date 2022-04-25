@@ -38,7 +38,7 @@ public class PutDocFORCE extends Post {
         TagReqActOfUnivReq tagReqAct = new TagReqActOfUnivReq();
         force.setC("put");
         force.setT("document");
-        force.setN("PaymentOrder");
+        force.setN(PutDocAction.documentTypeString);
         force.setV(3.1);
         force.setS(AuthLogin.sessionID);
         tagReqAct.setV("FORCE");
@@ -52,12 +52,10 @@ public class PutDocFORCE extends Post {
         request();
         writeBodyResponseInFile();
         printReqAndResInLog();
+        checkTest();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             documentBankID = rootTag.getListF().get(0).getI();
-            checkTest();
-        } else {
-            Check.quantityFAILED++;
         }
     }
 

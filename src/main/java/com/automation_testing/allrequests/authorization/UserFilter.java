@@ -33,6 +33,7 @@ public class UserFilter extends Post {
 
     protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "UserFilter");
+
     }
 
 
@@ -253,13 +254,11 @@ public class UserFilter extends Post {
         request();
         writeBodyResponseInFile();
         printReqAndResInLog();
+        checkTest();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             identificationOfOrgData();
-            checkTest();
             info();
-        } else {
-            Check.quantityFAILED++;
         }
     }
 }

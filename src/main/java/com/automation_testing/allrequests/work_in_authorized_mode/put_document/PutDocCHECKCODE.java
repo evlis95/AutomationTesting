@@ -21,7 +21,7 @@ public class PutDocCHECKCODE extends Post {
     private final String nameRequestAndActionForLog;
     private final String documentID;
     private final String statusCodeForCheck;
-    private String documentBankID;
+    public static String documentBankID;
     //реквизиты сохраненного ПП
     private String documentStatusCode;
     private String documentNumber;
@@ -40,14 +40,6 @@ public class PutDocCHECKCODE extends Post {
 
     protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "CHECKCODE");
-
-        if (documentStatusCode.equals(statusCodeForCheck)) {
-           LOG.info("Проверка присвоения статус кода " + statusCodeForCheck + " документу - PASS\n");
-            Check.quantityPASS++;
-        } else {
-           LOG.error("Проверка присвоения статус кода " + statusCodeForCheck + " документу - FAILED");
-            Check.quantityFAILED++;
-        }
     }
 
     @Override
@@ -92,14 +84,18 @@ public class PutDocCHECKCODE extends Post {
         request();
         writeBodyResponseInFile();
         printReqAndResInLog();
+        checkTest();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             initializationFields();
-            checkTest();
             info();
-
-        } else {
-            Check.quantityFAILED++;
+            if (documentStatusCode.equals(statusCodeForCheck)) {
+                LOG.info("Проверка присвоения статус кода " + statusCodeForCheck + " документу - PASS\n");
+                Check.quantityPASS++;
+            } else {
+                LOG.error("Проверка присвоения статус кода " + statusCodeForCheck + " документу - FAILED");
+                Check.quantityFAILED++;
+            }
         }
     }
 }

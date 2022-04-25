@@ -72,12 +72,10 @@ public class BindManageDevice extends Post {
         request();
         writeBodyResponseInFile();
         printReqAndResInLog();
+        checkTest();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
-            checkTest();
             bindingDevice();
-        } else {
-            Check.quantityFAILED++;
         }
     }
 }

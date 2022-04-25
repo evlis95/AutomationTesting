@@ -1,6 +1,7 @@
 package com.automation_testing.allrequests.work_in_authorized_mode.put_document;
 
 import com.automation_testing.allrequests.authorization.AuthLogin;
+import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.PaymentOrderTarget;
 import com.automation_testing.allrequests.work_in_authorized_mode.getdoc.GetDocument;
 import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.TagPOfUnivReq;
@@ -135,36 +136,30 @@ public class PutDocAction extends Post {
         request();
         writeBodyResponseInFile();
         printReqAndResInLog();
+        checkTest();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             if (rootTag.getListC() != null) {
                 if (rootTag.getListC().get(0).getCe().equals("1")) {
                     documentID = rootTag.getListF().get(0).getD();
                     docNumber = rootTag.getListF().get(0).getN();
-                    checkTest();
                     Check.quantityFAILED++;
-                   info();
                 } else {
-                    checkTest();
                     documentID = rootTag.getListF().get(0).getD();
                     documentStatusCode = rootTag.getListF().get(0).getS();
                     docNumber = rootTag.getListF().get(0).getN();
                     documentBankID = rootTag.getListF().get(0).getI();
-                    info();
-
                 }
+                info();
             } else {
-                checkTest();
                 documentID = rootTag.getListF().get(0).getD();
                 documentStatusCode = rootTag.getListF().get(0).getS();
                 docNumber = rootTag.getListF().get(0).getN();
                 documentBankID = rootTag.getListF().get(0).getI();
                 info();
             }
-        } else {
-            printReqAndResInLog();
-            Check.quantityFAILED++;
         }
+
         switch (docType) {
             case PAYMENT_ORDER -> {
                 if (documentAction.toString().equals("SIGN")) {

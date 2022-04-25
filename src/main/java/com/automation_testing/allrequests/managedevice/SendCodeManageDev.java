@@ -56,12 +56,10 @@ public class SendCodeManageDev extends Post {
         request();
         writeBodyResponseInFile();
         printReqAndResInLog();
+        checkTest();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
-            checkTest();
            info();
-        } else {
-            Check.quantityFAILED++;
         }
     }
 }

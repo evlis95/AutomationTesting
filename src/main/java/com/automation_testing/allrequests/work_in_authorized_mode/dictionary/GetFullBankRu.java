@@ -45,6 +45,7 @@ public class GetFullBankRu extends Post {
         request();
         writeBodyResponseInFile();
         printReqAndResInLog();
+        checkTest();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             receiverBankName = rootTag.getListR().get(0).getX();
@@ -52,9 +53,6 @@ public class GetFullBankRu extends Post {
             receiverCorrAcc = rootTag.getListR().get(0).getTagCorrAcc().get(0).getA();
             receiverPlace = rootTag.getListR().get(0).getV();
             receiverPlaceType = rootTag.getListR().get(0).getB();
-            checkTest();
-        } else {
-            Check.quantityFAILED++;
         }
     }
 }

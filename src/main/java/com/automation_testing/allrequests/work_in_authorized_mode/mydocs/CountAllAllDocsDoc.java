@@ -27,15 +27,7 @@ public class CountAllAllDocsDoc extends Post {
 
     protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "CountAllAllDocsDocument");
-        if (rootTag.getListD() != null) {
-            if (tagTQuantity == rootTag.getListD().size()) {
-               LOG.info("Проверка количества пришедших типов документов в ответе на запрос CountAllAllDocsDoc, в зависимости от тех, которые ушли в запросе - PASS\n");
-                Check.quantityPASS++;
-            } else {
-               LOG.error("Проверка количества пришедших типов документов в ответе на запрос CountAllAllDocsDoc, в зависимости от тех, которые ушли в запросе - FAILED\n");
-                Check.quantityFAILED++;
-            }
-        }
+
     }
 
     @Override
@@ -130,11 +122,20 @@ public class CountAllAllDocsDoc extends Post {
         request();
         writeBodyResponseInFile();
         printReqAndResInLog();
+        checkTest();
         if (getCodeStatusResponse() == 200) {
-            rootTag = parseXmlBodyResponse();
-            checkTest();
-        } else {
-            Check.quantityFAILED++;
-        }
+                rootTag = parseXmlBodyResponse();
+
+            if (rootTag.getListD() != null) {
+                if (tagTQuantity == rootTag.getListD().size()) {
+                    LOG.info("Проверка количества пришедших типов документов в ответе на запрос CountAllAllDocsDoc, в зависимости от тех, которые ушли в запросе - PASS\n");
+                    Check.quantityPASS++;
+                } else {
+                    LOG.error("Проверка количества пришедших типов документов в ответе на запрос CountAllAllDocsDoc, в зависимости от тех, которые ушли в запросе - FAILED\n");
+                    Check.quantityFAILED++;
+                }
+            }
+
+            }
     }
 }

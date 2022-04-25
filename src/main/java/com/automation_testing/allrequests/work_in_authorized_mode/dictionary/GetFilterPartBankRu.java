@@ -44,13 +44,10 @@ public class GetFilterPartBankRu extends Post {
         createXmlBodyRequest();
         request();
         writeBodyResponseInFile();
+        printReqAndResInLog();
+        checkTest();
         if (getCodeStatusResponse() == 200) {
-            rootTag = parseXmlBodyResponse();
-            checkTest();
-            printReqAndResInLog();
-        } else {
-            printReqAndResInLog();
-            Check.quantityFAILED++;
-        }
+                rootTag = parseXmlBodyResponse();
+            }
     }
 }

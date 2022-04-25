@@ -17,13 +17,11 @@ public class NotificationMandatoryCount extends Post {
 
 
     public static UniversalResponseRootTag rootTag;
-    
 
 
     protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "NotificationMandatoryCount");
     }
-
 
 
     @Override
@@ -57,15 +55,13 @@ public class NotificationMandatoryCount extends Post {
 
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
-            createXmlBodyRequest();
-            request();
-            writeBodyResponseInFile();
-            printReqAndResInLog();
-            if (getCodeStatusResponse() == 200) {
-                rootTag = parseXmlBodyResponse();
-                checkTest();
-            } else {
-                Check.quantityFAILED++;
-            }
+        createXmlBodyRequest();
+        request();
+        writeBodyResponseInFile();
+        printReqAndResInLog();
+        checkTest();
+        if (getCodeStatusResponse() == 200) {
+            rootTag = parseXmlBodyResponse();
+        }
     }
 }

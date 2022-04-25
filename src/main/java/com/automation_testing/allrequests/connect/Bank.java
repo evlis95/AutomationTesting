@@ -38,11 +38,9 @@ public class Bank extends Post {
         request();
         writeBodyResponseInFile();
         printReqAndResInLog();
+        checkTest();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
-            checkTest();
-        } else {
-            Check.quantityFAILED++;
         }
     }
 }

@@ -21,6 +21,9 @@ public class Check {
         if (value.equals(200)) {
            LOG.info(String.format("Проверка кода 200 у ответа на запрос %s - PASS!\n\n", nameRequest));
             quantityPASS++;
+        } else {
+            LOG.error(String.format("Проверка кода 200 у ответа на запрос %s - FAILED!\n\n", nameRequest));
+            quantityFAILED++;
         }
     }
 
