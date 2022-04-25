@@ -17,7 +17,6 @@ public class Check {
     public static int quantityPASS;
     public static int quantityFAILED;
     private static int count;
-    public static List<String> requestsFailed;
 
     public static void checkCode200(@NotNull Integer value, String nameRequest) throws IOException {
         if (value.equals(200)) {
@@ -26,7 +25,6 @@ public class Check {
         } else {
             LOG.error(String.format("Проверка кода 200 у ответа на запрос %s - FAILED!\n\n", nameRequest));
             quantityFAILED++;
-            requestsFailed.add(nameRequest);
         }
     }
 
