@@ -2,6 +2,7 @@ package com.automation_testing.checks;
 
 import com.automation_testing.allrequests.authorization.AuthCryptoprofCode;
 import com.automation_testing.allrequests.authorization.UserAccount;
+import com.automation_testing.allrequests.authorization.UserFilter;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocAction;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import org.apache.logging.log4j.LogManager;
@@ -23,6 +24,24 @@ public class Check {
         }
     }
 
+    public static boolean checkEnabledD2BMAdvancedService(){
+        boolean result = false;
+        for (int j = 0; j < UserFilter.rootTag.getListV().size(); j++) {
+            if (UserFilter.rootTag.getListV().get(j).getAdv().equals("1")) {
+                result = true;
+                break;
+            }
+        }
+        if (result) {
+            LOG.info("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - PASS\n");
+            Check.quantityPASS++;
+        } else {
+            LOG.error("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - FAILED. Тестирование будет заверщено.\n");
+            Check.quantityFAILED++;
+        }
+        return result;
+    }
+
     public static boolean checkCountAvailableAccounts810() {
         int accAvailable810 = 0;
         for (int i = 0; i < UserAccount.rootTag.getListA().size(); i++) {
@@ -36,7 +55,6 @@ public class Check {
         if (PutDocAction.rootTag.getListC() != null) {
             if (PutDocAction.rootTag.getListC().get(0).getCe().equals("0")) {
                 if (rootTag.getListK() != null) {
-                    count = 0;
                     for (int i = 0; i < rootTag.getListK().size(); i++) {
                         if (rootTag.getListK().get(i).getT().equals("1")) {
                             count++;
