@@ -27,7 +27,7 @@ public class PushManagePushUserBind extends Post {
         marshallSetting(managePushUserBind);
     }
 
-    private void checkTest() throws IOException {
+    protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "PushManagePushUserBind");
     }
 
@@ -37,11 +37,11 @@ public class PushManagePushUserBind extends Post {
         createXmlBodyRequest();
         request();
         writeBodyResponseInFile();
+        printReqAndResInLog();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             checkTest();
         } else {
-            printReqAndResInLog();
             Check.quantityFAILED++;
         }
     }

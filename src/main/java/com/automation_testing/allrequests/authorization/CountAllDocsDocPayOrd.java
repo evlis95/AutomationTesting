@@ -67,7 +67,7 @@ public class CountAllDocsDocPayOrd extends Post {
     }
 
 
-    private void checkTest() throws IOException {
+    protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "CountallAlldocsDocumentPayment810");
     }
 
@@ -77,12 +77,11 @@ public class CountAllDocsDocPayOrd extends Post {
         createXmlBodyRequest();
         request();
         writeBodyResponseInFile();
+        printReqAndResInLog();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             checkTest();
-            printReqAndResInLog();
         } else {
-            printReqAndResInLog();
             Check.quantityFAILED++;
         }
     }

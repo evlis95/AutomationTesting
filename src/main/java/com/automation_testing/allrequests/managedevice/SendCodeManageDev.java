@@ -19,7 +19,7 @@ public class SendCodeManageDev extends Post {
     public static String successfullyCode;
     public static String condition;
 
-    private void checkTest() throws IOException {
+    protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "SendCodeManageDev");
     }
 
@@ -55,13 +55,12 @@ public class SendCodeManageDev extends Post {
         createXmlBodyRequest();
         request();
         writeBodyResponseInFile();
+        printReqAndResInLog();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             checkTest();
            info();
-            printReqAndResInLog();
         } else {
-            printReqAndResInLog();
             Check.quantityFAILED++;
         }
     }

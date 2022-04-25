@@ -12,7 +12,7 @@ public class VersionInfo extends Post {
 
     public static UniversalResponseRootTag rootTagA;
 
-    private void checkTest() throws IOException {
+    protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "VersionInfo");
     }
 
@@ -31,12 +31,11 @@ public class VersionInfo extends Post {
             createXmlBodyRequest();
             request();
             writeBodyResponseInFile();
+            printReqAndResInLog();
             if (getCodeStatusResponse() == 200) {
                 rootTagA = parseXmlBodyResponse();
                 checkTest();
-                printReqAndResInLog();
             } else {
-                printReqAndResInLog();
                 Check.quantityFAILED++;
             }
     }

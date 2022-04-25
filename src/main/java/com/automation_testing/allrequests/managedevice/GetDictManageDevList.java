@@ -14,7 +14,7 @@ public class GetDictManageDevList extends Post {
     public static UniversalResponseRootTag rootTag;
     public static String deviceBankID;
 
-    private void checkTest() throws IOException {
+    protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "GetDictManageDevList");
     }
 
@@ -43,13 +43,12 @@ public class GetDictManageDevList extends Post {
         createXmlBodyRequest();
         request();
         writeBodyResponseInFile();
+        printReqAndResInLog();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             definingDeviceBankID();
             checkTest();
-            printReqAndResInLog();
         } else {
-            printReqAndResInLog();
             Check.quantityFAILED++;
         }
     }

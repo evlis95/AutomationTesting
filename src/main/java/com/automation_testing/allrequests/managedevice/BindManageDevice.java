@@ -22,7 +22,7 @@ public class BindManageDevice extends Post {
     private final SendCodeManageDev sendCodeManageDev = new SendCodeManageDev();
 
 
-    private void checkTest() throws IOException {
+    protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "BindManageDevice");
     }
 
@@ -71,13 +71,12 @@ public class BindManageDevice extends Post {
         createXmlBodyRequest();
         request();
         writeBodyResponseInFile();
+        printReqAndResInLog();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             checkTest();
             bindingDevice();
-            printReqAndResInLog();
         } else {
-            printReqAndResInLog();
             Check.quantityFAILED++;
         }
     }

@@ -15,7 +15,8 @@ public class GetFilterPartCBCCodes extends Post {
     public static UniversalResponseRootTag rootTag;
     public static String cbcCodeValue;
 
-    private void checkTest() throws IOException {
+
+    protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "GetFilterPartCBCCodes");
     }
 
@@ -39,13 +40,12 @@ public class GetFilterPartCBCCodes extends Post {
         createXmlBodyRequest();
         request();
         writeBodyResponseInFile();
+        printReqAndResInLog();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             cbcCodeValue = rootTag.getListP().get(0).getListR().get(0).getD();
             checkTest();
-            printReqAndResInLog();
         } else {
-            printReqAndResInLog();
             Check.quantityFAILED++;
         }
     }

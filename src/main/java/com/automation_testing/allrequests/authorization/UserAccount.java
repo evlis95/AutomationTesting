@@ -26,7 +26,7 @@ public class UserAccount extends Post {
         marshallSetting(userAccount);
     }
 
-    private void checkTest() throws IOException {
+    protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "UserAccount");
     }
 
@@ -37,12 +37,11 @@ public class UserAccount extends Post {
             createXmlBodyRequest();
             request();
             writeBodyResponseInFile();
+            printReqAndResInLog();
             if (getCodeStatusResponse() == 200) {
                 rootTag = parseXmlBodyResponse();
                 checkTest();
-                printReqAndResInLog();
             } else {
-                printReqAndResInLog();
                 Check.quantityFAILED++;
             }
     }

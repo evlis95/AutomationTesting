@@ -31,7 +31,7 @@ public class UserFilter extends Post {
         marshallSetting(userFilter);
     }
 
-    private void checkTest() throws IOException {
+    protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "UserFilter");
     }
 
@@ -252,14 +252,13 @@ public class UserFilter extends Post {
         createXmlBodyRequest();
         request();
         writeBodyResponseInFile();
+        printReqAndResInLog();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             identificationOfOrgData();
             checkTest();
-            printReqAndResInLog();
-           // info();
+            info();
         } else {
-            printReqAndResInLog();
             Check.quantityFAILED++;
         }
     }

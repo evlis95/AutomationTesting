@@ -38,7 +38,7 @@ public class AuthLogin extends Post {
     }
 
 
-    private void checkTest() throws IOException {
+    protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "AuthLogin");
     }
 
@@ -48,13 +48,12 @@ public class AuthLogin extends Post {
         createXmlBodyRequest();
         request();
         writeBodyResponseInFile();
+        printReqAndResInLog();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             sessionID = rootTag.getListS().get(0).getV();
             checkTest();
-            printReqAndResInLog();
         } else {
-            printReqAndResInLog();
             Check.quantityFAILED++;
         }
     }

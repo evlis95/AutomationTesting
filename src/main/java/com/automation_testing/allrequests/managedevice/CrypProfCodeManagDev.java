@@ -17,7 +17,7 @@ public class CrypProfCodeManagDev extends Post {
     public static UniversalResponseRootTag rootTag;
     public static String spID;
 
-    private void checkTest() throws IOException {
+    protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "CrypProfCodeManagDev");
     }
 
@@ -50,13 +50,12 @@ public class CrypProfCodeManagDev extends Post {
         createXmlBodyRequest();
         request();
         writeBodyResponseInFile();
+        printReqAndResInLog();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             definingSPID();
             checkTest();
-            printReqAndResInLog();
         } else {
-            printReqAndResInLog();
             Check.quantityFAILED++;
         }
     }

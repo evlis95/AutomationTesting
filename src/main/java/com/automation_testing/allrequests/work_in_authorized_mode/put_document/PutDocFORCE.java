@@ -28,7 +28,7 @@ public class PutDocFORCE extends Post {
         this.documentID = documentID;
     }
 
-    private void checkTest() throws IOException {
+    protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "FORCE");
     }
 
@@ -51,13 +51,12 @@ public class PutDocFORCE extends Post {
         createXmlBodyRequest();
         request();
         writeBodyResponseInFile();
+        printReqAndResInLog();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             documentBankID = rootTag.getListF().get(0).getI();
             checkTest();
-            printReqAndResInLog();
         } else {
-            printReqAndResInLog();
             Check.quantityFAILED++;
         }
     }

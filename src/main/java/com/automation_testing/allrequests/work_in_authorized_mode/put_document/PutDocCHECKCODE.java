@@ -37,7 +37,7 @@ public class PutDocCHECKCODE extends Post {
     }
 
 
-    private void checkTest() throws IOException {
+    protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "CHECKCODE");
 
         if (documentStatusCode.equals(statusCodeForCheck)) {
@@ -84,17 +84,16 @@ public class PutDocCHECKCODE extends Post {
         createXmlBodyRequest();
         request();
         writeBodyResponseInFile();
+        printReqAndResInLog();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             documentBankID = rootTag.getListF().get(0).getI();
             documentNumber = rootTag.getListF().get(0).getN();
             documentStatusCode = rootTag.getListF().get(0).getS();
             checkTest();
-            printReqAndResInLog();
-           // info();
+            info();
 
         } else {
-            printReqAndResInLog();
             Check.quantityFAILED++;
         }
     }

@@ -13,7 +13,7 @@ public class GetDictSalaryAcc extends Post {
 
     public static UniversalResponseRootTag rootTag;
 
-    private void checkTest() throws IOException {
+    protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "GetDictSalaryAccount");
     }
 
@@ -33,12 +33,11 @@ public class GetDictSalaryAcc extends Post {
             createXmlBodyRequest();
             request();
             writeBodyResponseInFile();
+            printReqAndResInLog();
             if (getCodeStatusResponse() == 200) {
                 rootTag = parseXmlBodyResponse();
                 checkTest();
-                printReqAndResInLog();
             } else {
-                printReqAndResInLog();
                 Check.quantityFAILED++;
             }
     }

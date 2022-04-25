@@ -18,7 +18,7 @@ public class GetFullBankRuBud extends Post {
     public static String receiverPlace;
     public static String receiverPlaceType;
 
-    private void checkTest() throws IOException {
+    protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "GetFullBankRuDict");
     }
 
@@ -51,13 +51,12 @@ public class GetFullBankRuBud extends Post {
         createXmlBodyRequest();
         request();
         writeBodyResponseInFile();
+        printReqAndResInLog();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             initializationData();
             checkTest();
-            printReqAndResInLog();
         } else {
-            printReqAndResInLog();
             Check.quantityFAILED++;
         }
     }

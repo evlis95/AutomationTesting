@@ -25,7 +25,7 @@ public class CountAllAllDocsDoc extends Post {
     public static UniversalResponseRootTag rootTag;
 
 
-    private void checkTest() throws IOException {
+    protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "CountAllAllDocsDocument");
         if (rootTag.getListD() != null) {
             if (tagTQuantity == rootTag.getListD().size()) {
@@ -129,12 +129,11 @@ public class CountAllAllDocsDoc extends Post {
         createXmlBodyRequest();
         request();
         writeBodyResponseInFile();
+        printReqAndResInLog();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             checkTest();
-            printReqAndResInLog();
         } else {
-            printReqAndResInLog();
             Check.quantityFAILED++;
         }
     }

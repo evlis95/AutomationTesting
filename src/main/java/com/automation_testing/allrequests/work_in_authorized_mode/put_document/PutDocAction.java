@@ -40,7 +40,7 @@ public class PutDocAction extends Post {
         this.docType = docType;
     }
 
-    private void checkTest() throws IOException {
+    protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "PutDocument");
     }
 
@@ -134,6 +134,7 @@ public class PutDocAction extends Post {
         createXmlBodyRequest();
         request();
         writeBodyResponseInFile();
+        printReqAndResInLog();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             if (rootTag.getListC() != null) {
@@ -141,27 +142,24 @@ public class PutDocAction extends Post {
                     documentID = rootTag.getListF().get(0).getD();
                     docNumber = rootTag.getListF().get(0).getN();
                     checkTest();
-                    printReqAndResInLog();
                     Check.quantityFAILED++;
-                 //   info();
+                   info();
                 } else {
                     checkTest();
-                    printReqAndResInLog();
                     documentID = rootTag.getListF().get(0).getD();
                     documentStatusCode = rootTag.getListF().get(0).getS();
                     docNumber = rootTag.getListF().get(0).getN();
                     documentBankID = rootTag.getListF().get(0).getI();
-                    //info();
+                    info();
 
                 }
             } else {
                 checkTest();
-                printReqAndResInLog();
                 documentID = rootTag.getListF().get(0).getD();
                 documentStatusCode = rootTag.getListF().get(0).getS();
                 docNumber = rootTag.getListF().get(0).getN();
                 documentBankID = rootTag.getListF().get(0).getI();
-               // info();
+                info();
             }
         } else {
             printReqAndResInLog();

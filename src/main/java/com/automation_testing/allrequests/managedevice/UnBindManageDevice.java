@@ -21,7 +21,7 @@ public class UnBindManageDevice extends Post {
     private final Logger LOG = LogManager.getLogger(UnBindManageDevice.class);
     public static UniversalResponseRootTag rootTag;
 
-    private void checkTest() throws IOException {
+    protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "UnBindManageDevice");
     }
 
@@ -59,13 +59,12 @@ public class UnBindManageDevice extends Post {
         createXmlBodyRequest();
         request();
         writeBodyResponseInFile();
+        printReqAndResInLog();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             checkTest();
-            printReqAndResInLog();
             unbindingAndBindingDevice();
         } else {
-            printReqAndResInLog();
             Check.quantityFAILED++;
         }
     }

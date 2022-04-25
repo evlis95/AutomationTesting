@@ -12,10 +12,9 @@ public class AuthAccess extends Post {
 
     public static UniversalResponseRootTag rootTag;
 
-    private void checkTest() throws IOException {
+    protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "AuthAccess");
     }
-
 
 
     @Override
@@ -33,17 +32,15 @@ public class AuthAccess extends Post {
 
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
-
-            createXmlBodyRequest();
-            request();
-            writeBodyResponseInFile();
-            if (getCodeStatusResponse() == 200) {
-                rootTag = parseXmlBodyResponse();
-                checkTest();
-                printReqAndResInLog();
-            } else {
-                printReqAndResInLog();
-                Check.quantityFAILED++;
-            }
+        createXmlBodyRequest();
+        request();
+        writeBodyResponseInFile();
+        printReqAndResInLog();
+        if (getCodeStatusResponse() == 200) {
+            rootTag = parseXmlBodyResponse();
+            checkTest();
+        } else {
+            Check.quantityFAILED++;
+        }
     }
 }

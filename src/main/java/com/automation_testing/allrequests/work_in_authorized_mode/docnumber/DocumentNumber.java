@@ -24,7 +24,7 @@ public class DocumentNumber extends Post {
         return editTime;
     }
 
-    private void checkTest() throws IOException {
+    protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "DocumentNumber");
     }
 
@@ -48,13 +48,12 @@ public class DocumentNumber extends Post {
         createXmlBodyRequest();
         request();
         writeBodyResponseInFile();
+        printReqAndResInLog();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             docNum = rootTag.getListF().get(0).getV();
             checkTest();
-            printReqAndResInLog();
         } else {
-            printReqAndResInLog();
             Check.quantityFAILED++;
         }
     }

@@ -16,7 +16,9 @@ public class GetFilterPartBankRu extends Post {
 
     public static UniversalResponseRootTag rootTag;
 
-    private void checkTest() throws IOException {
+
+    @Override
+    protected void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "GetFilterPartBankRuDict");
     }
 
@@ -39,16 +41,16 @@ public class GetFilterPartBankRu extends Post {
 
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
-            createXmlBodyRequest();
-            request();
-            writeBodyResponseInFile();
-            if (getCodeStatusResponse() == 200) {
-                rootTag = parseXmlBodyResponse();
-                checkTest();
-                printReqAndResInLog();
-            } else {
-                printReqAndResInLog();
-                Check.quantityFAILED++;
-            }
+        createXmlBodyRequest();
+        request();
+        writeBodyResponseInFile();
+        if (getCodeStatusResponse() == 200) {
+            rootTag = parseXmlBodyResponse();
+            checkTest();
+            printReqAndResInLog();
+        } else {
+            printReqAndResInLog();
+            Check.quantityFAILED++;
+        }
     }
 }

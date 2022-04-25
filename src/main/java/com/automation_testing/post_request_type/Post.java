@@ -26,8 +26,8 @@ import java.time.Duration;
 
 
 public abstract class Post {
-
     private final Logger LOG = LogManager.getLogger(Post.class);
+    private UniversalResponseRootTag rootTag;
     private String bodyResponse;
     private Integer codeStatusResponse;
     private HttpRequest request;
@@ -98,25 +98,27 @@ public abstract class Post {
         return rootTag;
     }
 
+    protected abstract void checkTest() throws IOException;
+
     protected void printReqAndResInLog() throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(".\\src\\main\\java\\com\\automation_testing\\xmlfile\\request.xml"));
         StringBuilder stringBuffer = new StringBuilder("");
         String line = "";
-       LOG.warn("Запрос:");
+        LOG.warn("Запрос:");
         while ((line = bufferedReader.readLine()) != null) {
             stringBuffer.append(line).append("\n");
         }
         bufferedReader.close();
-       LOG.warn(stringBuffer.toString());
+        LOG.warn(stringBuffer.toString());
 
-       LOG.warn("Ответ:");
+        LOG.warn("Ответ:");
         StringBuilder stringBuffer1 = new StringBuilder("");
         bufferedReader = new BufferedReader(new StringReader(bodyResponse));
         while ((line = bufferedReader.readLine()) != null) {
             stringBuffer1.append(line).append("\n");
         }
         bufferedReader.close();
-       LOG.warn(stringBuffer1.toString());
+        LOG.warn(stringBuffer1.toString());
     }
 
 

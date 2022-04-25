@@ -18,7 +18,7 @@ public class Check {
 
     public static void checkCode200(@NotNull Integer value, String nameRequest) throws IOException {
         if (value.equals(200)) {
-           LOG.info(String.format("Проверка кода 200 у ответа на запрос %s - PASS!\n", nameRequest));
+           LOG.info(String.format("Проверка кода 200 у ответа на запрос %s - PASS!\n\n", nameRequest));
             quantityPASS++;
         }
     }
