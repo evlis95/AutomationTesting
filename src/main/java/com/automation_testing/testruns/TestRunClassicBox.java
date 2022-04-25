@@ -55,12 +55,11 @@ public class TestRunClassicBox {
     final GetDictSalaryAcc GET_DICT_SALARY_ACC = new GetDictSalaryAcc();
     final TooltipPaymentOrder TOOLTIP_PAYMENT_ORDER = new TooltipPaymentOrder();
     final GetFilterPartBankRu GET_FILTER_PART_BANK_RU = new GetFilterPartBankRu();
-    final GetFullBankRuKon GET_FULL_BANKRU_KON = new GetFullBankRuKon();
+    final GetFullBankRu GET_FULL_BANK_RU = new GetFullBankRu();
     final GetDictStat1256 GET_DICT_STAT_1256 = new GetDictStat1256();
     final GetDictPayGrndParam GET_DICT_PAY_GRND_PARAM = new GetDictPayGrndParam();
     final GetDictMessageType GET_DICT_MESSAGE_TYPE = new GetDictMessageType();
     final GetFilterPartCBCCodes GET_FILTER_PART_CBC_CODES = new GetFilterPartCBCCodes();
-    final GetFullBankRuBud GET_FULL_BANKRU_BUD = new GetFullBankRuBud();
     final CountAllAllDocsDoc COUNT_ALL_MY_DOCS = new CountAllAllDocsDoc();
     final HeadersAllDocsDoc HEADERS_ALL_DOCS_OF_MY_DOCS = new HeadersAllDocsDoc();
     final HeadersByDayPayOrd HEADERS_BY_DAY_PAY_ORD = new HeadersByDayPayOrd();
@@ -107,9 +106,8 @@ public class TestRunClassicBox {
         requestMap.put("GetDictMessageType", GET_DICT_MESSAGE_TYPE);
         requestMap.put("GetFilterPartCBCCodes", GET_FILTER_PART_CBC_CODES);
         //запрос необходимый для блока запросов контрагенту
-        requestMap.put("GetFullBankRuKon", GET_FULL_BANKRU_KON);
-        //запрос необходимый для блока запросов в бюджет
-        requestMap.put("GetFullBankRuBud", GET_FULL_BANKRU_BUD);
+        requestMap.put("GetFullBankRu", GET_FULL_BANK_RU);
+
         //блок сохранение документа контрагенту
         requestMap.put("DocNumPaymOrderKonSave", docNumber);
         requestMap.put("PutPaymentOrderDocKonSave", putDoc);

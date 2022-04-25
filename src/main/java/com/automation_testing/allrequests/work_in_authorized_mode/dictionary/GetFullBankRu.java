@@ -10,7 +10,7 @@ import com.automation_testing.post_request_type.Post;
 import javax.xml.bind.JAXBException;
 import java.io.*;
 
-public class GetFullBankRuKon extends Post {
+public class GetFullBankRu extends Post {
 
 
     public static UniversalResponseRootTag rootTag;
