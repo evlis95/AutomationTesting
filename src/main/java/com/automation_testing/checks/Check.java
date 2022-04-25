@@ -10,12 +10,14 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Check {
     private static final Logger LOG = LogManager.getLogger(Check.class);
     public static int quantityPASS;
     public static int quantityFAILED;
     private static int count;
+    public static List<String> requestsFailed;
 
     public static void checkCode200(@NotNull Integer value, String nameRequest) throws IOException {
         if (value.equals(200)) {
@@ -24,6 +26,7 @@ public class Check {
         } else {
             LOG.error(String.format("Проверка кода 200 у ответа на запрос %s - FAILED!\n\n", nameRequest));
             quantityFAILED++;
+            requestsFailed.add(nameRequest);
         }
     }
 

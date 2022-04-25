@@ -235,6 +235,12 @@ public class TestRunClassicBox {
                 }
             LOG.info("Тестирование завершено");
             LOG.info("Количество успешных тестов - " + Check.quantityPASS + ". Количество проваленных - " + Check.quantityFAILED + ".");
+            if (Check.requestsFailed.size() > 1) {
+                LOG.info("Список наименований упавших запросов: ");
+                for (String x : Check.requestsFailed) {
+                    LOG.info(x + "\n");
+                }
+            }
         } catch (IOException | JAXBException |
                 InterruptedException e) {
             e.printStackTrace();

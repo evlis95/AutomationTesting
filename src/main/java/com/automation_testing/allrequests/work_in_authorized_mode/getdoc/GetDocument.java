@@ -14,9 +14,13 @@ public class GetDocument extends Post {
 
     public static UniversalResponseRootTag rootTag;
     private final String documentBankID;
+    private String docType;
 
-    public GetDocument(String documentBankID) {
+
+
+    public GetDocument(String documentBankID, String docType) {
         this.documentBankID = documentBankID;
+        this.docType = docType;
     }
 
     protected void checkTest() throws IOException {
@@ -30,7 +34,7 @@ public class GetDocument extends Post {
 
         docNum.setC("get");
         docNum.setT("document");
-        docNum.setN("PaymentOrder");
+        docNum.setN(docType);
         docNum.setV(3.0);
         docNum.setS(AuthLogin.sessionID);
         tagP.setI(documentBankID);

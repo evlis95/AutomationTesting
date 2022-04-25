@@ -202,10 +202,10 @@ public class PutDocAction extends Post {
             if (rootTag.getListC() != null) {
                 force = new PutDocFORCE(documentID);
                 force.run();
-                getDoc = new GetDocument(force.getDocumentBankID());
+                getDoc = new GetDocument(force.getDocumentBankID(),documentTypeString);
                 getDoc.run();
             } else {
-                getDoc = new GetDocument(documentBankID);
+                getDoc = new GetDocument(documentBankID,documentTypeString);
                 getDoc.run();
             }
         }
@@ -222,7 +222,7 @@ public class PutDocAction extends Post {
                 if (rootTag.getListC().get(0).getCe().equals("1")) {
                     force = new PutDocFORCE(documentID);
                     force.run();
-                    getDoc = new GetDocument(force.getDocumentBankID());
+                    getDoc = new GetDocument(force.getDocumentBankID(), documentTypeString);
                     getDoc.run();
                 } else {
                     Check.checkCountAvailableSPSign(rootTag);
@@ -234,7 +234,7 @@ public class PutDocAction extends Post {
 
                     check = new PutDocCHECKCODE(messPass, documentID, statusCodeForCheck);
                     check.run();
-                    getDoc = new GetDocument(check.getDocumentBankID());
+                    getDoc = new GetDocument(check.getDocumentBankID(), documentTypeString);
                     getDoc.run();
                 }
             } else {
@@ -243,7 +243,7 @@ public class PutDocAction extends Post {
                 dataForSign.run();
                 check = new PutDocCHECKCODE(messPass, documentID, statusCodeForCheck);
                 check.run();
-                getDoc = new GetDocument(check.getDocumentBankID());
+                getDoc = new GetDocument(check.getDocumentBankID(), documentTypeString);
                 getDoc.run();
             }
         }
