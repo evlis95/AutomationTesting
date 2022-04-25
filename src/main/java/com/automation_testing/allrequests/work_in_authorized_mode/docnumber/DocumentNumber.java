@@ -16,6 +16,11 @@ public class DocumentNumber extends Post {
 
     public static String docNum;
     public static UniversalResponseRootTag rootTag;
+    private String docType;
+
+    public DocumentNumber(String docType) {
+        this.docType = docType;
+    }
 
     private @NotNull String createTime() {
         long currentTime = System.currentTimeMillis();
@@ -34,7 +39,7 @@ public class DocumentNumber extends Post {
         TagPOfUnivReq tagP = new TagPOfUnivReq();
         docNum.setC("documentnumber");
         docNum.setT("document");
-        docNum.setN("PaymentOrder");
+        docNum.setN(docType);
         docNum.setV(1.0);
         docNum.setS(AuthLogin.sessionID);
         tagP.setA(createTime());

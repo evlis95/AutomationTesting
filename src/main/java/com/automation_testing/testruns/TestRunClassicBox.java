@@ -156,9 +156,8 @@ public class TestRunClassicBox {
                             "DocNumPaymOrderKonSignGo",
                             "DocNumPaymOrderBudSave",
                             "DocNumPaymOrderBudSign",
-                            "DocNumPaymOrderBudSignGo",
-                            "DocNumCanReq" -> new DocumentNumber().run();
-
+                            "DocNumPaymOrderBudSignGo" -> new DocumentNumber("PaymentOrder").run();
+                    case "DocNumCanReq" -> new DocumentNumber("CancellationRequest").run();
                     case "DocNumPaymOrderYSSAve",
                             "DocNumPaymOrderYSSign",
                             "DocNumPaymOrderYSSignGo" -> {
@@ -168,7 +167,7 @@ public class TestRunClassicBox {
                                     Запрос нового документа не будет произведен.
                                     """);
                         } else {
-                            new DocumentNumber().run();
+                            new DocumentNumber("PaymentOrder").run();
                         }
                     }
                     case "UserFilter" -> {
@@ -227,7 +226,7 @@ public class TestRunClassicBox {
                         }
                     }
                     case "AvailableDocument" -> (availableDocument = new AvailableDocument("PaymentOrder", PutDocCHECKCODE.documentBankID)).run();
-                    case "PutCancellationRequestSignGo" -> (putDoc = new PutDocAction(DocumentAction.SIGN_GO, new CancellationRequest().initialCalReqFields(),DocumentType.CANCELLATION_REQUEST)).run();
+                    case "PutCancellationRequestSignGo" -> (putDoc = new PutDocAction(DocumentAction.SIGN_GO, new CancellationRequest().initialCalReqFields(), DocumentType.CANCELLATION_REQUEST)).run();
                     ////////////////////////////////////////////////////////////////////////////////////
                     default -> {
                         Post post = (Post) map.getValue();

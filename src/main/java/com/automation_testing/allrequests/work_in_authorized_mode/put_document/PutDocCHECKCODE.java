@@ -23,8 +23,8 @@ public class PutDocCHECKCODE extends Post {
     private final String statusCodeForCheck;
     public static String documentBankID;
     //реквизиты сохраненного ПП
-    private String documentStatusCode;
-    private String documentNumber;
+    public static String documentStatusCode;
+    public static String documentNumber;
     public static UniversalResponseRootTag rootTag;
 
     public PutDocCHECKCODE(String nameRequestAndActionForLog, String documentID, String statusCodeForCheck) {
