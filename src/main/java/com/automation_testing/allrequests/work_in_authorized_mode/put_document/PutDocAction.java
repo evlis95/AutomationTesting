@@ -1,14 +1,13 @@
 package com.automation_testing.allrequests.work_in_authorized_mode.put_document;
 
 import com.automation_testing.allrequests.authorization.AuthLogin;
-import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.PaymentOrderTarget;
 import com.automation_testing.allrequests.work_in_authorized_mode.getdoc.GetDocument;
 import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.TagPOfUnivReq;
 import com.automation_testing.creatingxml.TagReqActOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
-import com.automation_testing.post_request_type.Post;
+import com.automation_testing.post_request_pattern.Post;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

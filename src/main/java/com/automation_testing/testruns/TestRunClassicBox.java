@@ -17,7 +17,7 @@ import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.CountAl
 import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.HeadersAllDocsDoc;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocCHECKCODE;
 import com.automation_testing.checks.Check;
-import com.automation_testing.post_request_type.Post;
+import com.automation_testing.post_request_pattern.Post;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

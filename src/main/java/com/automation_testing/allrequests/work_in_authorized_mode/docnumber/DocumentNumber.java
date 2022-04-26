@@ -7,7 +7,7 @@ import com.automation_testing.creatingxml.TagPOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import org.jetbrains.annotations.NotNull;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
-import com.automation_testing.post_request_type.Post;
+import com.automation_testing.post_request_pattern.Post;
 
 import javax.xml.bind.JAXBException;
 import java.io.*;

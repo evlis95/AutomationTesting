@@ -5,7 +5,7 @@ import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.TagPOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
-import com.automation_testing.post_request_type.Post;
+import com.automation_testing.post_request_pattern.Post;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

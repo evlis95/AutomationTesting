@@ -4,7 +4,7 @@ import com.automation_testing.allrequests.authorization.AuthLogin;
 import com.automation_testing.allrequests.authorization.UserAccount;
 import com.automation_testing.allrequests.authorization.UserFilter;
 import com.automation_testing.checks.Check;
-import com.automation_testing.post_request_type.Post;
+import com.automation_testing.post_request_pattern.Post;
 import com.automation_testing.creatingxml.*;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 
@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 
 public class HeadersByDayPayOrd extends Post {

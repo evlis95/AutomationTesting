@@ -1,4 +1,4 @@
-package com.automation_testing.post_request_type;
+package com.automation_testing.post_request_pattern;
 
 
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
