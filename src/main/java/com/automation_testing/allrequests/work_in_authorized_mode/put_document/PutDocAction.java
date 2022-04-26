@@ -7,7 +7,7 @@ import com.automation_testing.creatingxml.TagPOfUnivReq;
 import com.automation_testing.creatingxml.TagReqActOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
-import com.automation_testing.post_request_type.Post;
+import com.automation_testing.post_request_pattern.Post;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,12 +20,12 @@ import java.util.List;
 import java.util.Map;
 
 public class PutDocAction extends Post {
-    public final DocumentType docType;
+    public final DocumentType DOC_TYPE;
     public static String documentTypeString;
-    private final Map<String, String> fieldsAndValues;
+    private final Map<String, String> MAP_FIELDS_AND_VALUES;
     public static UniversalResponseRootTag rootTag;
     private final Logger LOG = LogManager.getLogger(PutDocAction.class);
-    private final DocumentAction documentAction;
+    private final DocumentAction DOC_ACTION;
     private String documentID;
     private String documentBankID;
     private String messPass;
@@ -35,18 +35,19 @@ public class PutDocAction extends Post {
 
 
     public PutDocAction(DocumentAction documentAction, Map<String, String> fieldsMap, DocumentType docType) {
-        this.documentAction = documentAction;
-        this.fieldsAndValues = fieldsMap;
-        this.docType = docType;
+        this.DOC_ACTION = documentAction;
+        this.MAP_FIELDS_AND_VALUES = fieldsMap;
+        this.DOC_TYPE = docType;
     }
 
-    private void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "PutDocument");
+    @Override
+    protected void checkTest() throws IOException {
+        Check.checkCode200(codeStatusResponse, "PutDocument");
     }
 
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
-        switch (docType) {
+        switch (DOC_TYPE) {
             case PAYMENT_ORDER -> documentTypeString = "PaymentOrder";
             case CANCELLATION_REQUEST -> documentTypeString = "CancellationRequest";
         }
@@ -54,7 +55,7 @@ public class PutDocAction extends Post {
 
         List<TagPOfUnivReq> listP = new ArrayList<>();
 
-        put.setTagReqAct(new TagReqActOfUnivReq(documentAction.toString()));
+        put.setTagReqAct(new TagReqActOfUnivReq(DOC_ACTION.toString()));
 
         put.setC("put");
         put.setT("document");
@@ -62,7 +63,7 @@ public class PutDocAction extends Post {
         put.setV(3.2);
         put.setS(AuthLogin.sessionID);
 
-        fieldsAndValues.forEach((key, value) -> {
+        MAP_FIELDS_AND_VALUES.forEach((key, value) -> {
             TagPOfUnivReq p = new TagPOfUnivReq();
             p.setN(key);
             p.setV(value);
@@ -95,7 +96,7 @@ public class PutDocAction extends Post {
                 stringBuilder.append(line).append("\n");
             }
             bufferedReader.close();
-           LOG.info(stringBuilder.toString());
+            LOG.info(stringBuilder.toString());
         } else {
             if (rootTag.getListC().get(0).getCe().equals("1")) {
                 bufferedReader = new BufferedReader(new StringReader(messageFail));
@@ -110,7 +111,7 @@ public class PutDocAction extends Post {
                             "Сообщение: " + rootTag.getListError().get(i).getMessage() + "\n" +
                             "Тип важности контроля: " + rootTag.getListError().get(i).getType() + "\n");
                 }
-               LOG.error(stringBuilder.toString());
+                LOG.error(stringBuilder.toString());
             } else {
                 bufferedReader = new BufferedReader(new StringReader(messageWithSoftControls));
                 while ((line = bufferedReader.readLine()) != null) {
@@ -123,7 +124,7 @@ public class PutDocAction extends Post {
                             "Сообщение: " + rootTag.getListError().get(i).getMessage() + "\n" +
                             "Тип важности контроля: " + rootTag.getListError().get(i).getType() + "\n");
                 }
-               LOG.warn(stringBuilder.toString());
+                LOG.warn(stringBuilder.toString());
             }
         }
     }
@@ -132,46 +133,43 @@ public class PutDocAction extends Post {
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
         createXmlBodyRequest();
-        request();
+        executingRequest();
         writeBodyResponseInFile();
-        if (getCodeStatusResponse() == 200) {
-            rootTag = parseXmlBodyResponse();
+        printReqAndResInLog();
+        checkTest();
+        if (codeStatusResponse == 200) {
+            rootTag = parsingResponseBody();
             if (rootTag.getListC() != null) {
                 if (rootTag.getListC().get(0).getCe().equals("1")) {
                     documentID = rootTag.getListF().get(0).getD();
                     docNumber = rootTag.getListF().get(0).getN();
-                    checkTest();
-                    info();
+                    Check.quantityFAILED++;
                 } else {
-                    checkTest();
                     documentID = rootTag.getListF().get(0).getD();
                     documentStatusCode = rootTag.getListF().get(0).getS();
                     docNumber = rootTag.getListF().get(0).getN();
                     documentBankID = rootTag.getListF().get(0).getI();
-                    info();
-
                 }
+                info();
             } else {
-                checkTest();
                 documentID = rootTag.getListF().get(0).getD();
                 documentStatusCode = rootTag.getListF().get(0).getS();
                 docNumber = rootTag.getListF().get(0).getN();
                 documentBankID = rootTag.getListF().get(0).getI();
                 info();
             }
-        } else {
-            failedResponseMessage();
         }
-        switch (docType) {
+
+        switch (DOC_TYPE) {
             case PAYMENT_ORDER -> {
-                if (documentAction.toString().equals("SIGN")) {
+                if (DOC_ACTION.toString().equals("SIGN")) {
                     messPass = "ПП успешно подписано";
                 } else {
                     messPass = "ПП успешно подписано и отправлено";
                 }
             }
             case CANCELLATION_REQUEST -> {
-                if (documentAction.toString().equals("SIGN")) {
+                if (DOC_ACTION.toString().equals("SIGN")) {
                     messPass = "Документ запроса на отзыв успешно подписан";
                 } else {
                     messPass = "Документ запроса на отзыв успешно подписан и отправлен";
@@ -179,7 +177,7 @@ public class PutDocAction extends Post {
             }
 
         }
-        switch (documentAction) {
+        switch (DOC_ACTION) {
             case SAVE -> {
                 new ExecutingSaveDoc().executing();
             }
@@ -204,10 +202,10 @@ public class PutDocAction extends Post {
             if (rootTag.getListC() != null) {
                 force = new PutDocFORCE(documentID);
                 force.run();
-                getDoc = new GetDocument(force.getDocumentBankID());
+                getDoc = new GetDocument(force.getDocumentBankID(), documentTypeString);
                 getDoc.run();
             } else {
-                getDoc = new GetDocument(documentBankID);
+                getDoc = new GetDocument(documentBankID, documentTypeString);
                 getDoc.run();
             }
         }
@@ -224,7 +222,7 @@ public class PutDocAction extends Post {
                 if (rootTag.getListC().get(0).getCe().equals("1")) {
                     force = new PutDocFORCE(documentID);
                     force.run();
-                    getDoc = new GetDocument(force.getDocumentBankID());
+                    getDoc = new GetDocument(force.getDocumentBankID(), documentTypeString);
                     getDoc.run();
                 } else {
                     Check.checkCountAvailableSPSign(rootTag);
@@ -236,7 +234,7 @@ public class PutDocAction extends Post {
 
                     check = new PutDocCHECKCODE(messPass, documentID, statusCodeForCheck);
                     check.run();
-                    getDoc = new GetDocument(check.getDocumentBankID());
+                    getDoc = new GetDocument(check.getDocumentBankID(), documentTypeString);
                     getDoc.run();
                 }
             } else {
@@ -245,7 +243,7 @@ public class PutDocAction extends Post {
                 dataForSign.run();
                 check = new PutDocCHECKCODE(messPass, documentID, statusCodeForCheck);
                 check.run();
-                getDoc = new GetDocument(check.getDocumentBankID());
+                getDoc = new GetDocument(check.getDocumentBankID(), documentTypeString);
                 getDoc.run();
             }
         }

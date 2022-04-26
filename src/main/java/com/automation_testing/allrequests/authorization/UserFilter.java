@@ -6,7 +6,7 @@ import com.automation_testing.hibernate.pojo.Divisions;
 import com.automation_testing.hibernate.pojo.Organizations;
 import com.automation_testing.hibernate.utils.HibernateUtils;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
-import com.automation_testing.post_request_type.Post;
+import com.automation_testing.post_request_pattern.Post;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
@@ -27,7 +27,6 @@ public class UserFilter extends Post {
     public static String orgKPP;
     public static String orgINN;
     public static String orgName;
-
     private Divisions division;
 
     @Override
@@ -42,15 +41,15 @@ public class UserFilter extends Post {
         marshallSetting(userFilter);
     }
 
+    @Override
     private void checkTest() throws IOException {
         Check.checkCode200(getCodeStatusResponse(), "UserFilter");
         Check.checkEnabledServiceD2BMAdvanced();
     }
 
-
     public void info() throws IOException {
 
-        StringBuffer stringBuffer = new StringBuffer("");
+        StringBuffer stringBuffer = new StringBuffer();
         ////
         //организации
         stringBuffer.append("\n\nКоличество организаций пользователя - " + rootTag.getListC().size() + "\n");
@@ -107,13 +106,13 @@ public class UserFilter extends Post {
             if (rootTag.getListV().get(0).getDcc().equals("1")) {
                 stringBuffer.append("D2BM. Цифровые карты\n");
             }
-            if (rootTag.getListV().get(0).getaPay().equals("1")) {
+            if (rootTag.getListV().get(0).getAPay().equals("1")) {
                 stringBuffer.append("D2BM. Apple Pay\n");
             }
-            if (rootTag.getListV().get(0).getgPay().equals("1")) {
+            if (rootTag.getListV().get(0).getGPay().equals("1")) {
                 stringBuffer.append("D2BM. Google Pay\n");
             }
-            if (rootTag.getListV().get(0).getsPay().equals("1")) {
+            if (rootTag.getListV().get(0).getSPay().equals("1")) {
                 stringBuffer.append("D2BM. Samsung Pay\n");
             }
             if (rootTag.getListV().get(0).getWarn().equals("1")) {
@@ -203,13 +202,13 @@ public class UserFilter extends Post {
                         if (rootTag.getListV().get(j).getDcc().equals("1")) {
                             stringBuffer.append("D2BM. Цифровые карты\n");
                         }
-                        if (rootTag.getListV().get(j).getaPay().equals("1")) {
+                        if (rootTag.getListV().get(j).getAPay().equals("1")) {
                             stringBuffer.append("D2BM. Apple Pay\n");
                         }
-                        if (rootTag.getListV().get(j).getgPay().equals("1")) {
+                        if (rootTag.getListV().get(j).getGPay().equals("1")) {
                             stringBuffer.append("D2BM. Google Pay\n");
                         }
-                        if (rootTag.getListV().get(j).getsPay().equals("1")) {
+                        if (rootTag.getListV().get(j).getSPay().equals("1")) {
                             stringBuffer.append("D2BM. Samsung Pay\n");
                         }
                         if (rootTag.getListV().get(j).getWarn().equals("1")) {
@@ -249,6 +248,7 @@ public class UserFilter extends Post {
                 }
             }
         }
+        LOG.info(stringBuffer.toString());
         LOG.info(stringBuffer.toString());
     }
 
@@ -290,16 +290,19 @@ public class UserFilter extends Post {
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
         createXmlBodyRequest();
-        request();
+        executingRequest();
         writeBodyResponseInFile();
+        printReqAndResInLog();
+        checkTest();
+        if (codeStatusResponse == 200) {
+            rootTag = parsingResponseBody();
+            identificationOfOrgData();
         if (getCodeStatusResponse() == 200) {
             rootTag = parseXmlBodyResponse();
             identificationOfOrgData();
             parsingDataAndSaveInBD();
             checkTest();
             info();
-        } else {
-            failedResponseMessage();
         }
     }
 }

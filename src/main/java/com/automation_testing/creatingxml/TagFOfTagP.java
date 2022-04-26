@@ -1,9 +1,14 @@
 package com.automation_testing.creatingxml;
 
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
+@Setter
+@NoArgsConstructor
 public class TagFOfTagP {
     @XmlAttribute
     private String g;
@@ -27,32 +32,5 @@ public class TagFOfTagP {
         this.s = s;
         this.t = t;
         this.listS = listS;
-    }
-
-    public TagFOfTagP() {
-    }
-
-    public void setG(String g) {
-        this.g = g;
-    }
-
-    public void setListS(List<TagSOfTagF> listS) {
-        this.listS = listS;
-    }
-
-    public void setB(String b) {
-        this.b = b;
-    }
-
-    public void setE(String e) {
-        this.e = e;
-    }
-
-    public void setS(String s) {
-        this.s = s;
-    }
-
-    public void setT(String t) {
-        this.t = t;
     }
 }

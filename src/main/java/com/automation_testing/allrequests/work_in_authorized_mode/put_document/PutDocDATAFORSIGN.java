@@ -5,7 +5,7 @@ import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.TagReqActOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
-import com.automation_testing.post_request_type.Post;
+import com.automation_testing.post_request_pattern.Post;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,19 +16,20 @@ import java.io.StringReader;
 
 public class PutDocDATAFORSIGN extends Post {
     private final Logger LOG = LogManager.getLogger(PutDocDATAFORSIGN.class);
-    private final UniversalResponseRootTag universalResponseRootTag;
-    private final String documentID;
+    private final UniversalResponseRootTag UNIV_RES_ROOT_TAG;
+    private final String DOC_ID;
     private String documentNameSP;
     private String documentUIDSP;
     public static UniversalResponseRootTag rootTag;
 
     public PutDocDATAFORSIGN(UniversalResponseRootTag universalResponseRootTag, String documentID) {
-        this.universalResponseRootTag = universalResponseRootTag;
-        this.documentID = documentID;
+        this.UNIV_RES_ROOT_TAG = universalResponseRootTag;
+        this.DOC_ID = documentID;
     }
 
-    private void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "DATAFORSIGN");
+    @Override
+    protected void checkTest() throws IOException {
+        Check.checkCode200(codeStatusResponse, "DATAFORSIGN");
     }
 
 
@@ -45,14 +46,14 @@ public class PutDocDATAFORSIGN extends Post {
         dataForSign.setTagU(documentUIDSP);
 
         tagReqAct.setV("DATAFORSIGN");
-        tagReqAct.setDocID(documentID);
+        tagReqAct.setDocID(DOC_ID);
 
         dataForSign.setTagReqAct(tagReqAct);
 
-        for (int i = 0; i < universalResponseRootTag.getListK().size(); i++) {
-            if (universalResponseRootTag.getListK().get(i).getT().equals("1")) {
-                documentNameSP = universalResponseRootTag.getListK().get(i).getP();
-                documentUIDSP = universalResponseRootTag.getListK().get(i).getU();
+        for (int i = 0; i < UNIV_RES_ROOT_TAG.getListK().size(); i++) {
+            if (UNIV_RES_ROOT_TAG.getListK().get(i).getT().equals("1")) {
+                documentNameSP = UNIV_RES_ROOT_TAG.getListK().get(i).getP();
+                documentUIDSP = UNIV_RES_ROOT_TAG.getListK().get(i).getU();
                 dataForSign.setU(documentUIDSP);
             }
         }
@@ -69,20 +70,19 @@ public class PutDocDATAFORSIGN extends Post {
             stringBuilder.append(line).append("\n");
         }
         bufferedReader.close();
-       LOG.info(stringBuilder.toString());
+        LOG.info(stringBuilder.toString());
     }
 
 
     public void run() throws IOException, InterruptedException, JAXBException {
         createXmlBodyRequest();
-        request();
+        executingRequest();
         writeBodyResponseInFile();
-        if (getCodeStatusResponse() == 200) {
-            rootTag = parseXmlBodyResponse();
-            checkTest();
+        printReqAndResInLog();
+        checkTest();
+        if (codeStatusResponse == 200) {
+            rootTag = parsingResponseBody();
             info();
-        } else {
-            failedResponseMessage();
         }
     }
 

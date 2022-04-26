@@ -1,10 +1,11 @@
 package com.automation_testing.creatingxml;
 
+import lombok.Setter;
+
 import javax.xml.bind.annotation.*;
 import java.util.List;
-
+@Setter
 @XmlRootElement(name = "R")
-@XmlAccessorType(XmlAccessType.NONE)
 public class UniversalRequestRootTag {
     @XmlAttribute
     private double v;
@@ -36,60 +37,4 @@ public class UniversalRequestRootTag {
     private String p;
     @XmlElement(name = "u")
     private String u;
-
-    public void setS(String s) {
-        this.s = s;
-    }
-
-    public void setC(String c) {
-        this.c = c;
-    }
-
-    public void setT(String t) {
-        this.t = t;
-    }
-
-    public void setN(String n) {
-        this.n = n;
-    }
-
-    public void setV(double v) {
-        this.v = v;
-    }
-
-    public void setListP(List<TagPOfUnivReq> listP) {
-        this.listP = listP;
-    }
-
-    public void setTagAbout(TagAboutOfUnivReq tagAbout) {
-        this.tagAbout = tagAbout;
-    }
-
-    public void setTagHash(String tagHash) {
-        this.tagHash = tagHash;
-    }
-
-    public void setTagU(String tagU) {
-        this.tagU = tagU;
-    }
-
-    public void setTagReqAct(TagReqActOfUnivReq tagReqAct) {
-        this.tagReqAct = tagReqAct;
-    }
-
-    public void setTagC(String tagC) {
-        this.tagC = tagC;
-    }
-
-    public void setP(String p) {
-        this.p = p;
-    }
-
-    public void setU(String u) {
-        this.u = u;
-    }
-
-    public void setTagP(TagPOfUnivReq tagP) {
-        this.tagP = tagP;
-    }
 }

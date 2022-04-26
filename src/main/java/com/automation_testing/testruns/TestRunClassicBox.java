@@ -3,6 +3,8 @@ package com.automation_testing.testruns;
 import com.automation_testing.allrequests.authorization.*;
 import com.automation_testing.allrequests.connect.*;
 import com.automation_testing.allrequests.managedevice.*;
+import com.automation_testing.allrequests.work_in_authorized_mode.create_cancell_req.AvailableDocument;
+import com.automation_testing.allrequests.work_in_authorized_mode.create_cancell_req.CancellationRequest;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.DocumentAction;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.DocumentType;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocAction;
@@ -13,8 +15,9 @@ import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.*;
 import com.automation_testing.allrequests.work_in_authorized_mode.docnumber.DocumentNumber;
 import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.CountAllAllDocsDoc;
 import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.HeadersAllDocsDoc;
+import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocCHECKCODE;
 import com.automation_testing.checks.Check;
-import com.automation_testing.post_request_type.Post;
+import com.automation_testing.post_request_pattern.Post;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -55,15 +58,15 @@ public class TestRunClassicBox {
     final GetDictSalaryAcc GET_DICT_SALARY_ACC = new GetDictSalaryAcc();
     final TooltipPaymentOrder TOOLTIP_PAYMENT_ORDER = new TooltipPaymentOrder();
     final GetFilterPartBankRu GET_FILTER_PART_BANK_RU = new GetFilterPartBankRu();
-    final GetFullBankRuKon GET_FULL_BANKRU_KON = new GetFullBankRuKon();
+    final GetFullBankRu GET_FULL_BANK_RU = new GetFullBankRu();
     final GetDictStat1256 GET_DICT_STAT_1256 = new GetDictStat1256();
     final GetDictPayGrndParam GET_DICT_PAY_GRND_PARAM = new GetDictPayGrndParam();
     final GetDictMessageType GET_DICT_MESSAGE_TYPE = new GetDictMessageType();
     final GetFilterPartCBCCodes GET_FILTER_PART_CBC_CODES = new GetFilterPartCBCCodes();
-    final GetFullBankRuBud GET_FULL_BANKRU_BUD = new GetFullBankRuBud();
     final CountAllAllDocsDoc COUNT_ALL_MY_DOCS = new CountAllAllDocsDoc();
     final HeadersAllDocsDoc HEADERS_ALL_DOCS_OF_MY_DOCS = new HeadersAllDocsDoc();
     final HeadersByDayPayOrd HEADERS_BY_DAY_PAY_ORD = new HeadersByDayPayOrd();
+    public static AvailableDocument availableDocument;
     public static PutDocAction putDoc;
     public static DocumentNumber docNumber;
 
@@ -106,10 +109,8 @@ public class TestRunClassicBox {
         requestMap.put("GetDictPayGrndParam", GET_DICT_PAY_GRND_PARAM);
         requestMap.put("GetDictMessageType", GET_DICT_MESSAGE_TYPE);
         requestMap.put("GetFilterPartCBCCodes", GET_FILTER_PART_CBC_CODES);
-        //запрос необходимый для блока запросов контрагенту
-        requestMap.put("GetFullBankRuKon", GET_FULL_BANKRU_KON);
-        //запрос необходимый для блока запросов в бюджет
-        requestMap.put("GetFullBankRuBud", GET_FULL_BANKRU_BUD);
+        //запрос необходимый для блока запросов контрагенту и в бюджет
+        requestMap.put("GetFullBankRu", GET_FULL_BANK_RU);
         //блок сохранение документа контрагенту
         requestMap.put("DocNumPaymOrderKonSave", docNumber);
         requestMap.put("PutPaymentOrderDocKonSave", putDoc);
@@ -141,20 +142,24 @@ public class TestRunClassicBox {
         requestMap.put("CountAllAllDocsDoc", COUNT_ALL_MY_DOCS);
         requestMap.put("HeadersAllDocsDocOfMyDocs", HEADERS_ALL_DOCS_OF_MY_DOCS);
         // создание запроса на отзыв
-        requestMap.put("DocNumCanReq", docNumber);
         requestMap.put("HeadersByDayPayOrd", HEADERS_BY_DAY_PAY_ORD);
+        requestMap.put("AvailableDocument", availableDocument);
+        requestMap.put("DocNumCanReq", docNumber);
+        requestMap.put("PutCancellationRequestSignGo", putDoc);
 
         LOG.info("Teстирование выполняется\n");
         try {
             for (Entry map : requestMap.entrySet())
                 switch (map.getKey().toString()) {
+
                     case "DocNumPaymOrderKonSave",
                             "DocNumPaymOrderKonSign",
                             "DocNumPaymOrderKonSignGo",
                             "DocNumPaymOrderBudSave",
                             "DocNumPaymOrderBudSign",
-                            "DocNumPaymOrderBudSignGo",
-                            "DocNumCanReq" -> new DocumentNumber().run();
+                            "DocNumPaymOrderBudSignGo" -> new DocumentNumber("PaymentOrder").run();
+
+                    case "DocNumCanReq" -> new DocumentNumber("CancellationRequest").run();
 
                     case "DocNumPaymOrderYSSAve",
                             "DocNumPaymOrderYSSign",
@@ -165,25 +170,16 @@ public class TestRunClassicBox {
                                     Запрос нового документа не будет произведен.
                                     """);
                         } else {
-                            new DocumentNumber().run();
+                            new DocumentNumber("PaymentOrder").run();
                         }
                     }
-                    case "UserFilter" -> USER_FILTER.run();
-/*                        boolean result = false;  /// убрать проверку в класс Check
-                        for (int j = 0; j < UserFilter.rootTag.getListV().size(); j++) {
-                            if (UserFilter.rootTag.getListV().get(j).getAdv().equals("1")) {
-                                result = true;
-                                break;
-                            }
-                        }
-                        if (result) {
-                           LOG.info("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - PASS\n");
-                            Check.quantityPASS++;
-                        } else {
-                           LOG.error("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - FAILED. Тестирование будет заверщено.\n");
-                            Check.quantityFAILED++;
+
+                    case "UserFilter" -> {
+                        USER_FILTER.run();
+                        if (!Check.checkEnabledD2BMAdvancedService()) {
                             return;
-                        }*/
+                        }
+                    }
                     case "SmsAuthCode" -> {
                         if (Check.checkAvailableSignatureToolOTP()) {
                             SMS_AUTH_CODE.run();
@@ -229,10 +225,13 @@ public class TestRunClassicBox {
                                 case "PutPaymentOrderDoсYSSign" -> new PutDocAction(DocumentAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER).run();
 
                                 case "PutPaymentOrderDoсYSSignGo" -> new PutDocAction(DocumentAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER).run();
-
                             }
                         }
                     }
+
+                    case "AvailableDocument" -> (availableDocument = new AvailableDocument("PaymentOrder", PutDocCHECKCODE.documentBankID)).run();
+
+                    case "PutCancellationRequestSignGo" -> (putDoc = new PutDocAction(DocumentAction.SIGN_GO, new CancellationRequest().initialCalReqFields(), DocumentType.CANCELLATION_REQUEST)).run();
                     ////////////////////////////////////////////////////////////////////////////////////
                     default -> {
                         Post post = (Post) map.getValue();

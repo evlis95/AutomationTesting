@@ -4,7 +4,7 @@ import com.automation_testing.allrequests.authorization.AuthLogin;
 import com.automation_testing.allrequests.authorization.UserAccount;
 import com.automation_testing.allrequests.authorization.UserFilter;
 import com.automation_testing.checks.Check;
-import com.automation_testing.post_request_type.Post;
+import com.automation_testing.post_request_pattern.Post;
 import com.automation_testing.creatingxml.*;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 
@@ -14,30 +14,30 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 
 public class HeadersByDayPayOrd extends Post {
-    private final Map<String, String> mapAccAndBic = new HashMap<>();
-    private final List<String> divInWhichSerAreConn = new ArrayList<>();
-    private final String[] payOrdStatCode = {"8", "40", "43", "44", "45", "46", "48"};
+    private final Map<String, String> MAP_ACC_AND_BIC = new HashMap<>();
+    private final List<String> DIVISION_WITH_ENABLED_SERVICE_ADV_AND_REQ = new ArrayList<>();
+    private final String[] PAY_ORD_STAT_CODE = {"8", "40", "43", "44", "45", "46", "48"};
     public static UniversalResponseRootTag rootTag;
 
-    private void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "HeadersByDayPayOrd");
+    @Override
+    protected void checkTest() throws IOException {
+        Check.checkCode200(codeStatusResponse, "HeadersByDayPayOrd");
     }
 
     private void definingAccWithConnServ() {
         for (int i = 0; i < UserFilter.rootTag.getListV().size(); i++) {
             if (UserFilter.rootTag.getListV().get(i).getAdv().equals("1") & UserFilter.rootTag.getListV().get(i).getReq().equals("1")) {
-                divInWhichSerAreConn.add(UserFilter.rootTag.getListV().get(i).getF());
+                DIVISION_WITH_ENABLED_SERVICE_ADV_AND_REQ.add(UserFilter.rootTag.getListV().get(i).getF());
             }
         }
-        for (String s : divInWhichSerAreConn) {
+        for (String s : DIVISION_WITH_ENABLED_SERVICE_ADV_AND_REQ) {
             for (int j = 0; j < UserFilter.rootTag.getListF().size(); j++) {
                 for (int k = 0; k < UserAccount.rootTag.getListA().size(); k++) {
                     if (s.equals(UserFilter.rootTag.getListF().get(j).getI()) & s.equals(UserAccount.rootTag.getListA().get(k).getF()) & UserAccount.rootTag.getListA().get(k).getV().equals("810")) {
-                        mapAccAndBic.put(UserAccount.rootTag.getListA().get(k).getA(), UserFilter.rootTag.getListF().get(j).getB());
+                        MAP_ACC_AND_BIC.put(UserAccount.rootTag.getListA().get(k).getA(), UserFilter.rootTag.getListF().get(j).getB());
                     }
                 }
             }
@@ -55,14 +55,13 @@ public class HeadersByDayPayOrd extends Post {
         headersByDay.setN("PaymentOrder");
         headersByDay.setV(1.0);
         headersByDay.setS(AuthLogin.sessionID);
-        for (String s : payOrdStatCode) {
+        for (String s : PAY_ORD_STAT_CODE) {
             listA.add(new TagAOfTagP(s));
         }
-        mapAccAndBic.forEach((key, value) -> {
+        MAP_ACC_AND_BIC.forEach((key, value) -> {
             TagSOfTagF tagS = new TagSOfTagF(key, value);
             listS.add(tagS);
         });
-
 
         TagFOfTagP tagF = new TagFOfTagP("0", "0", listS);
         headersByDay.setTagP(new TagPOfUnivReq("0", UserFilter.orgId, listA, tagF));
@@ -73,13 +72,12 @@ public class HeadersByDayPayOrd extends Post {
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
         createXmlBodyRequest();
-        request();
+        executingRequest();
         writeBodyResponseInFile();
-        if (getCodeStatusResponse() == 200) {
-            rootTag = parseXmlBodyResponse();
-            checkTest();
-        } else {
-            failedResponseMessage();
+        printReqAndResInLog();
+        checkTest();
+        if (codeStatusResponse == 200) {
+            rootTag = parsingResponseBody();
         }
     }
 }

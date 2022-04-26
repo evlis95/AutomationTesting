@@ -1,7 +1,10 @@
 package com.automation_testing.parsingxml;
 
+import lombok.Getter;
+
 import javax.xml.bind.annotation.XmlElement;
 
+@Getter
 public class TagUserSettingsOfTagUnivRes {
     @XmlElement(name = "corpcards")
     private TagCorpCardsOfTagUnivRes tagCorpCards;
@@ -9,25 +12,4 @@ public class TagUserSettingsOfTagUnivRes {
     private TagFreeDocsToBankOfTagUnivRes tagFreeDocsToBank;
     @XmlElement(name = "servManagement")
     private TagServManagementOfTagUnivRes tagServManagement;
-
-    public TagCorpCardsOfTagUnivRes getTagCorpCards() {
-        return tagCorpCards;
-    }
-
-    public TagFreeDocsToBankOfTagUnivRes getTagFreeDocsToBank() {
-        return tagFreeDocsToBank;
-    }
-
-    public TagServManagementOfTagUnivRes getTagServManagement() {
-        return tagServManagement;
-    }
-
-    @Override
-    public String toString() {
-        return "TagUserSettingsOfTagUnivRes{" +
-                "tagCorpCards=" + tagCorpCards +
-                ", tagFreeDocsToBank=" + tagFreeDocsToBank +
-                ", tagServManagement=" + tagServManagement +
-                '}';
-    }
 }

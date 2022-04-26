@@ -1,9 +1,11 @@
 package com.automation_testing.parsingxml;
 
+import lombok.Getter;
+
 import javax.xml.bind.annotation.XmlAttribute;
 
+@Getter
 public class TagIOfTagRequests {
-
     @XmlAttribute
     private String c;
     @XmlAttribute
@@ -12,30 +14,4 @@ public class TagIOfTagRequests {
     private String t;
     @XmlAttribute
     private String v;
-
-    public String getC() {
-        return c;
-    }
-
-    public String getN() {
-        return n;
-    }
-
-    public String getT() {
-        return t;
-    }
-
-    public String getV() {
-        return v;
-    }
-
-    @Override
-    public String toString() {
-        return "TagIOfTagRequests{" +
-                "c='" + c + '\'' +
-                ", n='" + n + '\'' +
-                ", t='" + t + '\'' +
-                ", v='" + v + '\'' +
-                '}';
-    }
 }

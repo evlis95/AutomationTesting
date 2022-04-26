@@ -1,20 +1,12 @@
 package com.automation_testing.parsingxml;
 
+import lombok.Getter;
+
 import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
+@Getter
 public class TagRequestsOfTagUnivResp {
     @XmlElement(name = "i")
     private List<TagIOfTagRequests> listTagI;
-
-    public List<TagIOfTagRequests> getListTagI() {
-        return listTagI;
-    }
-
-    @Override
-    public String toString() {
-        return "TagRequestsOfTagUnivResp{" +
-                "listTagI=" + listTagI +
-                '}';
-    }
 }

@@ -2,53 +2,43 @@ package com.automation_testing.allrequests.work_in_authorized_mode.put_document;
 
 import com.automation_testing.allrequests.authorization.AuthLogin;
 
-import com.automation_testing.allrequests.authorization.UserFilter;
 import com.automation_testing.checks.Check;
 
 import com.automation_testing.creatingxml.TagReqActOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
-import com.automation_testing.post_request_type.Post;
+import com.automation_testing.post_request_pattern.Post;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.xml.bind.JAXBException;
 import java.io.*;
-import java.util.ArrayList;
 
 public class PutDocCHECKCODE extends Post {
     private final Logger LOG = LogManager.getLogger(PutDocCHECKCODE.class);
-    private final String nameRequestAndActionForLog;
-    private final String documentID;
-    private final String statusCodeForCheck;
-    private String documentBankID;
-    public static ArrayList<String> listDocBankID;
+    private final String NAME_REQ_AND_ACT_FOR_LOG;
+    private final String DOC_ID;
+    private final String STA_CODE_FOR_CHECK;
+    public static String documentBankID;
     //реквизиты сохраненного ПП
-    private String documentStatusCode;
-    private String documentNumber;
+    public static String documentStatusCode;
+    public static String documentNumber;
     public static UniversalResponseRootTag rootTag;
 
     public PutDocCHECKCODE(String nameRequestAndActionForLog, String documentID, String statusCodeForCheck) {
-        this.nameRequestAndActionForLog = nameRequestAndActionForLog;
-        this.documentID = documentID;
-        this.statusCodeForCheck = statusCodeForCheck;
+        this.NAME_REQ_AND_ACT_FOR_LOG = nameRequestAndActionForLog;
+        this.DOC_ID = documentID;
+        this.STA_CODE_FOR_CHECK = statusCodeForCheck;
+
     }
 
     public String getDocumentBankID() {
         return documentBankID;
     }
 
-
-    private void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "CHECKCODE");
-
-        if (documentStatusCode.equals(statusCodeForCheck)) {
-           LOG.info("Проверка присвоения статус кода " + statusCodeForCheck + " документу - PASS\n");
-            Check.quantityPASS++;
-        } else {
-           LOG.error("Проверка присвоения статус кода " + statusCodeForCheck + " документу - FAILED");
-            Check.quantityFAILED++;
-        }
+    @Override
+    protected void checkTest() throws IOException {
+        Check.checkCode200(codeStatusResponse, "CHECKCODE");
     }
 
     @Override
@@ -62,7 +52,7 @@ public class PutDocCHECKCODE extends Post {
         checkCode.setS(AuthLogin.sessionID);
         checkCode.setTagC("1");
         tagReqAct.setV("CHECKCODE");
-        tagReqAct.setDocID(documentID);
+        tagReqAct.setDocID(DOC_ID);
         checkCode.setTagReqAct(tagReqAct);
         marshallSetting(checkCode);
     }
@@ -72,41 +62,39 @@ public class PutDocCHECKCODE extends Post {
         String messageText = String.format("\n\n%s\n" +
                 "Идентификатор документа в банковской системе: " + documentBankID + "\n" +
                 "Cтатус код: " + documentStatusCode + "\n" +
-                "Номер документа: " + documentNumber + "\n", nameRequestAndActionForLog);
+                "Номер документа: " + documentNumber + "\n", NAME_REQ_AND_ACT_FOR_LOG);
         BufferedReader bufferedReader = new BufferedReader(new StringReader(messageText));
         String line;
         while ((line = bufferedReader.readLine()) != null) {
             stringBuilder.append(line).append("\n");
         }
         bufferedReader.close();
-       LOG.info(stringBuilder.toString());
+        LOG.info(stringBuilder.toString());
     }
 
     private void initializationFields() {
         documentBankID = rootTag.getListF().get(0).getI();
         documentNumber = rootTag.getListF().get(0).getN();
         documentStatusCode = rootTag.getListF().get(0).getS();
-        if (documentStatusCode.equals("43")) {
-            for (int i = 0; i < UserFilter.rootTag.getListV().size(); i++) {
-                if(UserFilter.rootTag.getListV().get(i).getAdv().equals("1") & UserFilter.rootTag.getListV().get(i).getReq().equals("1")) {
-                    listDocBankID.add(documentBankID);
-                }
-            }
-        }
     }
 
     public void run() throws IOException, InterruptedException, JAXBException {
         createXmlBodyRequest();
-        request();
+        executingRequest();
         writeBodyResponseInFile();
-        if (getCodeStatusResponse() == 200) {
-            rootTag = parseXmlBodyResponse();
+        printReqAndResInLog();
+        checkTest();
+        if (codeStatusResponse == 200) {
+            rootTag = parsingResponseBody();
             initializationFields();
-            checkTest();
             info();
-
-        } else {
-            failedResponseMessage();
+            if (documentStatusCode.equals(STA_CODE_FOR_CHECK)) {
+                LOG.info("Проверка присвоения статус кода " + STA_CODE_FOR_CHECK + " документу - PASS\n");
+                Check.quantityPASS++;
+            } else {
+                LOG.error("Проверка присвоения статус кода " + STA_CODE_FOR_CHECK + " документу - FAILED");
+                Check.quantityFAILED++;
+            }
         }
     }
 }

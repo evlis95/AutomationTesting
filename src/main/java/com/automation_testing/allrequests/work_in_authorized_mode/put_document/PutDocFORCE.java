@@ -5,14 +5,14 @@ import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.TagReqActOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
-import com.automation_testing.post_request_type.Post;
+import com.automation_testing.post_request_pattern.Post;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
 public class PutDocFORCE extends Post {
 
-    private final String documentID;
+    private final String DOC_ID;
     private String documentBankID;
     private UniversalResponseRootTag rootTag;
 
@@ -25,11 +25,12 @@ public class PutDocFORCE extends Post {
     }
 
     public PutDocFORCE(String documentID) {
-        this.documentID = documentID;
+        this.DOC_ID = documentID;
     }
 
-    private void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "FORCE");
+    @Override
+    protected void checkTest() throws IOException {
+        Check.checkCode200(codeStatusResponse, "FORCE");
     }
 
     @Override
@@ -38,25 +39,24 @@ public class PutDocFORCE extends Post {
         TagReqActOfUnivReq tagReqAct = new TagReqActOfUnivReq();
         force.setC("put");
         force.setT("document");
-        force.setN("PaymentOrder");
+        force.setN(PutDocAction.documentTypeString);
         force.setV(3.1);
         force.setS(AuthLogin.sessionID);
         tagReqAct.setV("FORCE");
-        tagReqAct.setDocID(documentID);
+        tagReqAct.setDocID(DOC_ID);
         force.setTagReqAct(tagReqAct);
         marshallSetting(force);
     }
 
     public void run() throws IOException, InterruptedException, JAXBException {
         createXmlBodyRequest();
-        request();
+        executingRequest();
         writeBodyResponseInFile();
-        if (getCodeStatusResponse() == 200) {
-            rootTag = parseXmlBodyResponse();
+        printReqAndResInLog();
+        checkTest();
+        if (codeStatusResponse == 200) {
+            rootTag = parsingResponseBody();
             documentBankID = rootTag.getListF().get(0).getI();
-            checkTest();
-        } else {
-            failedResponseMessage();
         }
     }
 

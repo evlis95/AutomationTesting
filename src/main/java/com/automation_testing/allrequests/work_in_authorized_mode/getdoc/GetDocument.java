@@ -5,7 +5,7 @@ import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.TagPOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
-import com.automation_testing.post_request_type.Post;
+import com.automation_testing.post_request_pattern.Post;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
@@ -14,13 +14,17 @@ public class GetDocument extends Post {
 
     public static UniversalResponseRootTag rootTag;
     private final String documentBankID;
+    private final String DOC_TYPE;
 
-    public GetDocument(String documentBankID) {
+
+    public GetDocument(String documentBankID, String docType) {
         this.documentBankID = documentBankID;
+        this.DOC_TYPE = docType;
     }
 
-    private void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "GetDocument");
+    @Override
+    protected void checkTest() throws IOException {
+        Check.checkCode200(codeStatusResponse, "GetDocument");
     }
 
     @Override
@@ -30,7 +34,7 @@ public class GetDocument extends Post {
 
         docNum.setC("get");
         docNum.setT("document");
-        docNum.setN("PaymentOrder");
+        docNum.setN(DOC_TYPE);
         docNum.setV(3.0);
         docNum.setS(AuthLogin.sessionID);
         tagP.setI(documentBankID);
@@ -41,14 +45,14 @@ public class GetDocument extends Post {
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
         createXmlBodyRequest();
-        request();
+        executingRequest();
         writeBodyResponseInFile();
-        if (getCodeStatusResponse() == 200) {
-            rootTag = parseXmlBodyResponse();
-            checkTest();
-        } else {
-            failedResponseMessage();
+        printReqAndResInLog();
+        checkTest();
+        if (codeStatusResponse == 200) {
+            rootTag = parsingResponseBody();
         }
     }
+
 
 }

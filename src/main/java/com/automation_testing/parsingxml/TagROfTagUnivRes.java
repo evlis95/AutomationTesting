@@ -1,10 +1,13 @@
 package com.automation_testing.parsingxml;
 
+import lombok.Getter;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import java.util.List;
 
+@Getter
 public class TagROfTagUnivRes {
     @XmlAttribute
     private String a;
@@ -55,100 +58,4 @@ public class TagROfTagUnivRes {
     @XmlElementWrapper(name = "corraccounts")
     @XmlElement(name = "corracc")
     private List<TagCorrAccOfTagR> tagCorrAcc;
-
-    public String getA() {
-        return a;
-    }
-
-    public String getD() {
-        return d;
-    }
-
-    public String getK() {
-        return k;
-    }
-
-    public String getS() {
-        return s;
-    }
-
-    public String getF() {
-        return f;
-    }
-
-    public String getG() {
-        return g;
-    }
-
-    public String getSn() {
-        return sn;
-    }
-
-    public String getC() {
-        return c;
-    }
-
-    public String getI() {
-        return i;
-    }
-
-    public String getO() {
-        return o;
-    }
-
-    public String getT() {
-        return t;
-    }
-
-    public String getY() {
-        return y;
-    }
-
-    public String getB() {
-        return b;
-    }
-
-    public String getGbn() {
-        return gbn;
-    }
-
-    public String getJ() {
-        return j;
-    }
-
-    public String getN() {
-        return n;
-    }
-
-    public String getQ() {
-        return q;
-    }
-
-    public String getQq() {
-        return qq;
-    }
-
-    public String getV() {
-        return v;
-    }
-
-    public String getW() {
-        return w;
-    }
-
-    public String getX() {
-        return x;
-    }
-
-    public String getZ() {
-        return z;
-    }
-
-    public List<TagCorrAccOfTagR> getTagCorrAcc() {
-        return tagCorrAcc;
-    }
-
-    public String getH() {
-        return h;
-    }
 }

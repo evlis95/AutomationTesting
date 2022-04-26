@@ -1,18 +1,10 @@
 package com.automation_testing.parsingxml;
 
+import lombok.Getter;
+
 import java.util.List;
 
+@Getter
 public class TagCorpCardPageOfTagUnivRes {
-     private List<TagAGeneralForList> listA;
-
-    public List<TagAGeneralForList> getListA() {
-        return listA;
-    }
-
-    @Override
-    public String toString() {
-        return "TagCorpCardPageOfTagUnivRes{" +
-                "listA=" + listA +
-                '}';
-    }
+    private List<TagAGeneralForList> listA;
 }

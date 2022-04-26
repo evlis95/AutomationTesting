@@ -1,7 +1,10 @@
 package com.automation_testing.parsingxml;
 
+import lombok.Getter;
+
 import javax.xml.bind.annotation.XmlAttribute;
 
+@Getter
 public class TagAOfTagAd {
     @XmlAttribute
     private String a;
@@ -9,25 +12,4 @@ public class TagAOfTagAd {
     private String t;
     @XmlAttribute
     private String tr;
-
-    public String getA() {
-        return a;
-    }
-
-    public String getT() {
-        return t;
-    }
-
-    public String getTr() {
-        return tr;
-    }
-
-    @Override
-    public String toString() {
-        return "TagAOfTagAd{" +
-                "a='" + a + '\'' +
-                ", t='" + t + '\'' +
-                ", tr='" + tr + '\'' +
-                '}';
-    }
 }

@@ -5,7 +5,7 @@ import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.TagPOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
-import com.automation_testing.post_request_type.Post;
+import com.automation_testing.post_request_pattern.Post;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,13 +17,13 @@ public class BindManageDevice extends Post {
     public static boolean resultBinding;
     final static Logger LOG = LogManager.getLogger(BindManageDevice.class);
     public static UniversalResponseRootTag rootTag;
-    private final CrypProfCodeManagDev crypProfCodeManagDev = new CrypProfCodeManagDev();
-    private final SmsCodeManageDev smsCodeManageDev = new SmsCodeManageDev();
-    private final SendCodeManageDev sendCodeManageDev = new SendCodeManageDev();
+    private final CrypProfCodeManagDev MANAGE_DEVICE = new CrypProfCodeManagDev();
+    private final SmsCodeManageDev SMS_CODE_MANAGE_DEVICE = new SmsCodeManageDev();
+    private final SendCodeManageDev SEND_CODE_MANAGE_DEVICE = new SendCodeManageDev();
 
-
-    private void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "BindManageDevice");
+    @Override
+    protected void checkTest() throws IOException {
+        Check.checkCode200(codeStatusResponse, "BindManageDevice");
     }
 
     @Override
@@ -40,7 +40,7 @@ public class BindManageDevice extends Post {
 
     private void bindingDevice() throws JAXBException, IOException, InterruptedException {
         if (rootTag.getListA().get(0).getV().equals("0")) {
-           LOG.error("""
+            LOG.error("""
                     Внимание! Добавление/удаление устройства в списке доверенных невозможно.
                     За дополнительной информацией, пожалуйста, обратитесь в банк.
                     Настройка Конфигурация ДБО. Мобильный клиент. Доступность работы с доверенными устройствами значение false.
@@ -48,18 +48,18 @@ public class BindManageDevice extends Post {
 
 
         } else if (rootTag.getListA().get(0).getV().equals("11")) {
-           LOG.error("Доступно подтверждение только через сервис PayControl.");
+            LOG.error("Доступно подтверждение только через сервис PayControl.");
 
         } else {
-            crypProfCodeManagDev.run();
-            smsCodeManageDev.run();
-            sendCodeManageDev.run();
+            MANAGE_DEVICE.run();
+            SMS_CODE_MANAGE_DEVICE.run();
+            SEND_CODE_MANAGE_DEVICE.run();
             if (SendCodeManageDev.condition.equals("1")) {
-               LOG.info("Доступ разрешен (устройство привязано). Проверка на привязку устройства - PASS.\n");
+                LOG.info("Доступ разрешен (устройство привязано). Проверка на привязку устройства - PASS.\n");
                 Check.quantityPASS++;
                 resultBinding = true;
             } else {
-               LOG.error("Проверка привязки устройства - FAILED.");
+                LOG.error("Проверка привязки устройства - FAILED.");
                 Check.quantityFAILED++;
                 resultBinding = false;
             }
@@ -69,14 +69,13 @@ public class BindManageDevice extends Post {
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
         createXmlBodyRequest();
-        request();
+        executingRequest();
         writeBodyResponseInFile();
-        if (getCodeStatusResponse() == 200) {
-            rootTag = parseXmlBodyResponse();
-            checkTest();
+        printReqAndResInLog();
+        checkTest();
+        if (codeStatusResponse == 200) {
+            rootTag = parsingResponseBody();
             bindingDevice();
-        } else {
-            failedResponseMessage();
         }
     }
 }

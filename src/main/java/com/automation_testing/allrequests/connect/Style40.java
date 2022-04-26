@@ -5,7 +5,8 @@ import com.automation_testing.creatingxml.TagAboutOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 
-import com.automation_testing.post_request_type.Post;
+import com.automation_testing.post_request_pattern.Post;
+
 import javax.xml.bind.JAXBException;
 import java.io.*;
 
@@ -13,8 +14,9 @@ public class Style40 extends Post {
 
     public static UniversalResponseRootTag rootTag;
 
-    private void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "Style40");
+    @Override
+    protected void checkTest() throws IOException {
+        Check.checkCode200(codeStatusResponse, "Style40");
     }
 
     @Override
@@ -34,14 +36,13 @@ public class Style40 extends Post {
 
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
-            createXmlBodyRequest();
-            request();
-            writeBodyResponseInFile();
-            if (getCodeStatusResponse() == 200) {
-                rootTag = parseXmlBodyResponse();
-                checkTest();
-            } else {
-                failedResponseMessage();
-            }
+        createXmlBodyRequest();
+        executingRequest();
+        writeBodyResponseInFile();
+        printReqAndResInLog();
+        checkTest();
+        if (codeStatusResponse == 200) {
+            rootTag = parsingResponseBody();
+        }
     }
 }

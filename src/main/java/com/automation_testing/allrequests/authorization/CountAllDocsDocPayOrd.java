@@ -3,7 +3,7 @@ package com.automation_testing.allrequests.authorization;
 import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.*;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
-import com.automation_testing.post_request_type.Post;
+import com.automation_testing.post_request_pattern.Post;
 
 import javax.xml.bind.JAXBException;
 import java.io.*;
@@ -15,7 +15,7 @@ public class CountAllDocsDocPayOrd extends Post {
     public static UniversalResponseRootTag rootTag;
 
     private String calculatingBICByIdSubDivision(String subDivisionId) {
-        String divisionBIC = null;
+        String divisionBIC = "";
         for (int i = 0; i < UserFilter.rootTag.getListF().size(); i++) {
             if (UserFilter.rootTag.getListF().get(i).getI().equals(subDivisionId)) {
                 divisionBIC = UserFilter.rootTag.getListF().get(i).getB();
@@ -27,7 +27,7 @@ public class CountAllDocsDocPayOrd extends Post {
 
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
-        UniversalRequestRootTag counallAllDocs = new UniversalRequestRootTag();
+        UniversalRequestRootTag countAllDocs = new UniversalRequestRootTag();
         TagPOfUnivReq tagP = new TagPOfUnivReq();
         List<TagPOfUnivReq> listP = new ArrayList<>();
         List<TagTOfTagP> listT = new ArrayList<>();
@@ -35,11 +35,11 @@ public class CountAllDocsDocPayOrd extends Post {
         List<TagFOfTagP> listF = new ArrayList<>();
         List<TagSOfTagF> listS = new ArrayList<>();
 
-        counallAllDocs.setC("countall");
-        counallAllDocs.setT("document");
-        counallAllDocs.setN("alldocs");
-        counallAllDocs.setV(1.0);
-        counallAllDocs.setS(AuthLogin.sessionID);
+        countAllDocs.setC("countall");
+        countAllDocs.setT("document");
+        countAllDocs.setN("alldocs");
+        countAllDocs.setV(1.0);
+        countAllDocs.setS(AuthLogin.sessionID);
 
 
         listT.add(new TagTOfTagP("PaymentOrder"));
@@ -60,28 +60,25 @@ public class CountAllDocsDocPayOrd extends Post {
 
         listP.add(tagP);
 
+        countAllDocs.setListP(listP);
 
-        counallAllDocs.setListP(listP);
-
-        marshallSetting(counallAllDocs);
+        marshallSetting(countAllDocs);
     }
 
-
-    private void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "CountallAlldocsDocumentPayment810");
+    @Override
+    protected void checkTest() throws IOException {
+        Check.checkCode200(codeStatusResponse, "CountallAlldocsDocumentPayment810");
     }
-
 
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
         createXmlBodyRequest();
-        request();
+        executingRequest();
         writeBodyResponseInFile();
-        if (getCodeStatusResponse() == 200) {
-            rootTag = parseXmlBodyResponse();
-            checkTest();
-        } else {
-            failedResponseMessage();
+        printReqAndResInLog();
+        checkTest();
+        if (codeStatusResponse == 200) {
+            rootTag = parsingResponseBody();
         }
     }
 }

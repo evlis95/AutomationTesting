@@ -1,7 +1,10 @@
 package com.automation_testing.parsingxml;
 
+import lombok.Getter;
+
 import javax.xml.bind.annotation.XmlAttribute;
 
+@Getter
 public class TagROfTagP {
     @XmlAttribute
     private String d;
@@ -11,20 +14,4 @@ public class TagROfTagP {
     private String a;
     @XmlAttribute
     private String s;
-
-    public String getD() {
-        return d;
-    }
-
-    public String getX() {
-        return x;
-    }
-
-    public String getA() {
-        return a;
-    }
-
-    public String getS() {
-        return s;
-    }
 }

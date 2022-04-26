@@ -1,18 +1,13 @@
 package com.automation_testing.creatingxml;
 
+import lombok.Setter;
+
 import javax.xml.bind.annotation.XmlAttribute;
 
+@Setter
 public class TagAboutOfUnivReq {
     @XmlAttribute
     private String h;
     @XmlAttribute
     private String w;
-
-    public void setH(String h) {
-        this.h = h;
-    }
-
-    public void setW(String w) {
-        this.w = w;
-    }
 }

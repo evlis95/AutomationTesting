@@ -1,7 +1,10 @@
 package com.automation_testing.parsingxml;
 
+import lombok.Getter;
+
 import javax.xml.bind.annotation.XmlAttribute;
 
+@Getter
 public class TagFOfTagLanguages {
     @XmlAttribute
     private String hash;
@@ -17,45 +20,4 @@ public class TagFOfTagLanguages {
     private String sl;
     @XmlAttribute
     private String sn;
-
-    public String getHash() {
-        return hash;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getIn() {
-        return in;
-    }
-
-    public String getMd() {
-        return md;
-    }
-
-    public String getN() {
-        return n;
-    }
-
-    public String getSl() {
-        return sl;
-    }
-
-    public String getSn() {
-        return sn;
-    }
-
-    @Override
-    public String toString() {
-        return "TagFOfTagLanguages{" +
-                "hash='" + hash + '\'' +
-                ", id='" + id + '\'' +
-                ", in='" + in + '\'' +
-                ", md='" + md + '\'' +
-                ", n='" + n + '\'' +
-                ", sl='" + sl + '\'' +
-                ", sn='" + sn + '\'' +
-                '}';
-    }
 }

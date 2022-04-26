@@ -1,34 +1,15 @@
 package com.automation_testing.parsingxml;
 
+import lombok.Getter;
+
 import javax.xml.bind.annotation.XmlAttribute;
 
+@Getter
 public class TagDOfTagConfirmation {
-
     @XmlAttribute
     private String d;
     @XmlAttribute
     private String sign;
     @XmlAttribute
     private String type;
-
-    public String getD() {
-        return d;
-    }
-
-    public String getSign() {
-        return sign;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    @Override
-    public String toString() {
-        return "TagDOfTagConfirmation{" +
-                "d='" + d + '\'' +
-                ", sign='" + sign + '\'' +
-                ", type='" + type + '\'' +
-                '}';
-    }
 }

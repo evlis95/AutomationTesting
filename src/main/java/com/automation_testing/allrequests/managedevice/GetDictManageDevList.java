@@ -4,7 +4,7 @@ import com.automation_testing.allrequests.authorization.AuthLogin;
 import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
-import com.automation_testing.post_request_type.Post;
+import com.automation_testing.post_request_pattern.Post;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
@@ -14,8 +14,9 @@ public class GetDictManageDevList extends Post {
     public static UniversalResponseRootTag rootTag;
     public static String deviceBankID;
 
-    private void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "GetDictManageDevList");
+    @Override
+    protected void checkTest() throws IOException {
+        Check.checkCode200(codeStatusResponse, "GetDictManageDevList");
     }
 
     @Override
@@ -41,14 +42,13 @@ public class GetDictManageDevList extends Post {
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
         createXmlBodyRequest();
-        request();
+        executingRequest();
         writeBodyResponseInFile();
-        if (getCodeStatusResponse() == 200) {
-            rootTag = parseXmlBodyResponse();
+        printReqAndResInLog();
+        checkTest();
+        if (codeStatusResponse == 200) {
+            rootTag = parsingResponseBody();
             definingDeviceBankID();
-            checkTest();
-        } else {
-            failedResponseMessage();
         }
     }
 }

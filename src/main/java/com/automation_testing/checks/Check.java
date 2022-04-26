@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Check {
     private static final Logger LOG = LogManager.getLogger(Check.class);
@@ -19,21 +20,15 @@ public class Check {
 
     public static void checkCode200(@NotNull Integer value, String nameRequest) throws IOException {
         if (value.equals(200)) {
-           LOG.info(String.format("Проверка кода 200 у ответа на запрос %s - PASS!\n", nameRequest));
+           LOG.info(String.format("Проверка кода 200 у ответа на запрос %s - PASS!\n\n", nameRequest));
             quantityPASS++;
+        } else {
+            LOG.error(String.format("Проверка кода 200 у ответа на запрос %s - FAILED!\n\n", nameRequest));
+            quantityFAILED++;
         }
     }
 
-    public static boolean checkCountAvailableAccounts810() {
-        int accAvailable810 = 0;
-        for (int i = 0; i < UserAccount.rootTag.getListA().size(); i++) {
-            if (UserAccount.rootTag.getListA().get(i).getT().equals("1") & UserAccount.rootTag.getListA().get(i).getV().equals("810"))
-                accAvailable810++;
-        }
-        return accAvailable810 <= 1;
-    }
-
-    public static void checkEnabledServiceD2BMAdvanced() {
+    public static boolean checkEnabledD2BMAdvancedService(){
         boolean result = false;
         for (int j = 0; j < UserFilter.rootTag.getListV().size(); j++) {
             if (UserFilter.rootTag.getListV().get(j).getAdv().equals("1")) {
@@ -45,16 +40,26 @@ public class Check {
             LOG.info("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - PASS\n");
             Check.quantityPASS++;
         } else {
-            LOG.error("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - FAILED. ВНИМАНИЕ!!!.\n");
+            LOG.error("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - FAILED. Тестирование будет заверщено.\n");
             Check.quantityFAILED++;
         }
+        return result;
+    }
+
+    public static boolean checkCountAvailableAccounts810() {
+        int accAvailable810 = 0;
+        for (int i = 0; i < UserAccount.rootTag.getListA().size(); i++) {
+            if (UserAccount.rootTag.getListA().get(i).getT().equals("1") & UserAccount.rootTag.getListA().get(i).getV().equals("810"))
+                accAvailable810++;
+        }
+        return accAvailable810 <= 1;
     }
 
     public static void checkCountAvailableSPForce(UniversalResponseRootTag rootTag) {
+
         if (PutDocAction.rootTag.getListC() != null) {
             if (PutDocAction.rootTag.getListC().get(0).getCe().equals("0")) {
                 if (rootTag.getListK() != null) {
-                    count = 0;
                     for (int i = 0; i < rootTag.getListK().size(); i++) {
                         if (rootTag.getListK().get(i).getT().equals("1")) {
                             count++;

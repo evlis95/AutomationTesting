@@ -1,9 +1,11 @@
 package com.automation_testing.parsingxml;
 
+import lombok.Getter;
+
 import javax.xml.bind.annotation.XmlAttribute;
 
+@Getter
 public class TagROfTagPage {
-
     @XmlAttribute
     private String a;
     @XmlAttribute
@@ -50,125 +52,4 @@ public class TagROfTagPage {
     private String svc;
     @XmlAttribute
     private String svm;
-
-    public String getA() {
-        return a;
-    }
-
-    public String getS() {
-        return s;
-    }
-
-    public String getD() {
-        return d;
-    }
-
-    public String getF() {
-        return f;
-    }
-
-    public String getG() {
-        return g;
-    }
-
-    public String getH() {
-        return h;
-    }
-
-    public String getJ() {
-        return j;
-    }
-
-    public String getK() {
-        return k;
-    }
-
-    public String getZ() {
-        return z;
-    }
-
-    public String getX() {
-        return x;
-    }
-
-    public String getC() {
-        return c;
-    }
-
-    public String getV() {
-        return v;
-    }
-
-    public String getB() {
-        return b;
-    }
-
-    public String getE() {
-        return e;
-    }
-
-    public String getT() {
-        return t;
-    }
-
-    public String getY() {
-        return y;
-    }
-
-    public String getJa() {
-        return ja;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getBu() {
-        return bu;
-    }
-
-    public String getSi() {
-        return si;
-    }
-
-    public String getSvc() {
-        return svc;
-    }
-
-    public String getSvm() {
-        return svm;
-    }
-
-    @Override
-    public String toString() {
-        return "TagROfTagPage{" +
-                "a='" + a + '\'' +
-                ", s='" + s + '\'' +
-                ", d='" + d + '\'' +
-                ", f='" + f + '\'' +
-                ", g='" + g + '\'' +
-                ", h='" + h + '\'' +
-                ", j='" + j + '\'' +
-                ", k='" + k + '\'' +
-                ", z='" + z + '\'' +
-                ", x='" + x + '\'' +
-                ", c='" + c + '\'' +
-                ", v='" + v + '\'' +
-                ", b='" + b + '\'' +
-                ", e='" + e + '\'' +
-                ", t='" + t + '\'' +
-                ", y='" + y + '\'' +
-                ", ja='" + ja + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", bu='" + bu + '\'' +
-                ", si='" + si + '\'' +
-                ", svc='" + svc + '\'' +
-                ", svm='" + svm + '\'' +
-                '}';
-    }
 }

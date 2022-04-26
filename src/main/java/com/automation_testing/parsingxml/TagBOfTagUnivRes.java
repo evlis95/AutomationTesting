@@ -1,75 +1,26 @@
 package com.automation_testing.parsingxml;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import lombok.Getter;
 
+import javax.xml.bind.annotation.XmlAttribute;
+@Getter
 public class TagBOfTagUnivRes {
     @XmlAttribute(name = "a")
-    private String a; //%МеждународноеНазвание%
+    private String a;
     @XmlAttribute(name = "b")
-    private String b; //%БИК%
+    private String b;
     @XmlAttribute(name = "dt")
-    private String dt; //%ЧасовойПояс%
+    private String dt;
     @XmlAttribute(name = "e")
-    private String e; //%ЭлектронныйАдрес% Значение параметра "E-mail подразделения банка"
+    private String e;
     @XmlAttribute(name = "i")
-    private String i; //%УникальныйНомерСистемыДБО% Передается идентификатор подразделения в Correqts
+    private String i;
     @XmlAttribute(name = "n")
-    private String n; //%Название подр по умолчанию в МБК%
+    private String n;
     @XmlAttribute(name = "p")
-    private String p; //%Телефон% Значение параметра "Телефон подразделения банка"
+    private String p;
     @XmlAttribute(name = "s")
-    private String s; //%СистемаДБО% Название системы ДБО: 0 – ДБОх64, 1 – Correqts, 2 – РЦК
+    private Integer s;
     @XmlAttribute(name = "t")
-    private String t; //%ДатаАктуальностиКарточки%
-
-    public String getA() {
-        return a;
-    }
-
-    public String getB() {
-        return b;
-    }
-
-    public String getDt() {
-        return dt;
-    }
-
-    public String getE() {
-        return e;
-    }
-
-    public String getI() {
-        return i;
-    }
-
-    public String getN() {
-        return n;
-    }
-
-    public String getP() {
-        return p;
-    }
-
-    public String getS() {
-        return s;
-    }
-
-    public String getT() {
-        return t;
-    }
-
-    @Override
-    public String toString() {
-        return "TagBOfTagUnivRes{" +
-                "a='" + a + '\'' +
-                ", b='" + b + '\'' +
-                ", dt='" + dt + '\'' +
-                ", e='" + e + '\'' +
-                ", i='" + i + '\'' +
-                ", n='" + n + '\'' +
-                ", p='" + p + '\'' +
-                ", s='" + s + '\'' +
-                ", t='" + t + '\'' +
-                '}';
-    }
+    private Integer t;
 }

@@ -24,18 +24,10 @@ public class CountAllAllDocsDoc extends Post {
     private int tagTQuantity;
     public static UniversalResponseRootTag rootTag;
 
+    @Override
+    protected void checkTest() throws IOException {
+        Check.checkCode200(codeStatusResponse, "CountAllAllDocsDocument");
 
-    private void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "CountAllAllDocsDocument");
-        if (rootTag.getListD() != null) {
-            if (tagTQuantity == rootTag.getListD().size()) {
-               LOG.info("Проверка количества пришедших типов документов в ответе на запрос CountAllAllDocsDoc, в зависимости от тех, которые ушли в запросе - PASS\n");
-                Check.quantityPASS++;
-            } else {
-               LOG.error("Проверка количества пришедших типов документов в ответе на запрос CountAllAllDocsDoc, в зависимости от тех, которые ушли в запросе - FAILED\n");
-                Check.quantityFAILED++;
-            }
-        }
     }
 
     @Override
@@ -127,13 +119,23 @@ public class CountAllAllDocsDoc extends Post {
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
         createXmlBodyRequest();
-        request();
+        executingRequest();
         writeBodyResponseInFile();
-        if (getCodeStatusResponse() == 200) {
-            rootTag = parseXmlBodyResponse();
-            checkTest();
-        } else {
-            failedResponseMessage();
+        printReqAndResInLog();
+        checkTest();
+        if (codeStatusResponse == 200) {
+            rootTag = parsingResponseBody();
+
+            if (rootTag.getListD() != null) {
+                if (tagTQuantity == rootTag.getListD().size()) {
+                    LOG.info("Проверка количества пришедших типов документов в ответе на запрос CountAllAllDocsDoc, в зависимости от тех, которые ушли в запросе - PASS\n");
+                    Check.quantityPASS++;
+                } else {
+                    LOG.error("Проверка количества пришедших типов документов в ответе на запрос CountAllAllDocsDoc, в зависимости от тех, которые ушли в запросе - FAILED\n");
+                    Check.quantityFAILED++;
+                }
+            }
+
         }
     }
 }

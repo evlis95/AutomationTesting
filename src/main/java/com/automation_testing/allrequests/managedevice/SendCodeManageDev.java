@@ -5,7 +5,7 @@ import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.TagPOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
-import com.automation_testing.post_request_type.Post;
+import com.automation_testing.post_request_pattern.Post;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,8 +19,9 @@ public class SendCodeManageDev extends Post {
     public static String successfullyCode;
     public static String condition;
 
-    private void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "SendCodeManageDev");
+    @Override
+    protected void checkTest() throws IOException {
+        Check.checkCode200(codeStatusResponse, "SendCodeManageDev");
     }
 
     @Override
@@ -42,10 +43,10 @@ public class SendCodeManageDev extends Post {
         successfullyCode = rootTag.getListS().get(0).getV();
         condition = rootTag.getListS().get(0).getZ();
         if (successfullyCode.equals("1")) {
-           LOG.info("Проверка кода подтверждения операции - PASS\n");
+            LOG.info("Проверка кода подтверждения операции - PASS\n");
             Check.quantityPASS++;
         } else {
-           LOG.error("Проверка кода подтверждения операции - FAILED\n");
+            LOG.error("Проверка кода подтверждения операции - FAILED\n");
             Check.quantityFAILED++;
         }
     }
@@ -53,14 +54,13 @@ public class SendCodeManageDev extends Post {
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
         createXmlBodyRequest();
-        request();
+        executingRequest();
         writeBodyResponseInFile();
-        if (getCodeStatusResponse() == 200) {
-            rootTag = parseXmlBodyResponse();
-            checkTest();
+        printReqAndResInLog();
+        checkTest();
+        if (codeStatusResponse == 200) {
+            rootTag = parsingResponseBody();
             info();
-        } else {
-            failedResponseMessage();
         }
     }
 }

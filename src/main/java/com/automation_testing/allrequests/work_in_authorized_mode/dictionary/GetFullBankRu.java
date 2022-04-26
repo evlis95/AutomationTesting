@@ -5,58 +5,55 @@ import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.TagPOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
-import com.automation_testing.post_request_type.Post;
+import com.automation_testing.post_request_pattern.Post;
 
 import javax.xml.bind.JAXBException;
-import java.io.IOException;
+import java.io.*;
 
-public class GetFullBankRuBud extends Post {
+public class GetFullBankRu extends Post {
+
 
     public static UniversalResponseRootTag rootTag;
     public static String receiverBankName;
-    public static String receiverGeneralBIC;
+    public static String receiverCorrAcc;
+    public static String receiverBIC;
     public static String receiverPlace;
     public static String receiverPlaceType;
 
-    private void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "GetFullBankRuDict");
+    @Override
+    protected void checkTest() throws IOException {
+        Check.checkCode200(codeStatusResponse, "GetFullBankRuDict");
     }
+
 
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag getFull = new UniversalRequestRootTag();
         TagPOfUnivReq tagP = new TagPOfUnivReq();
-
         getFull.setC("getfull");
         getFull.setT("dictionary");
         getFull.setN("bankru");
         getFull.setV(1.0);
         getFull.setS(AuthLogin.sessionID);
-        tagP.setD("044525000");
-
+        tagP.setD("044525700");
         getFull.setTagP(tagP);
-
         marshallSetting(getFull);
-    }
-
-    private void initializationData() {
-        receiverBankName = rootTag.getListR().get(0).getX();
-        receiverGeneralBIC = rootTag.getListR().get(0).getD();
-        receiverPlace = rootTag.getListR().get(0).getV();
-        receiverPlaceType = rootTag.getListR().get(0).getB();
     }
 
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
         createXmlBodyRequest();
-        request();
+        executingRequest();
         writeBodyResponseInFile();
-        if (getCodeStatusResponse() == 200) {
-            rootTag = parseXmlBodyResponse();
-            initializationData();
-            checkTest();
-        } else {
-            failedResponseMessage();
+        printReqAndResInLog();
+        checkTest();
+        if (codeStatusResponse == 200) {
+            rootTag = parsingResponseBody();
+            receiverBankName = rootTag.getListR().get(0).getX();
+            receiverBIC = rootTag.getListR().get(0).getD();
+            receiverCorrAcc = rootTag.getListR().get(0).getTagCorrAcc().get(0).getA();
+            receiverPlace = rootTag.getListR().get(0).getV();
+            receiverPlaceType = rootTag.getListR().get(0).getB();
         }
     }
 }

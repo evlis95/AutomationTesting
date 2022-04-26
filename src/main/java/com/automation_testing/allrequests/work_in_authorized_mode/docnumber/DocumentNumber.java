@@ -7,7 +7,7 @@ import com.automation_testing.creatingxml.TagPOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import org.jetbrains.annotations.NotNull;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
-import com.automation_testing.post_request_type.Post;
+import com.automation_testing.post_request_pattern.Post;
 
 import javax.xml.bind.JAXBException;
 import java.io.*;
@@ -16,6 +16,11 @@ public class DocumentNumber extends Post {
 
     public static String docNum;
     public static UniversalResponseRootTag rootTag;
+    private String docType;
+
+    public DocumentNumber(String docType) {
+        this.docType = docType;
+    }
 
     private @NotNull String createTime() {
         long currentTime = System.currentTimeMillis();
@@ -24,8 +29,9 @@ public class DocumentNumber extends Post {
         return editTime;
     }
 
-    private void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "DocumentNumber");
+    @Override
+    protected void checkTest() throws IOException {
+        Check.checkCode200(codeStatusResponse, "DocumentNumber");
     }
 
     @Override
@@ -34,7 +40,7 @@ public class DocumentNumber extends Post {
         TagPOfUnivReq tagP = new TagPOfUnivReq();
         docNum.setC("documentnumber");
         docNum.setT("document");
-        docNum.setN("PaymentOrder");
+        docNum.setN(docType);
         docNum.setV(1.0);
         docNum.setS(AuthLogin.sessionID);
         tagP.setA(createTime());
@@ -46,14 +52,14 @@ public class DocumentNumber extends Post {
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
         createXmlBodyRequest();
-        request();
+        executingRequest();
         writeBodyResponseInFile();
-        if (getCodeStatusResponse() == 200) {
-            rootTag = parseXmlBodyResponse();
+        printReqAndResInLog();
+        checkTest();
+        if (codeStatusResponse == 200) {
+            rootTag = parsingResponseBody();
             docNum = rootTag.getListF().get(0).getV();
-            checkTest();
-        } else {
-            failedResponseMessage();
         }
+
     }
 }

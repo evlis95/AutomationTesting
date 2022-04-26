@@ -4,7 +4,7 @@ import com.automation_testing.allrequests.authorization.AuthLogin;
 import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
-import com.automation_testing.post_request_type.Post;
+import com.automation_testing.post_request_pattern.Post;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,8 +17,9 @@ public class CrypProfCodeManagDev extends Post {
     public static UniversalResponseRootTag rootTag;
     public static String spID;
 
-    private void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "CrypProfCodeManagDev");
+    @Override
+    protected void checkTest() throws IOException {
+        Check.checkCode200(codeStatusResponse, "CrypProfCodeManagDev");
     }
 
     @Override
@@ -41,21 +42,20 @@ public class CrypProfCodeManagDev extends Post {
                 }
             }
         } else {
-           LOG.error("Проверка наличия хотя бы 1 СП OTP для подписи действия с доверенными устройствами - FAILED");
+            LOG.error("Проверка наличия хотя бы 1 СП OTP для подписи действия с доверенными устройствами - FAILED");
         }
     }
 
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
         createXmlBodyRequest();
-        request();
+        executingRequest();
         writeBodyResponseInFile();
-        if (getCodeStatusResponse() == 200) {
-            rootTag = parseXmlBodyResponse();
+        printReqAndResInLog();
+        checkTest();
+        if (codeStatusResponse == 200) {
+            rootTag = parsingResponseBody();
             definingSPID();
-            checkTest();
-        } else {
-            failedResponseMessage();
         }
     }
 }
