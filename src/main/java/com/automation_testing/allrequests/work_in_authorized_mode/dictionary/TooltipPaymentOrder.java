@@ -31,7 +31,7 @@ public class TooltipPaymentOrder extends Post {
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
             createXmlBodyRequest();
-            request();
+            executingRequest();
             writeBodyResponseInFile();
             checkTest();
             if (codeStatusResponse == 200) {

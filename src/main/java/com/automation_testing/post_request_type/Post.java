@@ -58,7 +58,7 @@ public abstract class Post {
         }
     }
 
-    protected void request() throws IOException, InterruptedException {
+    protected void executingRequest() throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofFile(Path.of(PATH_REQUEST_BODY)))
                 .uri(URI.create(Settings.uriPost))

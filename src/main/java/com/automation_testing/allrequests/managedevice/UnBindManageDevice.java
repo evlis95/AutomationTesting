@@ -57,7 +57,7 @@ public class UnBindManageDevice extends Post {
     public void run() throws IOException, InterruptedException, JAXBException {
         getDictManageDevList.run();
         createXmlBodyRequest();
-        request();
+        executingRequest();
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();

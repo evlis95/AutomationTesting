@@ -29,7 +29,7 @@ public class VersionInfo extends Post {
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
             createXmlBodyRequest();
-            request();
+            executingRequest();
             writeBodyResponseInFile();
             printReqAndResInLog();
             checkTest();

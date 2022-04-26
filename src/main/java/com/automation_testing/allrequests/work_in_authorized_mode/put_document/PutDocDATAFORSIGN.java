@@ -75,7 +75,7 @@ public class PutDocDATAFORSIGN extends Post {
 
     public void run() throws IOException, InterruptedException, JAXBException {
         createXmlBodyRequest();
-        request();
+        executingRequest();
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
