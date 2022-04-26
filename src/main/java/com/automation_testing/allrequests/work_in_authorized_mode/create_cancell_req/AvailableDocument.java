@@ -26,7 +26,7 @@ public class AvailableDocument extends Post {
     }
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "AvailableDocumentForCancellReq");
+        Check.checkCode200(codeStatusResponse, "AvailableDocumentForCancellReq");
     }
 
     @Override
@@ -54,7 +54,7 @@ public class AvailableDocument extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = parseXmlBodyResponse();
             result = rootTag.getListF().get(0).getV();
 

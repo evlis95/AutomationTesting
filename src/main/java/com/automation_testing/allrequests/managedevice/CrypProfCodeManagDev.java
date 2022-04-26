@@ -18,7 +18,7 @@ public class CrypProfCodeManagDev extends Post {
     public static String spID;
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "CrypProfCodeManagDev");
+        Check.checkCode200(codeStatusResponse, "CrypProfCodeManagDev");
     }
 
     @Override
@@ -52,7 +52,7 @@ public class CrypProfCodeManagDev extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = parseXmlBodyResponse();
             definingSPID();
         }

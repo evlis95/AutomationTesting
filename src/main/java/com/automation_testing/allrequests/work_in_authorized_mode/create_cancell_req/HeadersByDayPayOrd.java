@@ -24,7 +24,7 @@ public class HeadersByDayPayOrd extends Post {
     public static UniversalResponseRootTag rootTag;
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "HeadersByDayPayOrd");
+        Check.checkCode200(codeStatusResponse, "HeadersByDayPayOrd");
     }
 
     private void definingAccWithConnServ() {
@@ -77,7 +77,7 @@ public class HeadersByDayPayOrd extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
                 rootTag = parseXmlBodyResponse();
             }
     }

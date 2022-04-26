@@ -26,7 +26,7 @@ public class CountAllAllDocsDoc extends Post {
 
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "CountAllAllDocsDocument");
+        Check.checkCode200(codeStatusResponse, "CountAllAllDocsDocument");
 
     }
 
@@ -123,7 +123,7 @@ public class CountAllAllDocsDoc extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
                 rootTag = parseXmlBodyResponse();
 
             if (rootTag.getListD() != null) {

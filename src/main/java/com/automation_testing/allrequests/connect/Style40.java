@@ -14,7 +14,7 @@ public class Style40 extends Post {
     public static UniversalResponseRootTag rootTag;
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "Style40");
+        Check.checkCode200(codeStatusResponse, "Style40");
     }
 
     @Override
@@ -39,7 +39,7 @@ public class Style40 extends Post {
             writeBodyResponseInFile();
             printReqAndResInLog();
             checkTest();
-            if (getCodeStatusResponse() == 200) {
+            if (codeStatusResponse == 200) {
                 rootTag = parseXmlBodyResponse();
             } 
     }

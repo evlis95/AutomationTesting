@@ -39,7 +39,7 @@ public class AuthLogin extends Post {
 
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "AuthLogin");
+        Check.checkCode200(codeStatusResponse, "AuthLogin");
     }
 
 
@@ -50,7 +50,7 @@ public class AuthLogin extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = parseXmlBodyResponse();
             sessionID = rootTag.getListS().get(0).getV();
         }

@@ -14,7 +14,7 @@ public class AuthCryptoprofCode extends Post {
 
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "AuthCryptoProfilesCode");
+        Check.checkCode200(codeStatusResponse, "AuthCryptoProfilesCode");
     }
 
 
@@ -37,7 +37,7 @@ public class AuthCryptoprofCode extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = parseXmlBodyResponse();
         }
     }

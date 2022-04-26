@@ -28,7 +28,7 @@ public class PutDocDATAFORSIGN extends Post {
     }
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "DATAFORSIGN");
+        Check.checkCode200(codeStatusResponse, "DATAFORSIGN");
     }
 
 
@@ -79,7 +79,7 @@ public class PutDocDATAFORSIGN extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = parseXmlBodyResponse();
             info();
         }

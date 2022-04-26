@@ -15,7 +15,7 @@ public class GetDictManageDevList extends Post {
     public static String deviceBankID;
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "GetDictManageDevList");
+        Check.checkCode200(codeStatusResponse, "GetDictManageDevList");
     }
 
     @Override
@@ -45,7 +45,7 @@ public class GetDictManageDevList extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = parseXmlBodyResponse();
             definingDeviceBankID();
         }

@@ -13,7 +13,7 @@ public class VersionInfo extends Post {
     public static UniversalResponseRootTag rootTagA;
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "VersionInfo");
+        Check.checkCode200(codeStatusResponse, "VersionInfo");
     }
 
     @Override
@@ -33,7 +33,7 @@ public class VersionInfo extends Post {
             writeBodyResponseInFile();
             printReqAndResInLog();
             checkTest();
-            if (getCodeStatusResponse() == 200) {
+            if (codeStatusResponse == 200) {
                 rootTagA = parseXmlBodyResponse();
             }
     }

@@ -76,7 +76,7 @@ public class StatementDocsByDay extends Post {
 
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "StatementDocsByDay");
+        Check.checkCode200(codeStatusResponse, "StatementDocsByDay");
     }
 
 
@@ -88,7 +88,7 @@ public class StatementDocsByDay extends Post {
             writeBodyResponseInFile();
             printReqAndResInLog();
             checkTest();
-            if (getCodeStatusResponse() == 200) {
+            if (codeStatusResponse == 200) {
                 rootTag = parseXmlBodyResponse();
             } 
     }

@@ -21,7 +21,7 @@ public class GetFullBankRu extends Post {
     public static String receiverPlaceType;
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "GetFullBankRuDict");
+        Check.checkCode200(codeStatusResponse, "GetFullBankRuDict");
     }
 
 
@@ -46,7 +46,7 @@ public class GetFullBankRu extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = parseXmlBodyResponse();
             receiverBankName = rootTag.getListR().get(0).getX();
             receiverBIC = rootTag.getListR().get(0).getD();

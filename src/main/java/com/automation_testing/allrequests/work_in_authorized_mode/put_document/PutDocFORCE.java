@@ -29,7 +29,7 @@ public class PutDocFORCE extends Post {
     }
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "FORCE");
+        Check.checkCode200(codeStatusResponse, "FORCE");
     }
 
     @Override
@@ -53,7 +53,7 @@ public class PutDocFORCE extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = parseXmlBodyResponse();
             documentBankID = rootTag.getListF().get(0).getI();
         }

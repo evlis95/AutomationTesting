@@ -24,7 +24,7 @@ public class GetDocument extends Post {
     }
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "GetDocument");
+        Check.checkCode200(codeStatusResponse, "GetDocument");
     }
 
     @Override
@@ -49,7 +49,7 @@ public class GetDocument extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = parseXmlBodyResponse();
         }
     }

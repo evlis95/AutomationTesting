@@ -42,7 +42,7 @@ public class PutDocAction extends Post {
     }
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "PutDocument");
+        Check.checkCode200(codeStatusResponse, "PutDocument");
     }
 
     @Override
@@ -137,7 +137,7 @@ public class PutDocAction extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = parseXmlBodyResponse();
             if (rootTag.getListC() != null) {
                 if (rootTag.getListC().get(0).getCe().equals("1")) {

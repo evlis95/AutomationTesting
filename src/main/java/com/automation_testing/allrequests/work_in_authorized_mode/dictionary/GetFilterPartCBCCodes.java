@@ -17,7 +17,7 @@ public class GetFilterPartCBCCodes extends Post {
 
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "GetFilterPartCBCCodes");
+        Check.checkCode200(codeStatusResponse, "GetFilterPartCBCCodes");
     }
 
     @Override
@@ -42,7 +42,7 @@ public class GetFilterPartCBCCodes extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = parseXmlBodyResponse();
             cbcCodeValue = rootTag.getListP().get(0).getListR().get(0).getD();
         }

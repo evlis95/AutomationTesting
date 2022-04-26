@@ -32,7 +32,7 @@ public class UserFilter extends Post {
     }
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "UserFilter");
+        Check.checkCode200(codeStatusResponse, "UserFilter");
 
     }
 
@@ -255,7 +255,7 @@ public class UserFilter extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = parseXmlBodyResponse();
             identificationOfOrgData();
             info();

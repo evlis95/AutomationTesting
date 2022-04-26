@@ -40,7 +40,7 @@ public class HeadersAllDocsDoc extends Post {
 
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "HeadersAllDocsDocument");
+        Check.checkCode200(codeStatusResponse, "HeadersAllDocsDocument");
     }
 
     @Override
@@ -179,7 +179,7 @@ public class HeadersAllDocsDoc extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = parseXmlBodyResponse();
             checkAvailabilityDocPayOrdInRes();
         }

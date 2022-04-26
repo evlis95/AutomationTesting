@@ -14,7 +14,7 @@ public class GetDictPayGrndParam extends Post {
     public static UniversalResponseRootTag rootTag;
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "GetDictPayGrndParam");
+        Check.checkCode200(codeStatusResponse, "GetDictPayGrndParam");
     }
 
     @Override
@@ -36,7 +36,7 @@ public class GetDictPayGrndParam extends Post {
             writeBodyResponseInFile();
             printReqAndResInLog();
             checkTest();
-            if (getCodeStatusResponse() == 200) {
+            if (codeStatusResponse == 200) {
                 rootTag = parseXmlBodyResponse();
             } 
     }

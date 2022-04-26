@@ -20,7 +20,7 @@ public class NotificationMandatoryCount extends Post {
 
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "NotificationMandatoryCount");
+        Check.checkCode200(codeStatusResponse, "NotificationMandatoryCount");
     }
 
 
@@ -60,7 +60,7 @@ public class NotificationMandatoryCount extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = parseXmlBodyResponse();
         }
     }

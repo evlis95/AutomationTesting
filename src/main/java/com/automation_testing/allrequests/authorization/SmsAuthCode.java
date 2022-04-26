@@ -14,7 +14,7 @@ public class SmsAuthCode extends Post {
 
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "SMSAuthCode");
+        Check.checkCode200(codeStatusResponse, "SMSAuthCode");
     }
 
 
@@ -43,7 +43,7 @@ public class SmsAuthCode extends Post {
             writeBodyResponseInFile();
             printReqAndResInLog();
             checkTest();
-            if (getCodeStatusResponse() == 200) {
+            if (codeStatusResponse == 200) {
                 rootTag = parseXmlBodyResponse();
             } 
     }

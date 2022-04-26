@@ -16,7 +16,7 @@ public class Bank extends Post {
     public static UniversalResponseRootTag rootTag;
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "Bank");
+        Check.checkCode200(codeStatusResponse, "Bank");
     }
 
 
@@ -39,7 +39,7 @@ public class Bank extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = parseXmlBodyResponse();
         }
     }

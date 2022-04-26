@@ -19,7 +19,7 @@ public class GetFilterPartBankRu extends Post {
 
     @Override
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "GetFilterPartBankRuDict");
+        Check.checkCode200(codeStatusResponse, "GetFilterPartBankRuDict");
     }
 
     @Override
@@ -46,7 +46,7 @@ public class GetFilterPartBankRu extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
                 rootTag = parseXmlBodyResponse();
             }
     }

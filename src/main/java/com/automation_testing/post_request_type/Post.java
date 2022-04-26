@@ -1,6 +1,6 @@
 package com.automation_testing.post_request_type;
 
-import com.automation_testing.checks.Check;
+
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.jaxbsettings.CustomCharacterEscapeHandler;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
@@ -27,25 +27,14 @@ import java.time.Duration;
 
 public abstract class Post {
     private final Logger LOG = LogManager.getLogger(Post.class);
-    private UniversalResponseRootTag rootTag;
-    private String bodyResponse;
-    private Integer codeStatusResponse;
-    private HttpRequest request;
-    private final String hostProxy = Settings.hostProxy;
-    private final Integer portProxy = Settings.portProxy;
-    private final HttpClient httpClient = HttpClient.newBuilder()
+    protected String bodyResponse;
+    protected Integer codeStatusResponse;
+    private final HttpClient HTTP_CLIENT = HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_1_1)
-            .proxy(ProxySelector.of(new InetSocketAddress(hostProxy, portProxy)))
+            .proxy(ProxySelector.of(new InetSocketAddress(Settings.hostProxy, Settings.portProxy)))
             .connectTimeout(Duration.ofSeconds(10))
             .build();
 
-    public Integer getCodeStatusResponse() {
-        return codeStatusResponse;
-    }
-
-    public HttpRequest getRequest() {
-        return request;
-    }
 
     protected void marshallSetting(UniversalRequestRootTag rootTag) throws JAXBException {
         JAXBContext jcCreate = JAXBContext.newInstance(UniversalRequestRootTag.class);
@@ -73,7 +62,7 @@ public abstract class Post {
 
     protected void request() throws IOException, InterruptedException {
 
-        request = HttpRequest.newBuilder()
+        HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofFile(Path.of(".\\src\\main\\java\\com\\automation_testing\\xmlfile\\request.xml")))
                 .uri(URI.create(Settings.uriPost))
                 .setHeader("Accept-Encoding", "gzip")
@@ -82,8 +71,8 @@ public abstract class Post {
                 .setHeader("AppVersionName", Settings.appVersionName)
                 .build();
 
-        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-        HttpHeaders headers = response.headers();
+        HttpResponse<String> response = HTTP_CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
+        //HttpHeaders headers = response.headers();
         bodyResponse = response.body();
         codeStatusResponse = response.statusCode();
     }

@@ -27,7 +27,7 @@ public class UserAccount extends Post {
     }
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "UserAccount");
+        Check.checkCode200(codeStatusResponse, "UserAccount");
     }
 
 
@@ -39,7 +39,7 @@ public class UserAccount extends Post {
             writeBodyResponseInFile();
             printReqAndResInLog();
             checkTest();
-            if (getCodeStatusResponse() == 200) {
+            if (codeStatusResponse == 200) {
                 rootTag = parseXmlBodyResponse();
             } 
     }

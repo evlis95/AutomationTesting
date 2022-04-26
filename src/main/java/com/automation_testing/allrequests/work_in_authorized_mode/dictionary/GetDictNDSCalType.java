@@ -13,7 +13,7 @@ public class GetDictNDSCalType extends Post {
     public static UniversalResponseRootTag rootTag;
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "GetdictNDSCalType");
+        Check.checkCode200(codeStatusResponse, "GetdictNDSCalType");
     }
 
     @Override
@@ -34,7 +34,7 @@ public class GetDictNDSCalType extends Post {
             writeBodyResponseInFile();
             printReqAndResInLog();
             checkTest();
-            if (getCodeStatusResponse() == 200) {
+            if (codeStatusResponse == 200) {
                 rootTag = parseXmlBodyResponse();
             } 
     }

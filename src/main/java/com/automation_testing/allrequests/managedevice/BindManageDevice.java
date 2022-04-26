@@ -23,7 +23,7 @@ public class BindManageDevice extends Post {
 
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "BindManageDevice");
+        Check.checkCode200(codeStatusResponse, "BindManageDevice");
     }
 
     @Override
@@ -73,7 +73,7 @@ public class BindManageDevice extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = parseXmlBodyResponse();
             bindingDevice();
         }

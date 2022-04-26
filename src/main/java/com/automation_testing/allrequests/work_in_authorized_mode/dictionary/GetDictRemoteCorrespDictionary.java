@@ -14,7 +14,7 @@ public class GetDictRemoteCorrespDictionary extends Post {
     public static UniversalResponseRootTag rootTag;
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "GetDictRemoteCorr");
+        Check.checkCode200(codeStatusResponse, "GetDictRemoteCorr");
     }
 
     @Override
@@ -35,7 +35,7 @@ public class GetDictRemoteCorrespDictionary extends Post {
             writeBodyResponseInFile();
             printReqAndResInLog();
             checkTest();
-            if (getCodeStatusResponse() == 200) {
+            if (codeStatusResponse == 200) {
                 rootTag = parseXmlBodyResponse();
             } 
     }

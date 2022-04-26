@@ -39,7 +39,7 @@ public class PutDocCHECKCODE extends Post {
 
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "CHECKCODE");
+        Check.checkCode200(codeStatusResponse, "CHECKCODE");
     }
 
     @Override
@@ -85,7 +85,7 @@ public class PutDocCHECKCODE extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = parseXmlBodyResponse();
             initializationFields();
             info();

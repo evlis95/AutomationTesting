@@ -25,7 +25,7 @@ public class Localization extends Post {
     }
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "Localization");
+        Check.checkCode200(codeStatusResponse, "Localization");
     }
 
     @Override
@@ -35,7 +35,7 @@ public class Localization extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
                 rootTag = parseXmlBodyResponse();
             }
     }

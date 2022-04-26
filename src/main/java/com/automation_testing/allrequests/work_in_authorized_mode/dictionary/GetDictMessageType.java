@@ -18,7 +18,7 @@ public class GetDictMessageType extends Post {
     public static UniversalResponseRootTag rootTag;
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "GetDictMessageType");
+        Check.checkCode200(codeStatusResponse, "GetDictMessageType");
     }
 
     @Override
@@ -45,7 +45,7 @@ public class GetDictMessageType extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
                 rootTag = parseXmlBodyResponse();
             }
     }

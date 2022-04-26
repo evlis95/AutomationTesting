@@ -15,7 +15,7 @@ public class SmsCodeManageDev extends Post {
     public static UniversalResponseRootTag rootTag;
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "SmsCodeManageDev");
+        Check.checkCode200(codeStatusResponse, "SmsCodeManageDev");
     }
 
     @Override
@@ -40,7 +40,7 @@ public class SmsCodeManageDev extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
                 rootTag = parseXmlBodyResponse();
             }
     }

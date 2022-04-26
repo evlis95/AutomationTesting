@@ -56,6 +56,7 @@ public class Check {
     }
 
     public static void checkCountAvailableSPForce(UniversalResponseRootTag rootTag) {
+
         if (PutDocAction.rootTag.getListC() != null) {
             if (PutDocAction.rootTag.getListC().get(0).getCe().equals("0")) {
                 if (rootTag.getListK() != null) {

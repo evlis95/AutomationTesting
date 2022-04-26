@@ -30,7 +30,7 @@ public class DocumentNumber extends Post {
     }
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "DocumentNumber");
+        Check.checkCode200(codeStatusResponse, "DocumentNumber");
     }
 
     @Override
@@ -55,7 +55,7 @@ public class DocumentNumber extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = parseXmlBodyResponse();
             docNum = rootTag.getListF().get(0).getV();
         }

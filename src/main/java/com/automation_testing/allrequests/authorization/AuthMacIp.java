@@ -17,7 +17,7 @@ public class AuthMacIp extends Post {
     public static UniversalResponseRootTag rootTag;
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "AuthMacip");
+        Check.checkCode200(codeStatusResponse, "AuthMacip");
     }
 
 
@@ -60,7 +60,7 @@ public class AuthMacIp extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = parseXmlBodyResponse();
         }
     }

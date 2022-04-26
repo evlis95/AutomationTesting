@@ -17,7 +17,7 @@ public class ManagePushBind extends Post {
 
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "ManagePushBind");
+        Check.checkCode200(codeStatusResponse, "ManagePushBind");
     }
 
 
@@ -49,7 +49,7 @@ public class ManagePushBind extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
                 rootTag = parseXmlBodyResponse();
             }
     }

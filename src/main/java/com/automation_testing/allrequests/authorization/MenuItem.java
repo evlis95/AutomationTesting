@@ -15,7 +15,7 @@ public class MenuItem extends Post {
 
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "MenuItem");
+        Check.checkCode200(codeStatusResponse, "MenuItem");
     }
 
     @Override
@@ -38,7 +38,7 @@ public class MenuItem extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = parseXmlBodyResponse();
         }
     }

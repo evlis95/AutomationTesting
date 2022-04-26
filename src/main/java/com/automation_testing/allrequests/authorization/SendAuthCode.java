@@ -17,7 +17,7 @@ public class SendAuthCode extends Post {
     
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "SendAuthCode");
+        Check.checkCode200(codeStatusResponse, "SendAuthCode");
     }
 
 
@@ -56,7 +56,7 @@ public class SendAuthCode extends Post {
             writeBodyResponseInFile();
             printReqAndResInLog();
             checkTest();
-            if (getCodeStatusResponse() == 200) {
+            if (codeStatusResponse == 200) {
                 rootTag = parseXmlBodyResponse();
             }
     }

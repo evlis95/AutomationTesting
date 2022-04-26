@@ -22,7 +22,7 @@ public class UnBindManageDevice extends Post {
     public static UniversalResponseRootTag rootTag;
 
     protected void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "UnBindManageDevice");
+        Check.checkCode200(codeStatusResponse, "UnBindManageDevice");
     }
 
     @Override
@@ -61,7 +61,7 @@ public class UnBindManageDevice extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         checkTest();
-        if (getCodeStatusResponse() == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = parseXmlBodyResponse();
             unbindingAndBindingDevice();
         }
