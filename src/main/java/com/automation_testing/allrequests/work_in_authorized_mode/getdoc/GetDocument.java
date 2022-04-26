@@ -14,15 +14,15 @@ public class GetDocument extends Post {
 
     public static UniversalResponseRootTag rootTag;
     private final String documentBankID;
-    private String docType;
-
+    private final String DOC_TYPE;
 
 
     public GetDocument(String documentBankID, String docType) {
         this.documentBankID = documentBankID;
-        this.docType = docType;
+        this.DOC_TYPE = docType;
     }
 
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "GetDocument");
     }
@@ -34,7 +34,7 @@ public class GetDocument extends Post {
 
         docNum.setC("get");
         docNum.setT("document");
-        docNum.setN(docType);
+        docNum.setN(DOC_TYPE);
         docNum.setV(3.0);
         docNum.setS(AuthLogin.sessionID);
         tagP.setI(documentBankID);

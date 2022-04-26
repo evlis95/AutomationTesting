@@ -31,15 +31,14 @@ public class UserFilter extends Post {
         marshallSetting(userFilter);
     }
 
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "UserFilter");
-
     }
-
 
     public void info() throws IOException {
 
-        StringBuffer stringBuffer = new StringBuffer("");
+        StringBuffer stringBuffer = new StringBuffer();
         ////
         //организации
         stringBuffer.append("\n\nКоличество организаций пользователя - " + rootTag.getListC().size() + "\n");
@@ -238,7 +237,7 @@ public class UserFilter extends Post {
                 }
             }
         }
-       LOG.info(stringBuffer.toString());
+        LOG.info(stringBuffer.toString());
     }
 
     private void identificationOfOrgData() {

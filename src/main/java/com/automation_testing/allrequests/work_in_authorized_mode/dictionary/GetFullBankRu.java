@@ -20,6 +20,7 @@ public class GetFullBankRu extends Post {
     public static String receiverPlace;
     public static String receiverPlaceType;
 
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "GetFullBankRuDict");
     }

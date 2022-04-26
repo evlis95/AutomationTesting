@@ -15,14 +15,12 @@ import java.util.List;
 
 public class NotificationMandatoryCount extends Post {
 
-
     public static UniversalResponseRootTag rootTag;
 
-
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "NotificationMandatoryCount");
     }
-
 
     @Override
     protected void createXmlBodyRequest() throws JAXBException {

@@ -13,14 +13,15 @@ import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
 public class UnBindManageDevice extends Post {
-    private final CrypProfCodeManagDev crypProfCodeManagDev = new CrypProfCodeManagDev();
-    private final GetDictManageDevList getDictManageDevList = new GetDictManageDevList();
-    private final BindManageDevice bindManageDevice = new BindManageDevice();
-    private final SmsCodeManageDev smsCodeManageDev = new SmsCodeManageDev();
-    private final SendCodeManageDev sendCodeManageDev = new SendCodeManageDev();
+    private final CrypProfCodeManagDev CRYPT_PROF_MANAGE_DEVICE = new CrypProfCodeManagDev();
+    private final GetDictManageDevList GET_DICT_MAN_DEV = new GetDictManageDevList();
+    private final BindManageDevice BIND = new BindManageDevice();
+    private final SmsCodeManageDev SMS_CODE_MAN_DEV = new SmsCodeManageDev();
+    private final SendCodeManageDev SEND_CODE_MAN_DEV = new SendCodeManageDev();
     private final Logger LOG = LogManager.getLogger(UnBindManageDevice.class);
     public static UniversalResponseRootTag rootTag;
 
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "UnBindManageDevice");
     }
@@ -40,22 +41,22 @@ public class UnBindManageDevice extends Post {
     }
 
     private void unbindingAndBindingDevice() throws JAXBException, IOException, InterruptedException {
-        crypProfCodeManagDev.run();
-        smsCodeManageDev.run();
-        sendCodeManageDev.run();
+        CRYPT_PROF_MANAGE_DEVICE.run();
+        SMS_CODE_MAN_DEV.run();
+        SEND_CODE_MAN_DEV.run();
         if (SendCodeManageDev.condition.equals("0") || (SendCodeManageDev.condition.equals("2"))) {
-           LOG.info("Проверка на отвязку устройства - PASS\n");
+            LOG.info("Проверка на отвязку устройства - PASS\n");
             Check.quantityPASS++;
-            bindManageDevice.run();
+            BIND.run();
         } else {
-           LOG.error("Проверка на отвязку устройства - FAILED\n");
+            LOG.error("Проверка на отвязку устройства - FAILED\n");
             Check.quantityFAILED++;
         }
     }
 
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
-        getDictManageDevList.run();
+        GET_DICT_MAN_DEV.run();
         createXmlBodyRequest();
         executingRequest();
         writeBodyResponseInFile();

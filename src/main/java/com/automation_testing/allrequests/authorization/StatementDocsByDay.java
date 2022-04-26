@@ -7,6 +7,7 @@ import com.automation_testing.creatingxml.TagPOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_type.Post;
+
 import javax.xml.bind.JAXBException;
 import java.io.*;
 import java.util.ArrayList;
@@ -14,9 +15,7 @@ import java.util.List;
 
 public class StatementDocsByDay extends Post {
 
-
     public static UniversalResponseRootTag rootTag;
-
 
     private String calculatingBICByIdSubDivision(String subDivisionId) {
         String divisionBIC = null;
@@ -74,23 +73,21 @@ public class StatementDocsByDay extends Post {
         marshallSetting(statementDocs);
     }
 
-
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "StatementDocsByDay");
     }
 
-
-
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
-            createXmlBodyRequest();
-            executingRequest();
-            writeBodyResponseInFile();
-            printReqAndResInLog();
-            checkTest();
-            if (codeStatusResponse == 200) {
-                rootTag = parsingResponseBody();
-            } 
+        createXmlBodyRequest();
+        executingRequest();
+        writeBodyResponseInFile();
+        printReqAndResInLog();
+        checkTest();
+        if (codeStatusResponse == 200) {
+            rootTag = parsingResponseBody();
+        }
     }
 
 

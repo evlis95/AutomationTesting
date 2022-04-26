@@ -24,6 +24,7 @@ public class Localization extends Post {
         marshallSetting(localization);
     }
 
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "Localization");
     }
@@ -36,7 +37,7 @@ public class Localization extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-                rootTag = parsingResponseBody();
-            }
+            rootTag = parsingResponseBody();
+        }
     }
 }

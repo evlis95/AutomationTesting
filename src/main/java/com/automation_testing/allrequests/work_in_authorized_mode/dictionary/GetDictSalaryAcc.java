@@ -13,6 +13,7 @@ public class GetDictSalaryAcc extends Post {
 
     public static UniversalResponseRootTag rootTag;
 
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "GetDictSalaryAccount");
     }
@@ -30,13 +31,13 @@ public class GetDictSalaryAcc extends Post {
 
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
-            createXmlBodyRequest();
-            executingRequest();
-            writeBodyResponseInFile();
-            printReqAndResInLog();
-            checkTest();
-            if (codeStatusResponse == 200) {
-                rootTag = parsingResponseBody();
-            } 
+        createXmlBodyRequest();
+        executingRequest();
+        writeBodyResponseInFile();
+        printReqAndResInLog();
+        checkTest();
+        if (codeStatusResponse == 200) {
+            rootTag = parsingResponseBody();
+        }
     }
 }

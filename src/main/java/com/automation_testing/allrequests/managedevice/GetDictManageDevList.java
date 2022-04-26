@@ -14,6 +14,7 @@ public class GetDictManageDevList extends Post {
     public static UniversalResponseRootTag rootTag;
     public static String deviceBankID;
 
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "GetDictManageDevList");
     }

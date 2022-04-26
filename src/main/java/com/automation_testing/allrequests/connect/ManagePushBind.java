@@ -12,14 +12,12 @@ import java.io.*;
 
 public class ManagePushBind extends Post {
 
-
     public static UniversalResponseRootTag rootTag;
 
-
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "ManagePushBind");
     }
-
 
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
@@ -50,7 +48,7 @@ public class ManagePushBind extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-                rootTag = parsingResponseBody();
-            }
+            rootTag = parsingResponseBody();
+        }
     }
 }

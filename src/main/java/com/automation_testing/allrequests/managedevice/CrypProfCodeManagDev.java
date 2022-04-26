@@ -17,6 +17,7 @@ public class CrypProfCodeManagDev extends Post {
     public static UniversalResponseRootTag rootTag;
     public static String spID;
 
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "CrypProfCodeManagDev");
     }
@@ -41,7 +42,7 @@ public class CrypProfCodeManagDev extends Post {
                 }
             }
         } else {
-           LOG.error("Проверка наличия хотя бы 1 СП OTP для подписи действия с доверенными устройствами - FAILED");
+            LOG.error("Проверка наличия хотя бы 1 СП OTP для подписи действия с доверенными устройствами - FAILED");
         }
     }
 

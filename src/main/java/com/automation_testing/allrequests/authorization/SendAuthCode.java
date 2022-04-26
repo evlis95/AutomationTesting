@@ -14,20 +14,17 @@ import java.util.List;
 public class SendAuthCode extends Post {
 
     public static UniversalResponseRootTag rootTag;
-    
 
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "SendAuthCode");
     }
-
-
 
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag sendAuthCode = new UniversalRequestRootTag();
         TagPOfUnivReq tagP = new TagPOfUnivReq();
         List<TagPOfUnivReq> listP = new ArrayList<>();
-
 
         sendAuthCode.setC("send");
         sendAuthCode.setT("auth");
@@ -51,13 +48,13 @@ public class SendAuthCode extends Post {
 
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
-            createXmlBodyRequest();
-            executingRequest();
-            writeBodyResponseInFile();
-            printReqAndResInLog();
-            checkTest();
-            if (codeStatusResponse == 200) {
-                rootTag = parsingResponseBody();
-            }
+        createXmlBodyRequest();
+        executingRequest();
+        writeBodyResponseInFile();
+        printReqAndResInLog();
+        checkTest();
+        if (codeStatusResponse == 200) {
+            rootTag = parsingResponseBody();
+        }
     }
 }

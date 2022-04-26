@@ -15,7 +15,7 @@ public class GetFilterPartCBCCodes extends Post {
     public static UniversalResponseRootTag rootTag;
     public static String cbcCodeValue;
 
-
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "GetFilterPartCBCCodes");
     }

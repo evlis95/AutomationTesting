@@ -19,6 +19,7 @@ public class SendCodeManageDev extends Post {
     public static String successfullyCode;
     public static String condition;
 
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "SendCodeManageDev");
     }
@@ -42,10 +43,10 @@ public class SendCodeManageDev extends Post {
         successfullyCode = rootTag.getListS().get(0).getV();
         condition = rootTag.getListS().get(0).getZ();
         if (successfullyCode.equals("1")) {
-           LOG.info("Проверка кода подтверждения операции - PASS\n");
+            LOG.info("Проверка кода подтверждения операции - PASS\n");
             Check.quantityPASS++;
         } else {
-           LOG.error("Проверка кода подтверждения операции - FAILED\n");
+            LOG.error("Проверка кода подтверждения операции - FAILED\n");
             Check.quantityFAILED++;
         }
     }
@@ -59,7 +60,7 @@ public class SendCodeManageDev extends Post {
         checkTest();
         if (codeStatusResponse == 200) {
             rootTag = parsingResponseBody();
-           info();
+            info();
         }
     }
 }

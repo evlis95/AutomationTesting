@@ -15,10 +15,10 @@ public class Bank extends Post {
 
     public static UniversalResponseRootTag rootTag;
 
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "Bank");
     }
-
 
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
@@ -30,7 +30,6 @@ public class Bank extends Post {
         bank.setTagP(new TagPOfUnivReq("xhdpi", "0"));
         marshallSetting(bank);
     }
-
 
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {

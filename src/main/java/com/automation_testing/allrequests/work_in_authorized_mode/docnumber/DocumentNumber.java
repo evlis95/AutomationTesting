@@ -29,6 +29,7 @@ public class DocumentNumber extends Post {
         return editTime;
     }
 
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "DocumentNumber");
     }

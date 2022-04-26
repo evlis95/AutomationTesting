@@ -15,16 +15,17 @@ import java.io.IOException;
 
 public class AvailableDocument extends Post {
     private final Logger LOG = LogManager.getLogger(AvailableDocument.class);
-    private final String docType;
-    private final String docID;
+    private final String DOC_TYPE;
+    private final String DOC_ID;
     public static UniversalResponseRootTag rootTag;
     public static String result;
 
     public AvailableDocument(String docType, String docID) {
-        this.docType = docType;
-        this.docID = docID;
+        this.DOC_TYPE = docType;
+        this.DOC_ID = docID;
     }
 
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "AvailableDocumentForCancellReq");
     }
@@ -40,8 +41,8 @@ public class AvailableDocument extends Post {
         available.setV(1.0);
         available.setS(AuthLogin.sessionID);
 
-        tagP.setA(docID);
-        tagP.setB(docType);
+        tagP.setA(DOC_ID);
+        tagP.setB(DOC_TYPE);
 
         available.setTagP(tagP);
         marshallSetting(available);
@@ -58,7 +59,7 @@ public class AvailableDocument extends Post {
             rootTag = parsingResponseBody();
             result = rootTag.getListF().get(0).getV();
 
-            if(result.equals("1")) {
+            if (result.equals("1")) {
                 LOG.info("Проверка на доступность отзыва документа - PASS\n");
                 Check.quantityPASS++;
             } else {

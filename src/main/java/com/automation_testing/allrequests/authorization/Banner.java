@@ -12,10 +12,10 @@ public class Banner extends Post {
 
     public static UniversalResponseRootTag rootTag;
 
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "Banner");
     }
-
 
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
@@ -25,7 +25,6 @@ public class Banner extends Post {
         banner.setN("banner");
         banner.setV(1.0);
         banner.setS(AuthLogin.sessionID);
-
 
         marshallSetting(banner);
     }

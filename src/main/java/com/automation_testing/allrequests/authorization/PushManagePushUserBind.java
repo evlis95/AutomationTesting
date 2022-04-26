@@ -10,9 +10,7 @@ import java.io.*;
 
 public class PushManagePushUserBind extends Post {
 
-
     public static UniversalResponseRootTag rootTag;
-
 
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
@@ -27,10 +25,10 @@ public class PushManagePushUserBind extends Post {
         marshallSetting(managePushUserBind);
     }
 
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "PushManagePushUserBind");
     }
-
 
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {

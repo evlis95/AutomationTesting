@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class PutDocFORCE extends Post {
 
-    private final String documentID;
+    private final String DOC_ID;
     private String documentBankID;
     private UniversalResponseRootTag rootTag;
 
@@ -25,9 +25,10 @@ public class PutDocFORCE extends Post {
     }
 
     public PutDocFORCE(String documentID) {
-        this.documentID = documentID;
+        this.DOC_ID = documentID;
     }
 
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "FORCE");
     }
@@ -42,7 +43,7 @@ public class PutDocFORCE extends Post {
         force.setV(3.1);
         force.setS(AuthLogin.sessionID);
         tagReqAct.setV("FORCE");
-        tagReqAct.setDocID(documentID);
+        tagReqAct.setDocID(DOC_ID);
         force.setTagReqAct(tagReqAct);
         marshallSetting(force);
     }

@@ -15,7 +15,7 @@ public class CountAllDocsDocPayOrd extends Post {
     public static UniversalResponseRootTag rootTag;
 
     private String calculatingBICByIdSubDivision(String subDivisionId) {
-        String divisionBIC = null;
+        String divisionBIC = "";
         for (int i = 0; i < UserFilter.rootTag.getListF().size(); i++) {
             if (UserFilter.rootTag.getListF().get(i).getI().equals(subDivisionId)) {
                 divisionBIC = UserFilter.rootTag.getListF().get(i).getB();
@@ -27,7 +27,7 @@ public class CountAllDocsDocPayOrd extends Post {
 
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
-        UniversalRequestRootTag counallAllDocs = new UniversalRequestRootTag();
+        UniversalRequestRootTag countAllDocs = new UniversalRequestRootTag();
         TagPOfUnivReq tagP = new TagPOfUnivReq();
         List<TagPOfUnivReq> listP = new ArrayList<>();
         List<TagTOfTagP> listT = new ArrayList<>();
@@ -35,11 +35,11 @@ public class CountAllDocsDocPayOrd extends Post {
         List<TagFOfTagP> listF = new ArrayList<>();
         List<TagSOfTagF> listS = new ArrayList<>();
 
-        counallAllDocs.setC("countall");
-        counallAllDocs.setT("document");
-        counallAllDocs.setN("alldocs");
-        counallAllDocs.setV(1.0);
-        counallAllDocs.setS(AuthLogin.sessionID);
+        countAllDocs.setC("countall");
+        countAllDocs.setT("document");
+        countAllDocs.setN("alldocs");
+        countAllDocs.setV(1.0);
+        countAllDocs.setS(AuthLogin.sessionID);
 
 
         listT.add(new TagTOfTagP("PaymentOrder"));
@@ -60,17 +60,15 @@ public class CountAllDocsDocPayOrd extends Post {
 
         listP.add(tagP);
 
+        countAllDocs.setListP(listP);
 
-        counallAllDocs.setListP(listP);
-
-        marshallSetting(counallAllDocs);
+        marshallSetting(countAllDocs);
     }
 
-
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "CountallAlldocsDocumentPayment810");
     }
-
 
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {

@@ -18,9 +18,9 @@ import java.util.ArrayList;
 
 public class PutDocCHECKCODE extends Post {
     private final Logger LOG = LogManager.getLogger(PutDocCHECKCODE.class);
-    private final String nameRequestAndActionForLog;
-    private final String documentID;
-    private final String statusCodeForCheck;
+    private final String NAME_REQ_AND_ACT_FOR_LOG;
+    private final String DOC_ID;
+    private final String STA_CODE_FOR_CHECK;
     public static String documentBankID;
     //реквизиты сохраненного ПП
     public static String documentStatusCode;
@@ -28,16 +28,17 @@ public class PutDocCHECKCODE extends Post {
     public static UniversalResponseRootTag rootTag;
 
     public PutDocCHECKCODE(String nameRequestAndActionForLog, String documentID, String statusCodeForCheck) {
-        this.nameRequestAndActionForLog = nameRequestAndActionForLog;
-        this.documentID = documentID;
-        this.statusCodeForCheck = statusCodeForCheck;
+        this.NAME_REQ_AND_ACT_FOR_LOG = nameRequestAndActionForLog;
+        this.DOC_ID = documentID;
+        this.STA_CODE_FOR_CHECK = statusCodeForCheck;
+
     }
 
     public String getDocumentBankID() {
         return documentBankID;
     }
 
-
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "CHECKCODE");
     }
@@ -53,7 +54,7 @@ public class PutDocCHECKCODE extends Post {
         checkCode.setS(AuthLogin.sessionID);
         checkCode.setTagC("1");
         tagReqAct.setV("CHECKCODE");
-        tagReqAct.setDocID(documentID);
+        tagReqAct.setDocID(DOC_ID);
         checkCode.setTagReqAct(tagReqAct);
         marshallSetting(checkCode);
     }
@@ -63,14 +64,14 @@ public class PutDocCHECKCODE extends Post {
         String messageText = String.format("\n\n%s\n" +
                 "Идентификатор документа в банковской системе: " + documentBankID + "\n" +
                 "Cтатус код: " + documentStatusCode + "\n" +
-                "Номер документа: " + documentNumber + "\n", nameRequestAndActionForLog);
+                "Номер документа: " + documentNumber + "\n", NAME_REQ_AND_ACT_FOR_LOG);
         BufferedReader bufferedReader = new BufferedReader(new StringReader(messageText));
         String line;
         while ((line = bufferedReader.readLine()) != null) {
             stringBuilder.append(line).append("\n");
         }
         bufferedReader.close();
-       LOG.info(stringBuilder.toString());
+        LOG.info(stringBuilder.toString());
     }
 
     private void initializationFields() {
@@ -89,11 +90,11 @@ public class PutDocCHECKCODE extends Post {
             rootTag = parsingResponseBody();
             initializationFields();
             info();
-            if (documentStatusCode.equals(statusCodeForCheck)) {
-                LOG.info("Проверка присвоения статус кода " + statusCodeForCheck + " документу - PASS\n");
+            if (documentStatusCode.equals(STA_CODE_FOR_CHECK)) {
+                LOG.info("Проверка присвоения статус кода " + STA_CODE_FOR_CHECK + " документу - PASS\n");
                 Check.quantityPASS++;
             } else {
-                LOG.error("Проверка присвоения статус кода " + statusCodeForCheck + " документу - FAILED");
+                LOG.error("Проверка присвоения статус кода " + STA_CODE_FOR_CHECK + " документу - FAILED");
                 Check.quantityFAILED++;
             }
         }

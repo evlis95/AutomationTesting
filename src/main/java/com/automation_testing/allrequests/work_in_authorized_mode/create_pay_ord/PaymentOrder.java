@@ -13,8 +13,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 @Getter
 public class PaymentOrder {
-    private final PaymentOrderTarget paymentOrderTarget;
-    private final Map<String, String> map = new LinkedHashMap<>();
+    private final PaymentOrderTarget PAY_ORD_TARGET;
+    private final Map<String, String> MAP = new LinkedHashMap<>();
     private String bankRecordID;
     private String status;
     private String documentDate;
@@ -88,12 +88,12 @@ public class PaymentOrder {
     private String receiverDivID;
 
     public PaymentOrder(PaymentOrderTarget paymentOrderTarget) {
-        this.paymentOrderTarget = paymentOrderTarget;
+        this.PAY_ORD_TARGET = paymentOrderTarget;
     }
 
     public Map<String, String> creating() {
 
-        switch (paymentOrderTarget) {
+        switch (PAY_ORD_TARGET) {
             case PAYMENT_TO_COUNTERPARTY -> {
                 generalInitialVar();
                 payToCounterpartyInitialVar();
@@ -108,78 +108,78 @@ public class PaymentOrder {
             }
         }
 
-        map.put("BankRecordID", bankRecordID);
-        map.put("Status", status);
-        map.put("DocumentDate", documentDate);
-        map.put("DocumentNumber", documentNumber);
-        map.put("SenderOfficials", senderOfficials);
-        map.put("CustomerBankRecordID", customerBankRecordID);
-        map.put("BranchBankRecordID", branchBankRecordID);
-        map.put("Amount", amount);
-        map.put("CBCcode", cbcCode);
-        map.put("NDS", nds);
-        map.put("Payer", payer);
-        map.put("PayerAccount", payerAccount);
-        map.put("PayerBIC", payerBIC);
-        map.put("PayerINN", payerINN);
-        map.put("Receiver", receiver);
-        map.put("ReceiverAccount", receiverAccount);
-        map.put("ReceiverBIC", receiverBIC);
-        map.put("ReceiverBankName", receiverBankName);
-        map.put("ReceiverINN", receiverINN);
-        map.put("Ground", ground);
-        map.put("CurrCode", currCode);
-        map.put("KNFCode", knfCode);
-        map.put("OKATOcode", okatoCode);
-        map.put("OperType", operType);
-        map.put("OrderPayer", orderPayer);
-        map.put("OrderPayerAccount", orderPayerAccount);
-        map.put("OrderReceiver", orderReceiver);
-        map.put("OrderReceiverAccount", orderReceiverAccount);
-        map.put("PayUntil", payUntil);
-        map.put("PayerBankName", payerBankName);
-        map.put("PayerBankType", payerBankType);
-        map.put("PayerCorrAccount", payerCorrAccount);
-        map.put("PayerKPP", payerKPP);
-        map.put("PayerPlace", payerPlace);
-        map.put("PayerPlaceType", payerPlaceType);
-        map.put("PayerPropertyType", payerPropertyType);
-        map.put("PaymentUrgent", paymentUrgent);
-        map.put("ReceiverBankType", receiverBankType);
-        map.put("ReceiverCorrAccount", receiverCorrAccount);
-        map.put("ReceiverKPP", receiverKPP);
-        map.put("ReceiverPlace", receiverPlace);
-        map.put("ReceiverPlaceType", receiverPlaceType);
-        map.put("ReceiverPropertyType", receiverPropertyType);
-        map.put("SendType", sendType);
-        map.put("SendTypeCode", sendTypeCode);
-        map.put("NDSCalculationType", ndsCalculationType);
-        map.put("NDSPercent", ndsPercent);
-        map.put("Stat1256", stat1256);
-        map.put("TaxPeriodParam1", taxPeriodParam1);
-        map.put("TaxPeriodParam2", taxPeriodParam2);
-        map.put("TaxPeriodParam3", taxPeriodParam3);
-        map.put("DocDateParam1", docDateParam1);
-        map.put("DocDateParam2", docDateParam2);
-        map.put("DocDateParam3", docDateParam3);
-        map.put("DocNumParam1", docNumParam1);
-        map.put("DocNumParam2", docNumParam2);
-        map.put("PayGrndParam", payGrndParam);
-        map.put("PayTypeParam", payTypeParam);
-        map.put("CodeUIP", codeUIP);
-        map.put("NDSSystemName", ndsSystemName);
-        map.put("PaymentType", paymentType);
-        map.put("OperCode", operCode);
-        map.put("TrafficLightColor", trafficLightColor);
-        map.put("TrafficLightDescription", trafficLightDescription);
-        map.put("Reserv23", reserv23);
-        map.put("IncomeTypeCode", incomeTypeCode);
-        map.put("SaveTemplate", saveTemplate);
-        map.put("TemplateName", templateName);
-        map.put("Phone", phone);
-        map.put("Email", email);
+        MAP.put("BankRecordID", bankRecordID);
+        MAP.put("Status", status);
+        MAP.put("DocumentDate", documentDate);
+        MAP.put("DocumentNumber", documentNumber);
+        MAP.put("SenderOfficials", senderOfficials);
+        MAP.put("CustomerBankRecordID", customerBankRecordID);
+        MAP.put("BranchBankRecordID", branchBankRecordID);
+        MAP.put("Amount", amount);
+        MAP.put("CBCcode", cbcCode);
+        MAP.put("NDS", nds);
+        MAP.put("Payer", payer);
+        MAP.put("PayerAccount", payerAccount);
+        MAP.put("PayerBIC", payerBIC);
+        MAP.put("PayerINN", payerINN);
+        MAP.put("Receiver", receiver);
+        MAP.put("ReceiverAccount", receiverAccount);
+        MAP.put("ReceiverBIC", receiverBIC);
+        MAP.put("ReceiverBankName", receiverBankName);
+        MAP.put("ReceiverINN", receiverINN);
+        MAP.put("Ground", ground);
+        MAP.put("CurrCode", currCode);
+        MAP.put("KNFCode", knfCode);
+        MAP.put("OKATOcode", okatoCode);
+        MAP.put("OperType", operType);
+        MAP.put("OrderPayer", orderPayer);
+        MAP.put("OrderPayerAccount", orderPayerAccount);
+        MAP.put("OrderReceiver", orderReceiver);
+        MAP.put("OrderReceiverAccount", orderReceiverAccount);
+        MAP.put("PayUntil", payUntil);
+        MAP.put("PayerBankName", payerBankName);
+        MAP.put("PayerBankType", payerBankType);
+        MAP.put("PayerCorrAccount", payerCorrAccount);
+        MAP.put("PayerKPP", payerKPP);
+        MAP.put("PayerPlace", payerPlace);
+        MAP.put("PayerPlaceType", payerPlaceType);
+        MAP.put("PayerPropertyType", payerPropertyType);
+        MAP.put("PaymentUrgent", paymentUrgent);
+        MAP.put("ReceiverBankType", receiverBankType);
+        MAP.put("ReceiverCorrAccount", receiverCorrAccount);
+        MAP.put("ReceiverKPP", receiverKPP);
+        MAP.put("ReceiverPlace", receiverPlace);
+        MAP.put("ReceiverPlaceType", receiverPlaceType);
+        MAP.put("ReceiverPropertyType", receiverPropertyType);
+        MAP.put("SendType", sendType);
+        MAP.put("SendTypeCode", sendTypeCode);
+        MAP.put("NDSCalculationType", ndsCalculationType);
+        MAP.put("NDSPercent", ndsPercent);
+        MAP.put("Stat1256", stat1256);
+        MAP.put("TaxPeriodParam1", taxPeriodParam1);
+        MAP.put("TaxPeriodParam2", taxPeriodParam2);
+        MAP.put("TaxPeriodParam3", taxPeriodParam3);
+        MAP.put("DocDateParam1", docDateParam1);
+        MAP.put("DocDateParam2", docDateParam2);
+        MAP.put("DocDateParam3", docDateParam3);
+        MAP.put("DocNumParam1", docNumParam1);
+        MAP.put("DocNumParam2", docNumParam2);
+        MAP.put("PayGrndParam", payGrndParam);
+        MAP.put("PayTypeParam", payTypeParam);
+        MAP.put("CodeUIP", codeUIP);
+        MAP.put("NDSSystemName", ndsSystemName);
+        MAP.put("PaymentType", paymentType);
+        MAP.put("OperCode", operCode);
+        MAP.put("TrafficLightColor", trafficLightColor);
+        MAP.put("TrafficLightDescription", trafficLightDescription);
+        MAP.put("Reserv23", reserv23);
+        MAP.put("IncomeTypeCode", incomeTypeCode);
+        MAP.put("SaveTemplate", saveTemplate);
+        MAP.put("TemplateName", templateName);
+        MAP.put("Phone", phone);
+        MAP.put("Email", email);
 
-        return map;
+        return MAP;
     }
 
     private void payToCounterpartyInitialVar() {

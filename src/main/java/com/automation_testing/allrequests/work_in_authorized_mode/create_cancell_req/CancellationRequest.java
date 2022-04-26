@@ -13,7 +13,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class CancellationRequest {
-    private final Map<String, String> map = new LinkedHashMap<>();
+    private final Map<String, String> MAP = new LinkedHashMap<>();
     private String documentDate;
     private String documentNumber;
     private String customerBankRecordID;
@@ -47,23 +47,23 @@ public class CancellationRequest {
             cancelDocBankRecordID = PutDocCHECKCODE.documentBankID;
             cancelDocNotification = "message";
         }
-        map.put("BankRecordID", "");
-        map.put("Status", "0");
-        map.put("DocumentDate", documentDate);
-        map.put("DocumentNumber", documentNumber);
-        map.put("SenderOfficial", "");
-        map.put("CustomerBankRecordID", customerBankRecordID);
-        map.put("BranchBankRecordID", branchBankRecordID);
-        map.put("CancelDocNumber", cancelDocNumber);
-        map.put("CancelDocType", cancelDocType);
-        map.put("CancelDocDate", cancelDocDate);
-        map.put("CancelDocAmount", cancelDocAmount);
-        map.put("CancelDocCurrCode", cancelDocCurrCode);
-        map.put("CancelDocBankRecordID", cancelDocBankRecordID);
-        map.put("CancelDocMandatoryFields", "");
-        map.put("CancelDocNotification", cancelDocNotification);
-        map.put("CancelDocTariff", "");
+        MAP.put("BankRecordID", "");
+        MAP.put("Status", "0");
+        MAP.put("DocumentDate", documentDate);
+        MAP.put("DocumentNumber", documentNumber);
+        MAP.put("SenderOfficial", "");
+        MAP.put("CustomerBankRecordID", customerBankRecordID);
+        MAP.put("BranchBankRecordID", branchBankRecordID);
+        MAP.put("CancelDocNumber", cancelDocNumber);
+        MAP.put("CancelDocType", cancelDocType);
+        MAP.put("CancelDocDate", cancelDocDate);
+        MAP.put("CancelDocAmount", cancelDocAmount);
+        MAP.put("CancelDocCurrCode", cancelDocCurrCode);
+        MAP.put("CancelDocBankRecordID", cancelDocBankRecordID);
+        MAP.put("CancelDocMandatoryFields", "");
+        MAP.put("CancelDocNotification", cancelDocNotification);
+        MAP.put("CancelDocTariff", "");
 
-        return map;
+        return MAP;
     }
 }

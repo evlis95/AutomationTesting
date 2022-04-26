@@ -16,19 +16,19 @@ import java.util.*;
 
 
 public class HeadersAllDocsDoc extends Post {
-    private final String[] payOrdStatCode = new String[]{"1", "3", "6", "7", "8", "9", "10", "11", "12", "15", "17", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50"};
-    private final String[] canReqStatCode = new String[]{"3", "6", "7", "8", "9", "10", "11", "12", "15", "17", "39", "40", "41", "42", "43", "44"};
-    private final String[] curTraStatCode = new String[]{"1", "3", "6", "8", "9", "10", "11", "12", "15", "17", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48"};
-    private final String[] onlineCurConvStatCode = new String[]{"1", "3", "9", "10", "11", "12", "11", "12", "17", "15", "39", "42", "43", "44"};
-    private final String[] corpCardStatCode = new String[]{"1", "3", "6", "8", "9", "10", "11", "12", "17", "15", "39", "42", "43", "44"};
-    private final String[] docFromBankStatCode = new String[]{"6", "10", "11", "12", "17", "39", "42", "43", "44", "64", "65", "66", "67"};
-    private final String[] minBalanceStatCode = new String[]{"1", "3", "6", "9", "10", "11", "12", "15", "17", "39", "42", "43", "44"};
-    private final String[] credStatCode = new String[]{"1", "6", "8", "10", "11", "12", "15", "17", "39", "42", "43", "44", "68", "69", "70"};
-    private final String[] depLightStatCode = new String[]{"1", "3", "6", "9", "10", "11", "12", "17", "15", "39", "42", "43", "44", "69", "70"};
-    private final String[] serConnStatCode = new String[]{"1", "3", "6", "8", "9", "10", "11", "12", "17", "39", "42", "43", "44"};
-    private final String[] sysFastPayQRStatCode = new String[]{"39", "42", "6", "1", "44", "11", "12", "15", "17", "10"};
-    private final String[] sysFastPayStatCode = new String[]{"39", "42", "3", "1", "44", "6", "12", "15", "11", "17", "10"};
-    private final String[] addAccStatCode = new String[]{"39", "10", "3", "42", "12", "6", "17", "15", "11", "9", "43", "44", "8", "71", "10"};
+    private final String[] PAY_ORD_STAT_CODE = new String[]{"1", "3", "6", "7", "8", "9", "10", "11", "12", "15", "17", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50"};
+    private final String[] CAN_REQ_STAT_CODE = new String[]{"3", "6", "7", "8", "9", "10", "11", "12", "15", "17", "39", "40", "41", "42", "43", "44"};
+    private final String[] CURR_TRA_STAT_CODE = new String[]{"1", "3", "6", "8", "9", "10", "11", "12", "15", "17", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48"};
+    private final String[] ONLINE_CUR_CONV_STAT_CODE = new String[]{"1", "3", "9", "10", "11", "12", "11", "12", "17", "15", "39", "42", "43", "44"};
+    private final String[] CORP_CARD_STAT_CODE = new String[]{"1", "3", "6", "8", "9", "10", "11", "12", "17", "15", "39", "42", "43", "44"};
+    private final String[] DOC_FROM_BANK_STAT_CODE = new String[]{"6", "10", "11", "12", "17", "39", "42", "43", "44", "64", "65", "66", "67"};
+    private final String[] MIN_BALANCE_STAT_CODE = new String[]{"1", "3", "6", "9", "10", "11", "12", "15", "17", "39", "42", "43", "44"};
+    private final String[] CRED_STAT_CODE = new String[]{"1", "6", "8", "10", "11", "12", "15", "17", "39", "42", "43", "44", "68", "69", "70"};
+    private final String[] DEP_LIGHT_STAT_CODE = new String[]{"1", "3", "6", "9", "10", "11", "12", "17", "15", "39", "42", "43", "44", "69", "70"};
+    private final String[] SER_CONN_STAT_CODE = new String[]{"1", "3", "6", "8", "9", "10", "11", "12", "17", "39", "42", "43", "44"};
+    private final String[] SYS_FAST_PAY_QR_STAT_CODE = new String[]{"39", "42", "6", "1", "44", "11", "12", "15", "17", "10"};
+    private final String[] SYS_FAST_PAY_STAT_CODE = new String[]{"39", "42", "3", "1", "44", "6", "12", "15", "11", "17", "10"};
+    private final String[] ADD_ACC_STAT_CODE = new String[]{"39", "10", "3", "42", "12", "6", "17", "15", "11", "9", "43", "44", "8", "71", "10"};
     /*private final String[] depAdvStatCode = new String[]{"39", "1", "3", "42", "43", "6", "44", "11", "12", "15", "17", "9", "10"};*/
     private Map<String, TagTOfTagP> mapTagT;
     private final Logger LOG = LogManager.getLogger(HeadersAllDocsDoc.class);
@@ -38,7 +38,7 @@ public class HeadersAllDocsDoc extends Post {
         return rootTag;
     }
 
-
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "HeadersAllDocsDocument");
     }
@@ -97,53 +97,53 @@ public class HeadersAllDocsDoc extends Post {
     private void createRequestedDocAndStatus() {
         for (int i = 0; i < UserFilter.rootTag.getListV().size(); i++) {
             if (UserFilter.rootTag.getListV().get(i).getAdv().equals("1")) {
-                addObjectInMap("PaymentOrder", payOrdStatCode);
+                addObjectInMap("PaymentOrder", PAY_ORD_STAT_CODE);
             }
             if (UserFilter.rootTag.getListV().get(i).getReq().equals("1")) {
-                addObjectInMap("CancellationRequest", canReqStatCode);
+                addObjectInMap("CancellationRequest", CAN_REQ_STAT_CODE);
             }
             if (UserFilter.rootTag.getListV().get(i).getCtr().equals("1")) {
-                addObjectInMap("CurTransfer", curTraStatCode);
+                addObjectInMap("CurTransfer", CURR_TRA_STAT_CODE);
             }
             if (UserFilter.rootTag.getListV().get(i).getExch().equals("1")) {
-                addObjectInMap("OnlineCurConv", onlineCurConvStatCode);
+                addObjectInMap("OnlineCurConv", ONLINE_CUR_CONV_STAT_CODE);
             }
             if (UserFilter.rootTag.getListV().get(i).getCc().equals("1") || UserFilter.rootTag.getListV().get(i).getDcc().equals("1")) {
-                addObjectInMap("CorpCardNew", corpCardStatCode);
-                addObjectInMap("CorpCardBlock", corpCardStatCode);
-                addObjectInMap("CorpCardReissue", corpCardStatCode);
-                addObjectInMap("CorpCardUnblock", corpCardStatCode);
-                addObjectInMap("CorpCardAbroadOperReq", corpCardStatCode);
+                addObjectInMap("CorpCardNew", CORP_CARD_STAT_CODE);
+                addObjectInMap("CorpCardBlock", CORP_CARD_STAT_CODE);
+                addObjectInMap("CorpCardReissue", CORP_CARD_STAT_CODE);
+                addObjectInMap("CorpCardUnblock", CORP_CARD_STAT_CODE);
+                addObjectInMap("CorpCardAbroadOperReq", CORP_CARD_STAT_CODE);
             }
             if (UserFilter.rootTag.getListV().get(i).getOffer().equals("1")) {
-                addObjectInMap("DocFromBank", docFromBankStatCode);
+                addObjectInMap("DocFromBank", DOC_FROM_BANK_STAT_CODE);
             }
             if (UserFilter.rootTag.getListV().get(i).getMinBalance().equals("1")) {
-                addObjectInMap("MinBalance", minBalanceStatCode);
+                addObjectInMap("MinBalance", MIN_BALANCE_STAT_CODE);
             }
             if (UserFilter.rootTag.getListV().get(i).getCr().equals("1")) {
-                addObjectInMap("CreditApplication", credStatCode);
-                addObjectInMap("CreditTerms", credStatCode);
+                addObjectInMap("CreditApplication", CRED_STAT_CODE);
+                addObjectInMap("CreditTerms", CRED_STAT_CODE);
             }
             if (UserFilter.rootTag.getListV().get(i).getDep().equals("1")) {
-                addObjectInMap("NewDepositPetition", depLightStatCode);
+                addObjectInMap("NewDepositPetition", DEP_LIGHT_STAT_CODE);
             }
             if (UserFilter.rootTag.getListV().get(i).getSm().equals("1")) {
-                addObjectInMap("ServiceСonnection", serConnStatCode);
+                addObjectInMap("ServiceСonnection", SER_CONN_STAT_CODE);
                 if (UserFilter.rootTag.getListV().get(i).getListContract() != null) {
                     if (UserFilter.rootTag.getListV().get(i).getListContract().get(i).getTar().equals("1")) {
-                        addObjectInMap("ServiceСonnection", serConnStatCode);
+                        addObjectInMap("ServiceСonnection", SER_CONN_STAT_CODE);
                     }
                 }
             }
             if (UserFilter.rootTag.getListV().get(i).getNewqr().equals("1")) {
-                addObjectInMap("SystemFastPayQR", sysFastPayQRStatCode);
+                addObjectInMap("SystemFastPayQR", SYS_FAST_PAY_QR_STAT_CODE);
             }
             if (UserFilter.rootTag.getListV().get(i).getBackpay().equals("1")) {
-                addObjectInMap("SystemFastPayBack", sysFastPayStatCode);
+                addObjectInMap("SystemFastPayBack", SYS_FAST_PAY_STAT_CODE);
             }
             if (UserFilter.rootTag.getListV().get(i).getPaybc().equals("1")) {
-                addObjectInMap("SystemFastPay", sysFastPayStatCode);
+                addObjectInMap("SystemFastPay", SYS_FAST_PAY_STAT_CODE);
             }
            /* if (UserFilter.rootTag.getListV().get(i).getDepAdv().equals("1")) { // убрать комментарий когда появится услуга D2BM. DepAdv
                 addObjectInMap("DepositPartialWithdrawal", depAdvStatCode);
@@ -152,7 +152,7 @@ public class HeadersAllDocsDoc extends Post {
                 addObjectInMap("DepositTermination", depAdvStatCode);
             }*/
             if (UserFilter.rootTag.getListV().get(i).getAddAcc().equals("1")) {
-                addObjectInMap("AdditionalAcc", addAccStatCode);
+                addObjectInMap("AdditionalAcc", ADD_ACC_STAT_CODE);
             }
 
 

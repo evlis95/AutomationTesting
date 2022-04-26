@@ -13,6 +13,7 @@ public class TooltipPaymentOrder extends Post {
 
     public static UniversalResponseRootTag rootTag;
 
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "TooltipPaymentOrder");
     }
@@ -30,12 +31,12 @@ public class TooltipPaymentOrder extends Post {
 
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
-            createXmlBodyRequest();
-            executingRequest();
-            writeBodyResponseInFile();
-            checkTest();
-            if (codeStatusResponse == 200) {
-                rootTag = parsingResponseBody();
-            } 
+        createXmlBodyRequest();
+        executingRequest();
+        writeBodyResponseInFile();
+        checkTest();
+        if (codeStatusResponse == 200) {
+            rootTag = parsingResponseBody();
+        }
     }
 }

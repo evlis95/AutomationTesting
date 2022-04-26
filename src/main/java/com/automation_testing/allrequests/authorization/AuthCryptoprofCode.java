@@ -12,11 +12,10 @@ public class AuthCryptoprofCode extends Post {
 
     public static UniversalResponseRootTag rootTag;
 
-
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "AuthCryptoProfilesCode");
     }
-
 
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
@@ -26,7 +25,6 @@ public class AuthCryptoprofCode extends Post {
         authCryProCode.setN("code");
         authCryProCode.setV(1.0);
         authCryProCode.setS(AuthLogin.sessionID);
-
         marshallSetting(authCryProCode);
     }
 

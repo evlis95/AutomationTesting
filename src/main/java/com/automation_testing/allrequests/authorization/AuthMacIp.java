@@ -16,10 +16,10 @@ public class AuthMacIp extends Post {
 
     public static UniversalResponseRootTag rootTag;
 
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "AuthMacip");
     }
-
 
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
@@ -54,7 +54,6 @@ public class AuthMacIp extends Post {
 
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
-
         createXmlBodyRequest();
         executingRequest();
         writeBodyResponseInFile();

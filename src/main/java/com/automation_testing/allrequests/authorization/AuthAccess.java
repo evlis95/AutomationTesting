@@ -12,10 +12,10 @@ public class AuthAccess extends Post {
 
     public static UniversalResponseRootTag rootTag;
 
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "AuthAccess");
     }
-
 
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
@@ -28,9 +28,7 @@ public class AuthAccess extends Post {
 
         marshallSetting(authAccess);
     }
-
-
-    @Override
+@Override
     public void run() throws IOException, InterruptedException, JAXBException {
         createXmlBodyRequest();
         executingRequest();

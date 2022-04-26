@@ -17,7 +17,6 @@ public class AuthLogin extends Post {
     public static UniversalResponseRootTag rootTag;
     public static String sessionID;
 
-
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag authLogin = new UniversalRequestRootTag();
@@ -37,11 +36,10 @@ public class AuthLogin extends Post {
         marshallSetting(authLogin);
     }
 
-
+    @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "AuthLogin");
     }
-
 
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
