@@ -27,7 +27,7 @@ public class ManagePushBind extends Post {
         managePushBind.setC("push");
         managePushBind.setN("bind");
         managePushBind.setV(1.0);
-        tagP.setApv(Settings.appVersionName);
+        tagP.setApv(Settings.APP_VERSION_NAME);
         tagP.setDid("cbb99cc0763eb5c2");
         tagP.setDnm("IDEA");
         tagP.setMs("0");

@@ -1,9 +1,14 @@
 package com.automation_testing.creatingxml;
 
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
+@Setter
+@NoArgsConstructor
 public class TagPOfUnivReq {
 
     @XmlAttribute
@@ -86,7 +91,6 @@ public class TagPOfUnivReq {
     TagFOfTagP tagF;
 
 
-
     public TagPOfUnivReq(String i) {
         this.i = i;
     }
@@ -106,9 +110,6 @@ public class TagPOfUnivReq {
         this.tagF = tagF;
     }
 
-    public TagPOfUnivReq() {
-    }
-
     public TagPOfUnivReq(String p, String g, List<TagAOfTagP> listA, TagFOfTagP tagF) {
         this.p = p;
         this.g = g;
@@ -121,161 +122,5 @@ public class TagPOfUnivReq {
         this.p = p;
         this.listT = listT;
         this.listF = listF;
-    }
-
-    public void setTagF(TagFOfTagP tagF) {
-        this.tagF = tagF;
-    }
-
-    public void setDeviceos(String deviceos) {
-        this.deviceos = deviceos;
-    }
-
-    public void setHash(String hash) {
-        this.hash = hash;
-    }
-
-    public void setLangid(String langid) {
-        this.langid = langid;
-    }
-
-    public void setD(String d) {
-        this.d = d;
-    }
-
-    public void setT(String t) {
-        this.t = t;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
-
-    public void setApc(String apc) {
-        this.apc = apc;
-    }
-
-    public void setApv(String apv) {
-        this.apv = apv;
-    }
-
-    public void setI(String i) {
-        this.i = i;
-    }
-
-    public void setM(String m) {
-        this.m = m;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public void setOsv(String osv) {
-        this.osv = osv;
-    }
-
-    public void setOsvk(String osvk) {
-        this.osvk = osvk;
-    }
-
-    public void setPn(String pn) {
-        this.pn = pn;
-    }
-
-    public void setTermsDate(String termsDate) {
-        this.termsDate = termsDate;
-    }
-
-    public void setC(String c) {
-        this.c = c;
-    }
-
-    public void setS(String s) {
-        this.s = s;
-    }
-
-    public void setE(String e) {
-        this.e = e;
-    }
-
-    public void setA(String a) {
-        this.a = a;
-    }
-
-    public void setB(String b) {
-        this.b = b;
-    }
-
-    public void setG(String g) {
-        this.g = g;
-    }
-
-    public void setCard(String card) {
-        this.card = card;
-    }
-
-    public void setP(String p) {
-        this.p = p;
-    }
-
-    public void setN(String n) {
-        this.n = n;
-    }
-
-    public void setR(String r) {
-        this.r = r;
-    }
-
-    public void setV(String v) {
-        this.v = v;
-    }
-
-    public void setListA(List<TagAOfTagP> listA) {
-        this.listA = listA;
-    }
-
-    public void setListC(List<TagCOfTagP> listC) {
-        this.listC = listC;
-    }
-
-    public void setListT(List<TagTOfTagP> listT) {
-        this.listT = listT;
-    }
-
-    public void setListF(List<TagFOfTagP> listF) {
-        this.listF = listF;
-    }
-
-    public void setDid(String did) {
-        this.did = did;
-    }
-
-    public void setDnm(String dnm) {
-        this.dnm = dnm;
-    }
-
-    public void setMs(String ms) {
-        this.ms = ms;
-    }
-
-    public void setDph(String dph) {
-        this.dph = dph;
-    }
-
-    public void setOs(String os) {
-        this.os = os;
-    }
-
-    public void setPcpushid(String pcpushid) {
-        this.pcpushid = pcpushid;
-    }
-
-    public void setPushid(String pushid) {
-        this.pushid = pushid;
     }
 }

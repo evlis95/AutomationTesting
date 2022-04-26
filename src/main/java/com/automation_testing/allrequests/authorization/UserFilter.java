@@ -95,13 +95,13 @@ public class UserFilter extends Post {
             if (rootTag.getListV().get(0).getDcc().equals("1")) {
                 stringBuffer.append("D2BM. Цифровые карты\n");
             }
-            if (rootTag.getListV().get(0).getaPay().equals("1")) {
+            if (rootTag.getListV().get(0).getAPay().equals("1")) {
                 stringBuffer.append("D2BM. Apple Pay\n");
             }
-            if (rootTag.getListV().get(0).getgPay().equals("1")) {
+            if (rootTag.getListV().get(0).getGPay().equals("1")) {
                 stringBuffer.append("D2BM. Google Pay\n");
             }
-            if (rootTag.getListV().get(0).getsPay().equals("1")) {
+            if (rootTag.getListV().get(0).getSPay().equals("1")) {
                 stringBuffer.append("D2BM. Samsung Pay\n");
             }
             if (rootTag.getListV().get(0).getWarn().equals("1")) {
@@ -191,13 +191,13 @@ public class UserFilter extends Post {
                         if (rootTag.getListV().get(j).getDcc().equals("1")) {
                             stringBuffer.append("D2BM. Цифровые карты\n");
                         }
-                        if (rootTag.getListV().get(j).getaPay().equals("1")) {
+                        if (rootTag.getListV().get(j).getAPay().equals("1")) {
                             stringBuffer.append("D2BM. Apple Pay\n");
                         }
-                        if (rootTag.getListV().get(j).getgPay().equals("1")) {
+                        if (rootTag.getListV().get(j).getGPay().equals("1")) {
                             stringBuffer.append("D2BM. Google Pay\n");
                         }
-                        if (rootTag.getListV().get(j).getsPay().equals("1")) {
+                        if (rootTag.getListV().get(j).getSPay().equals("1")) {
                             stringBuffer.append("D2BM. Samsung Pay\n");
                         }
                         if (rootTag.getListV().get(j).getWarn().equals("1")) {

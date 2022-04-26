@@ -1,8 +1,10 @@
 package com.automation_testing.parsingxml;
 
+import lombok.Getter;
+
 import javax.xml.bind.annotation.XmlAttribute;
 
-
+@Getter
 public class TagFOfTagUnivRes {
     @XmlAttribute
     private String a;
@@ -52,130 +54,4 @@ public class TagFOfTagUnivRes {
     private String ruquiredError;
     @XmlAttribute
     private String required;
-
-    public String getA() {
-        return a;
-    }
-
-    public String getB() {
-        return b;
-    }
-
-    public String getC() {
-        return c;
-    }
-
-    public String getD() {
-        return d;
-    }
-
-    public String getDt() {
-        return dt;
-    }
-
-    public String getE() {
-        return e;
-    }
-
-    public String getG() {
-        return g;
-    }
-
-    public String getGbn() {
-        return gbn;
-    }
-
-    public String getI() {
-        return i;
-    }
-
-    public String getM() {
-        return m;
-    }
-
-    public String getN() {
-        return n;
-    }
-
-    public String getP() {
-        return p;
-    }
-
-    public String getQ() {
-        return q;
-    }
-
-    public String getR() {
-        return r;
-    }
-
-    public String getS() {
-        return s;
-    }
-
-    public String getU() {
-        return u;
-    }
-
-    public String getW() {
-        return w;
-    }
-
-    public String getX() {
-        return x;
-    }
-
-    public String getZ() {
-        return z;
-    }
-
-    public String getV() {
-        return v;
-    }
-
-    public String getMaxLength() {
-        return maxLength;
-    }
-
-    public String getMaxLengthError() {
-        return maxLengthError;
-    }
-
-    public String getRuquiredError() {
-        return ruquiredError;
-    }
-
-    public String getRequired() {
-        return required;
-    }
-
-    @Override
-    public String toString() {
-        return "TagFOfTagUnivRes{" +
-                "a='" + a + '\'' +
-                ", b='" + b + '\'' +
-                ", c='" + c + '\'' +
-                ", d='" + d + '\'' +
-                ", dt='" + dt + '\'' +
-                ", e='" + e + '\'' +
-                ", g='" + g + '\'' +
-                ", gbn='" + gbn + '\'' +
-                ", i='" + i + '\'' +
-                ", m='" + m + '\'' +
-                ", n='" + n + '\'' +
-                ", p='" + p + '\'' +
-                ", q='" + q + '\'' +
-                ", r='" + r + '\'' +
-                ", s='" + s + '\'' +
-                ", u='" + u + '\'' +
-                ", w='" + w + '\'' +
-                ", x='" + x + '\'' +
-                ", z='" + z + '\'' +
-                ", v='" + v + '\'' +
-                ", maxLength='" + maxLength + '\'' +
-                ", maxLengthError='" + maxLengthError + '\'' +
-                ", ruquiredError='" + ruquiredError + '\'' +
-                ", required='" + required + '\'' +
-                '}';
-    }
 }

@@ -1,11 +1,12 @@
 package com.automation_testing.parsingxml;
 
+import lombok.Getter;
+
 import javax.xml.bind.annotation.*;
 import java.util.List;
 
-
+@Getter
 @XmlRootElement(name = "A")
-@XmlAccessorType(XmlAccessType.NONE)
 public class UniversalResponseRootTag {
     @XmlElement(name = "requests")
     private TagRequestsOfTagUnivResp tagRequests;
@@ -84,159 +85,5 @@ public class UniversalResponseRootTag {
     @XmlElementWrapper(name = "errorList")
     @XmlElement(name = "error")
     private List<TagErrorOfTagUnivRes> listError;
-
-    public TagLoginPageOfTagUnivRes getTagLoginPage() {
-        return tagLoginPage;
-    }
-
-    public TagRequestsOfTagUnivResp getTagRequests() {
-        return tagRequests;
-    }
-
-    public TagGlobalOfTagUnivRes getTagGlobal() {
-        return tagGlobal;
-    }
-
-    public TagMenuPageOfTagUnivRes getTagMenuPage() {
-        return tagMenuPage;
-    }
-
-    public TagFilterPageOfTagUnivRes getTagFilterPage() {
-        return tagFilterPage;
-    }
-
-    public TagChatPageOfTagUnivRes getTagChatPage() {
-        return tagChatPage;
-    }
-
-    public TagDocCreateEditPageOfTagUnivRes getTagDocCreateEditPage() {
-        return tagDocCreateEditPage;
-    }
-
-    public TagDocViewPageOfTagUnivRes getTagDocViewPage() {
-        return tagDocViewPage;
-    }
-
-    public TagAboutPageOfTagUnivRes getTagAboutPage() {
-        return tagAboutPage;
-    }
-
-    public TagAtmDepPageOfTagUnivReq getTagAtmDepPage() {
-        return tagAtmDepPage;
-    }
-
-    public TagAccountInfoOfTagUnivRes getTagAccountInfo() {
-        return tagAccountInfo;
-    }
-
-    public TagCorpCardPageOfTagUnivRes getTagCorpCardPage() {
-        return tagCorpCardPage;
-    }
-
-    public TagDepositLightPageOfTagUnivRes getTagDepositLightPage() {
-        return tagDepositLightPage;
-    }
-
-    public TagHashOfTagUnivRes getTagHash() {
-        return tagHash;
-    }
-
-    public TagLanguagesOfTagUnivRes getTagLanguages() {
-        return tagLanguages;
-    }
-
-    public TagLocalizationOfTagUnivRes getTagLocalization() {
-        return tagLocalization;
-    }
-
-    public TagBOfTagUnivRes getTagB() {
-        return tagB;
-    }
-
-    public TagLOfTagUnivRes getTagL() {
-        return tagL;
-    }
-
-    public TagUOfUnivRes getTagU() {
-        return tagU;
-    }
-
-    public TagSettingsOfTafUnivRes getTagSettings() {
-        return tagSettings;
-    }
-
-    public List<TagCOfTagUnivRes> getListC() {
-        return listC;
-    }
-
-    public List<TagSOfUnivRes> getListS() {
-        return listS;
-    }
-
-    public TagWebimOfTagUnivRes getTagWebim() {
-        return tagWebim;
-    }
-
-    public TagFPOfTagUnivRes getTagFP() {
-        return tagFP;
-    }
-
-    public TagLastAuthOfTagUnivRes getTagLastAuth() {
-        return tagLastAuth;
-    }
-
-    public TagUserSettingsOfTagUnivRes getTagUserSettings() {
-        return tagUserSettings;
-    }
-
-    public TagPersonInfoOfTagUnivRes getTagPersonInfo() {
-        return tagPersonInfo;
-    }
-
-
-    public List<TagFOfTagUnivRes> getListF() {
-        return listF;
-    }
-
-    public List<TagVOfTagUnivRes> getListV() {
-        return listV;
-    }
-
-    public List<TagDOfTafUnivRes> getListD() {
-        return listD;
-    }
-
-    public List<TagAOfTagUnivRes> getListA() {
-        return listA;
-    }
-
-
-    public List<TagDSOfTagUnivRes> getListDS() {
-        return listDS;
-    }
-
-    public List<TagPageOfTagUnivRes> getListPage() {
-        return listPage;
-    }
-
-    public List<TagROfTagUnivRes> getListR() {
-        return listR;
-    }
-
-    public List<TagPOfTagUnivRes> getListP() {
-        return listP;
-    }
-
-    public List<TagKOfTagUnivRes> getListK() {
-        return listK;
-    }
-
-    public String getD() {
-        return d;
-    }
-
-    public List<TagErrorOfTagUnivRes> getListError() {
-        return listError;
-    }
 }
 

@@ -29,7 +29,7 @@ public abstract class Post {
     protected Integer codeStatusResponse;
     private final HttpClient HTTP_CLIENT = HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_1_1)
-            .proxy(ProxySelector.of(new InetSocketAddress(Settings.hostProxy, Settings.portProxy)))
+            .proxy(ProxySelector.of(new InetSocketAddress(Settings.HOST_PROXY, Settings.PORT_PROXY)))
             .connectTimeout(Duration.ofSeconds(10))
             .build();
     private final String PATH_RESPONSE_BODY = ".\\src\\main\\java\\com\\automation_testing\\xmlfile\\response.xml";
@@ -61,11 +61,11 @@ public abstract class Post {
     protected void executingRequest() throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofFile(Path.of(PATH_REQUEST_BODY)))
-                .uri(URI.create(Settings.uriPost))
+                .uri(URI.create(Settings.URI_POST))
                 .setHeader("Accept-Encoding", "gzip")
                 .setHeader("Content-Type", "text/xml")
                 .setHeader("AppLanguage", "ru")
-                .setHeader("AppVersionName", Settings.appVersionName)
+                .setHeader("AppVersionName", Settings.APP_VERSION_NAME)
                 .build();
 
         HttpResponse<String> response = HTTP_CLIENT.send(request, HttpResponse.BodyHandlers.ofString());

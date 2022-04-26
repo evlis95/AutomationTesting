@@ -1,7 +1,10 @@
 package com.automation_testing.parsingxml;
 
+import lombok.Getter;
+
 import javax.xml.bind.annotation.XmlAttribute;
 
+@Getter
 public class TagUIOfTagUnivRes {
     @XmlAttribute
     private String e;
@@ -9,25 +12,4 @@ public class TagUIOfTagUnivRes {
     private String f;
     @XmlAttribute
     private String p;
-
-    public String getE() {
-        return e;
-    }
-
-    public String getF() {
-        return f;
-    }
-
-    public String getP() {
-        return p;
-    }
-
-    @Override
-    public String toString() {
-        return "TagUIOfTagUnivRes{" +
-                "e='" + e + '\'' +
-                ", f='" + f + '\'' +
-                ", p='" + p + '\'' +
-                '}';
-    }
 }

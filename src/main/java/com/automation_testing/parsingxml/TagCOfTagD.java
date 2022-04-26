@@ -1,26 +1,13 @@
 package com.automation_testing.parsingxml;
 
+import lombok.Getter;
+
 import javax.xml.bind.annotation.XmlAttribute;
 
+@Getter
 public class TagCOfTagD {
     @XmlAttribute
     private String s;
     @XmlAttribute
     private String v;
-
-    public String getS() {
-        return s;
-    }
-
-    public String getV() {
-        return v;
-    }
-
-    @Override
-    public String toString() {
-        return "TagCOfTagD{" +
-                "s='" + s + '\'' +
-                ", v='" + v + '\'' +
-                '}';
-    }
 }

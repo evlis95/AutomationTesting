@@ -1,21 +1,13 @@
 package com.automation_testing.parsingxml;
 
 
+import lombok.Getter;
+
 import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
+@Getter
 public class TagLocalizationOfTagUnivRes {
     @XmlElement(name = "page")
     private List<TagPageOfTagLocalization> listPage;
-
-    public List<TagPageOfTagLocalization> getListPage() {
-        return listPage;
-    }
-
-    @Override
-    public String toString() {
-        return "TagLocalizationOfTagUnivRes{" +
-                "listPage=" + listPage +
-                '}';
-    }
 }

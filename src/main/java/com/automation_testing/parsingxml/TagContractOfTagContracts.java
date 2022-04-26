@@ -1,7 +1,10 @@
 package com.automation_testing.parsingxml;
 
+import lombok.Getter;
+
 import javax.xml.bind.annotation.XmlAttribute;
 
+@Getter
 public class TagContractOfTagContracts {
     @XmlAttribute
     private String contractId;
@@ -13,35 +16,4 @@ public class TagContractOfTagContracts {
     private String tar;
     @XmlAttribute
     private String tariff;
-
-    public String getContractId() {
-        return contractId;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public String getNum() {
-        return num;
-    }
-
-    public String getTar() {
-        return tar;
-    }
-
-    public String getTariff() {
-        return tariff;
-    }
-
-    @Override
-    public String toString() {
-        return "TagContractOfTagContracts{" +
-                "contractId='" + contractId + '\'' +
-                ", date='" + date + '\'' +
-                ", num='" + num + '\'' +
-                ", tar='" + tar + '\'' +
-                ", tariff='" + tariff + '\'' +
-                '}';
-    }
 }

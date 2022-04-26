@@ -28,7 +28,8 @@ public class AuthAccess extends Post {
 
         marshallSetting(authAccess);
     }
-@Override
+
+    @Override
     public void run() throws IOException, InterruptedException, JAXBException {
         createXmlBodyRequest();
         executingRequest();

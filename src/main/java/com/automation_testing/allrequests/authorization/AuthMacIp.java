@@ -34,7 +34,7 @@ public class AuthMacIp extends Post {
         authMacip.setS(AuthLogin.sessionID);
 
         tagP.setApc("");
-        tagP.setApv(Settings.appVersionName);
+        tagP.setApv(Settings.APP_VERSION_NAME);
         tagP.setD("d8eb432fb028c2b3");
         tagP.setI("");
         tagP.setM("");
