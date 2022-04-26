@@ -32,6 +32,8 @@ public abstract class Post {
             .proxy(ProxySelector.of(new InetSocketAddress(Settings.hostProxy, Settings.portProxy)))
             .connectTimeout(Duration.ofSeconds(10))
             .build();
+    private final String PATH_RESPONSE_BODY = ".\\src\\main\\java\\com\\automation_testing\\xmlfile\\response.xml";
+    private final String PATH_REQUEST_BODY = ".\\src\\main\\java\\com\\automation_testing\\xmlfile\\request.xml";
 
     protected void marshallSetting(UniversalRequestRootTag rootTag) throws JAXBException {
         JAXBContext jcCreate = JAXBContext.newInstance(UniversalRequestRootTag.class);
@@ -39,17 +41,17 @@ public abstract class Post {
         marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
         marshaller.setProperty("com.sun.xml.bind.xmlHeaders", "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         marshaller.setProperty(CharacterEscapeHandler.class.getName(), new CustomCharacterEscapeHandler());
-        marshaller.marshal(rootTag, new File(".\\src\\main\\java\\com\\automation_testing\\xmlfile\\request.xml"));
+        marshaller.marshal(rootTag, new File(PATH_REQUEST_BODY));
     }
 
     protected UniversalResponseRootTag parsingResponseBody() throws JAXBException {
         JAXBContext jcParse = JAXBContext.newInstance(UniversalResponseRootTag.class);
         Unmarshaller unmarshall = jcParse.createUnmarshaller();
-        return (UniversalResponseRootTag) unmarshall.unmarshal(new File(".\\src\\main\\java\\com\\automation_testing\\xmlfile\\response.xml"));
+        return (UniversalResponseRootTag) unmarshall.unmarshal(new File(PATH_RESPONSE_BODY));
     }
 
     protected void writeBodyResponseInFile() {
-        try (FileWriter writer = new FileWriter(".\\src\\main\\java\\com\\automation_testing\\xmlfile\\response.xml", false)) {
+        try (FileWriter writer = new FileWriter(PATH_RESPONSE_BODY, false)) {
             writer.write(bodyResponse);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -58,7 +60,7 @@ public abstract class Post {
 
     protected void request() throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
-                .POST(HttpRequest.BodyPublishers.ofFile(Path.of(".\\src\\main\\java\\com\\automation_testing\\xmlfile\\request.xml")))
+                .POST(HttpRequest.BodyPublishers.ofFile(Path.of(PATH_REQUEST_BODY)))
                 .uri(URI.create(Settings.uriPost))
                 .setHeader("Accept-Encoding", "gzip")
                 .setHeader("Content-Type", "text/xml")
@@ -79,7 +81,7 @@ public abstract class Post {
     protected abstract void checkTest() throws IOException;
 
     protected void printReqAndResInLog() throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(".\\src\\main\\java\\com\\automation_testing\\xmlfile\\request.xml"));
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(PATH_REQUEST_BODY));
         StringBuilder stringBuffer = new StringBuilder();
         String line;
         LOG.warn("Запрос:");
