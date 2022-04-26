@@ -124,7 +124,7 @@ public class CountAllAllDocsDoc extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-                rootTag = parseXmlBodyResponse();
+                rootTag = parsingResponseBody();
 
             if (rootTag.getListD() != null) {
                 if (tagTQuantity == rootTag.getListD().size()) {

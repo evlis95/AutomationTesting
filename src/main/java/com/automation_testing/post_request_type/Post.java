@@ -18,12 +18,10 @@ import java.net.InetSocketAddress;
 import java.net.ProxySelector;
 import java.net.URI;
 import java.net.http.HttpClient;
-import java.net.http.HttpHeaders;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.file.Path;
 import java.time.Duration;
-
 
 public abstract class Post {
     private final Logger LOG = LogManager.getLogger(Post.class);
@@ -35,7 +33,6 @@ public abstract class Post {
             .connectTimeout(Duration.ofSeconds(10))
             .build();
 
-
     protected void marshallSetting(UniversalRequestRootTag rootTag) throws JAXBException {
         JAXBContext jcCreate = JAXBContext.newInstance(UniversalRequestRootTag.class);
         Marshaller marshaller = jcCreate.createMarshaller();
@@ -45,11 +42,10 @@ public abstract class Post {
         marshaller.marshal(rootTag, new File(".\\src\\main\\java\\com\\automation_testing\\xmlfile\\request.xml"));
     }
 
-    protected UniversalResponseRootTag unmarshallSetting(UniversalResponseRootTag a) throws JAXBException {
+    protected UniversalResponseRootTag parsingResponseBody() throws JAXBException {
         JAXBContext jcParse = JAXBContext.newInstance(UniversalResponseRootTag.class);
         Unmarshaller unmarshall = jcParse.createUnmarshaller();
-        a = (UniversalResponseRootTag) unmarshall.unmarshal(new File(".\\src\\main\\java\\com\\automation_testing\\xmlfile\\response.xml"));
-        return a;
+        return (UniversalResponseRootTag) unmarshall.unmarshal(new File(".\\src\\main\\java\\com\\automation_testing\\xmlfile\\response.xml"));
     }
 
     protected void writeBodyResponseInFile() {
@@ -61,7 +57,6 @@ public abstract class Post {
     }
 
     protected void request() throws IOException, InterruptedException {
-
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofFile(Path.of(".\\src\\main\\java\\com\\automation_testing\\xmlfile\\request.xml")))
                 .uri(URI.create(Settings.uriPost))
@@ -81,27 +76,20 @@ public abstract class Post {
 
     protected abstract void createXmlBodyRequest() throws JAXBException, IOException;
 
-    protected UniversalResponseRootTag parseXmlBodyResponse() throws JAXBException {
-        UniversalResponseRootTag rootTag = new UniversalResponseRootTag();
-        rootTag = unmarshallSetting(rootTag);
-        return rootTag;
-    }
-
     protected abstract void checkTest() throws IOException;
 
     protected void printReqAndResInLog() throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(".\\src\\main\\java\\com\\automation_testing\\xmlfile\\request.xml"));
-        StringBuilder stringBuffer = new StringBuilder("");
-        String line = "";
+        StringBuilder stringBuffer = new StringBuilder();
+        String line;
         LOG.warn("Запрос:");
         while ((line = bufferedReader.readLine()) != null) {
             stringBuffer.append(line).append("\n");
         }
         bufferedReader.close();
         LOG.warn(stringBuffer.toString());
-
         LOG.warn("Ответ:");
-        StringBuilder stringBuffer1 = new StringBuilder("");
+        StringBuilder stringBuffer1 = new StringBuilder();
         bufferedReader = new BufferedReader(new StringReader(bodyResponse));
         while ((line = bufferedReader.readLine()) != null) {
             stringBuffer1.append(line).append("\n");
@@ -109,7 +97,4 @@ public abstract class Post {
         bufferedReader.close();
         LOG.warn(stringBuffer1.toString());
     }
-
-
 }
-

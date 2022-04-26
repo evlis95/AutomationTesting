@@ -138,7 +138,7 @@ public class PutDocAction extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parseXmlBodyResponse();
+            rootTag = parsingResponseBody();
             if (rootTag.getListC() != null) {
                 if (rootTag.getListC().get(0).getCe().equals("1")) {
                     documentID = rootTag.getListF().get(0).getD();

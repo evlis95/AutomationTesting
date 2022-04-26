@@ -55,7 +55,7 @@ public class AvailableDocument extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parseXmlBodyResponse();
+            rootTag = parsingResponseBody();
             result = rootTag.getListF().get(0).getV();
 
             if(result.equals("1")) {

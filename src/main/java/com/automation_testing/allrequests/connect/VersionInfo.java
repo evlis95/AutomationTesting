@@ -34,7 +34,7 @@ public class VersionInfo extends Post {
             printReqAndResInLog();
             checkTest();
             if (codeStatusResponse == 200) {
-                rootTagA = parseXmlBodyResponse();
+                rootTagA = parsingResponseBody();
             }
     }
 }

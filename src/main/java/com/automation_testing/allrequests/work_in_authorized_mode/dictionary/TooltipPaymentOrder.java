@@ -35,7 +35,7 @@ public class TooltipPaymentOrder extends Post {
             writeBodyResponseInFile();
             checkTest();
             if (codeStatusResponse == 200) {
-                rootTag = parseXmlBodyResponse();
+                rootTag = parsingResponseBody();
             } 
     }
 }

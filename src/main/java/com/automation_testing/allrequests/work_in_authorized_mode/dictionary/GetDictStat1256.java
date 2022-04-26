@@ -38,7 +38,7 @@ public class GetDictStat1256 extends Post {
             printReqAndResInLog();
             checkTest();
             if (codeStatusResponse == 200) {
-                rootTag = parseXmlBodyResponse();
+                rootTag = parsingResponseBody();
             } 
     }
 }

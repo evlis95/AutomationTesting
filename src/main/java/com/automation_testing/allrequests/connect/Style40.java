@@ -40,7 +40,7 @@ public class Style40 extends Post {
             printReqAndResInLog();
             checkTest();
             if (codeStatusResponse == 200) {
-                rootTag = parseXmlBodyResponse();
+                rootTag = parsingResponseBody();
             } 
     }
 }

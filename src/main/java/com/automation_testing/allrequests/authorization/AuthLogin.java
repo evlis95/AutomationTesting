@@ -51,7 +51,7 @@ public class AuthLogin extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parseXmlBodyResponse();
+            rootTag = parsingResponseBody();
             sessionID = rootTag.getListS().get(0).getV();
         }
     }

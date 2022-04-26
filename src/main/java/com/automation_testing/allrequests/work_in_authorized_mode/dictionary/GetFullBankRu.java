@@ -47,7 +47,7 @@ public class GetFullBankRu extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parseXmlBodyResponse();
+            rootTag = parsingResponseBody();
             receiverBankName = rootTag.getListR().get(0).getX();
             receiverBIC = rootTag.getListR().get(0).getD();
             receiverCorrAcc = rootTag.getListR().get(0).getTagCorrAcc().get(0).getA();

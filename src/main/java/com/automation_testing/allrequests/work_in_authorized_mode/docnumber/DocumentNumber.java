@@ -56,7 +56,7 @@ public class DocumentNumber extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parseXmlBodyResponse();
+            rootTag = parsingResponseBody();
             docNum = rootTag.getListF().get(0).getV();
         }
 

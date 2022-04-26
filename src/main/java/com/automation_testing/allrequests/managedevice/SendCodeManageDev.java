@@ -58,7 +58,7 @@ public class SendCodeManageDev extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parseXmlBodyResponse();
+            rootTag = parsingResponseBody();
            info();
         }
     }

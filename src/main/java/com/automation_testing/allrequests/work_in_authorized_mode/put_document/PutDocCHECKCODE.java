@@ -86,7 +86,7 @@ public class PutDocCHECKCODE extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parseXmlBodyResponse();
+            rootTag = parsingResponseBody();
             initializationFields();
             info();
             if (documentStatusCode.equals(statusCodeForCheck)) {

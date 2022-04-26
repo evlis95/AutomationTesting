@@ -54,7 +54,7 @@ public class PutDocFORCE extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parseXmlBodyResponse();
+            rootTag = parsingResponseBody();
             documentBankID = rootTag.getListF().get(0).getI();
         }
     }
