@@ -14,7 +14,6 @@ import org.hibernate.Session;
 
 import javax.xml.bind.JAXBException;
 import java.io.*;
-import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,9 +41,9 @@ public class UserFilter extends Post {
     }
 
     @Override
-    private void checkTest() throws IOException {
-        Check.checkCode200(getCodeStatusResponse(), "UserFilter");
-        Check.checkEnabledServiceD2BMAdvanced();
+    protected void checkTest() throws IOException {
+        Check.checkCode200(codeStatusResponse, "UserFilter");
+        Check.checkEnabledD2BMAdvancedService();
     }
 
     public void info() throws IOException {
@@ -293,12 +292,8 @@ public class UserFilter extends Post {
         executingRequest();
         writeBodyResponseInFile();
         printReqAndResInLog();
-        checkTest();
         if (codeStatusResponse == 200) {
             rootTag = parsingResponseBody();
-            identificationOfOrgData();
-        if (getCodeStatusResponse() == 200) {
-            rootTag = parseXmlBodyResponse();
             identificationOfOrgData();
             parsingDataAndSaveInBD();
             checkTest();
@@ -306,3 +301,4 @@ public class UserFilter extends Post {
         }
     }
 }
+

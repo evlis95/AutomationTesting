@@ -1,6 +1,5 @@
-package com.automation_testing.post_request_type;
+package com.automation_testing.post_request_pattern;
 
-import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.jaxbsettings.CustomCharacterEscapeHandler;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
