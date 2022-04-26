@@ -151,13 +151,16 @@ public class TestRunClassicBox {
         try {
             for (Entry map : requestMap.entrySet())
                 switch (map.getKey().toString()) {
+
                     case "DocNumPaymOrderKonSave",
                             "DocNumPaymOrderKonSign",
                             "DocNumPaymOrderKonSignGo",
                             "DocNumPaymOrderBudSave",
                             "DocNumPaymOrderBudSign",
                             "DocNumPaymOrderBudSignGo" -> new DocumentNumber("PaymentOrder").run();
+
                     case "DocNumCanReq" -> new DocumentNumber("CancellationRequest").run();
+
                     case "DocNumPaymOrderYSSAve",
                             "DocNumPaymOrderYSSign",
                             "DocNumPaymOrderYSSignGo" -> {
@@ -170,6 +173,7 @@ public class TestRunClassicBox {
                             new DocumentNumber("PaymentOrder").run();
                         }
                     }
+
                     case "UserFilter" -> {
                         USER_FILTER.run();
                         if (!Check.checkEnabledD2BMAdvancedService()) {
@@ -221,11 +225,12 @@ public class TestRunClassicBox {
                                 case "PutPaymentOrderDoсYSSign" -> new PutDocAction(DocumentAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER).run();
 
                                 case "PutPaymentOrderDoсYSSignGo" -> new PutDocAction(DocumentAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER).run();
-
                             }
                         }
                     }
+
                     case "AvailableDocument" -> (availableDocument = new AvailableDocument("PaymentOrder", PutDocCHECKCODE.documentBankID)).run();
+
                     case "PutCancellationRequestSignGo" -> (putDoc = new PutDocAction(DocumentAction.SIGN_GO, new CancellationRequest().initialCalReqFields(), DocumentType.CANCELLATION_REQUEST)).run();
                     ////////////////////////////////////////////////////////////////////////////////////
                     default -> {
