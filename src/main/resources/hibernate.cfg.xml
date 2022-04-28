@@ -9,14 +9,18 @@
         <property name="connection.password">sql</property>
 
         <property name="connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
 
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
 
+        <property name="hibernate.current_session_context_class">thread</property>
+
         <mapping class="com.automation_testing.hibernate.pojo.Accounts"/>
         <mapping class="com.automation_testing.hibernate.pojo.Divisions"/>
         <mapping class="com.automation_testing.hibernate.pojo.Organizations"/>
-        <mapping class="com.automation_testing.hibernate.pojo.ServicesMobile"/>
+        <mapping class="com.automation_testing.hibernate.pojo.MobileServices"/>
+        <mapping class="com.automation_testing.hibernate.pojo.PaymentOrder"/>
+
     </session-factory>
 </hibernate-configuration>

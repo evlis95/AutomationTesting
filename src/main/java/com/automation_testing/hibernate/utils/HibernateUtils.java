@@ -14,13 +14,10 @@ public class HibernateUtils {
                 .configure()
                 .build();
         try {
-            sessionFactory = new MetadataSources(registry)
-                    .buildMetadata()
-                    .buildSessionFactory();
-        }
-        catch (Exception e) {
-            System.err.println("Cannot get session factory");
+            sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+        } catch (Exception e) {
             StandardServiceRegistryBuilder.destroy(registry);
+            System.out.println("Исключение - " + e);
         }
     }
 }

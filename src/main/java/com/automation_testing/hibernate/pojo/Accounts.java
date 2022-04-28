@@ -8,9 +8,9 @@ import lombok.Setter;
 
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.List;
-
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @AllArgsConstructor
@@ -18,12 +18,14 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "accounts", schema = "public", catalog = "Automation_testing")
-public class Accounts implements Serializable {
+public class Accounts {
 
     @Id
     private String id;
-    @Column(name = "div_id")
-    private String divID;
+
+    @ManyToOne
+    @JoinColumn(name = "div_id")
+    private Divisions division;
 
     @Column(name = "acc_num")
     private String accNum;
@@ -33,6 +35,23 @@ public class Accounts implements Serializable {
 
     @Column(name = "acc_numerical_code")
     private String accNumericalCode;
+
+    @ManyToOne
+    @JoinColumn(name = "org_id")
+    private Organizations organization;
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Accounts accounts)) return false;
+        return id.equals(accounts.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
 
 }

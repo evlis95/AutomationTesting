@@ -4,6 +4,11 @@ import com.automation_testing.allrequests.authorization.AuthCryptoprofCode;
 import com.automation_testing.allrequests.authorization.UserAccount;
 import com.automation_testing.allrequests.authorization.UserFilter;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocAction;
+import com.automation_testing.hibernate.pojo.Divisions;
+import com.automation_testing.hibernate.pojo.MobileServices;
+import com.automation_testing.hibernate.pojo.PaymentOrder;
+import com.automation_testing.hibernate.service.MobileServicesService;
+import com.automation_testing.hibernate.service.PaymentOrderService;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,7 +25,7 @@ public class Check {
 
     public static void checkCode200(@NotNull Integer value, String nameRequest) throws IOException {
         if (value.equals(200)) {
-           LOG.info(String.format("Проверка кода 200 у ответа на запрос %s - PASS!\n\n", nameRequest));
+            LOG.info(String.format("Проверка кода 200 у ответа на запрос %s - PASS!\n\n", nameRequest));
             quantityPASS++;
         } else {
             LOG.error(String.format("Проверка кода 200 у ответа на запрос %s - FAILED!\n\n", nameRequest));
@@ -28,7 +33,7 @@ public class Check {
         }
     }
 
-    public static boolean checkEnabledD2BMAdvancedService(){
+    public static boolean checkEnabledD2BMAdvancedService() {
         boolean result = false;
         for (int j = 0; j < UserFilter.rootTag.getListV().size(); j++) {
             if (UserFilter.rootTag.getListV().get(j).getAdv().equals("1")) {
@@ -66,15 +71,15 @@ public class Check {
                         }
                     }
                     if (count > 0) {
-                       LOG.info("Проверка на наличие хотя бы одного СП OTP для операции подписи - PASS\n");
+                        LOG.info("Проверка на наличие хотя бы одного СП OTP для операции подписи - PASS\n");
                         quantityPASS++;
                     } else {
-                       LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED\n");
+                        LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED\n");
                         quantityFAILED++;
                     }
                 } else {
                     quantityFAILED++;
-                   LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED\n");
+                    LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED\n");
                 }
             }
         }
@@ -82,7 +87,7 @@ public class Check {
 
     public static void checkCountAvailableSPSign(@NotNull UniversalResponseRootTag rootTag) {
         if (rootTag.getListK() == null & rootTag.getListC() == null) {
-           LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED\n");
+            LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED\n");
             quantityFAILED++;
 
         } else if (rootTag.getListK() != null & rootTag.getListC() == null) {
@@ -93,19 +98,19 @@ public class Check {
                 }
             }
             if (count > 0) {
-               LOG.info("Проверка на наличие хотя бы одного СП OTP для операции подписи - PASS\n");
+                LOG.info("Проверка на наличие хотя бы одного СП OTP для операции подписи - PASS\n");
                 quantityPASS++;
             } else {
-               LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED\n");
+                LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED\n");
 
                 quantityFAILED++;
             }
 
         } else if (rootTag.getListK() == null & rootTag.getListC() != null) {
             if (rootTag.getListC().get(0).getCe().equals("1")) {
-               LOG.warn("Проверка на наличие хотя бы одного СП OTP для операции подписи не проводится, из за наличия жестких контролей\n");
+                LOG.warn("Проверка на наличие хотя бы одного СП OTP для операции подписи не проводится, из за наличия жестких контролей\n");
             } else {
-               LOG.warn("Проверка на наличие хотя бы одного СП OTP для операции подписи не будет проведена из за наличия мягких контролей(данные СП будут в запросе FORCE)\n");
+                LOG.warn("Проверка на наличие хотя бы одного СП OTP для операции подписи не будет проведена из за наличия мягких контролей(данные СП будут в запросе FORCE)\n");
             }
         }
     }
@@ -115,11 +120,11 @@ public class Check {
         if (AuthCryptoprofCode.rootTag.getListS() != null) {
             for (int i = 0; i < AuthCryptoprofCode.rootTag.getListS().size(); i++) {
                 if (AuthCryptoprofCode.rootTag.getListS().get(i).getT().equals("1")) {
-                   LOG.info("Проверка на наличие хотя бы одного СП OTP для операции подписи - PASS\n");
+                    LOG.info("Проверка на наличие хотя бы одного СП OTP для операции подписи - PASS\n");
                     quantityPASS++;
                     break;
                 } else {
-                   LOG.error("Проверка на наличие хотя бы одного СП OTP - FAILED" +
+                    LOG.error("Проверка на наличие хотя бы одного СП OTP - FAILED" +
                             "Тестирование будет прервано");
                     quantityFAILED++;
                     result = false;
@@ -127,9 +132,42 @@ public class Check {
             }
         } else {
             result = false;
-           LOG.error("Проверка на наличие хотя бы одного СП OTP - FAILED" +
+            LOG.error("Проверка на наличие хотя бы одного СП OTP - FAILED" +
                     "Тестирование будет прервано");
             quantityFAILED++;
+        }
+        return result;
+    }
+
+    public static void definitionOfConnServCanReq() {
+        boolean result = false;
+        MobileServicesService ms = new MobileServicesService();
+        List<MobileServices> mobileServicesList = ms.findAllSerMob();
+        for (int i = 0; i < mobileServicesList.size(); i++) {
+            if (mobileServicesList.get(i).getAdv().equals("1") & mobileServicesList.get(i).getReq().equals("1")) {
+                result = true;
+            }
+        }
+        if(result) {
+            LOG.info("Поиск хотя бы 1 подразделения c подключенными услугами D2BM.Adv + D2BM. Запрос на отзыв - PASS.\n");
+            Check.quantityPASS++;
+        } else {
+            LOG.error("Поиск хотя бы 1 подразделения c подключенными услугами D2BM.Adv + D2BM. Запрос на отзыв - FAILED.\n");
+            Check.quantityFAILED++;
+        }
+
+    }
+
+    public static String definingPayOrdIDForCancellReq() {
+        String result = null;
+        PaymentOrderService pos = new PaymentOrderService();
+        List<PaymentOrder> paymentOrderList = pos.findAllPaymentOrder();
+        if (paymentOrderList != null) {
+            for (int i = 0; i < paymentOrderList.size(); i++) {
+                if (paymentOrderList.get(i).getAvailForCanReq().equals("1")) {
+                    result = paymentOrderList.get(i).getDocBankID();
+                }
+            }
         }
         return result;
     }

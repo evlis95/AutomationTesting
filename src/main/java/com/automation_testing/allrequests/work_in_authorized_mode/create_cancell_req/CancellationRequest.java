@@ -7,7 +7,6 @@ import com.automation_testing.allrequests.work_in_authorized_mode.docnumber.Docu
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocAction;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocCHECKCODE;
 import com.automation_testing.checks.Check;
-import com.automation_testing.testruns.TestRunClassicBox;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

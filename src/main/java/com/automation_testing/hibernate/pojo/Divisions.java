@@ -8,6 +8,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Objects;
 
 
 @Entity
@@ -33,5 +35,22 @@ public class Divisions implements Serializable {
     @JoinColumn(name = "org_id")
     private Organizations organization;
 
+    @OneToMany(mappedBy = "division",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Accounts> accountsList;
+
+    @OneToOne(mappedBy = "division", cascade = CascadeType.ALL, orphanRemoval = true)
+    private MobileServices serviceMobile;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Divisions divisions)) return false;
+        return id.equals(divisions.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
 }

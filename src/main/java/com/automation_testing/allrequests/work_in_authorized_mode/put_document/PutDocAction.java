@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 public class PutDocAction extends Post {
+    public static String payerDivisionID;
     public final DocumentType DOC_TYPE;
     public static String documentTypeString;
     private final Map<String, String> MAP_FIELDS_AND_VALUES;
@@ -129,9 +130,13 @@ public class PutDocAction extends Post {
         }
     }
 
+    private void initialPayerDivisionID() {
+        payerDivisionID = MAP_FIELDS_AND_VALUES.get("BranchBankRecordID");
+    }
 
     @Override
     public void run() throws IOException, InterruptedException, JAXBException {
+        initialPayerDivisionID();
         createXmlBodyRequest();
         executingRequest();
         writeBodyResponseInFile();

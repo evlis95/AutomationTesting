@@ -15,8 +15,9 @@ import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.*;
 import com.automation_testing.allrequests.work_in_authorized_mode.docnumber.DocumentNumber;
 import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.CountAllAllDocsDoc;
 import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.HeadersAllDocsDoc;
-import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocCHECKCODE;
 import com.automation_testing.checks.Check;
+import com.automation_testing.hibernate.pojo.MobileServices;
+import com.automation_testing.hibernate.service.MobileServicesService;
 import com.automation_testing.post_request_pattern.Post;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -229,7 +230,12 @@ public class TestRunClassicBox {
                         }
                     }
 
-                    case "AvailableDocument" -> (availableDocument = new AvailableDocument("PaymentOrder", PutDocCHECKCODE.documentBankID)).run();
+                    case "HeadersByDayPayOrd" -> {
+                        Check.definitionOfConnServCanReq();
+                        HEADERS_BY_DAY_PAY_ORD.run();
+                    }
+
+                    case "AvailableDocument" -> (availableDocument = new AvailableDocument("PaymentOrder", Check.definingPayOrdIDForCancellReq())).run();
 
                     case "PutCancellationRequestSignGo" -> (putDoc = new PutDocAction(DocumentAction.SIGN_GO, new CancellationRequest().initialCalReqFields(), DocumentType.CANCELLATION_REQUEST)).run();
                     ////////////////////////////////////////////////////////////////////////////////////

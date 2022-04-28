@@ -200,6 +200,7 @@ public class PaymentOrder {
         ndsPercent = "20.0";
         ndsSystemName = "Vat1";
         paymentType = "2";
+        templateName = "template";
     }
 
     private void payToBudgetInitialVar() {
