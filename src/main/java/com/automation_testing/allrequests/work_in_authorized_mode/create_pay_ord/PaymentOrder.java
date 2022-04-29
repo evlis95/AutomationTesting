@@ -201,6 +201,7 @@ public class PaymentOrder {
         ndsSystemName = "Vat1";
         paymentType = "2";
         templateName = "template";
+        saveTemplate = "1";
     }
 
     private void payToBudgetInitialVar() {

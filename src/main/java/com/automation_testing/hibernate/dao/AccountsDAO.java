@@ -1,12 +1,13 @@
 package com.automation_testing.hibernate.dao;
 
+import com.automation_testing.hibernate.interfaces.CRUDable;
 import com.automation_testing.hibernate.pojo.Accounts;
 import com.automation_testing.hibernate.utils.HibernateUtils;
 import org.hibernate.Session;
 
 import java.util.List;
 
-public class AccountsDAO {
+public class AccountsDAO implements CRUDable<Accounts> {
 
 
     public Accounts findById(String id) {
@@ -28,6 +29,31 @@ public class AccountsDAO {
         session.getTransaction().commit();
         session.close();
     }
+
+    public void save(Accounts account) {
+        Session session = HibernateUtils.sessionFactory.getCurrentSession();
+        session.getTransaction().begin();
+        session.save(account);
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public void merge(Accounts account) {
+        Session session = HibernateUtils.sessionFactory.getCurrentSession();
+        session.getTransaction().begin();
+        session.merge(account);
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public void update(Accounts account) {
+        Session session = HibernateUtils.sessionFactory.getCurrentSession();
+        session.getTransaction().begin();
+        session.update(account);
+        session.getTransaction().commit();
+        session.close();
+    }
+
 
     public List<Accounts> findAll() {
         return (List<Accounts>) HibernateUtils.sessionFactory.openSession().createQuery("From Accounts ").list();

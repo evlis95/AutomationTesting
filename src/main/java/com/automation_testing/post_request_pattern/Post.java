@@ -77,7 +77,7 @@ public abstract class Post {
 
     protected abstract void createXmlBodyRequest() throws JAXBException, IOException;
 
-    protected abstract void checkTest() throws IOException;
+    protected abstract void checkTest() throws IOException, JAXBException;
 
     protected void printReqAndResInLog() throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(PATH_REQUEST_BODY));

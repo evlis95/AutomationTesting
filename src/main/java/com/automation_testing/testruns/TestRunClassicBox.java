@@ -15,6 +15,8 @@ import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.*;
 import com.automation_testing.allrequests.work_in_authorized_mode.docnumber.DocumentNumber;
 import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.CountAllAllDocsDoc;
 import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.HeadersAllDocsDoc;
+import com.automation_testing.allrequests.work_in_authorized_mode.template.GetTemplate;
+import com.automation_testing.allrequests.work_in_authorized_mode.template.TemplateHeadersPayOrd;
 import com.automation_testing.checks.Check;
 import com.automation_testing.hibernate.pojo.MobileServices;
 import com.automation_testing.hibernate.service.MobileServicesService;
@@ -67,6 +69,8 @@ public class TestRunClassicBox {
     final CountAllAllDocsDoc COUNT_ALL_MY_DOCS = new CountAllAllDocsDoc();
     final HeadersAllDocsDoc HEADERS_ALL_DOCS_OF_MY_DOCS = new HeadersAllDocsDoc();
     final HeadersByDayPayOrd HEADERS_BY_DAY_PAY_ORD = new HeadersByDayPayOrd();
+    final TemplateHeadersPayOrd TEMPLATE_HEADERS_PAY_ORD = new TemplateHeadersPayOrd();
+    public static GetTemplate getTemplate;
     public static AvailableDocument availableDocument;
     public static PutDocAction putDoc;
     public static DocumentNumber docNumber;
@@ -147,6 +151,9 @@ public class TestRunClassicBox {
         requestMap.put("AvailableDocument", availableDocument);
         requestMap.put("DocNumCanReq", docNumber);
         requestMap.put("PutCancellationRequestSignGo", putDoc);
+        // справочник шаблонов платежей и запрос на получение созданного шаблона(указанного в ПП Контрагенту(поле TemplateName))
+        requestMap.put("TemplateHeadersPaymentOrder", TEMPLATE_HEADERS_PAY_ORD);
+        requestMap.put("GetTemplate", getTemplate);
 
         LOG.info("Teстирование выполняется\n");
         try {
@@ -238,6 +245,9 @@ public class TestRunClassicBox {
                     case "AvailableDocument" -> (availableDocument = new AvailableDocument("PaymentOrder", Check.definingPayOrdIDForCancellReq())).run();
 
                     case "PutCancellationRequestSignGo" -> (putDoc = new PutDocAction(DocumentAction.SIGN_GO, new CancellationRequest().initialCalReqFields(), DocumentType.CANCELLATION_REQUEST)).run();
+
+                    case "GetTemplate" -> (getTemplate = new GetTemplate(TemplateHeadersPayOrd.templateID)).run();
+
                     ////////////////////////////////////////////////////////////////////////////////////
                     default -> {
                         Post post = (Post) map.getValue();

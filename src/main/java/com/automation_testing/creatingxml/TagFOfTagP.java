@@ -21,7 +21,14 @@ public class TagFOfTagP {
     @XmlAttribute
     private String e;
     @XmlElement(name = "s")
-    List<TagSOfTagF> listS;
+    private List<TagSOfTagF> listS;
+    @XmlElement(name = "a")
+    private List<TagAOfTagF> listA;
+    @XmlElement(name = "g")
+    private TagGOfTagF tagG;
+    @XmlElement(name = "t")
+    private TagTOfTagF tagT;
+
 
     public TagFOfTagP(String b, String e) {
         this.b = b;
