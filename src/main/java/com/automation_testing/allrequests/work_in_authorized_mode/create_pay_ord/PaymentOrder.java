@@ -6,11 +6,11 @@ import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.Get
 import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.GetFullBankRu;
 import com.automation_testing.allrequests.work_in_authorized_mode.docnumber.DocumentNumber;
 import lombok.Getter;
-import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+
 @Getter
 public class PaymentOrder {
     private final PaymentOrderTarget PAY_ORD_TARGET;

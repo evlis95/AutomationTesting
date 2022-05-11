@@ -296,8 +296,6 @@ public class UserFilter extends Post {
     public void run() throws IOException, InterruptedException, JAXBException {
         createXmlBodyRequest();
         executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
         if (codeStatusResponse == 200) {
             rootTag = unmarshalling();
             identificationOfOrgData();

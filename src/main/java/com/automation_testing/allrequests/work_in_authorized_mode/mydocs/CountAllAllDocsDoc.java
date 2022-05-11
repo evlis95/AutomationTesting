@@ -3,12 +3,12 @@ package com.automation_testing.allrequests.work_in_authorized_mode.mydocs;
 import com.automation_testing.allrequests.authorization.AuthLogin;
 import com.automation_testing.allrequests.authorization.UserFilter;
 import com.automation_testing.checks.Check;
-import com.automation_testing.post_request_pattern.Post;
 import com.automation_testing.creatingxml.TagFOfTagP;
 import com.automation_testing.creatingxml.TagPOfUnivReq;
 import com.automation_testing.creatingxml.TagTOfTagP;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
+import com.automation_testing.post_request_pattern.Post;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,9 +20,9 @@ import java.util.List;
 import java.util.Set;
 
 public class CountAllAllDocsDoc extends Post {
+    public static UniversalResponseRootTag rootTag;
     private final Logger LOG = LogManager.getLogger(CountAllAllDocsDoc.class);
     private int tagTQuantity;
-    public static UniversalResponseRootTag rootTag;
 
     @Override
     protected void checkTest() throws IOException {
@@ -117,15 +117,10 @@ public class CountAllAllDocsDoc extends Post {
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
         if (codeStatusResponse == 200) {
-            rootTag = unmarshalling();
-
+            rootTag = Post.rootTag;
             if (rootTag.getListD() != null) {
                 if (tagTQuantity == rootTag.getListD().size()) {
                     LOG.info("Проверка количества пришедших типов документов в ответе на запрос CountAllAllDocsDoc, в зависимости от тех, которые ушли в запросе - PASS\n");
@@ -135,7 +130,6 @@ public class CountAllAllDocsDoc extends Post {
                     Check.quantityFAILED++;
                 }
             }
-
         }
     }
 }

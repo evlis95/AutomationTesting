@@ -14,8 +14,8 @@ import java.io.IOException;
 
 public class BindManageDevice extends Post {
 
-    public static boolean resultBinding;
     final static Logger LOG = LogManager.getLogger(BindManageDevice.class);
+    public static boolean resultBinding;
     public static UniversalResponseRootTag rootTag;
     private final CrypProfCodeManagDev MANAGE_DEVICE = new CrypProfCodeManagDev();
     private final SmsCodeManageDev SMS_CODE_MANAGE_DEVICE = new SmsCodeManageDev();
@@ -67,14 +67,10 @@ public class BindManageDevice extends Post {
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
         if (codeStatusResponse == 200) {
-            rootTag = unmarshalling();
+            rootTag = Post.rootTag;
             bindingDevice();
         }
     }

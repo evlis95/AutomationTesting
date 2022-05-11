@@ -55,15 +55,11 @@ public class UnBindManageDevice extends Post {
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
+    public void run() throws JAXBException, IOException, InterruptedException {
         GET_DICT_MAN_DEV.run();
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
-        if (codeStatusResponse == 200) {
-            rootTag = unmarshalling();
+        super.run();
+        if(codeStatusResponse == 200) {
+            rootTag = Post.rootTag;
             unbindingAndBindingDevice();
         }
     }

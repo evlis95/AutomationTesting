@@ -21,10 +21,10 @@ import java.util.Map;
 
 public class PutDocAction extends Post {
     public static String payerDivisionID;
-    public final DocumentType DOC_TYPE;
     public static String documentTypeString;
-    private final Map<String, String> MAP_FIELDS_AND_VALUES;
     public static UniversalResponseRootTag rootTag;
+    public final DocumentType DOC_TYPE;
+    private final Map<String, String> MAP_FIELDS_AND_VALUES;
     private final Logger LOG = LogManager.getLogger(PutDocAction.class);
     private final DocumentAction DOC_ACTION;
     private String documentID;
@@ -134,7 +134,7 @@ public class PutDocAction extends Post {
         payerDivisionID = MAP_FIELDS_AND_VALUES.get("BranchBankRecordID");
     }
 
-    @Override
+/*    @Override
     public void run() throws IOException, InterruptedException, JAXBException {
         initialPayerDivisionID();
         createXmlBodyRequest();
@@ -164,6 +164,8 @@ public class PutDocAction extends Post {
                 info();
             }
         }
+
+
 
         switch (DOC_TYPE) {
             case PAYMENT_ORDER -> {
@@ -196,8 +198,67 @@ public class PutDocAction extends Post {
             }
         }
 
-    }
+    }*/
 
+    @Override
+    public void run() throws JAXBException, IOException, InterruptedException {
+        initialPayerDivisionID();
+        super.run();
+        if (codeStatusResponse == 200) {
+            rootTag = Post.rootTag;
+            if (rootTag.getListC() != null) {
+                if (rootTag.getListC().get(0).getCe().equals("1")) {
+                    documentID = rootTag.getListF().get(0).getD();
+                    docNumber = rootTag.getListF().get(0).getN();
+                    Check.quantityFAILED++;
+                } else {
+                    documentID = rootTag.getListF().get(0).getD();
+                    documentStatusCode = rootTag.getListF().get(0).getS();
+                    docNumber = rootTag.getListF().get(0).getN();
+                    documentBankID = rootTag.getListF().get(0).getI();
+                }
+                info();
+            } else {
+                documentID = rootTag.getListF().get(0).getD();
+                documentStatusCode = rootTag.getListF().get(0).getS();
+                docNumber = rootTag.getListF().get(0).getN();
+                documentBankID = rootTag.getListF().get(0).getI();
+                info();
+            }
+        }
+
+
+        switch (DOC_TYPE) {
+            case PAYMENT_ORDER -> {
+                if (DOC_ACTION.toString().equals("SIGN")) {
+                    messPass = "ПП успешно подписано";
+                } else {
+                    messPass = "ПП успешно подписано и отправлено";
+                }
+            }
+            case CANCELLATION_REQUEST -> {
+                if (DOC_ACTION.toString().equals("SIGN")) {
+                    messPass = "Документ запроса на отзыв успешно подписан";
+                } else {
+                    messPass = "Документ запроса на отзыв успешно подписан и отправлен";
+                }
+            }
+
+        }
+        switch (DOC_ACTION) {
+            case SAVE -> {
+                new ExecutingSaveDoc().executing();
+            }
+            case SIGN -> {
+                statusCodeForCheck = "6";
+                new ExecutingSignAndSignGoDoc().executing();
+            }
+            case SIGN_GO -> {
+                statusCodeForCheck = "43";
+                new ExecutingSignAndSignGoDoc().executing();
+            }
+        }
+    }
 
     private class ExecutingSaveDoc {
         PutDocFORCE force;
@@ -233,7 +294,7 @@ public class PutDocAction extends Post {
                     Check.checkCountAvailableSPSign(rootTag);
                     force = new PutDocFORCE(documentID);
                     force.run();
-                    Check.checkCountAvailableSPForce(force.getRootTag());
+                    Check.checkCountAvailableSPForce(PutDocFORCE.rootTag);
                     dataForSign = new PutDocDATAFORSIGN(force.getRootTag(), documentID);
                     dataForSign.run();
 

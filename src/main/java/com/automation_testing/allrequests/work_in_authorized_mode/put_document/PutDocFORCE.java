@@ -14,7 +14,7 @@ public class PutDocFORCE extends Post {
 
     private final String DOC_ID;
     private String documentBankID;
-    private UniversalResponseRootTag rootTag;
+    public static UniversalResponseRootTag rootTag;
 
     public UniversalResponseRootTag getRootTag() {
         return rootTag;
@@ -48,17 +48,12 @@ public class PutDocFORCE extends Post {
         marshalling(force);
     }
 
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
-        if (codeStatusResponse == 200) {
-            rootTag = unmarshalling();
+    @Override
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
+        if(codeStatusResponse == 200) {
+            rootTag = Post.rootTag;
             documentBankID = rootTag.getListF().get(0).getI();
         }
     }
-
-
 }

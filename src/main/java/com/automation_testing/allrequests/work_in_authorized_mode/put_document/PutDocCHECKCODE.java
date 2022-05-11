@@ -1,33 +1,33 @@
 package com.automation_testing.allrequests.work_in_authorized_mode.put_document;
 
 import com.automation_testing.allrequests.authorization.AuthLogin;
-
 import com.automation_testing.checks.Check;
-
 import com.automation_testing.creatingxml.TagReqActOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
-import com.automation_testing.hibernate.pojo.PaymentOrder;
 import com.automation_testing.hibernate.pojo.MobileServices;
-import com.automation_testing.hibernate.service.PaymentOrderService;
+import com.automation_testing.hibernate.pojo.PaymentOrder;
 import com.automation_testing.hibernate.service.MobileServicesService;
+import com.automation_testing.hibernate.service.PaymentOrderService;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.xml.bind.JAXBException;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.StringReader;
 
 public class PutDocCHECKCODE extends Post {
-    private final Logger LOG = LogManager.getLogger(PutDocCHECKCODE.class);
-    private final String NAME_REQ_AND_ACT_FOR_LOG;
-    private final String DOC_ID;
-    private final String STA_CODE_FOR_CHECK;
     public static String documentBankID;
     //реквизиты сохраненного ПП
     public static String documentStatusCode;
     public static String documentNumber;
     public static UniversalResponseRootTag rootTag;
+    private final Logger LOG = LogManager.getLogger(PutDocCHECKCODE.class);
+    private final String NAME_REQ_AND_ACT_FOR_LOG;
+    private final String DOC_ID;
+    private final String STA_CODE_FOR_CHECK;
 
     public PutDocCHECKCODE(String nameRequestAndActionForLog, String documentID, String statusCodeForCheck) {
         this.NAME_REQ_AND_ACT_FOR_LOG = nameRequestAndActionForLog;
@@ -99,14 +99,11 @@ public class PutDocCHECKCODE extends Post {
         pos.saveOrUpdatePaymentOrder(paymentOrder);
     }
 
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
+    @Override
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
         if (codeStatusResponse == 200) {
-            rootTag = unmarshalling();
+            rootTag = Post.rootTag;
             initializationFields();
             if (PutDocAction.documentTypeString.equals("PaymentOrder")) {
                 writingPayOrdToDB();
