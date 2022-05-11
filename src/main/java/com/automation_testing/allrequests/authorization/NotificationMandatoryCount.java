@@ -48,7 +48,7 @@ public class NotificationMandatoryCount extends Post {
         listP.add(tagP);
         mandatoryCount.setListP(listP);
 
-        marshallSetting(mandatoryCount);
+        marshalling(mandatoryCount);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class NotificationMandatoryCount extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

@@ -26,7 +26,7 @@ public class GetDictCustomerKPP extends Post {
         cusKPP.setN("customerkpp");
         cusKPP.setV(1.0);
         cusKPP.setS(AuthLogin.sessionID);
-        marshallSetting(cusKPP);
+        marshalling(cusKPP);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class GetDictCustomerKPP extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

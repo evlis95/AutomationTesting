@@ -21,7 +21,7 @@ public class Localization extends Post {
         localization.setN("localization");
         localization.setV(1.0);
         localization.setTagP(new TagPOfUnivReq("IDEA", "", ""));
-        marshallSetting(localization);
+        marshalling(localization);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class Localization extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

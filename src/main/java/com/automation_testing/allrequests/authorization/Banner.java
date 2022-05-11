@@ -26,7 +26,7 @@ public class Banner extends Post {
         banner.setV(1.0);
         banner.setS(AuthLogin.sessionID);
 
-        marshallSetting(banner);
+        marshalling(banner);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class Banner extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

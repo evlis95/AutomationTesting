@@ -26,7 +26,7 @@ public class GetDictPaySendType extends Post {
         paySendType.setN("paysendtype");
         paySendType.setV(1.0);
         paySendType.setS(AuthLogin.sessionID);
-        marshallSetting(paySendType);
+        marshalling(paySendType);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class GetDictPaySendType extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

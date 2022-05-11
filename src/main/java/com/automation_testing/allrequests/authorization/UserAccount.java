@@ -26,7 +26,7 @@ public class UserAccount extends Post {
         userAccount.setV(3.1);
         userAccount.setS(AuthLogin.sessionID);
 
-        marshallSetting(userAccount);
+        marshalling(userAccount);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class UserAccount extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
             parsingDataAndSaveInBD();
         }
     }

@@ -26,7 +26,7 @@ public class TooltipPaymentOrder extends Post {
         tooltip.setN("PaymentOrder");
         tooltip.setV(1.0);
         tooltip.setS(AuthLogin.sessionID);
-        marshallSetting(tooltip);
+        marshalling(tooltip);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class TooltipPaymentOrder extends Post {
         writeBodyResponseInFile();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

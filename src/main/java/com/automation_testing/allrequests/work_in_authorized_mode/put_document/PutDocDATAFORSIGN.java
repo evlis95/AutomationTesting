@@ -57,7 +57,7 @@ public class PutDocDATAFORSIGN extends Post {
                 dataForSign.setU(documentUIDSP);
             }
         }
-        marshallSetting(dataForSign);
+        marshalling(dataForSign);
     }
 
     private void info() throws IOException {
@@ -81,7 +81,7 @@ public class PutDocDATAFORSIGN extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
             info();
         }
     }

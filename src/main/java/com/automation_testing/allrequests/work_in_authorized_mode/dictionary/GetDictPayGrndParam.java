@@ -27,7 +27,7 @@ public class GetDictPayGrndParam extends Post {
         payGRND.setN("paygrndparam");
         payGRND.setV(1.0);
         payGRND.setS(AuthLogin.sessionID);
-        marshallSetting(payGRND);
+        marshalling(payGRND);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class GetDictPayGrndParam extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

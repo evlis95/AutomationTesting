@@ -36,7 +36,7 @@ public class GetFilterPartBankRu extends Post {
         tagP.setP("0");
         listP.add(tagP);
         getFilterPart.setListP(listP);
-        marshallSetting(getFilterPart);
+        marshalling(getFilterPart);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class GetFilterPartBankRu extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-                rootTag = parsingResponseBody();
+                rootTag = unmarshalling();
             }
     }
 }

@@ -45,7 +45,7 @@ public class PutDocFORCE extends Post {
         tagReqAct.setV("FORCE");
         tagReqAct.setDocID(DOC_ID);
         force.setTagReqAct(tagReqAct);
-        marshallSetting(force);
+        marshalling(force);
     }
 
     public void run() throws IOException, InterruptedException, JAXBException {
@@ -55,7 +55,7 @@ public class PutDocFORCE extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
             documentBankID = rootTag.getListF().get(0).getI();
         }
     }

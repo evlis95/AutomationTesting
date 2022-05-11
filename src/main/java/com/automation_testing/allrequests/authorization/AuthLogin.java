@@ -33,7 +33,7 @@ public class AuthLogin extends Post {
 
         listP.add(tagP);
         authLogin.setListP(listP);
-        marshallSetting(authLogin);
+        marshalling(authLogin);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class AuthLogin extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
             sessionID = rootTag.getListS().get(0).getV();
         }
     }

@@ -37,7 +37,7 @@ public class GetFullBankRu extends Post {
         getFull.setS(AuthLogin.sessionID);
         tagP.setD("044525700");
         getFull.setTagP(tagP);
-        marshallSetting(getFull);
+        marshalling(getFull);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class GetFullBankRu extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
             receiverBankName = rootTag.getListR().get(0).getX();
             receiverBIC = rootTag.getListR().get(0).getD();
             receiverCorrAcc = rootTag.getListR().get(0).getTagCorrAcc().get(0).getA();

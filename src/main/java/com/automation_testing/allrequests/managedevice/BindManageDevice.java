@@ -35,7 +35,7 @@ public class BindManageDevice extends Post {
         device.setV(1.0);
         device.setS(AuthLogin.sessionID);
         device.setTagP(new TagPOfUnivReq("d8eb432fb028c2b3"));
-        marshallSetting(device);
+        marshalling(device);
     }
 
     private void bindingDevice() throws JAXBException, IOException, InterruptedException {
@@ -74,7 +74,7 @@ public class BindManageDevice extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
             bindingDevice();
         }
     }

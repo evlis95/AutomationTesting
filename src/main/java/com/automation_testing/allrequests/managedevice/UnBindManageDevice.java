@@ -37,7 +37,7 @@ public class UnBindManageDevice extends Post {
         TagPOfUnivReq tagP = new TagPOfUnivReq();
         tagP.setA(GetDictManageDevList.deviceBankID);
         device.setTagP(tagP);
-        marshallSetting(device);
+        marshalling(device);
     }
 
     private void unbindingAndBindingDevice() throws JAXBException, IOException, InterruptedException {
@@ -63,7 +63,7 @@ public class UnBindManageDevice extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
             unbindingAndBindingDevice();
         }
     }

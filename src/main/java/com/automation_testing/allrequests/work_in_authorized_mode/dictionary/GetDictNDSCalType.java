@@ -26,7 +26,7 @@ public class GetDictNDSCalType extends Post {
         ndsCalType.setN("ndscalculationtype");
         ndsCalType.setV(1.0);
         ndsCalType.setS(AuthLogin.sessionID);
-        marshallSetting(ndsCalType);
+        marshalling(ndsCalType);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class GetDictNDSCalType extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

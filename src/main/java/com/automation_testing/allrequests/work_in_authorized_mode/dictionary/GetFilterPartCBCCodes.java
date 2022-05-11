@@ -32,7 +32,7 @@ public class GetFilterPartCBCCodes extends Post {
         tagP.setD("18210101011011000110");
         tagP.setP("0");
         cbcCodes.setTagP(tagP);
-        marshallSetting(cbcCodes);
+        marshalling(cbcCodes);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class GetFilterPartCBCCodes extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
             cbcCodeValue = rootTag.getListP().get(0).getListR().get(0).getD();
         }
     }

@@ -31,7 +31,7 @@ public class Style40 extends Post {
         tagAbout.setW("auto");
         style40.setTagAbout(tagAbout);
         style40.setTagHash("");
-        marshallSetting(style40);
+        marshalling(style40);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class Style40 extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

@@ -70,7 +70,7 @@ public class StatementDocsByDay extends Post {
         listP.add(tagP);
         statementDocs.setListP(listP);
 
-        marshallSetting(statementDocs);
+        marshalling(statementDocs);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class StatementDocsByDay extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 

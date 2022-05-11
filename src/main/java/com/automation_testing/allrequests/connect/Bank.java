@@ -28,7 +28,7 @@ public class Bank extends Post {
         bank.setN("bank");
         bank.setV(6.0);
         bank.setTagP(new TagPOfUnivReq("xhdpi", "0"));
-        marshallSetting(bank);
+        marshalling(bank);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class Bank extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

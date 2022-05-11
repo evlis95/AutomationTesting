@@ -32,7 +32,7 @@ public class SmsAuthCode extends Post {
                 break;
             }
         }
-        marshallSetting(smsAuthCode);
+        marshalling(smsAuthCode);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class SmsAuthCode extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

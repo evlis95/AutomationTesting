@@ -39,7 +39,7 @@ public class GetDocument extends Post {
         docNum.setS(AuthLogin.sessionID);
         tagP.setI(documentBankID);
         docNum.setTagP(tagP);
-        marshallSetting(docNum);
+        marshalling(docNum);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class GetDocument extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 

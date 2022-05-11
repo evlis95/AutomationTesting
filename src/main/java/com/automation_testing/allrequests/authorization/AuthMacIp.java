@@ -49,7 +49,7 @@ public class AuthMacIp extends Post {
         listP.add(tagP);
         authMacip.setListP(listP);
 
-        marshallSetting(authMacip);
+        marshalling(authMacip);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class AuthMacIp extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

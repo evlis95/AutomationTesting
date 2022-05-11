@@ -37,7 +37,7 @@ public class GetTemplate extends Post {
         TagPOfUnivReq tagP = new TagPOfUnivReq(templateID);
         rootTagRequest.setTagP(tagP);
 
-        marshallSetting(rootTagRequest);
+        marshalling(rootTagRequest);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class GetTemplate extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

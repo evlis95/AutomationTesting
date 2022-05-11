@@ -26,7 +26,7 @@ public class MenuItem extends Post {
         menuItem.setV(1.0);
         menuItem.setS(AuthLogin.sessionID);
 
-        marshallSetting(menuItem);
+        marshalling(menuItem);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class MenuItem extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

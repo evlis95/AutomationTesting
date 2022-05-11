@@ -34,7 +34,7 @@ public abstract class Post {
     private final String PATH_RESPONSE_BODY = ".\\src\\main\\java\\com\\automation_testing\\xmlfile\\response.xml";
     private final String PATH_REQUEST_BODY = ".\\src\\main\\java\\com\\automation_testing\\xmlfile\\request.xml";
 
-    protected void marshallSetting(UniversalRequestRootTag rootTag) throws JAXBException {
+    protected void marshalling(UniversalRequestRootTag rootTag) throws JAXBException {
         JAXBContext jcCreate = JAXBContext.newInstance(UniversalRequestRootTag.class);
         Marshaller marshaller = jcCreate.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
@@ -43,7 +43,7 @@ public abstract class Post {
         marshaller.marshal(rootTag, new File(PATH_REQUEST_BODY));
     }
 
-    protected UniversalResponseRootTag parsingResponseBody() throws JAXBException {
+    protected UniversalResponseRootTag unmarshalling() throws JAXBException {
         JAXBContext jcParse = JAXBContext.newInstance(UniversalResponseRootTag.class);
         Unmarshaller unmarshall = jcParse.createUnmarshaller();
         return (UniversalResponseRootTag) unmarshall.unmarshal(new File(PATH_RESPONSE_BODY));

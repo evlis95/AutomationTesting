@@ -25,7 +25,7 @@ public class AuthCryptoprofCode extends Post {
         authCryProCode.setN("code");
         authCryProCode.setV(1.0);
         authCryProCode.setS(AuthLogin.sessionID);
-        marshallSetting(authCryProCode);
+        marshalling(authCryProCode);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class AuthCryptoprofCode extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

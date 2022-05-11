@@ -36,7 +36,7 @@ public class GetDictMessageType extends Post {
         tagP.setG(UserFilter.rootTag.getListC().get(0).getI());
         listP.add(tagP);
         messType.setListP(listP);
-        marshallSetting(messType);
+        marshalling(messType);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class GetDictMessageType extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

@@ -36,7 +36,7 @@ public class SendCodeManageDev extends Post {
         TagPOfUnivReq tagP = new TagPOfUnivReq();
         tagP.setC("1");
         device.setTagP(tagP);
-        marshallSetting(device);
+        marshalling(device);
     }
 
     private void info() {
@@ -59,7 +59,7 @@ public class SendCodeManageDev extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
             info();
         }
     }

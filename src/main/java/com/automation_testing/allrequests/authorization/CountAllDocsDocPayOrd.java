@@ -62,7 +62,7 @@ public class CountAllDocsDocPayOrd extends Post {
 
         countAllDocs.setListP(listP);
 
-        marshallSetting(countAllDocs);
+        marshalling(countAllDocs);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class CountAllDocsDocPayOrd extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

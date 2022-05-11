@@ -66,7 +66,7 @@ public class HeadersByDayPayOrd extends Post {
         TagFOfTagP tagF = new TagFOfTagP("0", "0", listS);
         headersByDay.setTagP(new TagPOfUnivReq("0", UserFilter.orgId, listA, tagF));
 
-        marshallSetting(headersByDay);
+        marshalling(headersByDay);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class HeadersByDayPayOrd extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

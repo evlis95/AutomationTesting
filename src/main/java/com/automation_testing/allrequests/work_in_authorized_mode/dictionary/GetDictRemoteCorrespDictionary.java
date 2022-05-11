@@ -27,7 +27,7 @@ public class GetDictRemoteCorrespDictionary extends Post {
         getDictRemoteCorr.setN("remotecorresp");
         getDictRemoteCorr.setV(1.0);
         getDictRemoteCorr.setS(AuthLogin.sessionID);
-        marshallSetting(getDictRemoteCorr);
+        marshalling(getDictRemoteCorr);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class GetDictRemoteCorrespDictionary extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

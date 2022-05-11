@@ -113,7 +113,7 @@ public class CountAllAllDocsDoc extends Post {
         List<TagTOfTagP> listTOfTagP = new ArrayList<>(setTOfTagP);
         tagP.setListT(listTOfTagP);
         countAll.setTagP(tagP);
-        marshallSetting(countAll);
+        marshalling(countAll);
     }
 
     @Override
@@ -124,7 +124,7 @@ public class CountAllAllDocsDoc extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
 
             if (rootTag.getListD() != null) {
                 if (tagTQuantity == rootTag.getListD().size()) {

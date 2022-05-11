@@ -46,7 +46,7 @@ public class DocumentNumber extends Post {
         tagP.setA(createTime());
         tagP.setB(UserFilter.rootTag.getListC().get(0).getI());
         docNum.setTagP(tagP);
-        marshallSetting(docNum);
+        marshalling(docNum);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class DocumentNumber extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
             docNum = rootTag.getListF().get(0).getV();
         }
 

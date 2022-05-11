@@ -64,7 +64,7 @@ public class HeadersAllDocsDoc extends Post {
         TagPOfUnivReq tagP = new TagPOfUnivReq(UserFilter.orgId, "0", setTagT, listF);
 
         headers.setTagP(tagP);
-        marshallSetting(headers);
+        marshalling(headers);
     }
 
     private void checkAvailabilityDocPayOrdInRes() {
@@ -180,7 +180,7 @@ public class HeadersAllDocsDoc extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
             checkAvailabilityDocPayOrdInRes();
         }
     }

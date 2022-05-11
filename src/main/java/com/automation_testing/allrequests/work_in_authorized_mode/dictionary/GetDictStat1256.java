@@ -28,7 +28,7 @@ public class GetDictStat1256 extends Post {
         stat1256.setV(1.0);
         stat1256.setS(AuthLogin.sessionID);
 
-        marshallSetting(stat1256);
+        marshalling(stat1256);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class GetDictStat1256 extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

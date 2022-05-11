@@ -44,7 +44,7 @@ public class AvailableDocument extends Post {
         tagP.setB(DOC_TYPE);
 
         available.setTagP(tagP);
-        marshallSetting(available);
+        marshalling(available);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class AvailableDocument extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
             result = rootTag.getListF().get(0).getV();
 
             if (result.equals("1")) {

@@ -24,7 +24,7 @@ public class VersionInfo extends Post {
         versionInfo.setC("getdict");
         versionInfo.setN("versionsinfo");
         versionInfo.setV(1.0);
-        marshallSetting(versionInfo);
+        marshalling(versionInfo);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class VersionInfo extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTagA = parsingResponseBody();
+            rootTagA = unmarshalling();
         }
     }
 }

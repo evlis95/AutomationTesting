@@ -37,7 +37,7 @@ public class UserFilter extends Post {
         userFilter.setV(5.0);
         userFilter.setS(AuthLogin.sessionID);
 
-        marshallSetting(userFilter);
+        marshalling(userFilter);
     }
 
     @Override
@@ -299,7 +299,7 @@ public class UserFilter extends Post {
         writeBodyResponseInFile();
         printReqAndResInLog();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
             identificationOfOrgData();
             parsingDataAndSaveInBD();
             checkTest();

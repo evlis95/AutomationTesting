@@ -27,7 +27,7 @@ public class GetDictManageDevList extends Post {
         device.setN("managedevicelist");
         device.setV(1.0);
         device.setS(AuthLogin.sessionID);
-        marshallSetting(device);
+        marshalling(device);
     }
 
     private void definingDeviceBankID() {
@@ -47,7 +47,7 @@ public class GetDictManageDevList extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
             definingDeviceBankID();
         }
     }

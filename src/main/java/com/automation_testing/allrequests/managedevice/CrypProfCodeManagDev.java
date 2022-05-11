@@ -30,7 +30,7 @@ public class CrypProfCodeManagDev extends Post {
         device.setN("code");
         device.setV(1.0);
         device.setS(AuthLogin.sessionID);
-        marshallSetting(device);
+        marshalling(device);
     }
 
     private void definingSPID() {
@@ -54,7 +54,7 @@ public class CrypProfCodeManagDev extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
             definingSPID();
         }
     }

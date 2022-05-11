@@ -43,7 +43,7 @@ public class SendAuthCode extends Post {
         listP.add(tagP);
         sendAuthCode.setListP(listP);
 
-        marshallSetting(sendAuthCode);
+        marshalling(sendAuthCode);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class SendAuthCode extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

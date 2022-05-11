@@ -46,7 +46,7 @@ public class TemplateHeadersPayOrd extends Post {
         tagP.setTagF(tagF);
         rootReqTag.setTagP(tagP);
 
-        marshallSetting(rootReqTag);
+        marshalling(rootReqTag);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class TemplateHeadersPayOrd extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
             definitionTemplateID();
         }
     }

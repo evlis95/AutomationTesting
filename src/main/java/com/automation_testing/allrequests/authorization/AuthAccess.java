@@ -26,7 +26,7 @@ public class AuthAccess extends Post {
         authAccess.setV(1.0);
         authAccess.setS(AuthLogin.sessionID);
 
-        marshallSetting(authAccess);
+        marshalling(authAccess);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class AuthAccess extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

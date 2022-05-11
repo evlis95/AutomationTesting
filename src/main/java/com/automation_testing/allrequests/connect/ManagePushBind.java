@@ -37,7 +37,7 @@ public class ManagePushBind extends Post {
         tagP.setPcpushid("cBPV8WtMQAqGVBFpqNrZgZ:APA91bHxg5Eg6ArcYsCwl4V10DOe-OSRQ3iJzEqLiNMfYe0JmXNh09fmlcgKtbrljbcAO6WsGX-AL3Ai-ROnAsPcPiTc8T1R-4x-YGFYmnkjiw-ucg91IsoAf7hL4sUtPvOuB86d0Bk_");
         tagP.setPushid("cBPV8WtMQAqGVBFpqNrZgZ:APA91bFpVr7dMTAnwgYO6Uwvyor5OOBQjS2Eq45PC3wwL1-8GgFe24tI7E_NG75BC0FLAoaCQmH_Csfw8AW9UnX3rYxdTTwy1DLvgMgTCEFngy2ZnLlX7qW-zBxBpkqgNJjSy3CuE2nN");
         managePushBind.setTagP(tagP);
-        marshallSetting(managePushBind);
+        marshalling(managePushBind);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class ManagePushBind extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

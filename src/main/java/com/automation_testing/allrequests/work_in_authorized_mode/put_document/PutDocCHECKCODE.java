@@ -58,7 +58,7 @@ public class PutDocCHECKCODE extends Post {
         tagReqAct.setV("CHECKCODE");
         tagReqAct.setDocID(DOC_ID);
         checkCode.setTagReqAct(tagReqAct);
-        marshallSetting(checkCode);
+        marshalling(checkCode);
     }
 
     private void info() throws IOException {
@@ -106,7 +106,7 @@ public class PutDocCHECKCODE extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
             initializationFields();
             if (PutDocAction.documentTypeString.equals("PaymentOrder")) {
                 writingPayOrdToDB();

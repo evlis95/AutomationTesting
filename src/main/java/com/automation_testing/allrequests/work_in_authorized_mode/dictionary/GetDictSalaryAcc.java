@@ -26,7 +26,7 @@ public class GetDictSalaryAcc extends Post {
         salaryAcc.setN("salaryaccount");
         salaryAcc.setV(1.0);
         salaryAcc.setS(AuthLogin.sessionID);
-        marshallSetting(salaryAcc);
+        marshalling(salaryAcc);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class GetDictSalaryAcc extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }

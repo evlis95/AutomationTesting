@@ -31,7 +31,7 @@ public class SmsCodeManageDev extends Post {
         TagPOfUnivReq tagP = new TagPOfUnivReq();
         tagP.setN("Autotest (d8eb432fb028c2b3)");
         device.setTagP(tagP);
-        marshallSetting(device);
+        marshalling(device);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class SmsCodeManageDev extends Post {
         printReqAndResInLog();
         checkTest();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = unmarshalling();
         }
     }
 }
