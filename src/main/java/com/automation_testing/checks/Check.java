@@ -4,7 +4,6 @@ import com.automation_testing.allrequests.authorization.AuthCryptoprofCode;
 import com.automation_testing.allrequests.authorization.UserAccount;
 import com.automation_testing.allrequests.authorization.UserFilter;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocAction;
-import com.automation_testing.hibernate.pojo.Divisions;
 import com.automation_testing.hibernate.pojo.MobileServices;
 import com.automation_testing.hibernate.pojo.PaymentOrder;
 import com.automation_testing.hibernate.service.MobileServicesService;
@@ -148,7 +147,7 @@ public class Check {
                 result = true;
             }
         }
-        if(result) {
+        if (result) {
             LOG.info("Поиск хотя бы 1 подразделения c подключенными услугами D2BM.Adv + D2BM. Запрос на отзыв - PASS.\n");
             Check.quantityPASS++;
         } else {

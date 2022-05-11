@@ -1,4 +1,4 @@
-package com.automation_testing.allrequests.authorization.utils;
+package com.automation_testing.utils;
 
 import org.apache.http.util.ByteArrayBuffer;
 import org.postgresql.shaded.com.ongres.scram.common.bouncycastle.base64.Base64;
