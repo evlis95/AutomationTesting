@@ -36,7 +36,7 @@ public class SendCodeManageDev extends Post {
         TagPOfUnivReq tagP = new TagPOfUnivReq();
         tagP.setC("1");
         device.setTagP(tagP);
-        marshallSetting(device);
+        marshalling(device);
     }
 
     private void info() {
@@ -52,14 +52,10 @@ public class SendCodeManageDev extends Post {
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
-        if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
+        if(codeStatusResponse == 200) {
+            rootTag = Post.rootTag;
             info();
         }
     }

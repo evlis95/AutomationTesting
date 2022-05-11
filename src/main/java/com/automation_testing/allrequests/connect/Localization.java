@@ -21,7 +21,7 @@ public class Localization extends Post {
         localization.setN("localization");
         localization.setV(1.0);
         localization.setTagP(new TagPOfUnivReq("IDEA", "", ""));
-        marshallSetting(localization);
+        marshalling(localization);
     }
 
     @Override
@@ -30,14 +30,10 @@ public class Localization extends Post {
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = Post.rootTag;
         }
     }
 }

@@ -31,18 +31,14 @@ public class Style40 extends Post {
         tagAbout.setW("auto");
         style40.setTagAbout(tagAbout);
         style40.setTagHash("");
-        marshallSetting(style40);
+        marshalling(style40);
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = Post.rootTag;
         }
     }
 }

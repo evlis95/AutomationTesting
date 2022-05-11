@@ -26,18 +26,14 @@ public class GetDictNDSCalType extends Post {
         ndsCalType.setN("ndscalculationtype");
         ndsCalType.setV(1.0);
         ndsCalType.setS(AuthLogin.sessionID);
-        marshallSetting(ndsCalType);
+        marshalling(ndsCalType);
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = Post.rootTag;
         }
     }
 }

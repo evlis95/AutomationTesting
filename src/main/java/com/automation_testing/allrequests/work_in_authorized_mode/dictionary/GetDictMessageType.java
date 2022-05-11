@@ -36,18 +36,14 @@ public class GetDictMessageType extends Post {
         tagP.setG(UserFilter.rootTag.getListC().get(0).getI());
         listP.add(tagP);
         messType.setListP(listP);
-        marshallSetting(messType);
+        marshalling(messType);
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = Post.rootTag;
         }
     }
 }

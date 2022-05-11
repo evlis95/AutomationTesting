@@ -26,17 +26,14 @@ public class TooltipPaymentOrder extends Post {
         tooltip.setN("PaymentOrder");
         tooltip.setV(1.0);
         tooltip.setS(AuthLogin.sessionID);
-        marshallSetting(tooltip);
+        marshalling(tooltip);
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        checkTest();
-        if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
+        if(codeStatusResponse == 200) {
+            rootTag = Post.rootTag;
         }
     }
 }

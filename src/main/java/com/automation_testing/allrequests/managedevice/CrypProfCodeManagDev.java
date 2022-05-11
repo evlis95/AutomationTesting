@@ -30,7 +30,7 @@ public class CrypProfCodeManagDev extends Post {
         device.setN("code");
         device.setV(1.0);
         device.setS(AuthLogin.sessionID);
-        marshallSetting(device);
+        marshalling(device);
     }
 
     private void definingSPID() {
@@ -47,14 +47,10 @@ public class CrypProfCodeManagDev extends Post {
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
-        if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
+        if(codeStatusResponse == 200) {
+            rootTag = Post.rootTag;
             definingSPID();
         }
     }

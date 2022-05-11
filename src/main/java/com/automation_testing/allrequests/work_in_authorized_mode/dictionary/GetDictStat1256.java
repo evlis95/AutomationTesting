@@ -28,18 +28,14 @@ public class GetDictStat1256 extends Post {
         stat1256.setV(1.0);
         stat1256.setS(AuthLogin.sessionID);
 
-        marshallSetting(stat1256);
+        marshalling(stat1256);
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = Post.rootTag;
         }
     }
 }

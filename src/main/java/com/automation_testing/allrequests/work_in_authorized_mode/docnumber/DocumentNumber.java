@@ -46,20 +46,15 @@ public class DocumentNumber extends Post {
         tagP.setA(createTime());
         tagP.setB(UserFilter.rootTag.getListC().get(0).getI());
         docNum.setTagP(tagP);
-        marshallSetting(docNum);
+        marshalling(docNum);
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
-        if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
+        if(codeStatusResponse == 200) {
+            rootTag = Post.rootTag;
             docNum = rootTag.getListF().get(0).getV();
         }
-
     }
 }

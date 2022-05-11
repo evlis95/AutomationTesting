@@ -15,12 +15,12 @@ import java.io.IOException;
 import java.io.StringReader;
 
 public class PutDocDATAFORSIGN extends Post {
+    public static UniversalResponseRootTag rootTag;
     private final Logger LOG = LogManager.getLogger(PutDocDATAFORSIGN.class);
     private final UniversalResponseRootTag UNIV_RES_ROOT_TAG;
     private final String DOC_ID;
     private String documentNameSP;
     private String documentUIDSP;
-    public static UniversalResponseRootTag rootTag;
 
     public PutDocDATAFORSIGN(UniversalResponseRootTag universalResponseRootTag, String documentID) {
         this.UNIV_RES_ROOT_TAG = universalResponseRootTag;
@@ -57,7 +57,7 @@ public class PutDocDATAFORSIGN extends Post {
                 dataForSign.setU(documentUIDSP);
             }
         }
-        marshallSetting(dataForSign);
+        marshalling(dataForSign);
     }
 
     private void info() throws IOException {
@@ -74,17 +74,12 @@ public class PutDocDATAFORSIGN extends Post {
     }
 
 
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
+    @Override
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = Post.rootTag;
             info();
         }
     }
-
-
 }

@@ -66,18 +66,14 @@ public class HeadersByDayPayOrd extends Post {
         TagFOfTagP tagF = new TagFOfTagP("0", "0", listS);
         headersByDay.setTagP(new TagPOfUnivReq("0", UserFilter.orgId, listA, tagF));
 
-        marshallSetting(headersByDay);
+        marshalling(headersByDay);
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = Post.rootTag;
         }
     }
 }

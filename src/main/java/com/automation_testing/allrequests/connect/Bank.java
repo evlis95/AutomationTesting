@@ -6,9 +6,8 @@ import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
 
-
 import javax.xml.bind.JAXBException;
-import java.io.*;
+import java.io.IOException;
 
 
 public class Bank extends Post {
@@ -28,18 +27,14 @@ public class Bank extends Post {
         bank.setN("bank");
         bank.setV(6.0);
         bank.setTagP(new TagPOfUnivReq("xhdpi", "0"));
-        marshallSetting(bank);
+        marshalling(bank);
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = Post.rootTag;
         }
     }
 }

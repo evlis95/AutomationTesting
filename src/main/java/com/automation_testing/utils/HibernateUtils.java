@@ -1,4 +1,4 @@
-package com.automation_testing.hibernate.utils;
+package com.automation_testing.utils;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;

@@ -46,7 +46,7 @@ public class TemplateHeadersPayOrd extends Post {
         tagP.setTagF(tagF);
         rootReqTag.setTagP(tagP);
 
-        marshallSetting(rootReqTag);
+        marshalling(rootReqTag);
     }
 
     @Override
@@ -70,14 +70,10 @@ public class TemplateHeadersPayOrd extends Post {
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
-        if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
+        if(codeStatusResponse == 200) {
+            rootTag = Post.rootTag;
             definitionTemplateID();
         }
     }

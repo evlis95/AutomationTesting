@@ -6,7 +6,7 @@ import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
 
 import javax.xml.bind.JAXBException;
-import java.io.*;
+import java.io.IOException;
 
 public class AuthAccess extends Post {
 
@@ -26,18 +26,14 @@ public class AuthAccess extends Post {
         authAccess.setV(1.0);
         authAccess.setS(AuthLogin.sessionID);
 
-        marshallSetting(authAccess);
+        marshalling(authAccess);
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = Post.rootTag;
         }
     }
 }

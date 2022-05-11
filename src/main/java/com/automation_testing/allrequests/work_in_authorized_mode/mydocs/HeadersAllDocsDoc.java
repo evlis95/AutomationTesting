@@ -64,7 +64,7 @@ public class HeadersAllDocsDoc extends Post {
         TagPOfUnivReq tagP = new TagPOfUnivReq(UserFilter.orgId, "0", setTagT, listF);
 
         headers.setTagP(tagP);
-        marshallSetting(headers);
+        marshalling(headers);
     }
 
     private void checkAvailabilityDocPayOrdInRes() {
@@ -154,8 +154,6 @@ public class HeadersAllDocsDoc extends Post {
             if (UserFilter.rootTag.getListV().get(i).getAddAcc().equals("1")) {
                 addObjectInMap("AdditionalAcc", ADD_ACC_STAT_CODE);
             }
-
-
         }
     }
 
@@ -173,17 +171,11 @@ public class HeadersAllDocsDoc extends Post {
 
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
-        if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
+        if(codeStatusResponse == 200) {
+            rootTag = Post.rootTag;
             checkAvailabilityDocPayOrdInRes();
         }
     }
-
-
 }

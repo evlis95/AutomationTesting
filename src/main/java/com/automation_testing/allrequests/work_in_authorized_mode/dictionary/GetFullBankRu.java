@@ -37,18 +37,14 @@ public class GetFullBankRu extends Post {
         getFull.setS(AuthLogin.sessionID);
         tagP.setD("044525700");
         getFull.setTagP(tagP);
-        marshallSetting(getFull);
+        marshalling(getFull);
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = Post.rootTag;
             receiverBankName = rootTag.getListR().get(0).getX();
             receiverBIC = rootTag.getListR().get(0).getD();
             receiverCorrAcc = rootTag.getListR().get(0).getTagCorrAcc().get(0).getA();

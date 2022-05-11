@@ -13,11 +13,11 @@ import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
 public class AvailableDocument extends Post {
+    public static UniversalResponseRootTag rootTag;
+    public static String result;
     private final Logger LOG = LogManager.getLogger(AvailableDocument.class);
     private final String DOC_TYPE;
     private final String DOC_ID;
-    public static UniversalResponseRootTag rootTag;
-    public static String result;
 
     public AvailableDocument(String docType, String docID) {
         this.DOC_TYPE = docType;
@@ -44,20 +44,15 @@ public class AvailableDocument extends Post {
         tagP.setB(DOC_TYPE);
 
         available.setTagP(tagP);
-        marshallSetting(available);
+        marshalling(available);
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = Post.rootTag;
             result = rootTag.getListF().get(0).getV();
-
             if (result.equals("1")) {
                 LOG.info("Проверка на доступность отзыва документа - PASS\n");
                 Check.quantityPASS++;

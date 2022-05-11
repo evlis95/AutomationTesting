@@ -4,11 +4,10 @@ import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.TagPOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
-
 import com.automation_testing.post_request_pattern.Post;
 
 import javax.xml.bind.JAXBException;
-import java.io.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class AuthLogin extends Post {
 
         listP.add(tagP);
         authLogin.setListP(listP);
-        marshallSetting(authLogin);
+        marshalling(authLogin);
     }
 
     @Override
@@ -42,14 +41,10 @@ public class AuthLogin extends Post {
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = Post.rootTag;
             sessionID = rootTag.getListS().get(0).getV();
         }
     }

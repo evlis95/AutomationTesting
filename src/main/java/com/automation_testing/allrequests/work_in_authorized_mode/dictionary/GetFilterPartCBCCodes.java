@@ -32,18 +32,14 @@ public class GetFilterPartCBCCodes extends Post {
         tagP.setD("18210101011011000110");
         tagP.setP("0");
         cbcCodes.setTagP(tagP);
-        marshallSetting(cbcCodes);
+        marshalling(cbcCodes);
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = Post.rootTag;
             cbcCodeValue = rootTag.getListP().get(0).getListR().get(0).getD();
         }
     }

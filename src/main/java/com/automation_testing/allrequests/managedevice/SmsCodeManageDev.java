@@ -31,18 +31,14 @@ public class SmsCodeManageDev extends Post {
         TagPOfUnivReq tagP = new TagPOfUnivReq();
         tagP.setN("Autotest (d8eb432fb028c2b3)");
         device.setTagP(tagP);
-        marshallSetting(device);
+        marshalling(device);
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = Post.rootTag;
         }
     }
 }

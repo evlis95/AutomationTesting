@@ -24,18 +24,14 @@ public class VersionInfo extends Post {
         versionInfo.setC("getdict");
         versionInfo.setN("versionsinfo");
         versionInfo.setV(1.0);
-        marshallSetting(versionInfo);
+        marshalling(versionInfo);
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
         if (codeStatusResponse == 200) {
-            rootTagA = parsingResponseBody();
+            rootTag = Post.rootTag;
         }
     }
 }

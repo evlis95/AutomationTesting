@@ -26,18 +26,14 @@ public class GetDictPaySendType extends Post {
         paySendType.setN("paysendtype");
         paySendType.setV(1.0);
         paySendType.setS(AuthLogin.sessionID);
-        marshallSetting(paySendType);
+        marshalling(paySendType);
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = Post.rootTag;
         }
     }
 }

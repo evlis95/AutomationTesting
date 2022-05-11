@@ -22,7 +22,7 @@ public class PushManagePushUserBind extends Post {
         managePushUserBind.setV(1.0);
         managePushUserBind.setS(AuthLogin.sessionID);
         managePushUserBind.setP("cBPV8WtMQAqGVBFpqNrZgZ:APA91bFpVr7dMTAnwgYO6Uwvyor5OOBQjS2Eq45PC3wwL1-8GgFe24tI7E_NG75BC0FLAoaCQmH_Csfw8AW9UnX3rYxdTTwy1DLvgMgTCEFngy2ZnLlX7qW-zBxBpkqgNJjSy3CuE2nN");
-        marshallSetting(managePushUserBind);
+        marshalling(managePushUserBind);
     }
 
     @Override
@@ -31,14 +31,10 @@ public class PushManagePushUserBind extends Post {
     }
 
     @Override
-    public void run() throws IOException, InterruptedException, JAXBException {
-        createXmlBodyRequest();
-        executingRequest();
-        writeBodyResponseInFile();
-        printReqAndResInLog();
-        checkTest();
+    public void run() throws JAXBException, IOException, InterruptedException {
+        super.run();
         if (codeStatusResponse == 200) {
-            rootTag = parsingResponseBody();
+            rootTag = Post.rootTag;
         }
     }
 }
