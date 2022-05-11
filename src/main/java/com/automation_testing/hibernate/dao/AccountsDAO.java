@@ -2,7 +2,7 @@ package com.automation_testing.hibernate.dao;
 
 import com.automation_testing.hibernate.interfaces.CRUDable;
 import com.automation_testing.hibernate.pojo.Accounts;
-import com.automation_testing.hibernate.utils.HibernateUtils;
+import com.automation_testing.utils.HibernateUtils;
 import org.hibernate.Session;
 
 import java.util.List;
