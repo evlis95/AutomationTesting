@@ -54,10 +54,10 @@ public class AvailableDocument extends Post {
             rootTag = Post.rootTag;
             result = rootTag.getListF().get(0).getV();
             if (result.equals("1")) {
-                LOG.info("Проверка на доступность отзыва документа - PASS\n");
+                LOG.info("Проверка на доступность отзыва документа - PASS");
                 Check.quantityPASS++;
             } else {
-                LOG.error("Проверка на доступность отзыва документа - FAILED\n");
+                LOG.error("Проверка на доступность отзыва документа - FAILED");
                 Check.quantityFAILED++;
             }
         }

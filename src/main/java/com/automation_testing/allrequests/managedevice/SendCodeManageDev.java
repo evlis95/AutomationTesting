@@ -54,10 +54,10 @@ public class SendCodeManageDev extends Post {
         successfullyCode = rootTag.getListS().get(0).getV();
         condition = rootTag.getListS().get(0).getZ();
         if (successfullyCode.equals("1")) {
-            LOG.info("Проверка кода подтверждения операции - PASS\n");
+            LOG.info("Проверка кода подтверждения операции - PASS");
             Check.quantityPASS++;
         } else {
-            LOG.error("Проверка кода подтверждения операции - FAILED\n");
+            LOG.error("Проверка кода подтверждения операции - FAILED");
             Check.quantityFAILED++;
         }
     }

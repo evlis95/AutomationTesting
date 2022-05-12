@@ -45,11 +45,11 @@ public class UnBindManageDevice extends Post {
         SMS_CODE_MAN_DEV.run();
         SEND_CODE_MAN_DEV.run();
         if (SendCodeManageDev.condition.equals("0") || (SendCodeManageDev.condition.equals("2"))) {
-            LOG.info("Проверка на отвязку устройства - PASS\n");
+            LOG.info("Проверка на отвязку устройства - PASS");
             Check.quantityPASS++;
             BIND.run();
         } else {
-            LOG.error("Проверка на отвязку устройства - FAILED\n");
+            LOG.error("Проверка на отвязку устройства - FAILED");
             Check.quantityFAILED++;
         }
     }
