@@ -1,11 +1,13 @@
 package com.automation_testing.allrequests.managedevice;
 
 import com.automation_testing.allrequests.authorization.AuthLogin;
+import com.automation_testing.allrequests.authorization.SmsAuthCode;
 import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.TagPOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
+import com.automation_testing.utils.CryptoUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -34,7 +36,16 @@ public class SendCodeManageDev extends Post {
         device.setS(AuthLogin.sessionID);
         device.setTagU(CrypProfCodeManagDev.spID);
         TagPOfUnivReq tagP = new TagPOfUnivReq();
-        tagP.setC("1");
+        tagP.setC(CryptoUtils.generateSignForAuthCode("555555",
+                AuthLogin.sessionID,
+                SmsCodeManageDev.rootTag.getListP().get(0).getH(),
+                SmsCodeManageDev.rootTag.getListP().get(0).getU(),
+                SmsCodeManageDev.rootTag.getListP().get(0).getJ(),
+                SmsCodeManageDev.rootTag.getListP().get(0).getI(),
+                SmsCodeManageDev.rootTag.getListP().get(0).getK(),
+                SmsCodeManageDev.rootTag.getListP().get(0).getAtrL(),
+                SmsCodeManageDev.rootTag.getListP().get(0).getA(),
+                SmsCodeManageDev.rootTag.getListP().get(0).getB()));
         device.setTagP(tagP);
         marshalling(device);
     }

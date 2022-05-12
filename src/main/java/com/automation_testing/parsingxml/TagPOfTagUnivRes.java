@@ -18,4 +18,18 @@ public class TagPOfTagUnivRes {
     private List<TagROfTagP> listR;
     @XmlAttribute
     private String a;
+    @XmlAttribute
+    private int h;
+    @XmlAttribute
+    private String u;
+    @XmlAttribute
+    private String j;
+    @XmlAttribute
+    private String i;
+    @XmlAttribute
+    private long k;
+    @XmlAttribute
+    private String g;
+    @XmlAttribute(name = "l")
+    private long atrL;
 }

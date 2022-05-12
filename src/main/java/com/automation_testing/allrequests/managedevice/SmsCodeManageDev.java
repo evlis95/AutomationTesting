@@ -29,7 +29,7 @@ public class SmsCodeManageDev extends Post {
         device.setS(AuthLogin.sessionID);
         device.setTagU(CrypProfCodeManagDev.spID);
         TagPOfUnivReq tagP = new TagPOfUnivReq();
-        tagP.setN("Autotest (d8eb432fb028c2b3)");
+        tagP.setN("Autotest (097e2a18390d4111)");
         device.setTagP(tagP);
         marshalling(device);
     }

@@ -19,6 +19,7 @@ import java.net.InetSocketAddress;
 import java.net.ProxySelector;
 import java.net.URI;
 import java.net.http.HttpClient;
+import java.net.http.HttpHeaders;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.file.Path;
@@ -28,12 +29,27 @@ public abstract class Post implements Runnable {
     public static final String PATH_REQUEST_BODY = ".\\src\\main\\java\\com\\automation_testing\\xmlfile\\request.xml";
     public static String bodyResponse;
     public static UniversalResponseRootTag rootTag;
+    public static HttpHeaders headers;
+    public static StringBuilder rtsRequest = new StringBuilder();
+    public static StringBuilder cookies = new StringBuilder();
     private final HttpClient HTTP_CLIENT = HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_1_1)
             .proxy(ProxySelector.of(new InetSocketAddress(Settings.HOST_PROXY, Settings.PORT_PROXY)))
             .connectTimeout(Duration.ofSeconds(10))
             .build();
     protected Integer codeStatusResponse;
+
+    public static void addCookies(String cookie) {
+        if (cookies.toString().equals("")) {
+            cookies.append(cookie);
+        } else {
+            cookies.append("; ").append(cookie);
+        }
+    }
+
+    public static void editRTSRequest(String str) {
+        rtsRequest.append("SID=").append(str);
+    }
 
     protected void marshalling(UniversalRequestRootTag rootTag) throws JAXBException {
         JAXBContext jcCreate = JAXBContext.newInstance(UniversalRequestRootTag.class);
@@ -54,14 +70,20 @@ public abstract class Post implements Runnable {
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(HttpRequest.BodyPublishers.ofFile(Path.of(PATH_REQUEST_BODY)))
                 .uri(URI.create(Settings.URI_POST))
-                .setHeader("Accept-Encoding", "gzip")
-                .setHeader("Content-Type", "text/xml")
+                .setHeader("accept-encoding", "gzip, deflate")
+                .setHeader("accept-language", "ru")
+                .setHeader("accept", "*/*")
+                .setHeader("Content-Type", "text/xml; charset=utf-8")
                 .setHeader("AppLanguage", "ru")
                 .setHeader("AppVersionName", Settings.APP_VERSION_NAME)
+                .setHeader("Rts-request", rtsRequest.toString())
+                .setHeader("Cookie", cookies.toString())
+                .setHeader("DeviceId", "097e2a18390d4111")
+                .setHeader("charset", "utf-8")
                 .build();
 
         HttpResponse<String> response = HTTP_CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
-        //HttpHeaders headers = response.headers();
+        headers = response.headers();
         bodyResponse = response.body();
         codeStatusResponse = response.statusCode();
     }

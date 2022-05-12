@@ -1,10 +1,9 @@
 package com.automation_testing.generalsettings;
 
 public class Settings {
-    //192.168.0.106
-    //vm-d2bm2
-    public static final String URI_POST = "http://192.168.0.106:9696/sbns-mobile/service/?";
-    public static final String APP_VERSION_NAME = "4.6.1.22";
+
+    public static final String URI_POST = "http://vm-dbo3-mbk:20661/bsi/?";
+    public static final String APP_VERSION_NAME = "4.1.3.10";
     public static final String HOST_PROXY = "192.168.0.106";
     public static final Integer PORT_PROXY = 8998;
 }

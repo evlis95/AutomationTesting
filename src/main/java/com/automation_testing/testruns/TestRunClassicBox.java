@@ -35,8 +35,6 @@ public class TestRunClassicBox {
     final static Logger LOG = LogManager.getLogger(TestRunClassicBox.class);
 
     final Bank BANK = new Bank();
-    final Localization LOCALIZATION = new Localization();
-    final ManagePushBind MANAGE_PUSH_BIND = new ManagePushBind();
     final Style40 STYLE40 = new Style40();
     final VersionInfo VERSION_INFO = new VersionInfo();
     final AuthLogin AUTH_LOGIN = new AuthLogin();
@@ -47,7 +45,6 @@ public class TestRunClassicBox {
     final AuthAccess AUTH_ACCESS = new AuthAccess();
     final BindManageDevice BIND_MANAGE_DEVICE = new BindManageDevice();
     final UnBindManageDevice UNBIND_MANAGE_DEVICE = new UnBindManageDevice();
-    final MenuItem MENU_ITEM = new MenuItem();
     final PushManagePushUserBind PUSH_MANAGE_PUSH_USER_BIND = new PushManagePushUserBind();
     final UserFilter USER_FILTER = new UserFilter();
     final Banner BANNER = new Banner();
@@ -83,11 +80,9 @@ public class TestRunClassicBox {
         //порядов запросов
         Map<String, Post> requestMap = new LinkedHashMap<>();
         //блок connect
-        requestMap.put("Bank", BANK);
-        requestMap.put("Localization", LOCALIZATION);
-        requestMap.put("ManagePushBind", MANAGE_PUSH_BIND);
-        requestMap.put("Style40", STYLE40);
         requestMap.put("VersionInfo", VERSION_INFO);
+        requestMap.put("Style40", STYLE40);
+        requestMap.put("Bank", BANK);
         //блок authorization
         requestMap.put("AuthLogin", AUTH_LOGIN);
         requestMap.put("AuthMacIp", AUTH_MAC_IP);
@@ -95,10 +90,9 @@ public class TestRunClassicBox {
         requestMap.put("SmsAuthCode", SMS_AUTH_CODE);
         requestMap.put("SendAuthCode", SEND_AUTH_CODE);
         requestMap.put("AuthAccess", AUTH_ACCESS);
-        requestMap.put("MenuItem", MENU_ITEM);
         requestMap.put("PushManagePushUserBind", PUSH_MANAGE_PUSH_USER_BIND);
-        requestMap.put("UserFilter", USER_FILTER);
         requestMap.put("Banner", BANNER);
+        requestMap.put("UserFilter", USER_FILTER);
         requestMap.put("NotificationMandatoryCount", NOTIFICATION_MANDATORY_COUNT);
         requestMap.put("UserAccount", USER_ACCOUNT);
         requestMap.put("StatementDocsByDay", STATEMENT_DOCS_BY_DAY);

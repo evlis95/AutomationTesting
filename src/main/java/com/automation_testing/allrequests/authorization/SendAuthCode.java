@@ -5,9 +5,10 @@ import com.automation_testing.creatingxml.TagPOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
+import com.automation_testing.utils.CryptoUtils;
 
 import javax.xml.bind.JAXBException;
-import java.io.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,17 @@ public class SendAuthCode extends Post {
         sendAuthCode.setN("code");
         sendAuthCode.setV(1.0);
         sendAuthCode.setS(AuthLogin.sessionID);
-        tagP.setC("1");
+        tagP.setC(CryptoUtils.generateSignForAuthCode(
+                "555555",
+                AuthLogin.sessionID,
+                SmsAuthCode.rootTag.getListP().get(0).getH(),
+                SmsAuthCode.rootTag.getListP().get(0).getU(),
+                SmsAuthCode.rootTag.getListP().get(0).getJ(),
+                SmsAuthCode.rootTag.getListP().get(0).getI(),
+                SmsAuthCode.rootTag.getListP().get(0).getK(),
+                SmsAuthCode.rootTag.getListP().get(0).getAtrL(),
+                SmsAuthCode.rootTag.getListP().get(0).getA(),
+                SmsAuthCode.rootTag.getListP().get(0).getB()));
 
         for (int i = 0; i < AuthCryptoprofCode.rootTag.getListS().size(); i++) {
             if (AuthCryptoprofCode.rootTag.getListS().get(i).getT().equals("1")) {

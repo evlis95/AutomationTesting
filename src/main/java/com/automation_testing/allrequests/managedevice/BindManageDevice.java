@@ -34,7 +34,7 @@ public class BindManageDevice extends Post {
         device.setN("bind");
         device.setV(1.0);
         device.setS(AuthLogin.sessionID);
-        device.setTagP(new TagPOfUnivReq("d8eb432fb028c2b3"));
+        device.setTagP(new TagPOfUnivReq("097e2a18390d4111"));
         marshalling(device);
     }
 

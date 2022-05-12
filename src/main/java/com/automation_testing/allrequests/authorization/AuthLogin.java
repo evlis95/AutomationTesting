@@ -5,6 +5,7 @@ import com.automation_testing.creatingxml.TagPOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
+import com.automation_testing.utils.CookiesUtils;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
@@ -26,9 +27,9 @@ public class AuthLogin extends Post {
         authLogin.setN("login");
         authLogin.setV(1.0);
 
-        tagP.setD("cbb99cc0763eb5c2");
-        tagP.setLogin("izh");
-        tagP.setPass("1");
+        tagP.setD("097e2a18390d4111");
+        tagP.setLogin("1111111111");
+        tagP.setPass("1111111111");
 
         listP.add(tagP);
         authLogin.setListP(listP);
@@ -46,6 +47,8 @@ public class AuthLogin extends Post {
         if (codeStatusResponse == 200) {
             rootTag = Post.rootTag;
             sessionID = rootTag.getListS().get(0).getV();
+            Post.addCookies(CookiesUtils.initiationSID());
+            Post.editRTSRequest(sessionID);
         }
     }
 }
