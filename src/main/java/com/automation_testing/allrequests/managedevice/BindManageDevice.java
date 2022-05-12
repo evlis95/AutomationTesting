@@ -55,7 +55,7 @@ public class BindManageDevice extends Post {
             SMS_CODE_MANAGE_DEVICE.run();
             SEND_CODE_MANAGE_DEVICE.run();
             if (SendCodeManageDev.condition.equals("1")) {
-                LOG.info("Доступ разрешен (устройство привязано). Проверка на привязку устройства - PASS.\n");
+                LOG.info("Доступ разрешен (устройство привязано). Проверка на привязку устройства - PASS.");
                 Check.quantityPASS++;
                 resultBinding = true;
             } else {

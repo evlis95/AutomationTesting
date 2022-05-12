@@ -79,18 +79,18 @@ public class HeadersAllDocsDoc extends Post {
                 }
                 if (result) {
                     Check.quantityPASS++;
-                    LOG.info("Проверка на наличие документов ПП в ответе на запрос HeadersAllDocsDoc - PASS\n");
+                    LOG.info("Проверка на наличие документов ПП в ответе на запрос HeadersAllDocsDoc - PASS");
                 } else {
                     Check.quantityFAILED++;
-                    LOG.error("Проверка на наличие документов ПП в ответе на запрос HeadersAllDocsDoc - FAILED\n");
+                    LOG.error("Проверка на наличие документов ПП в ответе на запрос HeadersAllDocsDoc - FAILED");
                 }
             } else {
                 Check.quantityFAILED++;
-                LOG.error("Проверка на наличие документов в ответе на запрос HeadersAllDocsDoc - FAILED\n");
+                LOG.error("Проверка на наличие документов в ответе на запрос HeadersAllDocsDoc - FAILED");
             }
         } else {
             Check.quantityFAILED++;
-            LOG.error("Проверка на наличие документов в ответе на запрос HeadersAllDocsDoc - FAILED\n");
+            LOG.error("Проверка на наличие документов в ответе на запрос HeadersAllDocsDoc - FAILED");
         }
     }
 

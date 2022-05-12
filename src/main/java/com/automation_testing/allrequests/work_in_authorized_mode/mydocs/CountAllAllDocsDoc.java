@@ -123,10 +123,10 @@ public class CountAllAllDocsDoc extends Post {
             rootTag = Post.rootTag;
             if (rootTag.getListD() != null) {
                 if (tagTQuantity == rootTag.getListD().size()) {
-                    LOG.info("Проверка количества пришедших типов документов в ответе на запрос CountAllAllDocsDoc, в зависимости от тех, которые ушли в запросе - PASS\n");
+                    LOG.info("Проверка количества пришедших типов документов в ответе на запрос CountAllAllDocsDoc, в зависимости от тех, которые ушли в запросе - PASS");
                     Check.quantityPASS++;
                 } else {
-                    LOG.error("Проверка количества пришедших типов документов в ответе на запрос CountAllAllDocsDoc, в зависимости от тех, которые ушли в запросе - FAILED\n");
+                    LOG.error("Проверка количества пришедших типов документов в ответе на запрос CountAllAllDocsDoc, в зависимости от тех, которые ушли в запросе - FAILED");
                     Check.quantityFAILED++;
                 }
             }

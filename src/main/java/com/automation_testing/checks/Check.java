@@ -4,7 +4,6 @@ import com.automation_testing.allrequests.authorization.AuthCryptoprofCode;
 import com.automation_testing.allrequests.authorization.UserAccount;
 import com.automation_testing.allrequests.authorization.UserFilter;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocAction;
-import com.automation_testing.hibernate.pojo.Divisions;
 import com.automation_testing.hibernate.pojo.MobileServices;
 import com.automation_testing.hibernate.pojo.PaymentOrder;
 import com.automation_testing.hibernate.service.MobileServicesService;
@@ -25,10 +24,10 @@ public class Check {
 
     public static void checkCode200(@NotNull Integer value, String nameRequest) throws IOException {
         if (value.equals(200)) {
-            LOG.info(String.format("Проверка кода 200 у ответа на запрос %s - PASS!\n\n", nameRequest));
+            LOG.info(String.format("Проверка кода 200 у ответа на запрос %s - PASS!", nameRequest));
             quantityPASS++;
         } else {
-            LOG.error(String.format("Проверка кода 200 у ответа на запрос %s - FAILED!\n\n", nameRequest));
+            LOG.error(String.format("Проверка кода 200 у ответа на запрос %s - FAILED!", nameRequest));
             quantityFAILED++;
         }
     }
@@ -42,10 +41,10 @@ public class Check {
             }
         }
         if (result) {
-            LOG.info("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - PASS\n");
+            LOG.info("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - PASS");
             Check.quantityPASS++;
         } else {
-            LOG.error("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - FAILED. Тестирование будет заверщено.\n");
+            LOG.error("Проверка на подключение услуги D2BM. Advanced, хотя бы в одном подразделении - FAILED. Тестирование будет заверщено.");
             Check.quantityFAILED++;
         }
         return result;
@@ -71,15 +70,15 @@ public class Check {
                         }
                     }
                     if (count > 0) {
-                        LOG.info("Проверка на наличие хотя бы одного СП OTP для операции подписи - PASS\n");
+                        LOG.info("Проверка на наличие хотя бы одного СП OTP для операции подписи - PASS");
                         quantityPASS++;
                     } else {
-                        LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED\n");
+                        LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED");
                         quantityFAILED++;
                     }
                 } else {
                     quantityFAILED++;
-                    LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED\n");
+                    LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED");
                 }
             }
         }
@@ -87,7 +86,7 @@ public class Check {
 
     public static void checkCountAvailableSPSign(@NotNull UniversalResponseRootTag rootTag) {
         if (rootTag.getListK() == null & rootTag.getListC() == null) {
-            LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED\n");
+            LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED");
             quantityFAILED++;
 
         } else if (rootTag.getListK() != null & rootTag.getListC() == null) {
@@ -98,19 +97,19 @@ public class Check {
                 }
             }
             if (count > 0) {
-                LOG.info("Проверка на наличие хотя бы одного СП OTP для операции подписи - PASS\n");
+                LOG.info("Проверка на наличие хотя бы одного СП OTP для операции подписи - PASS");
                 quantityPASS++;
             } else {
-                LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED\n");
+                LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED");
 
                 quantityFAILED++;
             }
 
         } else if (rootTag.getListK() == null & rootTag.getListC() != null) {
             if (rootTag.getListC().get(0).getCe().equals("1")) {
-                LOG.warn("Проверка на наличие хотя бы одного СП OTP для операции подписи не проводится, из за наличия жестких контролей\n");
+                LOG.warn("Проверка на наличие хотя бы одного СП OTP для операции подписи не проводится, из за наличия жестких контролей");
             } else {
-                LOG.warn("Проверка на наличие хотя бы одного СП OTP для операции подписи не будет проведена из за наличия мягких контролей(данные СП будут в запросе FORCE)\n");
+                LOG.warn("Проверка на наличие хотя бы одного СП OTP для операции подписи не будет проведена из за наличия мягких контролей(данные СП будут в запросе FORCE)");
             }
         }
     }
@@ -120,7 +119,7 @@ public class Check {
         if (AuthCryptoprofCode.rootTag.getListS() != null) {
             for (int i = 0; i < AuthCryptoprofCode.rootTag.getListS().size(); i++) {
                 if (AuthCryptoprofCode.rootTag.getListS().get(i).getT().equals("1")) {
-                    LOG.info("Проверка на наличие хотя бы одного СП OTP для операции подписи - PASS\n");
+                    LOG.info("Проверка на наличие хотя бы одного СП OTP для операции подписи - PASS");
                     quantityPASS++;
                     break;
                 } else {
@@ -148,11 +147,11 @@ public class Check {
                 result = true;
             }
         }
-        if(result) {
-            LOG.info("Поиск хотя бы 1 подразделения c подключенными услугами D2BM.Adv + D2BM. Запрос на отзыв - PASS.\n");
+        if (result) {
+            LOG.info("Поиск хотя бы 1 подразделения c подключенными услугами D2BM.Adv + D2BM. Запрос на отзыв - PASS.");
             Check.quantityPASS++;
         } else {
-            LOG.error("Поиск хотя бы 1 подразделения c подключенными услугами D2BM.Adv + D2BM. Запрос на отзыв - FAILED.\n");
+            LOG.error("Поиск хотя бы 1 подразделения c подключенными услугами D2BM.Adv + D2BM. Запрос на отзыв - FAILED.");
             Check.quantityFAILED++;
         }
 
