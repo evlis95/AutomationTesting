@@ -1,39 +1,44 @@
 package com.automation_testing.testruns;
 
 import com.automation_testing.allrequests.authorization.*;
-import com.automation_testing.allrequests.connect.*;
-import com.automation_testing.allrequests.managedevice.*;
+import com.automation_testing.allrequests.connect.Bank;
+import com.automation_testing.allrequests.connect.Style40;
+import com.automation_testing.allrequests.connect.VersionInfo;
+import com.automation_testing.allrequests.managedevice.BindManageDevice;
+import com.automation_testing.allrequests.managedevice.UnBindManageDevice;
 import com.automation_testing.allrequests.work_in_authorized_mode.create_cancell_req.AvailableDocument;
 import com.automation_testing.allrequests.work_in_authorized_mode.create_cancell_req.CancellationRequest;
-import com.automation_testing.allrequests.work_in_authorized_mode.put_document.DocumentAction;
-import com.automation_testing.allrequests.work_in_authorized_mode.put_document.DocumentType;
-import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocAction;
 import com.automation_testing.allrequests.work_in_authorized_mode.create_cancell_req.HeadersByDayPayOrd;
-import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.*;
-import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.GetDictRemoteCorrespDictionary;
+import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.PaymentOrder;
+import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.PaymentOrderTarget;
 import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.*;
 import com.automation_testing.allrequests.work_in_authorized_mode.docnumber.DocumentNumber;
 import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.CountAllAllDocsDoc;
 import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.HeadersAllDocsDoc;
+import com.automation_testing.allrequests.work_in_authorized_mode.put_document.DocumentAction;
+import com.automation_testing.allrequests.work_in_authorized_mode.put_document.DocumentType;
+import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocAction;
 import com.automation_testing.allrequests.work_in_authorized_mode.template.GetTemplate;
 import com.automation_testing.allrequests.work_in_authorized_mode.template.TemplateHeadersPayOrd;
 import com.automation_testing.checks.Check;
-import com.automation_testing.hibernate.pojo.MobileServices;
-import com.automation_testing.hibernate.service.MobileServicesService;
 import com.automation_testing.interfaces.Runnable;
 import com.automation_testing.post_request_pattern.Post;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.xml.bind.JAXBException;
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 public class TestRunClassicBox {
 
     final static Logger LOG = LogManager.getLogger(TestRunClassicBox.class);
-
+    public static GetTemplate getTemplate;
+    public static AvailableDocument availableDocument;
+    public static PutDocAction putDoc;
+    public static DocumentNumber docNumber;
     final Bank BANK = new Bank();
     final Style40 STYLE40 = new Style40();
     final VersionInfo VERSION_INFO = new VersionInfo();
@@ -43,6 +48,7 @@ public class TestRunClassicBox {
     final SmsAuthCode SMS_AUTH_CODE = new SmsAuthCode();
     final SendAuthCode SEND_AUTH_CODE = new SendAuthCode();
     final AuthAccess AUTH_ACCESS = new AuthAccess();
+    final AuthRoles AUTH_ROLES = new AuthRoles();
     final BindManageDevice BIND_MANAGE_DEVICE = new BindManageDevice();
     final UnBindManageDevice UNBIND_MANAGE_DEVICE = new UnBindManageDevice();
     final PushManagePushUserBind PUSH_MANAGE_PUSH_USER_BIND = new PushManagePushUserBind();
@@ -56,8 +62,6 @@ public class TestRunClassicBox {
     final GetDictPaySendType GET_DICT_PAY_SEND_TYPE = new GetDictPaySendType();
     final GetDictNDSCalType GET_DICT_NDS_CAL_TYPE = new GetDictNDSCalType();
     final GetDictCustomerKPP GET_DICT_CUSTOMER_KPP = new GetDictCustomerKPP();
-    final GetDictSalaryAcc GET_DICT_SALARY_ACC = new GetDictSalaryAcc();
-    final TooltipPaymentOrder TOOLTIP_PAYMENT_ORDER = new TooltipPaymentOrder();
     final GetFilterPartBankRu GET_FILTER_PART_BANK_RU = new GetFilterPartBankRu();
     final GetFullBankRu GET_FULL_BANK_RU = new GetFullBankRu();
     final GetDictStat1256 GET_DICT_STAT_1256 = new GetDictStat1256();
@@ -68,10 +72,6 @@ public class TestRunClassicBox {
     final HeadersAllDocsDoc HEADERS_ALL_DOCS_OF_MY_DOCS = new HeadersAllDocsDoc();
     final HeadersByDayPayOrd HEADERS_BY_DAY_PAY_ORD = new HeadersByDayPayOrd();
     final TemplateHeadersPayOrd TEMPLATE_HEADERS_PAY_ORD = new TemplateHeadersPayOrd();
-    public static GetTemplate getTemplate;
-    public static AvailableDocument availableDocument;
-    public static PutDocAction putDoc;
-    public static DocumentNumber docNumber;
 
     public TestRunClassicBox() {
     }
@@ -90,8 +90,8 @@ public class TestRunClassicBox {
         requestMap.put("SmsAuthCode", SMS_AUTH_CODE);
         requestMap.put("SendAuthCode", SEND_AUTH_CODE);
         requestMap.put("AuthAccess", AUTH_ACCESS);
-        requestMap.put("PushManagePushUserBind", PUSH_MANAGE_PUSH_USER_BIND);
         requestMap.put("Banner", BANNER);
+        requestMap.put("AuthRoles", AUTH_ROLES);
         requestMap.put("UserFilter", USER_FILTER);
         requestMap.put("NotificationMandatoryCount", NOTIFICATION_MANDATORY_COUNT);
         requestMap.put("UserAccount", USER_ACCOUNT);
@@ -102,8 +102,6 @@ public class TestRunClassicBox {
         requestMap.put("GetDictPaySendType", GET_DICT_PAY_SEND_TYPE);
         requestMap.put("GetDictNDSCalType", GET_DICT_NDS_CAL_TYPE);
         requestMap.put("GetDictCustomerKPP", GET_DICT_CUSTOMER_KPP);
-        requestMap.put("TooltipPaymentOrder", GET_DICT_SALARY_ACC);
-        requestMap.put("GetDictSalaryAcc", TOOLTIP_PAYMENT_ORDER);
         requestMap.put("GetFilterPartBankRu", GET_FILTER_PART_BANK_RU);
         requestMap.put("GetDictStat1256", GET_DICT_STAT_1256);
         requestMap.put("GetDictPayGrndParam", GET_DICT_PAY_GRND_PARAM);
@@ -114,30 +112,12 @@ public class TestRunClassicBox {
         //блок сохранение документа контрагенту
         requestMap.put("DocNumPaymOrderKonSave", docNumber);
         requestMap.put("PutPaymentOrderDocKonSave", putDoc);
-        //блок подписи документа контрагенту
-        requestMap.put("DocNumPaymOrderKonSign", docNumber);
-        requestMap.put("PutPaymentOrderDocKonSign", putDoc);
-        //блок подписи и отправки документа контрагенту
-        requestMap.put("DocNumPaymOrderKonSignGo", docNumber);
-        requestMap.put("PutPaymentOrderDocKonSignGo", putDoc);
         //блок сохранение документа в бюджет
         requestMap.put("DocNumPaymOrderBudSave", docNumber);
         requestMap.put("PutPaymentOrderDocBudSave", putDoc);
-        //блок подписи документа в бюджет
-        requestMap.put("DocNumPaymOrderBudSign", docNumber);
-        requestMap.put("PutPaymentOrderDocBudSign", putDoc);
-        //блок подписи и отправки документа в бюджет
-        requestMap.put("DocNumPaymOrderBudSignGo", docNumber);
-        requestMap.put("PutPaymentOrderDocBudSignGo", putDoc);
         //блок сохранение документа себе
         requestMap.put("DocNumPaymOrderYSSAve", docNumber);
         requestMap.put("PutPaymentOrderDoсYSSave", putDoc);
-        //блок подписи документа себе
-        requestMap.put("DocNumPaymOrderYSSign", docNumber);
-        requestMap.put("PutPaymentOrderDoсYSSign", putDoc);
-        //блок подписи и отправки документа себе
-        requestMap.put("DocNumPaymOrderYSSignGo", docNumber);
-        requestMap.put("PutPaymentOrderDoсYSSignGo", putDoc);
         // мои документы
         requestMap.put("CountAllAllDocsDoc", COUNT_ALL_MY_DOCS);
         requestMap.put("HeadersAllDocsDocOfMyDocs", HEADERS_ALL_DOCS_OF_MY_DOCS);
@@ -145,7 +125,7 @@ public class TestRunClassicBox {
         requestMap.put("HeadersByDayPayOrd", HEADERS_BY_DAY_PAY_ORD);
         requestMap.put("AvailableDocument", availableDocument);
         requestMap.put("DocNumCanReq", docNumber);
-        requestMap.put("PutCancellationRequestSignGo", putDoc);
+        requestMap.put("PutCancellationRequestSave", putDoc);
         // справочник шаблонов платежей и запрос на получение созданного шаблона(указанного в ПП Контрагенту(поле TemplateName))
         requestMap.put("TemplateHeadersPaymentOrder", TEMPLATE_HEADERS_PAY_ORD);
         requestMap.put("GetTemplate", getTemplate);
@@ -156,11 +136,7 @@ public class TestRunClassicBox {
                 switch (map.getKey().toString()) {
 
                     case "DocNumPaymOrderKonSave",
-                            "DocNumPaymOrderKonSign",
-                            "DocNumPaymOrderKonSignGo",
-                            "DocNumPaymOrderBudSave",
-                            "DocNumPaymOrderBudSign",
-                            "DocNumPaymOrderBudSignGo" -> new DocumentNumber("PaymentOrder").run();
+                            "DocNumPaymOrderBudSave" -> new DocumentNumber("PaymentOrder").run();
 
                     case "DocNumCanReq" -> new DocumentNumber("CancellationRequest").run();
 
@@ -174,13 +150,6 @@ public class TestRunClassicBox {
                                     """);
                         } else {
                             new DocumentNumber("PaymentOrder").run();
-                        }
-                    }
-
-                    case "UserFilter" -> {
-                        USER_FILTER.run();
-                        if (!Check.checkEnabledD2BMAdvancedService()) {
-                            return;
                         }
                     }
                     case "SmsAuthCode" -> {
@@ -203,43 +172,23 @@ public class TestRunClassicBox {
                     }
                     case "PutPaymentOrderDocKonSave" -> new PutDocAction(DocumentAction.SAVE, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY).creating(), DocumentType.PAYMENT_ORDER).run();
 
-                    case "PutPaymentOrderDocKonSign" -> new PutDocAction(DocumentAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY).creating(), DocumentType.PAYMENT_ORDER).run();
-
-                    case "PutPaymentOrderDocKonSignGo" -> new PutDocAction(DocumentAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_COUNTERPARTY).creating(), DocumentType.PAYMENT_ORDER).run();
-
                     case "PutPaymentOrderDocBudSave" -> new PutDocAction(DocumentAction.SAVE, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_BUDGET).creating(), DocumentType.PAYMENT_ORDER).run();
 
-                    case "PutPaymentOrderDocBudSign" -> new PutDocAction(DocumentAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_BUDGET).creating(), DocumentType.PAYMENT_ORDER).run();
 
-                    case "PutPaymentOrderDocBudSignGo" -> new PutDocAction(DocumentAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_BUDGET).creating(), DocumentType.PAYMENT_ORDER).run();
-
-                    case "PutPaymentOrderDoсYSSave",
-                            "PutPaymentOrderDoсYSSign",
-                            "PutPaymentOrderDoсYSSignGo" -> {
+                    case "PutPaymentOrderDoсYSSave" -> {
                         if (Check.checkCountAvailableAccounts810()) {
                             LOG.warn("""
                                     У пользователя нет 2 доступного счета в рублях, чтобы осуществить платеж Себе.
                                     Платеж себе не будет создан.
                                     """);
                         } else {
-                            switch (map.getKey().toString()) {
-                                case "PutPaymentOrderDoсYSSave" -> new PutDocAction(DocumentAction.SAVE, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER).run();
-
-                                case "PutPaymentOrderDoсYSSign" -> new PutDocAction(DocumentAction.SIGN, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER).run();
-
-                                case "PutPaymentOrderDoсYSSignGo" -> new PutDocAction(DocumentAction.SIGN_GO, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER).run();
+                            if ("PutPaymentOrderDoсYSSave".equals(map.getKey().toString())) {
+                                new PutDocAction(DocumentAction.SAVE, new PaymentOrder(PaymentOrderTarget.PAYMENT_TO_YOURSELF).creating(), DocumentType.PAYMENT_ORDER).run();
                             }
                         }
                     }
 
-                    case "HeadersByDayPayOrd" -> {
-                        Check.definitionOfConnServCanReq();
-                        HEADERS_BY_DAY_PAY_ORD.run();
-                    }
-
-                    case "AvailableDocument" -> (availableDocument = new AvailableDocument("PaymentOrder", Check.definingPayOrdIDForCancellReq())).run();
-
-                    case "PutCancellationRequestSignGo" -> (putDoc = new PutDocAction(DocumentAction.SIGN_GO, new CancellationRequest().initialCalReqFields(), DocumentType.CANCELLATION_REQUEST)).run();
+                    case "PutCancellationRequestSave" -> (putDoc = new PutDocAction(DocumentAction.SAVE, new CancellationRequest().initialCalReqFields(), DocumentType.CANCELLATION_REQUEST)).run();
 
                     case "GetTemplate" -> (getTemplate = new GetTemplate(TemplateHeadersPayOrd.templateID)).run();
 

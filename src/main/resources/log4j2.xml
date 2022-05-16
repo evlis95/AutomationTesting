@@ -18,7 +18,7 @@
             <AppenderRef ref="MyFile"/>
             <AppenderRef ref="Console"/>
         </Root>
-        <Logger name="org.hibernate" level="error">
+        <Logger name="org.hibernate" level="info">
             <AppenderRef ref="MyFile"/>
             <AppenderRef ref="Console"/>
         </Logger>

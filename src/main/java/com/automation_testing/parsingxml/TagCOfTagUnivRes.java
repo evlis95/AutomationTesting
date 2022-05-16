@@ -8,8 +8,6 @@ import java.util.List;
 
 @Getter
 public class TagCOfTagUnivRes {
-    @XmlElement(name = "f")
-    List<TagFForList> listF;
     @XmlAttribute
     private String a;
     @XmlAttribute
@@ -19,17 +17,13 @@ public class TagCOfTagUnivRes {
     @XmlAttribute
     private String cc;
     @XmlAttribute
-    private String ch;
+    private String ce;
     @XmlAttribute
     private String cr;
     @XmlAttribute
     private String ct;
     @XmlAttribute
     private String e;
-    @XmlAttribute
-    private String er;
-    @XmlAttribute
-    private String erdt;
     @XmlAttribute
     private String fb;
     @XmlAttribute
@@ -45,8 +39,6 @@ public class TagCOfTagUnivRes {
     @XmlAttribute
     private String n;
     @XmlAttribute
-    private String okpo;
-    @XmlAttribute
     private String ou;
     @XmlAttribute
     private String ph;
@@ -55,17 +47,23 @@ public class TagCOfTagUnivRes {
     @XmlAttribute
     private String r;
     @XmlAttribute
-    private String ce;
-    @XmlAttribute
     private String sv;
     @XmlAttribute
     private String tb;
     @XmlAttribute
     private String w;
     @XmlAttribute
+    private String y;
+    @XmlAttribute
+    private String t;
+    @XmlAttribute
+    private String u;
+    @XmlAttribute
     private String zku;
+    @XmlAttribute
+    private String pas;
+    @XmlAttribute
+    private String sbp;
     @XmlElement(name = "ad")
     private TagAdOfTagC tagAd;
-    @XmlElement(name = "confirmation")
-    private TagConfirmationOfTagC tagConfirmation;
 }

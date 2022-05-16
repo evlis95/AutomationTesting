@@ -4,25 +4,22 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:postgresql://localhost:5432/Automation_testing</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/Automation_testing_GPB</property>
         <property name="connection.username">postgres</property>
         <property name="connection.password">sql</property>
+
 
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
 
-        <property name="show_sql">true</property>
-        <property name="format_sql">true</property>
-        <property name="hibernate.use_sql_comments">false</property>
-        <property name="hibernate.generate_statistics">false</property>
+        <property name="show_sql">false</property>
+        <property name="format_sql">false</property>
 
         <property name="hibernate.current_session_context_class">thread</property>
 
-        <mapping class="com.automation_testing.hibernate.pojo.Accounts"/>
-        <mapping class="com.automation_testing.hibernate.pojo.Divisions"/>
-        <mapping class="com.automation_testing.hibernate.pojo.Organizations"/>
-        <mapping class="com.automation_testing.hibernate.pojo.MobileServices"/>
-        <mapping class="com.automation_testing.hibernate.pojo.PaymentOrder"/>
+        <mapping class="com.automation_testing.hibernate.pojo.Division"/>
+        <mapping class="com.automation_testing.hibernate.pojo.Organization"/>
+        <mapping class="com.automation_testing.hibernate.pojo.Account"/>
 
     </session-factory>
 </hibernate-configuration>

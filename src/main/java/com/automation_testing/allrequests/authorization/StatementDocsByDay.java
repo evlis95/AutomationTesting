@@ -54,7 +54,7 @@ public class StatementDocsByDay extends Post {
 
         List<TagAOfTagP> listA = new ArrayList<>();
         for (int i = 0; i < UserAccount.rootTag.getListA().size(); i++) {
-            if (UserAccount.rootTag.getListA().get(i).getV().equals("810")) {
+            if (UserAccount.rootTag.getListA().get(i).getV().equals("810") & UserAccount.rootTag.getListA().get(i).getO().equals(UserFilter.rootTag.getListC().get(0).getI())) {
                 listA.add(new TagAOfTagP((UserAccount.rootTag.getListA().get(i).getA()), (calculatingBICByIdSubDivision(UserAccount.rootTag.getListA().get(i).getF()))));
             }
         }

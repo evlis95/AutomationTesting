@@ -4,10 +4,6 @@ import com.automation_testing.allrequests.authorization.AuthLogin;
 import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.TagReqActOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
-import com.automation_testing.hibernate.pojo.MobileServices;
-import com.automation_testing.hibernate.pojo.PaymentOrder;
-import com.automation_testing.hibernate.service.MobileServicesService;
-import com.automation_testing.hibernate.service.PaymentOrderService;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
 import org.apache.logging.log4j.LogManager;
@@ -83,20 +79,7 @@ public class PutDocCHECKCODE extends Post {
     }
 
     private void writingPayOrdToDB() {
-        PaymentOrderService pos = new PaymentOrderService();
-        PaymentOrder paymentOrder = new PaymentOrder();
-        paymentOrder.setDocBankID(documentBankID);
-        paymentOrder.setDocNum(documentNumber);
-        paymentOrder.setStatus(documentStatusCode);
 
-        MobileServicesService servMob = new MobileServicesService();
-        MobileServices mobileServices = servMob.findOrg(PutDocAction.payerDivisionID);
-        if (mobileServices.getAdv().equals("1") & mobileServices.getReq().equals("1")) {
-            paymentOrder.setAvailForCanReq("1");
-        } else {
-            paymentOrder.setAvailForCanReq("0");
-        }
-        pos.saveOrUpdatePaymentOrder(paymentOrder);
     }
 
     @Override

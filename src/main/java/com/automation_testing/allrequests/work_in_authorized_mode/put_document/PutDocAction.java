@@ -56,12 +56,12 @@ public class PutDocAction extends Post {
 
         List<TagPOfUnivReq> listP = new ArrayList<>();
 
-        put.setTagReqAct(new TagReqActOfUnivReq(DOC_ACTION.toString()));
+        put.setTagReqAct(new TagReqActOfUnivReq((DOC_ACTION.toString()),"0"));
 
         put.setC("put");
         put.setT("document");
         put.setN(documentTypeString);
-        put.setV(3.2);
+        put.setV(3.1);
         put.setS(AuthLogin.sessionID);
 
         MAP_FIELDS_AND_VALUES.forEach((key, value) -> {
@@ -225,10 +225,9 @@ public class PutDocAction extends Post {
                     getDoc = new GetDocument(force.getDocumentBankID(), documentTypeString);
                     getDoc.run();
                 } else {
-                    Check.checkCountAvailableSPSign(rootTag);
+
                     force = new PutDocFORCE(documentID);
                     force.run();
-                    Check.checkCountAvailableSPForce(PutDocFORCE.rootTag);
                     dataForSign = new PutDocDATAFORSIGN(force.getRootTag(), documentID);
                     dataForSign.run();
 
@@ -238,7 +237,7 @@ public class PutDocAction extends Post {
                     getDoc.run();
                 }
             } else {
-                Check.checkCountAvailableSPSign(rootTag);
+
                 dataForSign = new PutDocDATAFORSIGN(rootTag, documentID);
                 dataForSign.run();
                 check = new PutDocCHECKCODE(messPass, documentID, statusCodeForCheck);

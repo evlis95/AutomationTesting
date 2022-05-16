@@ -46,12 +46,4 @@ public class TagFOfTagUnivRes {
     private String z;
     @XmlAttribute
     private String v;
-    @XmlAttribute
-    private String maxLength;
-    @XmlAttribute
-    private String maxLengthError;
-    @XmlAttribute
-    private String ruquiredError;
-    @XmlAttribute
-    private String required;
 }

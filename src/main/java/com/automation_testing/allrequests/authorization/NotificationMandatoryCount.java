@@ -41,7 +41,6 @@ public class NotificationMandatoryCount extends Post {
 
 
         listF.add(tagF);
-        listT.add(new TagTOfTagP("FreeDocFromBank"));
         listT.add(new TagTOfTagP("News"));
         tagP.setListF(listF);
         tagP.setListT(listT);

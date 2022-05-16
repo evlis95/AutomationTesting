@@ -1,61 +1,60 @@
 package com.automation_testing.hibernate.dao;
 
 import com.automation_testing.hibernate.interfaces.CRUDable;
-import com.automation_testing.hibernate.pojo.Accounts;
+import com.automation_testing.hibernate.pojo.Organization;
 import com.automation_testing.utils.HibernateUtils;
 import org.hibernate.Session;
 
 import java.util.List;
 
-public class AccountsDAO implements CRUDable<Accounts> {
+public class OrganizationDAO implements CRUDable<Organization> {
 
-
-    public Accounts findById(String id) {
-        return HibernateUtils.sessionFactory.openSession().get(Accounts.class, id);
+    public Organization findById(String id) {
+        return HibernateUtils.sessionFactory.openSession().get(Organization.class, id);
     }
 
-    public void saveOrUpdate(Accounts account) {
+    public void saveOrUpdate(Organization organization) {
         Session session = HibernateUtils.sessionFactory.getCurrentSession();
         session.getTransaction().begin();
-        session.saveOrUpdate(account);
+        session.saveOrUpdate(organization);
         session.getTransaction().commit();
         session.close();
     }
 
-    public void delete(Accounts account) {
+    public void delete(Organization organization) {
         Session session = HibernateUtils.sessionFactory.getCurrentSession();
         session.getTransaction().begin();
-        session.delete(account);
+        session.delete(organization);
         session.getTransaction().commit();
         session.close();
     }
 
-    public void save(Accounts account) {
+    public void save(Organization organization) {
         Session session = HibernateUtils.sessionFactory.getCurrentSession();
         session.getTransaction().begin();
-        session.save(account);
+        session.save(organization);
         session.getTransaction().commit();
         session.close();
     }
 
-    public void merge(Accounts account) {
+    public void update(Organization organization) {
         Session session = HibernateUtils.sessionFactory.getCurrentSession();
         session.getTransaction().begin();
-        session.merge(account);
+        session.update(organization);
         session.getTransaction().commit();
         session.close();
     }
 
-    public void update(Accounts account) {
+    public void merge(Organization organization) {
         Session session = HibernateUtils.sessionFactory.getCurrentSession();
         session.getTransaction().begin();
-        session.update(account);
+        session.merge(organization);
         session.getTransaction().commit();
         session.close();
     }
 
 
-    public List<Accounts> findAll() {
-        return (List<Accounts>) HibernateUtils.sessionFactory.openSession().createQuery("From Accounts ").list();
+    public List<Organization> findAll() {
+        return (List<Organization>) HibernateUtils.sessionFactory.openSession().createQuery("From Organization").list();
     }
 }

@@ -11,39 +11,41 @@ public class CustomCharacterEscapeHandler implements CharacterEscapeHandler {
         super();
     }
 
-    @Override
-    public void escape(char[] chars, int i, int i1, boolean b, Writer writer) throws IOException {
-        int limit = i + i1;
-        for (int in = i; in < limit; in++) {
-            char c = chars[i];
-            if (c == '&' || c == '<' || c == '>' || c == '\'' || (c == '\"' && b)) {
-                if (in != i)
-                    writer.write(chars, i, in - i);
-                in = in + 1;
-                switch (chars[i]) {
+    public void escape(char[] ch, int start, int length, boolean isAttVal, Writer out) throws IOException {
+        //avoid calling the Writerwrite method too much by assuming
+        //that the escaping occurs rarely.
+        //profiling revealed that this is faster than the naive code.
+        int limit = start + length;
+        for (int i = start; i < limit; i++) {
+            char c = ch[i];
+            if ((c == '&' && isAttVal) || c == '<' || c == '>' || c == '\'' || (c == '\"' && isAttVal) || (c == '\n' && isAttVal)) {
+                if (i != start)
+                    out.write(ch, start, i - start);
+                start = i + 1;
+                switch (ch[i]) {
                     case '&':
-                        writer.write("&amp;");
-                        break;
-                    case '\n':
-                        writer.write("&#xA;");
+                        out.write("&");
                         break;
                     case '<':
-                        writer.write("&lt;");
+                        out.write("<");
                         break;
                     case '>':
-                        writer.write("&gt;");
+                        out.write(">");
                         break;
                     case '\"':
-                        writer.write("&quot;");
+                        out.write("\"");
                         break;
                     case '\'':
-                        writer.write("&apos;");
+                        out.write("'");
+                        break;
+                    case '\n':
+                        out.write("&#10;");
                         break;
                 }
             }
         }
 
-        if (i != limit)
-            writer.write(chars, i, limit - i);
+        if (start != limit)
+            out.write(ch, start, limit - start);
     }
 }

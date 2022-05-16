@@ -14,8 +14,6 @@ import java.io.IOException;
 
 public class AvailableDocument extends Post {
     public static UniversalResponseRootTag rootTag;
-    public static String result;
-    private final Logger LOG = LogManager.getLogger(AvailableDocument.class);
     private final String DOC_TYPE;
     private final String DOC_ID;
 
@@ -52,14 +50,6 @@ public class AvailableDocument extends Post {
         super.run();
         if (codeStatusResponse == 200) {
             rootTag = Post.rootTag;
-            result = rootTag.getListF().get(0).getV();
-            if (result.equals("1")) {
-                LOG.info("Проверка на доступность отзыва документа - PASS");
-                Check.quantityPASS++;
-            } else {
-                LOG.error("Проверка на доступность отзыва документа - FAILED");
-                Check.quantityFAILED++;
-            }
         }
     }
 }

@@ -27,26 +27,9 @@ public class HeadersByDayPayOrd extends Post {
         Check.checkCode200(codeStatusResponse, "HeadersByDayPayOrd");
     }
 
-    private void definingAccWithConnServ() {
-        for (int i = 0; i < UserFilter.rootTag.getListV().size(); i++) {
-            if (UserFilter.rootTag.getListV().get(i).getAdv().equals("1") & UserFilter.rootTag.getListV().get(i).getReq().equals("1")) {
-                DIVISION_WITH_ENABLED_SERVICE_ADV_AND_REQ.add(UserFilter.rootTag.getListV().get(i).getF());
-            }
-        }
-        for (String s : DIVISION_WITH_ENABLED_SERVICE_ADV_AND_REQ) {
-            for (int j = 0; j < UserFilter.rootTag.getListF().size(); j++) {
-                for (int k = 0; k < UserAccount.rootTag.getListA().size(); k++) {
-                    if (s.equals(UserFilter.rootTag.getListF().get(j).getI()) & s.equals(UserAccount.rootTag.getListA().get(k).getF()) & UserAccount.rootTag.getListA().get(k).getV().equals("810")) {
-                        MAP_ACC_AND_BIC.put(UserAccount.rootTag.getListA().get(k).getA(), UserFilter.rootTag.getListF().get(j).getB());
-                    }
-                }
-            }
-        }
-    }
 
     @Override
     protected void createXmlBodyRequest() throws JAXBException, IOException {
-        definingAccWithConnServ();
         UniversalRequestRootTag headersByDay = new UniversalRequestRootTag();
         List<TagAOfTagP> listA = new ArrayList<>();
         List<TagSOfTagF> listS = new ArrayList<>();

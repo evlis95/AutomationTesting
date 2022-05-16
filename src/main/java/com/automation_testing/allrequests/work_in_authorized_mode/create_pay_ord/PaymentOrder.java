@@ -184,24 +184,27 @@ public class PaymentOrder {
 
     private void payToCounterpartyInitialVar() {
         amount = "1200.0";
-        nds = "200.0";
+        nds = "183.05";
         receiver = "OOO BSS";
         receiverAccount = "12345810611111111111";
         receiverBIC = GetFullBankRu.receiverBIC;
         receiverBankName = GetFullBankRu.receiverBankName.replaceAll("\"", "&quot;");
         receiverINN = "1126587769";
-        ground = "\nВ том числе НДС 20.00 % - 200.00 р.";
-        receiverBankType = "20";
+        ground = "\nВ том числе НДС 18.00 % - 183.05 р.";
+        receiverBankType = "";
         receiverCorrAccount = GetFullBankRu.receiverCorrAcc;
         receiverKPP = "772601001";
         receiverPlace = GetFullBankRu.receiverPlace;
         receiverPlaceType = GetFullBankRu.receiverPlaceType;
         ndsCalculationType = "1";
-        ndsPercent = "20.0";
+        ndsPercent = "18.0";
         ndsSystemName = "Vat1";
         paymentType = "2";
-        templateName = "template";
-        saveTemplate = "1";
+        templateName = "";
+        saveTemplate = "0";
+        sendTypeCode = "0";
+
+
     }
 
     private void payToBudgetInitialVar() {
@@ -292,7 +295,7 @@ public class PaymentOrder {
         payerPropertyType = UserFilter.rootTag.getListC().get(0).getE();
         paymentUrgent = "5";
         receiverPropertyType = "";
-        sendType = "";
+        sendType = " ";
         sendTypeCode = "";
         taxPeriodParam2 = "";
         taxPeriodParam3 = "";
@@ -321,7 +324,7 @@ public class PaymentOrder {
     }
 
     private @NotNull String createTime() {
-        long currentTime = System.currentTimeMillis();
+        long currentTime = System.currentTimeMillis()/1000;
         String editTime = Long.toString(currentTime);
         editTime = editTime.substring(0, 8) + "00000";
         return editTime;
@@ -329,7 +332,7 @@ public class PaymentOrder {
 
     private void definingPayAccAndBranchBankRecID() {
         for (int i = 0; i < UserAccount.rootTag.getListA().size(); i++) {
-            if (UserAccount.rootTag.getListA().get(i).getT().equals("1") & UserAccount.rootTag.getListA().get(i).getV().equals("810")) {
+            if (UserAccount.rootTag.getListA().get(i).getT().equals("1") & UserAccount.rootTag.getListA().get(i).getV().equals("810") & UserAccount.rootTag.getListA().get(i).getO().equals(UserFilter.rootTag.getListC().get(0).getI()) ) {
                 branchBankRecordID = UserAccount.rootTag.getListA().get(i).getF();
                 payerAccount = UserAccount.rootTag.getListA().get(i).getA();
                 break;

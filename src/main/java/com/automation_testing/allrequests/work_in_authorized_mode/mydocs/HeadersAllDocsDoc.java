@@ -58,7 +58,7 @@ public class HeadersAllDocsDoc extends Post {
         listF.add(tagF);
 
         mapTagT = new HashMap<>();
-        createRequestedDocAndStatus();
+
         List<TagTOfTagP> setTagT = new ArrayList<>(mapTagT.values());
 
         TagPOfUnivReq tagP = new TagPOfUnivReq(UserFilter.orgId, "0", setTagT, listF);
@@ -91,81 +91,6 @@ public class HeadersAllDocsDoc extends Post {
         } else {
             Check.quantityFAILED++;
             LOG.error("Проверка на наличие документов в ответе на запрос HeadersAllDocsDoc - FAILED");
-        }
-    }
-
-    private void createRequestedDocAndStatus() {
-        for (int i = 0; i < UserFilter.rootTag.getListV().size(); i++) {
-            if (UserFilter.rootTag.getListV().get(i).getAdv().equals("1")) {
-                addObjectInMap("PaymentOrder", PAY_ORD_STAT_CODE);
-            }
-            if (UserFilter.rootTag.getListV().get(i).getReq().equals("1")) {
-                addObjectInMap("CancellationRequest", CAN_REQ_STAT_CODE);
-            }
-            if (UserFilter.rootTag.getListV().get(i).getCtr().equals("1")) {
-                addObjectInMap("CurTransfer", CURR_TRA_STAT_CODE);
-            }
-            if (UserFilter.rootTag.getListV().get(i).getExch().equals("1")) {
-                addObjectInMap("OnlineCurConv", ONLINE_CUR_CONV_STAT_CODE);
-            }
-            if (UserFilter.rootTag.getListV().get(i).getCc().equals("1") || UserFilter.rootTag.getListV().get(i).getDcc().equals("1")) {
-                addObjectInMap("CorpCardNew", CORP_CARD_STAT_CODE);
-                addObjectInMap("CorpCardBlock", CORP_CARD_STAT_CODE);
-                addObjectInMap("CorpCardReissue", CORP_CARD_STAT_CODE);
-                addObjectInMap("CorpCardUnblock", CORP_CARD_STAT_CODE);
-                addObjectInMap("CorpCardAbroadOperReq", CORP_CARD_STAT_CODE);
-            }
-            if (UserFilter.rootTag.getListV().get(i).getOffer().equals("1")) {
-                addObjectInMap("DocFromBank", DOC_FROM_BANK_STAT_CODE);
-            }
-            if (UserFilter.rootTag.getListV().get(i).getMinBalance().equals("1")) {
-                addObjectInMap("MinBalance", MIN_BALANCE_STAT_CODE);
-            }
-            if (UserFilter.rootTag.getListV().get(i).getCr().equals("1")) {
-                addObjectInMap("CreditApplication", CRED_STAT_CODE);
-                addObjectInMap("CreditTerms", CRED_STAT_CODE);
-            }
-            if (UserFilter.rootTag.getListV().get(i).getDep().equals("1")) {
-                addObjectInMap("NewDepositPetition", DEP_LIGHT_STAT_CODE);
-            }
-            if (UserFilter.rootTag.getListV().get(i).getSm().equals("1")) {
-                addObjectInMap("ServiceСonnection", SER_CONN_STAT_CODE);
-                if (UserFilter.rootTag.getListV().get(i).getListContract() != null) {
-                    if (UserFilter.rootTag.getListV().get(i).getListContract().get(i).getTar().equals("1")) {
-                        addObjectInMap("ServiceСonnection", SER_CONN_STAT_CODE);
-                    }
-                }
-            }
-            if (UserFilter.rootTag.getListV().get(i).getNewqr().equals("1")) {
-                addObjectInMap("SystemFastPayQR", SYS_FAST_PAY_QR_STAT_CODE);
-            }
-            if (UserFilter.rootTag.getListV().get(i).getBackpay().equals("1")) {
-                addObjectInMap("SystemFastPayBack", SYS_FAST_PAY_STAT_CODE);
-            }
-            if (UserFilter.rootTag.getListV().get(i).getPaybc().equals("1")) {
-                addObjectInMap("SystemFastPay", SYS_FAST_PAY_STAT_CODE);
-            }
-           /* if (UserFilter.rootTag.getListV().get(i).getDepAdv().equals("1")) { // убрать комментарий когда появится услуга D2BM. DepAdv
-                addObjectInMap("DepositPartialWithdrawal", depAdvStatCode);
-                addObjectInMap("DepositProlongation", depAdvStatCode);
-                addObjectInMap("DepositReplenishment", depAdvStatCode);
-                addObjectInMap("DepositTermination", depAdvStatCode);
-            }*/
-            if (UserFilter.rootTag.getListV().get(i).getAddAcc().equals("1")) {
-                addObjectInMap("AdditionalAcc", ADD_ACC_STAT_CODE);
-            }
-        }
-    }
-
-    private void addObjectInMap(String nameKeyAndDocType, String[] statusCode) {
-        if (mapTagT.get(nameKeyAndDocType) == null) {
-            TagTOfTagP tagT = new TagTOfTagP(nameKeyAndDocType);
-            List<TagAOfTagT> listA = new ArrayList<>();
-            for (String s : statusCode) {
-                listA.add(new TagAOfTagT(s));
-            }
-            tagT.setListA(listA);
-            mapTagT.put(nameKeyAndDocType, tagT);
         }
     }
 

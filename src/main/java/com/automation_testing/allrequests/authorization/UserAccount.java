@@ -2,11 +2,6 @@ package com.automation_testing.allrequests.authorization;
 
 import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
-import com.automation_testing.hibernate.pojo.Accounts;
-import com.automation_testing.hibernate.pojo.Divisions;
-import com.automation_testing.hibernate.pojo.Organizations;
-import com.automation_testing.hibernate.service.DivisionService;
-import com.automation_testing.hibernate.service.OrganizationService;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
 
@@ -35,23 +30,7 @@ public class UserAccount extends Post {
     }
 
     private void parsingDataAndSaveInBD() {
-        OrganizationService organizationService = new OrganizationService();
-        Organizations org = organizationService.findOrg(UserFilter.orgId);
 
-        DivisionService divisionService = new DivisionService();
-        Divisions division;
-        Accounts acc;
-        for (int i = 0; i < rootTag.getListA().size(); i++) {
-            acc = new Accounts();
-            acc.setAccNum(rootTag.getListA().get(i).getA());
-            acc.setId(rootTag.getListA().get(i).getId());
-            acc.setAccNumericalCode(rootTag.getListA().get(i).getV());
-            acc.setType(rootTag.getListA().get(i).getT());
-            division = divisionService.findDivision(rootTag.getListA().get(i).getF());
-            acc.setDivision(division);
-            org.addAccount(acc);
-        }
-        organizationService.merge(org);
     }
 
     @Override

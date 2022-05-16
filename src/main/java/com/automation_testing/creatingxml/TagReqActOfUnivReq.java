@@ -14,8 +14,15 @@ public class TagReqActOfUnivReq {
     private String v;
     @XmlAttribute(name = "DocID")
     private String DocID;
+    @XmlAttribute
+    private String cm;
 
     public TagReqActOfUnivReq(String v) {
         this.v = v;
+    }
+
+    public TagReqActOfUnivReq(String v, String cm) {
+        this.v = v;
+        this.cm = cm;
     }
 }

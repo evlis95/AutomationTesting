@@ -2,7 +2,9 @@ package com.automation_testing.parsingxml;
 
 import lombok.Getter;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 @Getter
@@ -85,5 +87,14 @@ public class UniversalResponseRootTag {
     @XmlElementWrapper(name = "errorList")
     @XmlElement(name = "error")
     private List<TagErrorOfTagUnivRes> listError;
+    @XmlElement(name = "fs")
+    private List<TagFSOFTagUnivRes> listFS;
+    @XmlElement(name = "vs")
+    private List<TagVSOfTagUnivRes> listVS;
+    @XmlElement(name = "i")
+    private TagIOfTagUnivRes tagI;
+    @XmlElement(name = "w")
+    private TagWOfTagUnivRes tagW;
+
 }
 
