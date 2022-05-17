@@ -16,5 +16,7 @@ public class TagDSOfTagUnivRes {
     @XmlElement(name = "m")
     private List<TagMOfTagDS> listM;
     @XmlElement(name = "d")
-    List<TagDOfTagDS> listD;
+    private List<TagDOfTagDS> listD;
+    @XmlElement(name = "r")
+    private List<TagROfTagDS> listR;
 }

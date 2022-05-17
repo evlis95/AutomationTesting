@@ -51,6 +51,7 @@ public class PutDocAction extends Post {
         switch (DOC_TYPE) {
             case PAYMENT_ORDER -> documentTypeString = "PaymentOrder";
             case CANCELLATION_REQUEST -> documentTypeString = "CancellationRequest";
+            case SYSTEM_FAST_PAY -> documentTypeString = "SystemFastPay";
         }
         UniversalRequestRootTag put = new UniversalRequestRootTag();
 

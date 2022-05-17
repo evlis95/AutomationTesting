@@ -11,6 +11,7 @@ import com.automation_testing.allrequests.work_in_authorized_mode.create_cancell
 import com.automation_testing.allrequests.work_in_authorized_mode.create_cancell_req.HeadersByDayPayOrd;
 import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.PaymentOrder;
 import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.PaymentOrderTarget;
+import com.automation_testing.allrequests.work_in_authorized_mode.create_sbp.SBP;
 import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.*;
 import com.automation_testing.allrequests.work_in_authorized_mode.docnumber.DocumentNumber;
 import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.CountAllAllDocsDoc;
@@ -18,6 +19,8 @@ import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.Headers
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.DocumentAction;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.DocumentType;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocAction;
+import com.automation_testing.allrequests.work_in_authorized_mode.sbp.CountAllDocsSBP;
+import com.automation_testing.allrequests.work_in_authorized_mode.sbp.SBPHeadersByDay;
 import com.automation_testing.allrequests.work_in_authorized_mode.template.GetTemplate;
 import com.automation_testing.allrequests.work_in_authorized_mode.template.TemplateHeadersPayOrd;
 import com.automation_testing.checks.Check;
@@ -71,6 +74,11 @@ public class TestRunClassicBox {
     final HeadersAllDocsDoc HEADERS_ALL_DOCS_OF_MY_DOCS = new HeadersAllDocsDoc();
     final HeadersByDayPayOrd HEADERS_BY_DAY_PAY_ORD = new HeadersByDayPayOrd();
     final TemplateHeadersPayOrd TEMPLATE_HEADERS_PAY_ORD = new TemplateHeadersPayOrd();
+    final GetDictTSP GET_DICT_TSP = new GetDictTSP();
+    final CountAllDocsSBP COUNT_ALL_DOCS_SBP = new CountAllDocsSBP();
+    final SBPHeadersByDay SBP_HEADERS_BY_DAY = new SBPHeadersByDay();
+    final GetDictBanksSBP GET_DICT_BANKS_SBP = new GetDictBanksSBP();
+    final GetDictIncomeType GET_DICT_INCOME_TYPE = new GetDictIncomeType();
 
     public TestRunClassicBox() {
     }
@@ -127,6 +135,15 @@ public class TestRunClassicBox {
         // справочник шаблонов платежей и запрос на получение созданного шаблона(указанного в ПП Контрагенту(поле TemplateName))
         requestMap.put("TemplateHeadersPaymentOrder", TEMPLATE_HEADERS_PAY_ORD);
         requestMap.put("GetTemplate", getTemplate);
+        // сбп
+        requestMap.put("GetDictTSP", GET_DICT_TSP);
+        requestMap.put("CountAllDocsSBP", COUNT_ALL_DOCS_SBP);
+        requestMap.put("SBPHeadersByDay", SBP_HEADERS_BY_DAY);
+        requestMap.put("DocNumSystemFastPay", docNumber);
+        requestMap.put("GetDictBanksSBP", GET_DICT_BANKS_SBP);
+        requestMap.put("GetDictIncomeType", GET_DICT_INCOME_TYPE);
+        requestMap.put("PutSBPDocSign", putDoc);
+
 
         LOG.info("Teстирование выполняется\n");
         try {
@@ -189,6 +206,10 @@ public class TestRunClassicBox {
                     case "GetTemplate" -> (getTemplate = new GetTemplate(TemplateHeadersPayOrd.templateID)).run();
 
                     case "AvailableDocument" -> (availableDocument = new AvailableDocument("PaymentOrder", HeadersByDayPayOrd.docID)).run();
+
+                    case "DocNumSystemFastPay" -> (docNumber = new DocumentNumber("SystemFastPay")).run();
+
+                    case "PutSBPDocSign" -> (putDoc = new PutDocAction(DocumentAction.SIGN, new SBP().creatingDocSBP(),DocumentType.SYSTEM_FAST_PAY)).run();
 
                     ////////////////////////////////////////////////////////////////////////////////////
                     default -> {

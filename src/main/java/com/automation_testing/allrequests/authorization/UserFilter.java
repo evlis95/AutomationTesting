@@ -21,6 +21,10 @@ public class UserFilter extends Post {
     public static String orgName;
     public static ArrayList<Organization> orgList = new ArrayList<>();
 
+    private void initiatingAcc() {
+
+    }
+
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag userFilter = new UniversalRequestRootTag();

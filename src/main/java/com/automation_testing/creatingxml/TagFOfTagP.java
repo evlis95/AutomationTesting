@@ -20,6 +20,18 @@ public class TagFOfTagP {
     private String b;
     @XmlAttribute
     private String e;
+    @XmlAttribute
+    private String phone;
+    @XmlAttribute
+    private String tspId;
+    @XmlAttribute
+    private String fromDate;
+    @XmlAttribute
+    private String toDate;
+    @XmlAttribute
+    private String minAmount;
+    @XmlAttribute
+    private String maxAmount;
     @XmlElement(name = "s")
     private List<TagSOfTagF> listS;
     @XmlElement(name = "a")

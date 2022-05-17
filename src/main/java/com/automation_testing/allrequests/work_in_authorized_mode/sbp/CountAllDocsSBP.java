@@ -1,16 +1,19 @@
-package com.automation_testing.allrequests.authorization;
+package com.automation_testing.allrequests.work_in_authorized_mode.sbp;
 
+import com.automation_testing.allrequests.authorization.AuthLogin;
+import com.automation_testing.allrequests.authorization.UserAccount;
+import com.automation_testing.allrequests.authorization.UserFilter;
 import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.*;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
 
 import javax.xml.bind.JAXBException;
-import java.io.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CountAllDocsDocPayOrd extends Post {
+public class CountAllDocsSBP extends Post {
 
     public static UniversalResponseRootTag rootTag;
 
@@ -26,57 +29,38 @@ public class CountAllDocsDocPayOrd extends Post {
     }
 
     @Override
-    protected void createXmlBodyRequest() throws JAXBException {
-        UniversalRequestRootTag countAllDocs = new UniversalRequestRootTag();
+    protected void createXmlBodyRequest() throws JAXBException, IOException {
+        UniversalRequestRootTag sbp = new UniversalRequestRootTag();
+        sbp.setC("countall");
+        sbp.setT("document");
+        sbp.setN("alldocs");
+        sbp.setV(1.0);
+        sbp.setS(AuthLogin.sessionID);
+
         TagPOfUnivReq tagP = new TagPOfUnivReq();
-        List<TagPOfUnivReq> listP = new ArrayList<>();
-        List<TagTOfTagP> listT = new ArrayList<>();
+        tagP.setTagT(new TagTOfTagP("SystemFastPay"));
         TagFOfTagP tagF = new TagFOfTagP();
-        List<TagFOfTagP> listF = new ArrayList<>();
+        tagF.setG(UserFilter.orgId);
         List<TagSOfTagF> listS = new ArrayList<>();
-
-        countAllDocs.setC("countall");
-        countAllDocs.setT("document");
-        countAllDocs.setN("alldocs");
-        countAllDocs.setV(1.0);
-        countAllDocs.setS(AuthLogin.sessionID);
-
-
-        listT.add(new TagTOfTagP("PaymentOrder"));
-
-        tagF.setG(UserFilter.rootTag.getListC().get(0).getI());
-
         for (int i = 0; i < UserAccount.rootTag.getListA().size(); i++) {
-            if (UserAccount.rootTag.getListA().get(i).getV().equals("810") & (UserAccount.rootTag.getListA().get(i).getO().equals(UserFilter.rootTag))) {
+            if (UserAccount.rootTag.getListA().get(i).getV().equals("810") & UserAccount.rootTag.getListA().get(i).getO().equals(UserFilter.orgId)) {
                 listS.add(new TagSOfTagF((UserAccount.rootTag.getListA().get(i).getA()), (calculatingBICByIdSubDivision(UserAccount.rootTag.getListA().get(i).getF()))));
             }
         }
-
         tagF.setListS(listS);
-        listF.add(tagF);
-
-        tagP.setListT(listT);
-        tagP.setListF(listF);
-
-        listP.add(tagP);
-
-        countAllDocs.setListP(listP);
-
-        marshalling(countAllDocs);
+        tagP.setTagF(tagF);
+        sbp.setTagP(tagP);
+        marshalling(sbp);
     }
 
     @Override
-    protected void checkTest() throws IOException {
-        Check.checkCode200(codeStatusResponse, "CountallAlldocsDocumentPayment810");
+    protected void checkTest() throws IOException, JAXBException {
+        Check.checkCode200(codeStatusResponse, "countAllDocsSBP");
     }
 
     @Override
     public void run() throws JAXBException, IOException, InterruptedException {
         super.run();
-        if (codeStatusResponse == 200) {
-            rootTag = Post.rootTag;
-        }
+        rootTag = Post.rootTag;
     }
 }
-
-
