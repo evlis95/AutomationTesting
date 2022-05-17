@@ -51,7 +51,6 @@ public class TestRunClassicBox {
     final AuthRoles AUTH_ROLES = new AuthRoles();
     final BindManageDevice BIND_MANAGE_DEVICE = new BindManageDevice();
     final UnBindManageDevice UNBIND_MANAGE_DEVICE = new UnBindManageDevice();
-    final PushManagePushUserBind PUSH_MANAGE_PUSH_USER_BIND = new PushManagePushUserBind();
     final UserFilter USER_FILTER = new UserFilter();
     final Banner BANNER = new Banner();
     final NotificationMandatoryCount NOTIFICATION_MANDATORY_COUNT = new NotificationMandatoryCount();
@@ -125,7 +124,6 @@ public class TestRunClassicBox {
         requestMap.put("HeadersByDayPayOrd", HEADERS_BY_DAY_PAY_ORD);
         requestMap.put("AvailableDocument", availableDocument);
         requestMap.put("DocNumCanReq", docNumber);
-        requestMap.put("PutCancellationRequestSave", putDoc);
         // справочник шаблонов платежей и запрос на получение созданного шаблона(указанного в ПП Контрагенту(поле TemplateName))
         requestMap.put("TemplateHeadersPaymentOrder", TEMPLATE_HEADERS_PAY_ORD);
         requestMap.put("GetTemplate", getTemplate);
@@ -188,9 +186,9 @@ public class TestRunClassicBox {
                         }
                     }
 
-                    case "PutCancellationRequestSave" -> (putDoc = new PutDocAction(DocumentAction.SAVE, new CancellationRequest().initialCalReqFields(), DocumentType.CANCELLATION_REQUEST)).run();
-
                     case "GetTemplate" -> (getTemplate = new GetTemplate(TemplateHeadersPayOrd.templateID)).run();
+
+                    case "AvailableDocument" -> (availableDocument = new AvailableDocument("PaymentOrder", HeadersByDayPayOrd.docID)).run();
 
                     ////////////////////////////////////////////////////////////////////////////////////
                     default -> {

@@ -39,6 +39,7 @@ public class Division {
         return "Division{" +
                 "id='" + id + '\'' +
                 ", p='" + p + '\'' +
+                ", accountList=" + accountList +
                 '}';
     }
 }

@@ -15,9 +15,7 @@ import org.apache.logging.log4j.Logger;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class CountAllAllDocsDoc extends Post {
     public static UniversalResponseRootTag rootTag;
@@ -33,18 +31,23 @@ public class CountAllAllDocsDoc extends Post {
     @Override
     protected void createXmlBodyRequest() throws JAXBException, IOException {
         UniversalRequestRootTag countAll = new UniversalRequestRootTag();
-        Set<TagTOfTagP> setTOfTagP = new HashSet<>();
-        List<TagFOfTagP> listFOfTagP = new ArrayList<>();
         TagFOfTagP tagF = new TagFOfTagP();
-
+        TagPOfUnivReq tagP = new TagPOfUnivReq();
+        List<TagTOfTagP> listT = new ArrayList<>();
         countAll.setC("countall");
         countAll.setT("document");
         countAll.setN("alldocs");
         countAll.setV(1.0);
         countAll.setS(AuthLogin.sessionID);
 
+        TagTOfTagP tagT = new TagTOfTagP();
+        tagT.setN("CancellationRequest");
         tagF.setG(UserFilter.rootTag.getListC().get(0).getI());
-        listFOfTagP.add(tagF);
+
+        tagP.setTagF(tagF);
+        listT.add(tagT);
+        tagP.setListT(listT);
+        countAll.setTagP(tagP);
         marshalling(countAll);
     }
 
@@ -54,13 +57,11 @@ public class CountAllAllDocsDoc extends Post {
         if (codeStatusResponse == 200) {
             rootTag = Post.rootTag;
             if (rootTag.getListD() != null) {
-                if (tagTQuantity == rootTag.getListD().size()) {
-                    LOG.info("Проверка количества пришедших типов документов в ответе на запрос CountAllAllDocsDoc, в зависимости от тех, которые ушли в запросе - PASS");
-                    Check.quantityPASS++;
-                } else {
-                    LOG.error("Проверка количества пришедших типов документов в ответе на запрос CountAllAllDocsDoc, в зависимости от тех, которые ушли в запросе - FAILED");
-                    Check.quantityFAILED++;
-                }
+                LOG.info("Проверка количества пришедших типов документов в ответе на запрос CountAllAllDocsDoc - PASS");
+                Check.quantityPASS++;
+            } else {
+                LOG.error("Проверка количества пришедших типов документов в ответе на запрос CountAllAllDocsDoc - FAILED");
+                Check.quantityFAILED++;
             }
         }
     }

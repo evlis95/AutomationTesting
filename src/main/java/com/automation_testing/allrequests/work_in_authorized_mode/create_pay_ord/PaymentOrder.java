@@ -200,8 +200,8 @@ public class PaymentOrder {
         ndsPercent = "18.0";
         ndsSystemName = "Vat1";
         paymentType = "2";
-        templateName = "";
-        saveTemplate = "0";
+        templateName = "template";
+        saveTemplate = "1";
         sendTypeCode = "0";
 
 

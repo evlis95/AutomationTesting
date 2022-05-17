@@ -65,4 +65,8 @@ public class TagAOfTagUnivRes {
     private String w;
     @XmlAttribute
     private String y;
+    @XmlAttribute
+    private String withAccept;
+    @XmlAttribute
+    private String sbppay;
 }

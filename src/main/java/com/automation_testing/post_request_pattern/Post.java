@@ -67,6 +67,7 @@ public abstract class Post implements Runnable {
                 .setHeader("Cookie", cookies.toString())
                 .setHeader("DeviceId", "097e2a18390d4111")
                 .setHeader("charset", "utf-8")
+                .setHeader("User-agent","com.bssys.mbcphone.gpbank; 4.1.3.10")
                 .build();
         HttpResponse<String> response = HTTP_CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
         headers = response.headers();

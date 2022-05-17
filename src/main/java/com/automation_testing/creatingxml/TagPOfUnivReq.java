@@ -80,15 +80,19 @@ public class TagPOfUnivReq {
     @XmlAttribute
     private String pushid;
     @XmlElement(name = "a")
-    List<TagAOfTagP> listA;
+    private List<TagAOfTagP> listA;
     @XmlElement(name = "c")
-    List<TagCOfTagP> listC;
+    private List<TagCOfTagP> listC;
     @XmlElement(name = "t")
-    List<TagTOfTagP> listT;
+    private List<TagTOfTagP> listT;
     @XmlElement(name = "f")
-    List<TagFOfTagP> listF;
+    private List<TagFOfTagP> listF;
     @XmlElement(name = "f")
-    TagFOfTagP tagF;
+    private TagFOfTagP tagF;
+    @XmlElement(name = "t")
+    private TagTOfTagP tagT;
+    @XmlElement
+    private String sdkRSA;
 
 
     public TagPOfUnivReq(String i) {
@@ -110,17 +114,17 @@ public class TagPOfUnivReq {
         this.tagF = tagF;
     }
 
+    public TagPOfUnivReq(String p, String g, TagFOfTagP tagF, TagTOfTagP tagT) {
+        this.p = p;
+        this.g = g;
+        this.tagF = tagF;
+        this.tagT = tagT;
+    }
+
     public TagPOfUnivReq(String p, String g, List<TagAOfTagP> listA, TagFOfTagP tagF) {
         this.p = p;
         this.g = g;
         this.listA = listA;
         this.tagF = tagF;
-    }
-
-    public TagPOfUnivReq(String g, String p, List<TagTOfTagP> listT, List<TagFOfTagP> listF) {
-        this.g = g;
-        this.p = p;
-        this.listT = listT;
-        this.listF = listF;
     }
 }

@@ -4,9 +4,9 @@ import com.automation_testing.allrequests.authorization.AuthLogin;
 import com.automation_testing.allrequests.authorization.UserAccount;
 import com.automation_testing.allrequests.authorization.UserFilter;
 import com.automation_testing.checks.Check;
-import com.automation_testing.post_request_pattern.Post;
 import com.automation_testing.creatingxml.*;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
+import com.automation_testing.post_request_pattern.Post;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
@@ -17,10 +17,10 @@ import java.util.Map;
 
 
 public class HeadersByDayPayOrd extends Post {
-    private final Map<String, String> MAP_ACC_AND_BIC = new HashMap<>();
-    private final List<String> DIVISION_WITH_ENABLED_SERVICE_ADV_AND_REQ = new ArrayList<>();
-    private final String[] PAY_ORD_STAT_CODE = {"8", "40", "43", "44", "45", "46", "48"};
     public static UniversalResponseRootTag rootTag;
+    public static String docID;
+    private final Map<String, String> MAP_ACC_AND_BIC = new HashMap<>();
+    private final String[] PAY_ORD_STAT_CODE = {"7"};
 
     @Override
     protected void checkTest() throws IOException {
@@ -38,6 +38,14 @@ public class HeadersByDayPayOrd extends Post {
         headersByDay.setN("PaymentOrder");
         headersByDay.setV(1.0);
         headersByDay.setS(AuthLogin.sessionID);
+
+        for (int i = 0; i < UserAccount.rootTag.getListA().size(); i++) {
+            if (UserAccount.rootTag.getListA().get(i).getV().equals("810") & UserAccount.rootTag.getListA().get(i).getO().equals(UserFilter.rootTag.getListC().get(0).getI())) {
+                listS.add(new TagSOfTagF((UserAccount.rootTag.getListA().get(i).getA()), (calculatingBICByIdSubDivision(UserAccount.rootTag.getListA().get(i).getF()))));
+            }
+        }
+
+
         for (String s : PAY_ORD_STAT_CODE) {
             listA.add(new TagAOfTagP(s));
         }
@@ -52,11 +60,32 @@ public class HeadersByDayPayOrd extends Post {
         marshalling(headersByDay);
     }
 
+    private String calculatingBICByIdSubDivision(String subDivisionId) {
+        String divisionBIC = null;
+        for (int i = 0; i < UserFilter.rootTag.getListF().size(); i++) {
+            if (UserFilter.rootTag.getListF().get(i).getI().equals(subDivisionId)) {
+                divisionBIC = UserFilter.rootTag.getListF().get(i).getB();
+                break;
+            }
+        }
+        return divisionBIC;
+    }
+
+    private void initiationDocID() {
+        for (int i = 0; i < rootTag.getListDS().get(0).getListM().get(0).getListD().get(0).getListF().size(); i++) {
+            if (rootTag.getListDS().get(0).getListM().get(0).getListD().get(0).getListF().get(i).getN().equals("BankRecordID")) {
+                docID = rootTag.getListDS().get(0).getListM().get(0).getListD().get(0).getListF().get(i).getV();
+                break;
+            }
+        }
+    }
+
     @Override
     public void run() throws JAXBException, IOException, InterruptedException {
         super.run();
         if (codeStatusResponse == 200) {
             rootTag = Post.rootTag;
+            initiationDocID();
         }
     }
 }

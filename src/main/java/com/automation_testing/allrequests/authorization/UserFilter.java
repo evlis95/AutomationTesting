@@ -20,7 +20,6 @@ public class UserFilter extends Post {
     public static String orgINN;
     public static String orgName;
     public static ArrayList<Organization> orgList = new ArrayList<>();
-    public static ArrayList<Division> divList = new ArrayList<>();
 
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
@@ -47,6 +46,7 @@ public class UserFilter extends Post {
     }
 
     private void test() {
+        ArrayList<Division> divList = new ArrayList<>();
         Organization org;
         Division div;
         for (int i = 0; i < rootTag.getListC().size(); i++) {
@@ -116,14 +116,6 @@ public class UserFilter extends Post {
                 }
             }
         }
-
-        for (Organization organiz :
-                orgList) {
-            for (int i = 0; i < organiz.getDivisionList().size(); i++) {
-                System.out.println(organiz.getN() + i + organiz.getDivisionList().get(i).toString());
-            }
-        }
-
 
     }
 
