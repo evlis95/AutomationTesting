@@ -50,11 +50,21 @@ public class PutDocDATAFORSIGN extends Post {
 
         dataForSign.setTagReqAct(tagReqAct);
 
-        for (int i = 0; i < UNIV_RES_ROOT_TAG.getListK().size(); i++) {
-            if (UNIV_RES_ROOT_TAG.getListK().get(i).getT().equals("1")) {
-                documentNameSP = UNIV_RES_ROOT_TAG.getListK().get(i).getP();
-                documentUIDSP = UNIV_RES_ROOT_TAG.getListK().get(i).getU();
-                dataForSign.setU(documentUIDSP);
+        if (PutDocAction.documentTypeString.equals("SystemFastPay")) {
+            for (int i = 0; i < UNIV_RES_ROOT_TAG.getListK().size(); i++) {
+                if (UNIV_RES_ROOT_TAG.getListK().get(i).getT().equals("5") ) {
+                    documentNameSP = UNIV_RES_ROOT_TAG.getListK().get(i).getP();
+                    documentUIDSP = UNIV_RES_ROOT_TAG.getListK().get(i).getU();
+                    dataForSign.setU(documentUIDSP);
+                }
+            }
+        } else {
+            for (int i = 0; i < UNIV_RES_ROOT_TAG.getListK().size(); i++) {
+                if (UNIV_RES_ROOT_TAG.getListK().get(i).getT().equals("1") ) {
+                    documentNameSP = UNIV_RES_ROOT_TAG.getListK().get(i).getP();
+                    documentUIDSP = UNIV_RES_ROOT_TAG.getListK().get(i).getU();
+                    dataForSign.setU(documentUIDSP);
+                }
             }
         }
         marshalling(dataForSign);

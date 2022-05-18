@@ -219,32 +219,49 @@ public class PutDocAction extends Post {
         GetDocument getDoc;
 
         private void executing() throws JAXBException, IOException, InterruptedException {
-            if (rootTag.getListC() != null) {
-                if (rootTag.getListC().get(0).getCe().equals("1")) {
-                    force = new PutDocFORCE(documentID);
-                    force.run();
-                    getDoc = new GetDocument(force.getDocumentBankID(), documentTypeString);
-                    getDoc.run();
+            if (documentTypeString.equals("SystemFastPay")) {
+                if (rootTag.getListC() != null) {
+                    if (rootTag.getListC().get(0).getCe().equals("1")) {
+                        force = new PutDocFORCE(documentID);
+                        force.run();
+                    } else {
+                        force = new PutDocFORCE(documentID);
+                        force.run();
+                        dataForSign = new PutDocDATAFORSIGN(force.getRootTag(), documentID);
+                        dataForSign.run();
+                    }
+                } else {
+                    dataForSign = new PutDocDATAFORSIGN(rootTag, documentID);
+                    dataForSign.run();
+                }
+            } else {
+                if (rootTag.getListC() != null) {
+                    if (rootTag.getListC().get(0).getCe().equals("1")) {
+                        force = new PutDocFORCE(documentID);
+                        force.run();
+                        getDoc = new GetDocument(force.getDocumentBankID(), documentTypeString);
+                        getDoc.run();
+                    } else {
+
+                        force = new PutDocFORCE(documentID);
+                        force.run();
+                        dataForSign = new PutDocDATAFORSIGN(force.getRootTag(), documentID);
+                        dataForSign.run();
+
+                        check = new PutDocCHECKCODE(messPass, documentID, statusCodeForCheck);
+                        check.run();
+                        getDoc = new GetDocument(check.getDocumentBankID(), documentTypeString);
+                        getDoc.run();
+                    }
                 } else {
 
-                    force = new PutDocFORCE(documentID);
-                    force.run();
-                    dataForSign = new PutDocDATAFORSIGN(force.getRootTag(), documentID);
+                    dataForSign = new PutDocDATAFORSIGN(rootTag, documentID);
                     dataForSign.run();
-
                     check = new PutDocCHECKCODE(messPass, documentID, statusCodeForCheck);
                     check.run();
                     getDoc = new GetDocument(check.getDocumentBankID(), documentTypeString);
                     getDoc.run();
                 }
-            } else {
-
-                dataForSign = new PutDocDATAFORSIGN(rootTag, documentID);
-                dataForSign.run();
-                check = new PutDocCHECKCODE(messPass, documentID, statusCodeForCheck);
-                check.run();
-                getDoc = new GetDocument(check.getDocumentBankID(), documentTypeString);
-                getDoc.run();
             }
         }
     }
