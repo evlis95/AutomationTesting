@@ -2,38 +2,44 @@ package com.automation_testing.testruns;
 
 import com.automation_testing.allrequests.authorization.*;
 import com.automation_testing.allrequests.connect.*;
-import com.automation_testing.allrequests.managedevice.*;
+import com.automation_testing.allrequests.managedevice.BindManageDevice;
+import com.automation_testing.allrequests.managedevice.UnBindManageDevice;
 import com.automation_testing.allrequests.work_in_authorized_mode.create_cancell_req.AvailableDocument;
 import com.automation_testing.allrequests.work_in_authorized_mode.create_cancell_req.CancellationRequest;
+import com.automation_testing.allrequests.work_in_authorized_mode.create_cancell_req.HeadersByDayPayOrd;
+import com.automation_testing.allrequests.work_in_authorized_mode.create_letter.Letter;
+import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.PaymentOrder;
+import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.PaymentOrderTarget;
+import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.*;
+import com.automation_testing.allrequests.work_in_authorized_mode.docnumber.DocumentNumber;
+import com.automation_testing.allrequests.work_in_authorized_mode.letters.HeadersFreeDocFromBank;
+import com.automation_testing.allrequests.work_in_authorized_mode.letters.HeadersFreeDocToBank;
+import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.CountAllAllDocsDoc;
+import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.HeadersAllDocsDoc;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.DocumentAction;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.DocumentType;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocAction;
-import com.automation_testing.allrequests.work_in_authorized_mode.create_cancell_req.HeadersByDayPayOrd;
-import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.*;
-import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.GetDictRemoteCorrespDictionary;
-import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.*;
-import com.automation_testing.allrequests.work_in_authorized_mode.docnumber.DocumentNumber;
-import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.CountAllAllDocsDoc;
-import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.HeadersAllDocsDoc;
 import com.automation_testing.allrequests.work_in_authorized_mode.template.GetTemplate;
 import com.automation_testing.allrequests.work_in_authorized_mode.template.TemplateHeadersPayOrd;
 import com.automation_testing.checks.Check;
-import com.automation_testing.hibernate.pojo.MobileServices;
-import com.automation_testing.hibernate.service.MobileServicesService;
 import com.automation_testing.interfaces.Runnable;
 import com.automation_testing.post_request_pattern.Post;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.xml.bind.JAXBException;
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 public class TestRunClassicBox {
 
     final static Logger LOG = LogManager.getLogger(TestRunClassicBox.class);
-
+    public static GetTemplate getTemplate;
+    public static AvailableDocument availableDocument;
+    public static PutDocAction putDoc;
+    public static DocumentNumber docNumber;
     final Bank BANK = new Bank();
     final Localization LOCALIZATION = new Localization();
     final ManagePushBind MANAGE_PUSH_BIND = new ManagePushBind();
@@ -71,10 +77,8 @@ public class TestRunClassicBox {
     final HeadersAllDocsDoc HEADERS_ALL_DOCS_OF_MY_DOCS = new HeadersAllDocsDoc();
     final HeadersByDayPayOrd HEADERS_BY_DAY_PAY_ORD = new HeadersByDayPayOrd();
     final TemplateHeadersPayOrd TEMPLATE_HEADERS_PAY_ORD = new TemplateHeadersPayOrd();
-    public static GetTemplate getTemplate;
-    public static AvailableDocument availableDocument;
-    public static PutDocAction putDoc;
-    public static DocumentNumber docNumber;
+    final HeadersFreeDocFromBank HEADERS_FREE_DOC_FROM_BANK = new HeadersFreeDocFromBank();
+    final HeadersFreeDocToBank HEADERS_FREE_DOC_TO_BANK = new HeadersFreeDocToBank();
 
     public TestRunClassicBox() {
     }
@@ -155,6 +159,13 @@ public class TestRunClassicBox {
         // справочник шаблонов платежей и запрос на получение созданного шаблона(указанного в ПП Контрагенту(поле TemplateName))
         requestMap.put("TemplateHeadersPaymentOrder", TEMPLATE_HEADERS_PAY_ORD);
         requestMap.put("GetTemplate", getTemplate);
+        // письма
+        requestMap.put("HeadersFreeDocFromBank", HEADERS_FREE_DOC_FROM_BANK);
+        requestMap.put("HeadersFreeDocToBank", HEADERS_FREE_DOC_TO_BANK);
+        requestMap.put("DocNumFreeDocToBankSave", docNumber);
+        requestMap.put("PutFreeDocToBankSave", putDoc);
+        requestMap.put("DocNumFreeDocToBankSignGo", docNumber);
+        requestMap.put("PutFreeDocToBankSignGo", putDoc);
 
         LOG.info("Teстирование выполняется\n");
         try {
@@ -168,7 +179,7 @@ public class TestRunClassicBox {
                             "DocNumPaymOrderBudSign",
                             "DocNumPaymOrderBudSignGo" -> new DocumentNumber("PaymentOrder").run();
 
-                    case "DocNumCanReq" -> new DocumentNumber("CancellationRequest").run();
+                    case "DocNumCanReq" -> (docNumber = new DocumentNumber("CancellationRequest")).run();
 
                     case "DocNumPaymOrderYSSAve",
                             "DocNumPaymOrderYSSign",
@@ -249,6 +260,13 @@ public class TestRunClassicBox {
 
                     case "GetTemplate" -> (getTemplate = new GetTemplate(TemplateHeadersPayOrd.templateID)).run();
 
+                    case "DocNumFreeDocToBankSave" -> (docNumber = new DocumentNumber("FreeDocToBank")).run();
+
+                    case "PutFreeDocToBankSave" -> (putDoc = new PutDocAction(DocumentAction.SAVE, new Letter().creatingLetterFields(), DocumentType.FREE_DOC_TO_BANK)).run();
+
+                    case "PutFreeDocToBankSignGo" -> (putDoc = new PutDocAction(DocumentAction.SIGN_GO, new Letter().creatingLetterFields(), DocumentType.FREE_DOC_TO_BANK)).run();
+
+                    case "DocNumFreeDocToBankSignGo" -> (docNumber = new DocumentNumber("FreeDocToBank")).run();
                     ////////////////////////////////////////////////////////////////////////////////////
                     default -> {
                         Runnable request = (Runnable) map.getValue();

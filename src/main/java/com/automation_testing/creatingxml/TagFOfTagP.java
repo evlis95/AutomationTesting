@@ -1,5 +1,6 @@
 package com.automation_testing.creatingxml;
 
+import com.automation_testing.parsingxml.TagCOfTagF;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -10,6 +11,10 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class TagFOfTagP {
+    @XmlAttribute
+    private String o;
+    @XmlAttribute
+    private String w;
     @XmlAttribute
     private String g;
     @XmlAttribute
@@ -28,6 +33,8 @@ public class TagFOfTagP {
     private TagGOfTagF tagG;
     @XmlElement(name = "t")
     private TagTOfTagF tagT;
+    @XmlElement(name = "c")
+    private TagCOfTagF tagC;
 
 
     public TagFOfTagP(String b, String e) {

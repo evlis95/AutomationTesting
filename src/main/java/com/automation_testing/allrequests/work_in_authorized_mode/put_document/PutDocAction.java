@@ -51,17 +51,19 @@ public class PutDocAction extends Post {
         switch (DOC_TYPE) {
             case PAYMENT_ORDER -> documentTypeString = "PaymentOrder";
             case CANCELLATION_REQUEST -> documentTypeString = "CancellationRequest";
+            case SYSTEM_FAST_PAY -> documentTypeString = "SystemFastPay";
+            case FREE_DOC_TO_BANK -> documentTypeString = "FreeDocToBank";
         }
         UniversalRequestRootTag put = new UniversalRequestRootTag();
 
         List<TagPOfUnivReq> listP = new ArrayList<>();
 
-        put.setTagReqAct(new TagReqActOfUnivReq(DOC_ACTION.toString()));
+        put.setTagReqAct(new TagReqActOfUnivReq((DOC_ACTION.toString())));
 
         put.setC("put");
         put.setT("document");
         put.setN(documentTypeString);
-        put.setV(3.2);
+        put.setV(3.1);
         put.setS(AuthLogin.sessionID);
 
         MAP_FIELDS_AND_VALUES.forEach((key, value) -> {
@@ -175,6 +177,13 @@ public class PutDocAction extends Post {
                     messPass = "Документ запроса на отзыв успешно подписан";
                 } else {
                     messPass = "Документ запроса на отзыв успешно подписан и отправлен";
+                }
+            }
+            case FREE_DOC_TO_BANK -> {
+                if (DOC_ACTION.toString().equals("SIGN")) {
+                    messPass = "Письмо в банк успешно подписано";
+                } else {
+                    messPass = "Письмо в банк успешно подписано и отправлено";
                 }
             }
 
