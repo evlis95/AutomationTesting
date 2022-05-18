@@ -7,13 +7,15 @@ import com.automation_testing.allrequests.connect.VersionInfo;
 import com.automation_testing.allrequests.managedevice.BindManageDevice;
 import com.automation_testing.allrequests.managedevice.UnBindManageDevice;
 import com.automation_testing.allrequests.work_in_authorized_mode.create_cancell_req.AvailableDocument;
-import com.automation_testing.allrequests.work_in_authorized_mode.create_cancell_req.CancellationRequest;
 import com.automation_testing.allrequests.work_in_authorized_mode.create_cancell_req.HeadersByDayPayOrd;
+import com.automation_testing.allrequests.work_in_authorized_mode.create_letter.Letter;
 import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.PaymentOrder;
 import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.PaymentOrderTarget;
 import com.automation_testing.allrequests.work_in_authorized_mode.create_sbp.SBP;
 import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.*;
 import com.automation_testing.allrequests.work_in_authorized_mode.docnumber.DocumentNumber;
+import com.automation_testing.allrequests.work_in_authorized_mode.letters.HeadersFreeDocFromBank;
+import com.automation_testing.allrequests.work_in_authorized_mode.letters.HeadersFreeDocToBank;
 import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.CountAllAllDocsDoc;
 import com.automation_testing.allrequests.work_in_authorized_mode.mydocs.HeadersAllDocsDoc;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.DocumentAction;
@@ -79,6 +81,8 @@ public class TestRunClassicBox {
     final SBPHeadersByDay SBP_HEADERS_BY_DAY = new SBPHeadersByDay();
     final GetDictBanksSBP GET_DICT_BANKS_SBP = new GetDictBanksSBP();
     final GetDictIncomeType GET_DICT_INCOME_TYPE = new GetDictIncomeType();
+    final HeadersFreeDocFromBank HEADERS_FREE_DOC_FROM_BANK = new HeadersFreeDocFromBank();
+    final HeadersFreeDocToBank HEADERS_FREE_DOC_TO_BANK = new HeadersFreeDocToBank();
 
     public TestRunClassicBox() {
     }
@@ -143,7 +147,11 @@ public class TestRunClassicBox {
         requestMap.put("GetDictBanksSBP", GET_DICT_BANKS_SBP);
         requestMap.put("GetDictIncomeType", GET_DICT_INCOME_TYPE);
         requestMap.put("PutSBPDocSign", putDoc);
-
+        // письма
+        requestMap.put("HeadersFreeDocFromBank", HEADERS_FREE_DOC_FROM_BANK);
+        requestMap.put("HeadersFreeDocToBank", HEADERS_FREE_DOC_TO_BANK);
+        requestMap.put("DocNumFreeDocToBank", docNumber);
+        requestMap.put("PutFreeDocToBankSave", putDoc);
 
         LOG.info("Teстирование выполняется\n");
         try {
@@ -209,8 +217,11 @@ public class TestRunClassicBox {
 
                     case "DocNumSystemFastPay" -> (docNumber = new DocumentNumber("SystemFastPay")).run();
 
-                    case "PutSBPDocSign" -> (putDoc = new PutDocAction(DocumentAction.SIGN, new SBP().creatingDocSBP(),DocumentType.SYSTEM_FAST_PAY)).run();
+                    case "PutSBPDocSign" -> (putDoc = new PutDocAction(DocumentAction.SIGN, new SBP().creatingDocSBP(), DocumentType.SYSTEM_FAST_PAY)).run();
 
+                    case "DocNumFreeDocToBank" -> (docNumber = new DocumentNumber("FreeDocToBank")).run();
+
+                    case "PutFreeDocToBankSave" -> (putDoc = new PutDocAction(DocumentAction.SAVE, new Letter().creatingLetterFields(), DocumentType.FREE_DOC_TO_BANK)).run();
                     ////////////////////////////////////////////////////////////////////////////////////
                     default -> {
                         Runnable request = (Runnable) map.getValue();
