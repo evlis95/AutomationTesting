@@ -1,7 +1,7 @@
-package com.automation_testing.allrequests.work_in_authorized_mode.create_cancell_req;
+package com.automation_testing.allrequests.work_in_authorized_mode.creating_keysandvalues_fields_map;
 
 
-import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.PaymentOrder;
+import com.automation_testing.allrequests.work_in_authorized_mode.creating_keysandvalues_fields_map.PaymentOrder;
 import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.PaymentOrderTarget;
 import com.automation_testing.allrequests.work_in_authorized_mode.docnumber.DocumentNumber;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocAction;

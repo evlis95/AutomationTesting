@@ -1,4 +1,4 @@
-package com.automation_testing.allrequests.work_in_authorized_mode.create_letter;
+package com.automation_testing.allrequests.work_in_authorized_mode.creating_keysandvalues_fields_map;
 
 import com.automation_testing.allrequests.authorization.UserFilter;
 import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.GetDictMessageType;
