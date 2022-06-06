@@ -74,11 +74,12 @@ public class HeadersAllDocsDoc extends Post {
         SimpleDateFormat format = new SimpleDateFormat("dd");
         Date date = new Date();
         String data = format.format(date);
+
         if (rootTag.getListDS() != null) {
             if (rootTag.getListDS().get(0).getListM() != null) {
                 boolean result = false;
                 for (int i = 0; i < rootTag.getListDS().get(0).getListM().size(); i++) {
-                    if(rootTag.getListDS().get(0).getListM().get(i).getN().contains(data)) {
+                    if(rootTag.getListDS().get(0).getListM().get(i).getN().contains(data) || (rootTag.getListDS().get(0).getListM().get(i).getN().contains(data.substring(1)))) {
                         for (int j = 0; j < rootTag.getListDS().get(0).getListM().get(i).getListD().size(); j++) {
                             if (rootTag.getListDS().get(0).getListM().get(i).getListD().get(j).getType().equals("PaymentOrder")) {
                                 result = true;
@@ -118,7 +119,7 @@ public class HeadersAllDocsDoc extends Post {
             if (UserFilter.rootTag.getListV().get(i).getExch().equals("1")) {
                 addObjectInMap("OnlineCurConv", onlineCurConvStatCode);
             }
-            if (UserFilter.rootTag.getListV().get(i).getCc().equals("1") || UserFilter.rootTag.getListV().get(i).getDcc().equals("1")) {
+            if (UserFilter.rootTag.getListV().get(i).getCc().equals("1")) {
                 addObjectInMap("CorpCardNew", corpCardStatCode);
                 addObjectInMap("CorpCardBlock", corpCardStatCode);
                 addObjectInMap("CorpCardReissue", corpCardStatCode);
