@@ -2,7 +2,7 @@ package com.automation_testing.post_request_pattern;
 
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.generalsettings.Settings;
-import com.automation_testing.interfaces.Runnable;
+import com.automation_testing.interfaces.Launchable;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.utils.JAXBUtils;
 import com.automation_testing.utils.PrintDataInLogUtils;
@@ -18,7 +18,7 @@ import java.net.http.HttpResponse;
 import java.nio.file.Path;
 import java.time.Duration;
 
-public abstract class Post implements Runnable {
+public abstract class Post implements Launchable {
     public static final String PATH_REQUEST_BODY = ".\\src\\main\\java\\com\\automation_testing\\xmlfile\\request.xml";
     public static String bodyResponse;
     public static UniversalResponseRootTag rootTag;

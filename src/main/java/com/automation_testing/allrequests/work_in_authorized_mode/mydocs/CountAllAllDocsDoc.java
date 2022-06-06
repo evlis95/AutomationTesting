@@ -92,19 +92,8 @@ public class CountAllAllDocsDoc extends Post {
                 setTOfTagP.add(new TagTOfTagP("CreditApplication "));
                 setTOfTagP.add(new TagTOfTagP("CreditTerms"));
             }
-            /*if (UserFilter.rootTag.getListV().get(i).getDepAdv().equals("1")) { // убрать комментарий когда запилят услугу D2BM. depAdv
-                setTOfTagP.add(new TagTOfTagP("DepositPartialWithdrawal"));
-                setTOfTagP.add(new TagTOfTagP("DepositProlongation"));
-                setTOfTagP.add(new TagTOfTagP("DepositReplenishment"));
-                setTOfTagP.add(new TagTOfTagP("DepositTermination"));
-            }*/
             if (UserFilter.rootTag.getListV().get(i).getSm().equals("1")) {
                 setTOfTagP.add(new TagTOfTagP("ServiceСonnection"));
-                if (UserFilter.rootTag.getListV().get(i).getListContract() != null) {
-                    if (UserFilter.rootTag.getListV().get(i).getListContract().get(i).getTariff().equals("1")) {
-                        setTOfTagP.add(new TagTOfTagP("ServiceСonnection"));
-                    }
-                }
             }
             tagTQuantity = setTOfTagP.size();
         }

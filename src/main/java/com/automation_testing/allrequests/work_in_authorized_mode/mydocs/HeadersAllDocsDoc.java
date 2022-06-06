@@ -130,11 +130,6 @@ public class HeadersAllDocsDoc extends Post {
             }
             if (UserFilter.rootTag.getListV().get(i).getSm().equals("1")) {
                 addObjectInMap("ServiceСonnection", SER_CONN_STAT_CODE);
-                if (UserFilter.rootTag.getListV().get(i).getListContract() != null) {
-                    if (UserFilter.rootTag.getListV().get(i).getListContract().get(i).getTar().equals("1")) {
-                        addObjectInMap("ServiceСonnection", SER_CONN_STAT_CODE);
-                    }
-                }
             }
             if (UserFilter.rootTag.getListV().get(i).getNewqr().equals("1")) {
                 addObjectInMap("SystemFastPayQR", SYS_FAST_PAY_QR_STAT_CODE);
@@ -145,12 +140,6 @@ public class HeadersAllDocsDoc extends Post {
             if (UserFilter.rootTag.getListV().get(i).getPaybc().equals("1")) {
                 addObjectInMap("SystemFastPay", SYS_FAST_PAY_STAT_CODE);
             }
-           /* if (UserFilter.rootTag.getListV().get(i).getDepAdv().equals("1")) { // убрать комментарий когда появится услуга D2BM. DepAdv
-                addObjectInMap("DepositPartialWithdrawal", depAdvStatCode);
-                addObjectInMap("DepositProlongation", depAdvStatCode);
-                addObjectInMap("DepositReplenishment", depAdvStatCode);
-                addObjectInMap("DepositTermination", depAdvStatCode);
-            }*/
             if (UserFilter.rootTag.getListV().get(i).getAddAcc().equals("1")) {
                 addObjectInMap("AdditionalAcc", ADD_ACC_STAT_CODE);
             }

@@ -22,7 +22,7 @@ import com.automation_testing.allrequests.work_in_authorized_mode.put_document.P
 import com.automation_testing.allrequests.work_in_authorized_mode.template.GetTemplate;
 import com.automation_testing.allrequests.work_in_authorized_mode.template.TemplateHeadersPayOrd;
 import com.automation_testing.checks.Check;
-import com.automation_testing.interfaces.Runnable;
+import com.automation_testing.interfaces.Launchable;
 import com.automation_testing.post_request_pattern.Post;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -269,7 +269,7 @@ public class TestRunClassicBox {
                     case "DocNumFreeDocToBankSignGo" -> (docNumber = new DocumentNumber("FreeDocToBank")).run();
                     ////////////////////////////////////////////////////////////////////////////////////
                     default -> {
-                        Runnable request = (Runnable) map.getValue();
+                        Launchable request = (Launchable) map.getValue();
                         request.run();
                     }
                 }
