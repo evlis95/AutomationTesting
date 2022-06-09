@@ -80,30 +80,6 @@ public class UserFilter extends Post {
             if (rootTag.getListV().get(0).getDep().equals("1")) {
                 stringBuffer.append("D2BM. Депозиты\n");
             }
-            if (rootTag.getListV().get(0).getCr().equals("1")) {
-                stringBuffer.append("D2BM. Кредиты\n");
-            }
-            if (rootTag.getListV().get(0).getAddAcc().equals("1")) {
-                stringBuffer.append("D2BM. Заявка на открытие счета\n");
-            }
-            if (rootTag.getListV().get(0).getOffer().equals("1")) {
-                stringBuffer.append("D2BM. Документы из банка\n");
-            }
-            if (rootTag.getListV().get(0).getSm().equals("1")) {
-                stringBuffer.append("D2BM. Управление услугами\n");
-            }
-            if (rootTag.getListV().get(0).getDcc().equals("1")) {
-                stringBuffer.append("D2BM. Цифровые карты\n");
-            }
-            if (rootTag.getListV().get(0).getaPay().equals("1")) {
-                stringBuffer.append("D2BM. Apple Pay\n");
-            }
-            if (rootTag.getListV().get(0).getgPay().equals("1")) {
-                stringBuffer.append("D2BM. Google Pay\n");
-            }
-            if (rootTag.getListV().get(0).getsPay().equals("1")) {
-                stringBuffer.append("D2BM. Samsung Pay\n");
-            }
             if (rootTag.getListV().get(0).getWarn().equals("1")) {
                 stringBuffer.append("D2BM. Ограничения и картотеки\n");
             }
@@ -124,18 +100,6 @@ public class UserFilter extends Post {
             }
             if (rootTag.getListV().get(0).getExch().equals("1")) {
                 stringBuffer.append("D2BM. Обмен валюты\n");
-            }
-            if (rootTag.getListV().get(0).getNewqr().equals("1")) {
-                stringBuffer.append("D2BM. Генерация QR\n");
-            }
-            if (rootTag.getListV().get(0).getPaybc().equals("1")) {
-                stringBuffer.append("D2BM. Переводы СБП\n");
-            }
-            if (rootTag.getListV().get(0).getBackpay().equals("1")) {
-                stringBuffer.append("D2BM. Возвраты СБП\n");
-            }
-            if (rootTag.getListV().get(0).getMinBalance().equals("1")) {
-                stringBuffer.append("D2BM. НСО\n");
             }
         } else {
             for (int i = 1; i < rootTag.getListF().size() + 1; i++) {
@@ -170,69 +134,6 @@ public class UserFilter extends Post {
                         if (rootTag.getListV().get(j).getCc().equals("1")) {
                             stringBuffer.append("D2BM. Корпоративные карты\n");
                         }
-                      /*  if (rootTag.getListV().get(j).getBn().equals("1")) {
-                            stringBuffer.append("D2BM. Канал продаж\n");
-                        }
-                        if (rootTag.getListV().get(j).getDep().equals("1")) {
-                            stringBuffer.append("D2BM. Депозиты\n");
-                        }
-                        if (rootTag.getListV().get(j).getCr().equals("1")) {
-                            stringBuffer.append("D2BM. Кредиты\n");
-                        }
-                        if (rootTag.getListV().get(j).getAddAcc().equals("1")) {
-                            stringBuffer.append("D2BM. Заявка на открытие счета\n");
-                        }
-                        if (rootTag.getListV().get(j).getOffer().equals("1")) {
-                            stringBuffer.append("D2BM. Документы из банка\n");
-                        }
-                        if (rootTag.getListV().get(j).getSm().equals("1")) {
-                            stringBuffer.append("D2BM. Управление услугами\n");
-                        }
-                        if (rootTag.getListV().get(j).getDcc().equals("1")) {
-                            stringBuffer.append("D2BM. Цифровые карты\n");
-                        }
-                        if (rootTag.getListV().get(j).getaPay().equals("1")) {
-                            stringBuffer.append("D2BM. Apple Pay\n");
-                        }
-                        if (rootTag.getListV().get(j).getgPay().equals("1")) {
-                            stringBuffer.append("D2BM. Google Pay\n");
-                        }
-                        if (rootTag.getListV().get(j).getsPay().equals("1")) {
-                            stringBuffer.append("D2BM. Samsung Pay\n");
-                        }
-                        if (rootTag.getListV().get(j).getWarn().equals("1")) {
-                            stringBuffer.append("D2BM. Ограничения и картотеки\n");
-                        }
-                        if (rootTag.getListV().get(j).getDocflow().equals("1")) {
-                            stringBuffer.append("D2BM. Документооборот\n");
-                        }
-                        if (rootTag.getListV().get(j).getDtb().equals("1")) {
-                            stringBuffer.append("D2BM. Письма в банк\n");
-                        }
-                        if (rootTag.getListV().get(j).getDfb().equals("1")) {
-                            stringBuffer.append("D2BM. Письма из банка\n");
-                        }
-                        if (rootTag.getListV().get(j).getCtr().equals("1")) {
-                            stringBuffer.append("D2BM. Валютный перевод\n");
-                        }
-                        if (rootTag.getListV().get(j).getCurracc().equals("1")) {
-                            stringBuffer.append("D2BM. Отображение информации по валютным счетам\n");
-                        }
-                        if (rootTag.getListV().get(j).getExch().equals("1")) {
-                            stringBuffer.append("D2BM. Обмен валюты\n");
-                        }
-                        if (rootTag.getListV().get(j).getNewqr().equals("1")) {
-                            stringBuffer.append("D2BM. Генерация QR\n");
-                        }
-                        if (rootTag.getListV().get(j).getPaybc().equals("1")) {
-                            stringBuffer.append("D2BM. Переводы СБП\n");
-                        }
-                        if (rootTag.getListV().get(j).getBackpay().equals("1")) {
-                            stringBuffer.append("D2BM. Возвраты СБП\n");
-                        }
-                        if (rootTag.getListV().get(j).getMinBalance().equals("1")) {
-                            stringBuffer.append("D2BM. НСО\n");
-                        }*/
                     }
                 }
             }

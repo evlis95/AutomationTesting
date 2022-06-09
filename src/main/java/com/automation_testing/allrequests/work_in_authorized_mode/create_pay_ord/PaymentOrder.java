@@ -225,7 +225,7 @@ public class PaymentOrder {
         docDateParam3 = "2022";
         docNumParam1 = "";
         docNumParam2 = "12345";
-        payGrndParam = "АП";
+        payGrndParam = "0";
         codeUIP = "0";
         ndsSystemName = "VatZero";
         paymentType = "3";
