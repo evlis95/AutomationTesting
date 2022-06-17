@@ -5,10 +5,14 @@ import com.automation_testing.generalsettings.Settings;
 import com.automation_testing.interfaces.Launchable;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.utils.JAXBUtils;
-import com.automation_testing.utils.PrintDataInLogUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.bind.JAXBException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.StringReader;
 import java.net.InetSocketAddress;
 import java.net.ProxySelector;
 import java.net.URI;
@@ -59,11 +63,35 @@ public abstract class Post implements Launchable {
         if (codeStatusResponse == 200) {
             rootTag = unmarshalling();
         } else {
-            PrintDataInLogUtils.printReqAndRes();
+            PrintDataInLog.printReqAndRes();
         }
     }
 
     protected abstract void createXmlBodyRequest() throws JAXBException, IOException;
 
     protected abstract void checkTest() throws IOException, JAXBException;
+}
+
+class PrintDataInLog {
+    private static final Logger LOG = LogManager.getLogger(PrintDataInLog.class);
+
+    public static void printReqAndRes() throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(Post.PATH_REQUEST_BODY));
+        StringBuilder stringBuilder = new StringBuilder();
+        String line;
+        LOG.warn("Запрос:");
+        while ((line = bufferedReader.readLine()) != null) {
+            stringBuilder.append(line).append("\n");
+        }
+        bufferedReader.close();
+        LOG.warn(stringBuilder.toString());
+        LOG.warn("Ответ:");
+        StringBuilder stringBuilder1 = new StringBuilder();
+        bufferedReader = new BufferedReader(new StringReader(Post.bodyResponse));
+        while ((line = bufferedReader.readLine()) != null) {
+            stringBuilder1.append(line).append("\n");
+        }
+        bufferedReader.close();
+        LOG.warn(stringBuilder1.toString());
+    }
 }

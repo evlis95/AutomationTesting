@@ -124,7 +124,7 @@ public class UserFilter extends Post {
                 sb.append("D2BM. Письма в банк\n");
             }
             if (rootTag.getListV().get(0).getDfb().equals("1")) {
-                sb.append("D2BM. Письма в банк\n");
+                sb.append("D2BM. Письма из банка\n");
             }
             if (rootTag.getListV().get(0).getCtr().equals("1")) {
                 sb.append("D2BM. Валютный перевод\n");

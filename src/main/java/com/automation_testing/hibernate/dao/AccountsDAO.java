@@ -16,42 +16,57 @@ public class AccountsDAO implements CRUDable<Accounts> {
 
     public void saveOrUpdate(Accounts account) {
         Session session = HibernateUtils.sessionFactory.getCurrentSession();
-        session.getTransaction().begin();
-        session.saveOrUpdate(account);
-        session.getTransaction().commit();
-        session.close();
+        try {
+            session.getTransaction().begin();
+            session.saveOrUpdate(account);
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
     }
 
     public void delete(Accounts account) {
         Session session = HibernateUtils.sessionFactory.getCurrentSession();
-        session.getTransaction().begin();
-        session.delete(account);
-        session.getTransaction().commit();
-        session.close();
+        try {
+            session.getTransaction().begin();
+            session.delete(account);
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
     }
 
     public void save(Accounts account) {
         Session session = HibernateUtils.sessionFactory.getCurrentSession();
-        session.getTransaction().begin();
-        session.save(account);
-        session.getTransaction().commit();
-        session.close();
+        try {
+            session.getTransaction().begin();
+            session.save(account);
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
     }
 
     public void merge(Accounts account) {
         Session session = HibernateUtils.sessionFactory.getCurrentSession();
-        session.getTransaction().begin();
-        session.merge(account);
-        session.getTransaction().commit();
-        session.close();
+        try {
+            session.getTransaction().begin();
+            session.merge(account);
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
     }
 
     public void update(Accounts account) {
         Session session = HibernateUtils.sessionFactory.getCurrentSession();
-        session.getTransaction().begin();
-        session.update(account);
-        session.getTransaction().commit();
-        session.close();
+        try {
+            session.getTransaction().begin();
+            session.update(account);
+            session.getTransaction().commit();
+        } finally {
+            session.close();
+        }
     }
 
 
