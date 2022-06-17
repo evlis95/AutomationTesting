@@ -15,41 +15,61 @@ public class DivisionsDAO implements CRUDable<Divisions> {
 
     public void saveOrUpdate(Divisions divisions) {
         Session session = HibernateUtils.sessionFactory.getCurrentSession();
-        session.getTransaction().begin();
-        session.saveOrUpdate(divisions);
-        session.getTransaction().commit();
+        try {
+            session.getTransaction().begin();
+            session.saveOrUpdate(divisions);
+            session.getTransaction().commit();
+        } finally {
+
+        }
         session.close();
     }
 
     public void delete(Divisions divisions) {
         Session session = HibernateUtils.sessionFactory.getCurrentSession();
-        session.getTransaction().begin();
-        session.delete(divisions);
-        session.getTransaction().commit();
+        try {
+            session.getTransaction().begin();
+            session.delete(divisions);
+            session.getTransaction().commit();
+        } finally {
+
+        }
         session.close();
     }
 
     public void save(Divisions divisions) {
         Session session = HibernateUtils.sessionFactory.getCurrentSession();
-        session.getTransaction().begin();
-        session.save(divisions);
-        session.getTransaction().commit();
+        try {
+            session.getTransaction().begin();
+            session.save(divisions);
+            session.getTransaction().commit();
+        } finally {
+
+        }
         session.close();
     }
 
     public void update(Divisions divisions) {
         Session session = HibernateUtils.sessionFactory.getCurrentSession();
-        session.getTransaction().begin();
-        session.update(divisions);
-        session.getTransaction().commit();
+        try {
+            session.getTransaction().begin();
+            session.update(divisions);
+            session.getTransaction().commit();
+        } finally {
+
+        }
         session.close();
     }
 
     public void merge(Divisions divisions) {
         Session session = HibernateUtils.sessionFactory.getCurrentSession();
-        session.getTransaction().begin();
-        session.merge(divisions);
-        session.getTransaction().commit();
+        try {
+            session.getTransaction().begin();
+            session.merge(divisions);
+            session.getTransaction().commit();
+        } finally {
+
+        }
         session.close();
     }
 
