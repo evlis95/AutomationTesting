@@ -42,9 +42,7 @@ public class AuthMacIp extends Post {
         tagP.setOsv("Autotest");
         tagP.setOsvk("");
         tagP.setPn("com.bssys.mbcphone");
-        long time = System.currentTimeMillis();
-        String currentTime = Long.toString(time);
-        tagP.setTermsDate(currentTime);
+        tagP.setTermsDate(Long.toString(System.currentTimeMillis()));
 
         listP.add(tagP);
         authMacip.setListP(listP);
