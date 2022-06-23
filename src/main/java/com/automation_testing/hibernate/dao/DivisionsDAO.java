@@ -20,9 +20,8 @@ public class DivisionsDAO implements CRUDable<Divisions> {
             session.saveOrUpdate(divisions);
             session.getTransaction().commit();
         } finally {
-
+            session.close();
         }
-        session.close();
     }
 
     public void delete(Divisions divisions) {
@@ -32,9 +31,8 @@ public class DivisionsDAO implements CRUDable<Divisions> {
             session.delete(divisions);
             session.getTransaction().commit();
         } finally {
-
+            session.close();
         }
-        session.close();
     }
 
     public void save(Divisions divisions) {
@@ -44,9 +42,8 @@ public class DivisionsDAO implements CRUDable<Divisions> {
             session.save(divisions);
             session.getTransaction().commit();
         } finally {
-
+            session.close();
         }
-        session.close();
     }
 
     public void update(Divisions divisions) {
@@ -56,9 +53,8 @@ public class DivisionsDAO implements CRUDable<Divisions> {
             session.update(divisions);
             session.getTransaction().commit();
         } finally {
-
+            session.close();
         }
-        session.close();
     }
 
     public void merge(Divisions divisions) {
@@ -68,9 +64,8 @@ public class DivisionsDAO implements CRUDable<Divisions> {
             session.merge(divisions);
             session.getTransaction().commit();
         } finally {
-
+            session.close();
         }
-        session.close();
     }
 
 

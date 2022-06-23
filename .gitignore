@@ -24,6 +24,6 @@
 hs_err_pid*
 /src/main/java/com/automation_testing/xmlfile/request.xml
 /src/main/java/com/automation_testing/xmlfile/response.xml
-/src/main/java/com/automation_testing/generalsettings/Settings.java
+/src/main/java/com/automation_testing/generalsettings/
 /target/
 /.idea/
