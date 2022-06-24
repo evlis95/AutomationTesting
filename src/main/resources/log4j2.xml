@@ -2,7 +2,7 @@
 <Configuration status="warn" name="MyApp" packages="">
     <Appenders>
         <File name="MyFile"
-              fileName="C:\Work\autotest\result\testResult${date:dd-MM-yyyy-HH-mm}.log">
+              fileName="C:\Work\autotest\result\SMP2350_${date:dd-MM-yyyy-HH-mm}.log">
             <PatternLayout>
                 <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
                 </Pattern>

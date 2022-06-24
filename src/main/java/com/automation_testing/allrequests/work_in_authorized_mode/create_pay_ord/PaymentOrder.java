@@ -209,7 +209,7 @@ public class PaymentOrder {
         cbcCode = GetFilterPartCBCCodes.cbcCodeValue;
         nds = "";
         receiver = "Федеральное казначейство";
-        receiverAccount = "40702810611111111111";
+        receiverAccount = "40701810311111111111";
         receiverBIC = GetFullBankRu.receiverBIC;
         receiverBankName = GetFullBankRu.receiverBankName.replaceAll("\"", "&quot;");
         receiverINN = "1110568760";
