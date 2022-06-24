@@ -21,7 +21,6 @@ import java.io.*;
 
 public class UserFilter extends Post {
 
-    private final Logger LOG = LogManager.getLogger(UserFilter.class);
     public static UniversalResponseRootTag rootTag;
     public static String orgId;
     public static String orgKPP;
