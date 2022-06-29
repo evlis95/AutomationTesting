@@ -200,7 +200,7 @@ public class PaymentOrder {
         ndsPercent = "20.0";
         ndsSystemName = "Vat1";
         paymentType = "2";
-        templateName = "template";
+        templateName = "messages";
         saveTemplate = "1";
     }
 
@@ -228,7 +228,7 @@ public class PaymentOrder {
         docDateParam3 = "2022";
         docNumParam1 = "";
         docNumParam2 = "12345";
-        payGrndParam = "АП";
+        payGrndParam = "0";
         codeUIP = "0";
         ndsSystemName = "VatZero";
         paymentType = "3";
@@ -293,7 +293,7 @@ public class PaymentOrder {
         paymentUrgent = "5";
         receiverPropertyType = "";
         sendType = "";
-        sendTypeCode = "";
+        sendTypeCode = "0";
         taxPeriodParam2 = "";
         taxPeriodParam3 = "";
         payTypeParam = "";
@@ -302,7 +302,7 @@ public class PaymentOrder {
         trafficLightDescription = "";
         reserv23 = "";
         incomeTypeCode = "";
-        saveTemplate = "0";
+        saveTemplate = "";
         templateName = "";
         phone = "";
         email = "";

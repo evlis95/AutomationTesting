@@ -58,7 +58,7 @@ public class TemplateHeadersPayOrd extends Post {
         for (int i = 0; i < rootTag.getListDS().get(0).getListD().size(); i++) {
             for (int j = 0; j < rootTag.getListDS().get(0).getListD().get(i).getListF().size(); j++) {
                 if (rootTag.getListDS().get(0).getListD().get(i).getListF().get(j).getN().equals("TemplateName")
-                        & rootTag.getListDS().get(0).getListD().get(i).getListF().get(j).getV().equals("template")) {
+                        & rootTag.getListDS().get(0).getListD().get(i).getListF().get(j).getV().equals("messages")) {
                     for (int k = 0; k < rootTag.getListDS().get(0).getListD().get(i).getListF().size(); k++) {
                         if (rootTag.getListDS().get(0).getListD().get(i).getListF().get(k).getN().equals("BankRecordID")) {
                             templateID = rootTag.getListDS().get(0).getListD().get(i).getListF().get(k).getV();
