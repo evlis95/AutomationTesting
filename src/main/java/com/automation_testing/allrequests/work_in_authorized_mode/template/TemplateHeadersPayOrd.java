@@ -5,6 +5,9 @@ import com.automation_testing.allrequests.authorization.UserAccount;
 import com.automation_testing.allrequests.authorization.UserFilter;
 import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.*;
+import com.automation_testing.parsingxml.TagAOfTagUnivRes;
+import com.automation_testing.parsingxml.TagDOfTagDS;
+import com.automation_testing.parsingxml.TagFOfTagD;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
 
@@ -34,9 +37,10 @@ public class TemplateHeadersPayOrd extends Post {
         tagF.setT("0");
 
         List<TagAOfTagF> listA = new ArrayList<>();
-        for (int i = 0; i < UserAccount.rootTag.getListA().size(); i++) {
-            if (UserAccount.rootTag.getListA().get(i).getV().equals("810")) {
-                listA.add(new TagAOfTagF(UserAccount.rootTag.getListA().get(i).getA()));
+
+        for (TagAOfTagUnivRes tagA : UserAccount.rootTag.getListA()) {
+            if (tagA.getV().equals("810")) {
+                listA.add(new TagAOfTagF(tagA.getA()));
             }
         }
         tagF.setListA(listA);
@@ -55,24 +59,24 @@ public class TemplateHeadersPayOrd extends Post {
     }
 
     private void definitionTemplateID() {
-        for (int i = 0; i < rootTag.getListDS().get(0).getListD().size(); i++) {
-            for (int j = 0; j < rootTag.getListDS().get(0).getListD().get(i).getListF().size(); j++) {
-                if (rootTag.getListDS().get(0).getListD().get(i).getListF().get(j).getN().equals("TemplateName")
-                        & rootTag.getListDS().get(0).getListD().get(i).getListF().get(j).getV().equals("template")) {
-                    for (int k = 0; k < rootTag.getListDS().get(0).getListD().get(i).getListF().size(); k++) {
-                        if (rootTag.getListDS().get(0).getListD().get(i).getListF().get(k).getN().equals("BankRecordID")) {
-                            templateID = rootTag.getListDS().get(0).getListD().get(i).getListF().get(k).getV();
+        for (TagDOfTagDS tagD : rootTag.getListDS().get(0).getListD()) {
+            for (TagFOfTagD tagF : tagD.getListF()) {
+                if (tagF.getN().equals("TemplateName") & tagF.getV().equals("template")) {
+                    for (TagFOfTagD tagF2 : tagD.getListF()) {
+                        if (tagF2.getN().equals("BankRecordID")) {
+                            templateID = tagF2.getV();
                         }
                     }
                 }
             }
         }
+
     }
 
     @Override
     public void run() throws JAXBException, IOException, InterruptedException {
         super.run();
-        if(codeStatusResponse == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = Post.rootTag;
             definitionTemplateID();
         }

@@ -4,10 +4,11 @@ import com.automation_testing.allrequests.authorization.AuthLogin;
 import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.TagReqActOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
+import com.automation_testing.hibernate.dao.MobileServicesDAO;
+import com.automation_testing.hibernate.dao.PaymentOrderDAO;
+import com.automation_testing.hibernate.interfaces.CRUDable;
 import com.automation_testing.hibernate.pojo.MobileServices;
 import com.automation_testing.hibernate.pojo.PaymentOrder;
-import com.automation_testing.hibernate.service.MobileServicesService;
-import com.automation_testing.hibernate.service.PaymentOrderService;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
 import org.apache.logging.log4j.LogManager;
@@ -83,20 +84,21 @@ public class PutDocCHECKCODE extends Post {
     }
 
     private void writingPayOrdToDB() {
-        PaymentOrderService pos = new PaymentOrderService();
+        CRUDable<PaymentOrder> poServ = new PaymentOrderDAO();
+
         PaymentOrder paymentOrder = new PaymentOrder();
         paymentOrder.setDocBankID(documentBankID);
         paymentOrder.setDocNum(documentNumber);
         paymentOrder.setStatus(documentStatusCode);
 
-        MobileServicesService servMob = new MobileServicesService();
-        MobileServices mobileServices = servMob.findOrg(PutDocAction.payerDivisionID);
-        if (mobileServices.getAdv().equals("1") & mobileServices.getReq().equals("1")) {
+        CRUDable<MobileServices> services = new MobileServicesDAO();
+        MobileServices mobileService = services.findById(PutDocAction.payerDivisionID);
+        if (mobileService.getAdv().equals("1") & mobileService.getReq().equals("1")) {
             paymentOrder.setAvailForCanReq("1");
         } else {
             paymentOrder.setAvailForCanReq("0");
         }
-        pos.saveOrUpdatePaymentOrder(paymentOrder);
+        poServ.saveOrUpdate(paymentOrder);
     }
 
     @Override

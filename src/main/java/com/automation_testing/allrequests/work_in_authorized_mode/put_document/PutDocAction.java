@@ -63,7 +63,7 @@ public class PutDocAction extends Post {
         put.setC("put");
         put.setT("document");
         put.setN(documentTypeString);
-        put.setV(3.1);
+        put.setV(3.2);
         put.setS(AuthLogin.sessionID);
 
         MAP_FIELDS_AND_VALUES.forEach((key, value) -> {

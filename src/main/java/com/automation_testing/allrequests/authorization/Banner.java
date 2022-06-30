@@ -20,6 +20,7 @@ public class Banner extends Post {
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag banner = new UniversalRequestRootTag();
+
         banner.setC("");
         banner.setT("dictionary");
         banner.setN("banner");

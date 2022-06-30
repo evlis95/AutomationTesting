@@ -19,6 +19,7 @@ public class JAXBUtils {
         JAXBContext jcCreate = JAXBContext.newInstance(UniversalRequestRootTag.class);
         Marshaller marshaller = jcCreate.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         marshaller.setProperty("com.sun.xml.bind.xmlHeaders", "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         marshaller.setProperty(CharacterEscapeHandler.class.getName(), new CustomCharacterEscapeHandler());
         marshaller.marshal(rootTag, new File(Post.PATH_REQUEST_BODY));

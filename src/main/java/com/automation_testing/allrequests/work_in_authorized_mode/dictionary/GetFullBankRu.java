@@ -4,11 +4,12 @@ import com.automation_testing.allrequests.authorization.AuthLogin;
 import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.TagPOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
+import com.automation_testing.parsingxml.TagROfTagUnivRes;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
 
 import javax.xml.bind.JAXBException;
-import java.io.*;
+import java.io.IOException;
 
 public class GetFullBankRu extends Post {
 
@@ -30,12 +31,15 @@ public class GetFullBankRu extends Post {
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag getFull = new UniversalRequestRootTag();
         TagPOfUnivReq tagP = new TagPOfUnivReq();
+
         getFull.setC("getfull");
         getFull.setT("dictionary");
         getFull.setN("bankru");
         getFull.setV(1.0);
         getFull.setS(AuthLogin.sessionID);
+
         tagP.setD("044525700");
+
         getFull.setTagP(tagP);
         marshalling(getFull);
     }
@@ -45,11 +49,12 @@ public class GetFullBankRu extends Post {
         super.run();
         if (codeStatusResponse == 200) {
             rootTag = Post.rootTag;
-            receiverBankName = rootTag.getListR().get(0).getX();
-            receiverBIC = rootTag.getListR().get(0).getD();
-            receiverCorrAcc = rootTag.getListR().get(0).getTagCorrAcc().get(0).getA();
-            receiverPlace = rootTag.getListR().get(0).getV();
-            receiverPlaceType = rootTag.getListR().get(0).getB();
+            TagROfTagUnivRes tagR = rootTag.getListR().get(0);
+            receiverBankName = tagR.getX();
+            receiverBIC = tagR.getD();
+            receiverCorrAcc = tagR.getH();
+            receiverPlace = tagR.getV();
+            receiverPlaceType = tagR.getB();
         }
     }
 }

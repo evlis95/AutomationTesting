@@ -38,6 +38,7 @@ public class GetDocument extends Post {
         docNum.setV(3.0);
         docNum.setS(AuthLogin.sessionID);
         tagP.setI(documentBankID);
+
         docNum.setTagP(tagP);
         marshalling(docNum);
     }

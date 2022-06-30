@@ -2,11 +2,13 @@ package com.automation_testing.allrequests.authorization;
 
 import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.*;
+import com.automation_testing.parsingxml.TagAOfTagUnivRes;
+import com.automation_testing.parsingxml.TagFOfTagUnivRes;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
 
 import javax.xml.bind.JAXBException;
-import java.io.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +18,10 @@ public class CountAllDocsDocPayOrd extends Post {
 
     private String calculatingBICByIdSubDivision(String subDivisionId) {
         String divisionBIC = "";
-        for (int i = 0; i < UserFilter.rootTag.getListF().size(); i++) {
-            if (UserFilter.rootTag.getListF().get(i).getI().equals(subDivisionId)) {
-                divisionBIC = UserFilter.rootTag.getListF().get(i).getB();
+
+        for (TagFOfTagUnivRes tagF : UserFilter.rootTag.getListF()) {
+            if (tagF.getI().equals(subDivisionId)) {
+                divisionBIC = tagF.getB();
                 break;
             }
         }
@@ -29,10 +32,7 @@ public class CountAllDocsDocPayOrd extends Post {
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag countAllDocs = new UniversalRequestRootTag();
         TagPOfUnivReq tagP = new TagPOfUnivReq();
-        List<TagPOfUnivReq> listP = new ArrayList<>();
-        List<TagTOfTagP> listT = new ArrayList<>();
         TagFOfTagP tagF = new TagFOfTagP();
-        List<TagFOfTagP> listF = new ArrayList<>();
         List<TagSOfTagF> listS = new ArrayList<>();
 
         countAllDocs.setC("countall");
@@ -42,26 +42,19 @@ public class CountAllDocsDocPayOrd extends Post {
         countAllDocs.setS(AuthLogin.sessionID);
 
 
-        listT.add(new TagTOfTagP("PaymentOrder"));
-
-        tagF.setG(UserFilter.rootTag.getListC().get(0).getI());
-
-        for (int i = 0; i < UserAccount.rootTag.getListA().size(); i++) {
-            if (UserAccount.rootTag.getListA().get(i).getV().equals("810")) {
-                listS.add(new TagSOfTagF((UserAccount.rootTag.getListA().get(i).getA()), (calculatingBICByIdSubDivision(UserAccount.rootTag.getListA().get(i).getF()))));
+        for (TagAOfTagUnivRes tagA : UserAccount.rootTag.getListA()) {
+            if (tagA.getV().equals("810")) {
+                listS.add(new TagSOfTagF((tagA.getA()), (calculatingBICByIdSubDivision(tagA.getF()))));
             }
         }
 
+        tagF.setG(UserFilter.orgId);
         tagF.setListS(listS);
-        listF.add(tagF);
 
-        tagP.setListT(listT);
-        tagP.setListF(listF);
+        tagP.setTagT(new TagTOfTagP("PaymentOrder"));
+        tagP.setTagF(tagF);
 
-        listP.add(tagP);
-
-        countAllDocs.setListP(listP);
-
+        countAllDocs.setTagP(tagP);
         marshalling(countAllDocs);
     }
 

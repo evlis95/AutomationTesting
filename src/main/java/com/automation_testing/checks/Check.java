@@ -4,11 +4,12 @@ import com.automation_testing.allrequests.authorization.AuthCryptoprofCode;
 import com.automation_testing.allrequests.authorization.UserAccount;
 import com.automation_testing.allrequests.authorization.UserFilter;
 import com.automation_testing.allrequests.work_in_authorized_mode.put_document.PutDocAction;
+import com.automation_testing.hibernate.dao.MobileServicesDAO;
+import com.automation_testing.hibernate.dao.PaymentOrderDAO;
+import com.automation_testing.hibernate.interfaces.CRUDable;
 import com.automation_testing.hibernate.pojo.MobileServices;
 import com.automation_testing.hibernate.pojo.PaymentOrder;
-import com.automation_testing.hibernate.service.MobileServicesService;
-import com.automation_testing.hibernate.service.PaymentOrderService;
-import com.automation_testing.parsingxml.UniversalResponseRootTag;
+import com.automation_testing.parsingxml.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -34,8 +35,8 @@ public class Check {
 
     public static boolean checkEnabledD2BMAdvancedService() {
         boolean result = false;
-        for (int j = 0; j < UserFilter.rootTag.getListV().size(); j++) {
-            if (UserFilter.rootTag.getListV().get(j).getAdv().equals("1")) {
+        for (TagVOfTagUnivRes tagV : UserFilter.rootTag.getListV()) {
+            if (tagV.getAdv().equals("1")) {
                 result = true;
                 break;
             }
@@ -52,8 +53,9 @@ public class Check {
 
     public static boolean checkCountAvailableAccounts810() {
         int accAvailable810 = 0;
-        for (int i = 0; i < UserAccount.rootTag.getListA().size(); i++) {
-            if (UserAccount.rootTag.getListA().get(i).getT().equals("1") & UserAccount.rootTag.getListA().get(i).getV().equals("810"))
+
+        for (TagAOfTagUnivRes tagA : UserAccount.rootTag.getListA()) {
+            if (tagA.getT().equals("1") & tagA.getV().equals("810"))
                 accAvailable810++;
         }
         return accAvailable810 <= 1;
@@ -62,23 +64,26 @@ public class Check {
     public static void checkCountAvailableSPForce(UniversalResponseRootTag rootTag) {
 
         if (PutDocAction.rootTag.getListC() != null) {
-            if (PutDocAction.rootTag.getListC().get(0).getCe().equals("0")) {
-                if (rootTag.getListK() != null) {
-                    for (int i = 0; i < rootTag.getListK().size(); i++) {
-                        if (rootTag.getListK().get(i).getT().equals("1")) {
-                            count++;
+
+            for (TagCOfTagUnivRes tagC : PutDocAction.rootTag.getListC()) {
+                if (tagC.getCe().equals("0")) {
+                    if (rootTag.getListK() != null) {
+                        for (TagKOfTagUnivRes tagK : rootTag.getListK()) {
+                            if (tagK.getT().equals("1")) {
+                                count++;
+                            }
                         }
-                    }
-                    if (count > 0) {
-                        LOG.info("Проверка на наличие хотя бы одного СП OTP для операции подписи - PASS");
-                        quantityPASS++;
+                        if (count > 0) {
+                            LOG.info("Проверка на наличие хотя бы одного СП OTP для операции подписи - PASS");
+                            quantityPASS++;
+                        } else {
+                            LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED");
+                            quantityFAILED++;
+                        }
                     } else {
-                        LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED");
                         quantityFAILED++;
+                        LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED");
                     }
-                } else {
-                    quantityFAILED++;
-                    LOG.error("Проверка на наличие хотя бы одного СП OTP для операции подписи - FAILED");
                 }
             }
         }
@@ -91,8 +96,9 @@ public class Check {
 
         } else if (rootTag.getListK() != null & rootTag.getListC() == null) {
             count = 0;
-            for (int i = 0; i < rootTag.getListK().size(); i++) {
-                if (rootTag.getListK().get(i).getT().equals("1")) {
+
+            for (TagKOfTagUnivRes tagK : rootTag.getListK()) {
+                if (tagK.getT().equals("1")) {
                     count++;
                 }
             }
@@ -117,8 +123,8 @@ public class Check {
     public static boolean checkAvailableSignatureToolOTP() throws IOException {
         boolean result = true;
         if (AuthCryptoprofCode.rootTag.getListS() != null) {
-            for (int i = 0; i < AuthCryptoprofCode.rootTag.getListS().size(); i++) {
-                if (AuthCryptoprofCode.rootTag.getListS().get(i).getT().equals("1")) {
+            for (TagSOfUnivRes tagS : AuthCryptoprofCode.rootTag.getListS()) {
+                if (tagS.getT().equals("1")) {
                     LOG.info("Проверка на наличие хотя бы одного СП OTP для операции подписи - PASS");
                     quantityPASS++;
                     break;
@@ -140,10 +146,10 @@ public class Check {
 
     public static void definitionOfConnServCanReq() {
         boolean result = false;
-        MobileServicesService ms = new MobileServicesService();
-        List<MobileServices> mobileServicesList = ms.findAllSerMob();
-        for (int i = 0; i < mobileServicesList.size(); i++) {
-            if (mobileServicesList.get(i).getAdv().equals("1") & mobileServicesList.get(i).getReq().equals("1")) {
+        CRUDable<MobileServices> services = new MobileServicesDAO();
+        List<MobileServices> mobileServicesList = services.findAll();
+        for (MobileServices mobileServices : mobileServicesList) {
+            if (mobileServices.getAdv().equals("1") & mobileServices.getReq().equals("1")) {
                 result = true;
             }
         }
@@ -159,12 +165,12 @@ public class Check {
 
     public static String definingPayOrdIDForCancellReq() {
         String result = null;
-        PaymentOrderService pos = new PaymentOrderService();
-        List<PaymentOrder> paymentOrderList = pos.findAllPaymentOrder();
+        CRUDable<PaymentOrder> poService = new PaymentOrderDAO();
+        List<PaymentOrder> paymentOrderList = poService.findAll();
         if (paymentOrderList != null) {
-            for (int i = 0; i < paymentOrderList.size(); i++) {
-                if (paymentOrderList.get(i).getAvailForCanReq().equals("1")) {
-                    result = paymentOrderList.get(i).getDocBankID();
+            for (PaymentOrder paymentOrder : paymentOrderList) {
+                if (paymentOrder.getAvailForCanReq().equals("1")) {
+                    result = paymentOrder.getDocBankID();
                 }
             }
         }

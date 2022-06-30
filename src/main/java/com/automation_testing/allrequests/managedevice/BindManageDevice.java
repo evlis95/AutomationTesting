@@ -4,6 +4,7 @@ import com.automation_testing.allrequests.authorization.AuthLogin;
 import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.TagPOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
+import com.automation_testing.parsingxml.TagAOfTagUnivRes;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
 import org.apache.logging.log4j.LogManager;
@@ -29,17 +30,20 @@ public class BindManageDevice extends Post {
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag device = new UniversalRequestRootTag();
+
         device.setC("");
         device.setT("managedevice");
         device.setN("bind");
         device.setV(1.0);
         device.setS(AuthLogin.sessionID);
         device.setTagP(new TagPOfUnivReq("d8eb432fb028c2b3"));
+
         marshalling(device);
     }
 
     private void bindingDevice() throws JAXBException, IOException, InterruptedException {
-        if (rootTag.getListA().get(0).getV().equals("0")) {
+        TagAOfTagUnivRes tagA = rootTag.getListA().get(0);
+        if (tagA.getV().equals("0")) {
             LOG.error("""
                     Внимание! Добавление/удаление устройства в списке доверенных невозможно.
                     За дополнительной информацией, пожалуйста, обратитесь в банк.
@@ -47,7 +51,7 @@ public class BindManageDevice extends Post {
                       """);
 
 
-        } else if (rootTag.getListA().get(0).getV().equals("11")) {
+        } else if (tagA.getV().equals("11")) {
             LOG.error("Доступно подтверждение только через сервис PayControl.");
 
         } else {

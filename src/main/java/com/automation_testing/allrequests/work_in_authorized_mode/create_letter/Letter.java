@@ -3,8 +3,9 @@ package com.automation_testing.allrequests.work_in_authorized_mode.create_letter
 import com.automation_testing.allrequests.authorization.UserFilter;
 import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.GetDictMessageType;
 import com.automation_testing.allrequests.work_in_authorized_mode.docnumber.DocumentNumber;
-import com.automation_testing.hibernate.interfaces.CRUDable;
-import com.automation_testing.hibernate.pojo.Divisions;
+import com.automation_testing.parsingxml.TagFOfTagUnivRes;
+import com.automation_testing.parsingxml.TagROfTagUnivRes;
+import com.automation_testing.parsingxml.TagVOfTagUnivRes;
 import com.automation_testing.utils.DateUtils;
 import lombok.Getter;
 
@@ -72,21 +73,21 @@ public class Letter {
 
 
     private void initiatingMessageType() {
-        for (int i = 0; i < GetDictMessageType.rootTag.getListR().size(); i++) {
-            if (GetDictMessageType.rootTag.getListR().get(i).getT().contains("Письмо")) {
-                messageType = GetDictMessageType.rootTag.getListR().get(i).getT();
-                messageTypeID = GetDictMessageType.rootTag.getListR().get(i).getA();
+        for (TagROfTagUnivRes tagR : GetDictMessageType.rootTag.getListR()) {
+            if (tagR.getT().contains("Письмо")) {
+                messageType = tagR.getT();
+                messageTypeID = tagR.getA();
             }
         }
     }
 
     private void initiatingDivisionAndDivName() {
-        for (int i = 0; i < UserFilter.rootTag.getListV().size(); i++) {
-            if(UserFilter.rootTag.getListV().get(i).getDtb().equals("1") || UserFilter.rootTag.getListV().get(i).getDfb().equals("1")) {
-                for (int j = 0; j < UserFilter.rootTag.getListF().size(); j++) {
-                    if(UserFilter.rootTag.getListV().get(i).getF().equals(UserFilter.rootTag.getListF().get(j).getI())) {
-                        branchBankRecordID = UserFilter.rootTag.getListF().get(j).getI();
-                        branchName = UserFilter.rootTag.getListF().get(j).getN().replaceAll("\"","&quot;");
+        for (TagVOfTagUnivRes tagV : UserFilter.rootTag.getListV()) {
+            if (tagV.getDtb().equals("1") || tagV.getDfb().equals("1")) {
+                for (TagFOfTagUnivRes tagF : UserFilter.rootTag.getListF()) {
+                    if (tagV.getF().equals(tagF.getI())) {
+                        branchBankRecordID = tagF.getI();
+                        branchName = tagF.getN().replaceAll("\"", "&quot;");
                     }
                 }
             }

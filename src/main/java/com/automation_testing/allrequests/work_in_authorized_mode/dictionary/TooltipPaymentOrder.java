@@ -21,11 +21,13 @@ public class TooltipPaymentOrder extends Post {
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag tooltip = new UniversalRequestRootTag();
+
         tooltip.setC("tooltip");
         tooltip.setT("document");
         tooltip.setN("PaymentOrder");
         tooltip.setV(1.0);
         tooltip.setS(AuthLogin.sessionID);
+
         marshalling(tooltip);
     }
 

@@ -21,11 +21,13 @@ public class GetDictPaySendType extends Post {
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag paySendType = new UniversalRequestRootTag();
+
         paySendType.setC("getdict");
         paySendType.setT("dictionary");
         paySendType.setN("paysendtype");
         paySendType.setV(1.0);
         paySendType.setS(AuthLogin.sessionID);
+
         marshalling(paySendType);
     }
 

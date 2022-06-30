@@ -5,6 +5,8 @@ import com.automation_testing.allrequests.authorization.UserFilter;
 import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.GetFilterPartCBCCodes;
 import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.GetFullBankRu;
 import com.automation_testing.allrequests.work_in_authorized_mode.docnumber.DocumentNumber;
+import com.automation_testing.parsingxml.TagAOfTagUnivRes;
+import com.automation_testing.parsingxml.TagFOfTagUnivRes;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
@@ -323,48 +325,48 @@ public class PaymentOrder {
     private @NotNull String createTime() {
         long currentTime = System.currentTimeMillis();
         String editTime = Long.toString(currentTime);
-        editTime = editTime.substring(0, 8) + "00000";
-        return editTime;
+        return editTime.substring(0, 8) + "00000";
     }
 
     private void definingPayAccAndBranchBankRecID() {
-        for (int i = 0; i < UserAccount.rootTag.getListA().size(); i++) {
-            if (UserAccount.rootTag.getListA().get(i).getT().equals("1") & UserAccount.rootTag.getListA().get(i).getV().equals("810")) {
-                branchBankRecordID = UserAccount.rootTag.getListA().get(i).getF();
-                payerAccount = UserAccount.rootTag.getListA().get(i).getA();
+        for (TagAOfTagUnivRes tagA : UserAccount.rootTag.getListA()) {
+            if (tagA.getT().equals("1") & tagA.getV().equals("810")) {
+                branchBankRecordID = tagA.getF();
+                payerAccount = tagA.getA();
                 break;
             }
         }
     }
 
     private void definingPayerData() {
-        for (int i = 0; i < UserFilter.rootTag.getListF().size(); i++) {
-            if (UserFilter.rootTag.getListF().get(i).getI().equals(branchBankRecordID)) {
-                payerBIC = UserFilter.rootTag.getListF().get(i).getB();
-                payerBankName = UserFilter.rootTag.getListF().get(i).getN().replaceAll("\"", ("&quot;"));
-                payerCorrAccount = UserFilter.rootTag.getListF().get(i).getA();
-                payerPlace = UserFilter.rootTag.getListF().get(i).getG();
-                payerPlaceType = UserFilter.rootTag.getListF().get(i).getD();
+        for (TagFOfTagUnivRes tagF : UserFilter.rootTag.getListF()) {
+            if (tagF.getI().equals(branchBankRecordID)) {
+                payerBIC = tagF.getB();
+                payerBankName = tagF.getN().replaceAll("\"", ("&quot;"));
+                payerCorrAccount = tagF.getA();
+                payerPlace = tagF.getG();
+                payerPlaceType = tagF.getD();
                 break;
             }
         }
     }
 
     private void definingReceiverDataPayYourSelf() {
-        for (int i = 0; i < UserAccount.rootTag.getListA().size(); i++) {
-            if (UserAccount.rootTag.getListA().get(i).getT().equals("1") & UserAccount.rootTag.getListA().get(i).getV().equals("810") & !(UserAccount.rootTag.getListA().get(i).getA().equals(payerAccount))) {
-                receiverAccount = UserAccount.rootTag.getListA().get(i).getA();
-                receiverDivID = UserAccount.rootTag.getListA().get(i).getF();
+        for (TagAOfTagUnivRes tagA : UserAccount.rootTag.getListA()) {
+            if (tagA.getT().equals("1") & tagA.getV().equals("810") & !(tagA.getA().equals(payerAccount))) {
+                receiverAccount = tagA.getA();
+                receiverDivID = tagA.getF();
                 break;
             }
         }
-        for (int i = 0; i < UserFilter.rootTag.getListF().size(); i++) {
-            if (UserFilter.rootTag.getListF().get(i).getI().equals(receiverDivID)) {
-                receiverBankName = UserFilter.rootTag.getListF().get(i).getN().replaceAll("\"", "&quot;");
-                receiverCorrAccount = UserFilter.rootTag.getListF().get(i).getA();
-                receiverBIC = UserFilter.rootTag.getListF().get(i).getB();
-                receiverPlace = UserFilter.rootTag.getListF().get(i).getG();
-                receiverPlaceType = UserFilter.rootTag.getListF().get(i).getD();
+        for (TagFOfTagUnivRes tagF : UserFilter.rootTag.getListF()) {
+            if (tagF.getI().equals(receiverDivID)) {
+                receiverBankName = tagF.getN().replaceAll("\"", "&quot;");
+                receiverCorrAccount = tagF.getA();
+                receiverBIC = tagF.getB();
+                receiverPlace = tagF.getG();
+                receiverPlaceType = tagF.getD();
+                break;
             }
         }
     }

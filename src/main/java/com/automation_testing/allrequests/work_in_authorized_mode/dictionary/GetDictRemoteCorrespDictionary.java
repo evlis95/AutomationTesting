@@ -22,11 +22,13 @@ public class GetDictRemoteCorrespDictionary extends Post {
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag getDictRemoteCorr = new UniversalRequestRootTag();
+
         getDictRemoteCorr.setC("getdict");
         getDictRemoteCorr.setT("dictionary");
         getDictRemoteCorr.setN("remotecorresp");
         getDictRemoteCorr.setV(1.0);
         getDictRemoteCorr.setS(AuthLogin.sessionID);
+
         marshalling(getDictRemoteCorr);
     }
 

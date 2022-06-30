@@ -80,15 +80,19 @@ public class TagPOfUnivReq {
     @XmlAttribute
     private String pushid;
     @XmlElement(name = "a")
-    List<TagAOfTagP> listA;
+    private List<TagAOfTagP> listA;
     @XmlElement(name = "c")
-    List<TagCOfTagP> listC;
+    private List<TagCOfTagP> listC;
+    @XmlElement(name = "c")
+    private TagCOfTagP tagC;
     @XmlElement(name = "t")
-    List<TagTOfTagP> listT;
+    private List<TagTOfTagP> listT;
+    @XmlElement(name = "t")
+    private TagTOfTagP tagT;
     @XmlElement(name = "f")
-    List<TagFOfTagP> listF;
+    private List<TagFOfTagP> listF;
     @XmlElement(name = "f")
-    TagFOfTagP tagF;
+    private TagFOfTagP tagF;
 
 
     public TagPOfUnivReq(String i) {

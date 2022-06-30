@@ -21,11 +21,13 @@ public class GetDictNDSCalType extends Post {
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag ndsCalType = new UniversalRequestRootTag();
+
         ndsCalType.setC("getdict");
         ndsCalType.setT("dictionary");
         ndsCalType.setN("ndscalculationtype");
         ndsCalType.setV(1.0);
         ndsCalType.setS(AuthLogin.sessionID);
+
         marshalling(ndsCalType);
     }
 

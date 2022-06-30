@@ -5,11 +5,13 @@ import com.automation_testing.creatingxml.TagAOfTagP;
 import com.automation_testing.creatingxml.TagCOfTagP;
 import com.automation_testing.creatingxml.TagPOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
+import com.automation_testing.parsingxml.TagAOfTagUnivRes;
+import com.automation_testing.parsingxml.TagFOfTagUnivRes;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
 
 import javax.xml.bind.JAXBException;
-import java.io.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,12 +21,14 @@ public class StatementDocsByDay extends Post {
 
     private String calculatingBICByIdSubDivision(String subDivisionId) {
         String divisionBIC = null;
-        for (int i = 0; i < UserFilter.rootTag.getListF().size(); i++) {
-            if (UserFilter.rootTag.getListF().get(i).getI().equals(subDivisionId)) {
-                divisionBIC = UserFilter.rootTag.getListF().get(i).getB();
+
+        for (TagFOfTagUnivRes tagF : UserFilter.rootTag.getListF()) {
+            if (tagF.getI().equals(subDivisionId)) {
+                divisionBIC = tagF.getB();
                 break;
             }
         }
+
         return divisionBIC;
     }
 
@@ -32,7 +36,7 @@ public class StatementDocsByDay extends Post {
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag statementDocs = new UniversalRequestRootTag();
         TagPOfUnivReq tagP = new TagPOfUnivReq();
-        List<TagPOfUnivReq> listP = new ArrayList<>();
+
 
         statementDocs.setC("all");
         statementDocs.setT("dictionary");
@@ -53,23 +57,17 @@ public class StatementDocsByDay extends Post {
         tagP.setR("");
 
         List<TagAOfTagP> listA = new ArrayList<>();
-        for (int i = 0; i < UserAccount.rootTag.getListA().size(); i++) {
-            if (UserAccount.rootTag.getListA().get(i).getV().equals("810")) {
-                listA.add(new TagAOfTagP((UserAccount.rootTag.getListA().get(i).getA()), (calculatingBICByIdSubDivision(UserAccount.rootTag.getListA().get(i).getF()))));
+
+        for (TagAOfTagUnivRes tagA : UserAccount.rootTag.getListA()) {
+            if (tagA.getV().equals("810")) {
+                listA.add(new TagAOfTagP((tagA.getA()), (calculatingBICByIdSubDivision(tagA.getF()))));
             }
         }
 
         tagP.setListA(listA);
+        tagP.setTagC(new TagCOfTagP(""));
 
-        List<TagCOfTagP> listC = new ArrayList<>();
-        TagCOfTagP tagC = new TagCOfTagP();
-        tagC.setN("");
-        listC.add(tagC);
-        tagP.setListC(listC);
-
-        listP.add(tagP);
-        statementDocs.setListP(listP);
-
+        statementDocs.setTagP(tagP);
         marshalling(statementDocs);
     }
 

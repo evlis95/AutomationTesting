@@ -3,6 +3,7 @@ package com.automation_testing.allrequests.managedevice;
 import com.automation_testing.allrequests.authorization.AuthLogin;
 import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
+import com.automation_testing.parsingxml.TagSOfUnivRes;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
 import org.apache.logging.log4j.LogManager;
@@ -13,9 +14,9 @@ import java.io.IOException;
 
 public class CrypProfCodeManagDev extends Post {
 
-    private final Logger LOG = LogManager.getLogger(CrypProfCodeManagDev.class);
     public static UniversalResponseRootTag rootTag;
     public static String spID;
+    private final Logger LOG = LogManager.getLogger(CrypProfCodeManagDev.class);
 
     @Override
     protected void checkTest() throws IOException {
@@ -25,19 +26,21 @@ public class CrypProfCodeManagDev extends Post {
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag device = new UniversalRequestRootTag();
+
         device.setC("cryptoprofiles");
         device.setT("managedevice");
         device.setN("code");
         device.setV(1.0);
         device.setS(AuthLogin.sessionID);
+
         marshalling(device);
     }
 
     private void definingSPID() {
         if (rootTag.getListS() != null) {
-            for (int i = 0; i < rootTag.getListS().size(); i++) {
-                if (rootTag.getListS().get(i).getT().equals("1")) {
-                    spID = rootTag.getListS().get(i).getU();
+            for (TagSOfUnivRes tagS : rootTag.getListS()) {
+                if (tagS.getT().equals("1")) {
+                    spID = tagS.getU();
                     break;
                 }
             }
@@ -49,7 +52,7 @@ public class CrypProfCodeManagDev extends Post {
     @Override
     public void run() throws JAXBException, IOException, InterruptedException {
         super.run();
-        if(codeStatusResponse == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = Post.rootTag;
             definingSPID();
         }

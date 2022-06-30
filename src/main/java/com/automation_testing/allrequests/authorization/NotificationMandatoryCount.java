@@ -9,7 +9,7 @@ import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
 
 import javax.xml.bind.JAXBException;
-import java.io.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +25,7 @@ public class NotificationMandatoryCount extends Post {
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag mandatoryCount = new UniversalRequestRootTag();
-        List<TagPOfUnivReq> listP = new ArrayList<>();
         TagPOfUnivReq tagP = new TagPOfUnivReq();
-        List<TagFOfTagP> listF = new ArrayList<>();
         TagFOfTagP tagF = new TagFOfTagP();
         List<TagTOfTagP> listT = new ArrayList<>();
 
@@ -39,15 +37,13 @@ public class NotificationMandatoryCount extends Post {
 
         tagF.setG(UserFilter.rootTag.getListC().get(0).getI());
 
-
-        listF.add(tagF);
         listT.add(new TagTOfTagP("FreeDocFromBank"));
         listT.add(new TagTOfTagP("News"));
-        tagP.setListF(listF);
-        tagP.setListT(listT);
-        listP.add(tagP);
-        mandatoryCount.setListP(listP);
 
+        tagP.setTagF(tagF);
+        tagP.setListT(listT);
+
+        mandatoryCount.setTagP(tagP);
         marshalling(mandatoryCount);
     }
 

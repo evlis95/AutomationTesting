@@ -22,15 +22,18 @@ public class SmsCodeManageDev extends Post {
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag device = new UniversalRequestRootTag();
+
         device.setC("sms");
         device.setT("managedevice");
         device.setN("code");
         device.setV(1.0);
         device.setS(AuthLogin.sessionID);
         device.setTagU(CrypProfCodeManagDev.spID);
+
         TagPOfUnivReq tagP = new TagPOfUnivReq();
         tagP.setN("Autotest (d8eb432fb028c2b3)");
         device.setTagP(tagP);
+
         marshalling(device);
     }
 

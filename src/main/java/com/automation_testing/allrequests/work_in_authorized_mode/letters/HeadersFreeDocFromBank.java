@@ -23,6 +23,7 @@ public class HeadersFreeDocFromBank extends Post {
     @Override
     protected void createXmlBodyRequest() throws JAXBException, IOException {
         UniversalRequestRootTag free = new UniversalRequestRootTag();
+
         free.setC("headers");
         free.setT("document");
         free.setN("FreeDocFromBank");
@@ -31,21 +32,25 @@ public class HeadersFreeDocFromBank extends Post {
 
         TagPOfUnivReq tagP = new TagPOfUnivReq();
         tagP.setP("0");
+
         TagAOfTagP tagA;
         List<TagAOfTagP> listA = new ArrayList<>();
-        for (int i = 0; i < statusCode.length; i++) {
+        for(String code : statusCode) {
             tagA = new TagAOfTagP();
-            tagA.setS(statusCode[i]);
+            tagA.setS(code);
             listA.add(tagA);
         }
+
         TagFOfTagP tagF = new TagFOfTagP();
         tagF.setB("");
         tagF.setE("");
         tagF.setO("0");
         tagF.setW("");
         tagF.setTagC(new TagCOfTagF(UserFilter.orgId));
+
         tagP.setListA(listA);
         tagP.setTagF(tagF);
+
         free.setTagP(tagP);
 
         marshalling(free);

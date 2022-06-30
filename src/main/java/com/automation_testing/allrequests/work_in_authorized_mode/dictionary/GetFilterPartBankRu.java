@@ -8,9 +8,7 @@ import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
 
 import javax.xml.bind.JAXBException;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
 
 public class GetFilterPartBankRu extends Post {
 
@@ -25,17 +23,19 @@ public class GetFilterPartBankRu extends Post {
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag getFilterPart = new UniversalRequestRootTag();
-        List<TagPOfUnivReq> listP = new ArrayList<>();
         TagPOfUnivReq tagP = new TagPOfUnivReq();
+
         getFilterPart.setC("getfilterpart");
         getFilterPart.setT("dictionary");
         getFilterPart.setN("bankru");
         getFilterPart.setV(1.0);
         getFilterPart.setS(AuthLogin.sessionID);
+
         tagP.setD("044525700");
         tagP.setP("0");
-        listP.add(tagP);
-        getFilterPart.setListP(listP);
+
+        getFilterPart.setTagP(tagP);
+
         marshalling(getFilterPart);
     }
 

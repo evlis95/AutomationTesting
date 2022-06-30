@@ -27,6 +27,7 @@ public class GetDictPayGrndParam extends Post {
         payGRND.setN("paygrndparam");
         payGRND.setV(1.0);
         payGRND.setS(AuthLogin.sessionID);
+
         marshalling(payGRND);
     }
 

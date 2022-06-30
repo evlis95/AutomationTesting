@@ -21,11 +21,13 @@ public class GetDictCustomerKPP extends Post {
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag cusKPP = new UniversalRequestRootTag();
+
         cusKPP.setC("getdict");
         cusKPP.setT("dictionary");
         cusKPP.setN("customerkpp");
         cusKPP.setV(1.0);
         cusKPP.setS(AuthLogin.sessionID);
+
         marshalling(cusKPP);
     }
 

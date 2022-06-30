@@ -21,11 +21,13 @@ public class GetDictSalaryAcc extends Post {
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag salaryAcc = new UniversalRequestRootTag();
+
         salaryAcc.setC("getdict");
         salaryAcc.setT("dictionary");
         salaryAcc.setN("salaryaccount");
         salaryAcc.setV(1.0);
         salaryAcc.setS(AuthLogin.sessionID);
+
         marshalling(salaryAcc);
     }
 

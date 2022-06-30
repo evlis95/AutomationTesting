@@ -14,10 +14,10 @@ import java.io.IOException;
 
 public class SendCodeManageDev extends Post {
 
-    private final Logger LOG = LogManager.getLogger(SendCodeManageDev.class);
     public static UniversalResponseRootTag rootTag;
-    public static String successfullyCode;
+    public static String codeResult;
     public static String condition;
+    private final Logger LOG = LogManager.getLogger(SendCodeManageDev.class);
 
     @Override
     protected void checkTest() throws IOException {
@@ -27,22 +27,25 @@ public class SendCodeManageDev extends Post {
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag device = new UniversalRequestRootTag();
+
         device.setC("send");
         device.setT("managedevice");
         device.setN("code");
         device.setV(1.0);
         device.setS(AuthLogin.sessionID);
         device.setTagU(CrypProfCodeManagDev.spID);
+
         TagPOfUnivReq tagP = new TagPOfUnivReq();
         tagP.setC("1");
         device.setTagP(tagP);
+
         marshalling(device);
     }
 
     private void info() {
-        successfullyCode = rootTag.getListS().get(0).getV();
+        codeResult = rootTag.getListS().get(0).getV();
         condition = rootTag.getListS().get(0).getZ();
-        if (successfullyCode.equals("1")) {
+        if (codeResult.equals("1")) {
             LOG.info("Проверка кода подтверждения операции - PASS");
             Check.quantityPASS++;
         } else {
@@ -54,7 +57,7 @@ public class SendCodeManageDev extends Post {
     @Override
     public void run() throws JAXBException, IOException, InterruptedException {
         super.run();
-        if(codeStatusResponse == 200) {
+        if (codeStatusResponse == 200) {
             rootTag = Post.rootTag;
             info();
         }

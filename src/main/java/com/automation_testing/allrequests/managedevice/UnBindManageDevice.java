@@ -29,14 +29,17 @@ public class UnBindManageDevice extends Post {
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag device = new UniversalRequestRootTag();
+
         device.setC("");
         device.setT("managedevice");
         device.setN("unbind");
         device.setV(1.0);
         device.setS(AuthLogin.sessionID);
+
         TagPOfUnivReq tagP = new TagPOfUnivReq();
         tagP.setA(GetDictManageDevList.deviceBankID);
         device.setTagP(tagP);
+
         marshalling(device);
     }
 

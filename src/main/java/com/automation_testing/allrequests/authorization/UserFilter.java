@@ -2,21 +2,22 @@ package com.automation_testing.allrequests.authorization;
 
 import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
+import com.automation_testing.hibernate.dao.DivisionsDAO;
+import com.automation_testing.hibernate.dao.MobileServicesDAO;
+import com.automation_testing.hibernate.dao.OrganizationsDAO;
+import com.automation_testing.hibernate.interfaces.CRUDable;
 import com.automation_testing.hibernate.pojo.Divisions;
-import com.automation_testing.hibernate.pojo.Organizations;
 import com.automation_testing.hibernate.pojo.MobileServices;
-
-import com.automation_testing.hibernate.service.DivisionService;
-import com.automation_testing.hibernate.service.OrganizationService;
-import com.automation_testing.hibernate.service.MobileServicesService;
+import com.automation_testing.hibernate.pojo.Organizations;
+import com.automation_testing.parsingxml.TagCOfTagUnivRes;
+import com.automation_testing.parsingxml.TagFOfTagUnivRes;
+import com.automation_testing.parsingxml.TagVOfTagUnivRes;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import com.automation_testing.utils.ActivServicesAllDivision;
 
 import javax.xml.bind.JAXBException;
-import java.io.*;
+import java.io.IOException;
 
 
 public class UserFilter extends Post {
@@ -46,10 +47,9 @@ public class UserFilter extends Post {
     }
 
 
-
     private void parsingDataAndSaveInBD() {
 
-        OrganizationService orgSer = new OrganizationService();
+        CRUDable<Organizations> orgService = new OrganizationsDAO();
         Organizations org = new Organizations();
         org.setId(orgId);
         org.setKpp(orgKPP);
@@ -57,36 +57,41 @@ public class UserFilter extends Post {
         org.setName(orgName);
 
         Divisions division;
-        for (int i = 0; i < UserFilter.rootTag.getListF().size(); i++) {
+
+        for (TagFOfTagUnivRes tagF : rootTag.getListF()) {
             division = new Divisions();
-            division.setBic(rootTag.getListF().get(i).getB());
-            division.setCorrAcc(rootTag.getListF().get(i).getA());
-            division.setId(rootTag.getListF().get(i).getI());
-            division.setName(rootTag.getListF().get(i).getN());
+            division.setBic(tagF.getB());
+            division.setCorrAcc(tagF.getA());
+            division.setId(tagF.getI());
+            division.setName(tagF.getN());
             org.addDivision(division);
         }
-        orgSer.saveOrUpdate(org);
+        orgService.saveOrUpdate(org);
 
-        MobileServicesService ssm = new MobileServicesService();
-        DivisionService ds = new DivisionService();
-        MobileServices sm;
-        for (int i = 0; i < rootTag.getListV().size(); i++) {
-            division = ds.findDivision(rootTag.getListV().get(i).getF());
-            sm = new MobileServices();
-            sm.setDivision(division);
-            sm.setAdv(rootTag.getListV().get(i).getAdv());
-            sm.setReq(rootTag.getListV().get(i).getReq());
-            ssm.saveOrUpdate(sm);
-            division.setServiceMobile(sm);
-            ds.merge(division);
+
+        CRUDable<MobileServices> service = new MobileServicesDAO();
+        CRUDable<Divisions> divServices = new DivisionsDAO();
+
+        MobileServices mobileService;
+
+        for (TagVOfTagUnivRes tagV : rootTag.getListV()) {
+            division = divServices.findById(tagV.getF());
+            mobileService = new MobileServices();
+            mobileService.setDivision(division);
+            mobileService.setAdv(tagV.getAdv());
+            mobileService.setReq(tagV.getReq());
+            service.saveOrUpdate(mobileService);
+            division.setServiceMobile(mobileService);
+            divServices.merge(division);
         }
     }
 
     private void identificationOfOrgData() {
-        orgId = rootTag.getListC().get(0).getI();
-        orgKPP = rootTag.getListC().get(0).getW();
-        orgINN = rootTag.getListC().get(0).getA();
-        orgName = rootTag.getListC().get(0).getN();
+        TagCOfTagUnivRes orgData = rootTag.getListC().get(0);
+        orgId = orgData.getI();
+        orgKPP = orgData.getW();
+        orgINN = orgData.getA();
+        orgName = orgData.getN();
     }
 
     @Override
@@ -98,6 +103,7 @@ public class UserFilter extends Post {
             identificationOfOrgData();
             parsingDataAndSaveInBD();
             checkTest();
+            ActivServicesAllDivision.definition();
         }
     }
 }

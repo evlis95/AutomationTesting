@@ -24,13 +24,16 @@ public class GetFilterPartCBCCodes extends Post {
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag cbcCodes = new UniversalRequestRootTag();
         TagPOfUnivReq tagP = new TagPOfUnivReq();
+
         cbcCodes.setV(1.0);
         cbcCodes.setC("getfilterpart");
         cbcCodes.setN("cbccodes");
         cbcCodes.setT("dictionary");
         cbcCodes.setS(AuthLogin.sessionID);
+
         tagP.setD("18210101011011000110");
         tagP.setP("0");
+
         cbcCodes.setTagP(tagP);
         marshalling(cbcCodes);
     }

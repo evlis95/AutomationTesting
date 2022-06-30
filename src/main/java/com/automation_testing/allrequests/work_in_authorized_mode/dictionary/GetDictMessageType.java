@@ -25,7 +25,8 @@ public class GetDictMessageType extends Post {
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag messType = new UniversalRequestRootTag();
-        List<TagPOfUnivReq> listP = new ArrayList<>();
+
+
         TagPOfUnivReq tagP = new TagPOfUnivReq();
 
         messType.setC("getdict");
@@ -34,8 +35,8 @@ public class GetDictMessageType extends Post {
         messType.setV(1.0);
         messType.setS(AuthLogin.sessionID);
         tagP.setG(UserFilter.rootTag.getListC().get(0).getI());
-        listP.add(tagP);
-        messType.setListP(listP);
+
+        messType.setTagP(tagP);
         marshalling(messType);
     }
 

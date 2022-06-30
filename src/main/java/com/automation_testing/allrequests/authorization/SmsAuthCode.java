@@ -2,11 +2,12 @@ package com.automation_testing.allrequests.authorization;
 
 import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
+import com.automation_testing.parsingxml.TagSOfUnivRes;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
 
 import javax.xml.bind.JAXBException;
-import java.io.*;
+import java.io.IOException;
 
 public class SmsAuthCode extends Post {
 
@@ -26,12 +27,13 @@ public class SmsAuthCode extends Post {
         smsAuthCode.setV(1.0);
         smsAuthCode.setS(AuthLogin.sessionID);
 
-        for (int i = 0; i < AuthCryptoprofCode.rootTag.getListS().size(); i++) {
-            if (AuthCryptoprofCode.rootTag.getListS().get(i).getT().equals("1")) {
-                smsAuthCode.setTagU(AuthCryptoprofCode.rootTag.getListS().get(i).getU());
+        for (TagSOfUnivRes tagS : AuthCryptoprofCode.rootTag.getListS()) {
+            if (tagS.getT().equals("1")) {
+                smsAuthCode.setTagU(tagS.getU());
                 break;
             }
         }
+
         marshalling(smsAuthCode);
     }
 

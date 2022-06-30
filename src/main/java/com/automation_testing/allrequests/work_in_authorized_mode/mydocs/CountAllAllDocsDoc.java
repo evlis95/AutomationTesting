@@ -9,6 +9,7 @@ import com.automation_testing.creatingxml.TagTOfTagP;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
+import com.automation_testing.utils.ActivServicesAllDivision;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,6 +25,7 @@ public class CountAllAllDocsDoc extends Post {
     private final Logger LOG = LogManager.getLogger(CountAllAllDocsDoc.class);
     private int tagTQuantity;
 
+
     @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "CountAllAllDocsDocument");
@@ -33,7 +35,8 @@ public class CountAllAllDocsDoc extends Post {
     @Override
     protected void createXmlBodyRequest() throws JAXBException, IOException {
         UniversalRequestRootTag countAll = new UniversalRequestRootTag();
-        Set<TagTOfTagP> setTOfTagP = new HashSet<>();
+
+        Set<TagTOfTagP> listT = new HashSet<>();
         List<TagFOfTagP> listFOfTagP = new ArrayList<>();
         TagFOfTagP tagF = new TagFOfTagP();
 
@@ -46,64 +49,67 @@ public class CountAllAllDocsDoc extends Post {
         tagF.setG(UserFilter.rootTag.getListC().get(0).getI());
         listFOfTagP.add(tagF);
 
-        for (int i = 0; i < UserFilter.rootTag.getListV().size(); i++) {
-            if (UserFilter.rootTag.getListV().get(i).getAdv().equals("1")) {
-                setTOfTagP.add(new TagTOfTagP("PaymentOrder"));
-            }
-            if (UserFilter.rootTag.getListV().get(i).getReq().equals("1")) {
-                setTOfTagP.add(new TagTOfTagP("CancellationRequest"));
-            }
-            if (UserFilter.rootTag.getListV().get(i).getDcc().equals("1") || UserFilter.rootTag.getListV().get(i).getCc().equals("1")) {
-                setTOfTagP.add(new TagTOfTagP("CorpCardNew"));
-                setTOfTagP.add(new TagTOfTagP("CorpCardBlock"));
-                setTOfTagP.add(new TagTOfTagP("CorpCardUnblock"));
-                setTOfTagP.add(new TagTOfTagP("CorpCardReissue"));
-                setTOfTagP.add(new TagTOfTagP("CorpCardAbroadOperReq"));
 
-            }
-            if (UserFilter.rootTag.getListV().get(i).getExch().equals("1")) {
-                setTOfTagP.add(new TagTOfTagP("OnlineCurConv"));
-            }
-            if (UserFilter.rootTag.getListV().get(i).getCtr().equals("1")) {
-                setTOfTagP.add(new TagTOfTagP("CurTransfer"));
-            }
-            if (UserFilter.rootTag.getListV().get(i).getMinBalance().equals("1")) {
-                setTOfTagP.add(new TagTOfTagP("MinBalance"));
-            }
-            if (UserFilter.rootTag.getListV().get(i).getAddAcc().equals("1")) {
-                setTOfTagP.add(new TagTOfTagP("AdditionalAcc"));
-            }
-            if (UserFilter.rootTag.getListV().get(i).getOffer().equals("1")) {
-                setTOfTagP.add(new TagTOfTagP("DocFromBank"));
-            }
-            if (UserFilter.rootTag.getListV().get(i).getBackpay().equals("1")) {
-                setTOfTagP.add(new TagTOfTagP("SystemFastPayBack"));
-            }
-            if (UserFilter.rootTag.getListV().get(i).getPaybc().equals("1")) {
-                setTOfTagP.add(new TagTOfTagP("SystemFastPay"));
-            }
-            if (UserFilter.rootTag.getListV().get(i).getNewqr().equals("1")) {
-                setTOfTagP.add(new TagTOfTagP("SystemFastPayQR"));
-            }
-            if (UserFilter.rootTag.getListV().get(i).getDep().equals("1")) {
-                setTOfTagP.add(new TagTOfTagP("NewDepositPetition"));
-            }
-            if (UserFilter.rootTag.getListV().get(i).getCr().equals("1")) {
-                setTOfTagP.add(new TagTOfTagP("CreditApplication "));
-                setTOfTagP.add(new TagTOfTagP("CreditTerms"));
-            }
-            if (UserFilter.rootTag.getListV().get(i).getSm().equals("1")) {
-                setTOfTagP.add(new TagTOfTagP("ServiceСonnection"));
-            }
-            tagTQuantity = setTOfTagP.size();
+        if (ActivServicesAllDivision.adv) {
+            listT.add(new TagTOfTagP("PaymentOrder"));
         }
+        if (ActivServicesAllDivision.req) {
+            listT.add(new TagTOfTagP("CancellationRequest"));
+        }
+        if (ActivServicesAllDivision.cc_dcc) {
+            listT.add(new TagTOfTagP("CorpCardNew"));
+            listT.add(new TagTOfTagP("CorpCardBlock"));
+            listT.add(new TagTOfTagP("CorpCardUnblock"));
+            listT.add(new TagTOfTagP("CorpCardReissue"));
+            listT.add(new TagTOfTagP("CorpCardAbroadOperReq"));
+        }
+        if (ActivServicesAllDivision.exch) {
+            listT.add(new TagTOfTagP("OnlineCurConv"));
+        }
+        if (ActivServicesAllDivision.ctr) {
+            listT.add(new TagTOfTagP("CurTransfer"));
+        }
+        if (ActivServicesAllDivision.minBalance) {
+            listT.add(new TagTOfTagP("MinBalance"));
+        }
+        if (ActivServicesAllDivision.addAcc) {
+            listT.add(new TagTOfTagP("AdditionalAcc"));
+        }
+        if (ActivServicesAllDivision.offer) {
+            listT.add(new TagTOfTagP("DocFromBank"));
+        }
+        if (ActivServicesAllDivision.backPay) {
+            listT.add(new TagTOfTagP("SystemFastPayBack"));
+        }
+        if (ActivServicesAllDivision.payBC) {
+            listT.add(new TagTOfTagP("SystemFastPay"));
+        }
+        if (ActivServicesAllDivision.newQR) {
+            listT.add(new TagTOfTagP("SystemFastPayQR"));
+        }
+        if (ActivServicesAllDivision.dep) {
+            listT.add(new TagTOfTagP("NewDepositPetition"));
+        }
+        ///Необходимо уточнить при каких дополнительных условиях с сервера должны приходить данные количество доков по данным типам
+        /*if (ActivServicesAllDivision.cR) {
+            listT.add(new TagTOfTagP("CreditApplication "));
+            listT.add(new TagTOfTagP("CreditTerms"));
+        }*/
+        /*if (ActivServicesAllDivision.sM) {
+            listT.add(new TagTOfTagP("ServiceСonnection"));
+        }*/
+        tagTQuantity = listT.size();
+
+
         TagPOfUnivReq tagP = new TagPOfUnivReq();
         tagP.setListF(listFOfTagP);
-        List<TagTOfTagP> listTOfTagP = new ArrayList<>(setTOfTagP);
+        List<TagTOfTagP> listTOfTagP = new ArrayList<>(listT);
         tagP.setListT(listTOfTagP);
         countAll.setTagP(tagP);
+
         marshalling(countAll);
     }
+
 
     @Override
     public void run() throws JAXBException, IOException, InterruptedException {

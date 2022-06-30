@@ -3,13 +3,12 @@ package com.automation_testing.allrequests.authorization;
 import com.automation_testing.checks.Check;
 import com.automation_testing.creatingxml.TagPOfUnivReq;
 import com.automation_testing.creatingxml.UniversalRequestRootTag;
+import com.automation_testing.parsingxml.TagSOfUnivRes;
 import com.automation_testing.parsingxml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
 
 import javax.xml.bind.JAXBException;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
 
 public class SendAuthCode extends Post {
 
@@ -24,25 +23,23 @@ public class SendAuthCode extends Post {
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag sendAuthCode = new UniversalRequestRootTag();
         TagPOfUnivReq tagP = new TagPOfUnivReq();
-        List<TagPOfUnivReq> listP = new ArrayList<>();
 
         sendAuthCode.setC("send");
         sendAuthCode.setT("auth");
         sendAuthCode.setN("code");
         sendAuthCode.setV(1.0);
         sendAuthCode.setS(AuthLogin.sessionID);
+
         tagP.setC("1");
 
-        for (int i = 0; i < AuthCryptoprofCode.rootTag.getListS().size(); i++) {
-            if (AuthCryptoprofCode.rootTag.getListS().get(i).getT().equals("1")) {
-                sendAuthCode.setTagU((AuthCryptoprofCode.rootTag.getListS().get(i).getU()));
+        for (TagSOfUnivRes tagS : AuthCryptoprofCode.rootTag.getListS()) {
+            if (tagS.getT().equals("1")) {
+                sendAuthCode.setTagU((tagS.getU()));
                 break;
             }
         }
 
-        listP.add(tagP);
-        sendAuthCode.setListP(listP);
-
+        sendAuthCode.setTagP(tagP);
         marshalling(sendAuthCode);
     }
 

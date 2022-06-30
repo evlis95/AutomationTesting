@@ -8,8 +8,6 @@ import com.automation_testing.post_request_pattern.Post;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class AuthLogin extends Post {
 
@@ -19,8 +17,9 @@ public class AuthLogin extends Post {
     @Override
     protected void createXmlBodyRequest() throws JAXBException {
         UniversalRequestRootTag authLogin = new UniversalRequestRootTag();
+
         TagPOfUnivReq tagP = new TagPOfUnivReq();
-        List<TagPOfUnivReq> listP = new ArrayList<>();
+
         authLogin.setT("auth");
         authLogin.setC("");
         authLogin.setN("login");
@@ -30,8 +29,7 @@ public class AuthLogin extends Post {
         tagP.setLogin("izh");
         tagP.setPass("1");
 
-        listP.add(tagP);
-        authLogin.setListP(listP);
+        authLogin.setTagP(tagP);
         marshalling(authLogin);
     }
 

@@ -27,10 +27,14 @@ public class Style40 extends Post {
         style40.setC("");
         style40.setN("style40");
         style40.setV(1.0);
+
         tagAbout.setH("auto");
         tagAbout.setW("auto");
+
         style40.setTagAbout(tagAbout);
         style40.setTagHash("");
+
+
         marshalling(style40);
     }
 
