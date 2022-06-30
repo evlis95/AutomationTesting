@@ -188,7 +188,7 @@ public class PaymentOrder {
         amount = "1200.0";
         nds = "200.0";
         receiver = "OOO BSS";
-        receiverAccount = "12345810611111111111";
+        receiverAccount = "12345810711111111111";
         receiverBIC = GetFullBankRu.receiverBIC;
         receiverBankName = GetFullBankRu.receiverBankName.replaceAll("\"", "&quot;");
         receiverINN = "1126587769";
@@ -211,7 +211,7 @@ public class PaymentOrder {
         cbcCode = GetFilterPartCBCCodes.cbcCodeValue;
         nds = "";
         receiver = "Федеральное казначейство";
-        receiverAccount = "40702810611111111111";
+        receiverAccount = "40702810711111111111";
         receiverBIC = GetFullBankRu.receiverBIC;
         receiverBankName = GetFullBankRu.receiverBankName.replaceAll("\"", "&quot;");
         receiverINN = "1110568760";
@@ -230,7 +230,7 @@ public class PaymentOrder {
         docDateParam3 = "2022";
         docNumParam1 = "";
         docNumParam2 = "12345";
-        payGrndParam = "АП";
+        payGrndParam = "0";
         codeUIP = "0";
         ndsSystemName = "VatZero";
         paymentType = "3";

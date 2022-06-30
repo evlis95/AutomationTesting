@@ -38,7 +38,7 @@ public class GetFullBankRu extends Post {
         getFull.setV(1.0);
         getFull.setS(AuthLogin.sessionID);
 
-        tagP.setD("044525700");
+        tagP.setD("040173725");
 
         getFull.setTagP(tagP);
         marshalling(getFull);
