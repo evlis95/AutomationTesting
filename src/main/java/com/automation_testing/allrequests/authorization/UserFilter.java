@@ -43,7 +43,6 @@ public class UserFilter extends Post {
     @Override
     protected void checkTest() throws IOException {
         Check.checkCode200(codeStatusResponse, "UserFilter");
-        Check.checkEnabledD2BMAdvancedService();
     }
 
 
