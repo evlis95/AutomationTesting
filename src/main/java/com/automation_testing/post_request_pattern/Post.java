@@ -1,9 +1,9 @@
 package com.automation_testing.post_request_pattern;
 
-import com.automation_testing.creatingxml.UniversalRequestRootTag;
-import com.automation_testing.generalsettings.Settings;
+import com.automation_testing.creating_xml.UniversalRequestRootTag;
+import com.automation_testing.settings.Settings;
 import com.automation_testing.interfaces.Launchable;
-import com.automation_testing.parsingxml.UniversalResponseRootTag;
+import com.automation_testing.parsing_xml.UniversalResponseRootTag;
 import com.automation_testing.utils.JAXBUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,9 +24,30 @@ import java.time.Duration;
 
 public abstract class Post implements Launchable {
     public static final String PATH_REQUEST_BODY = ".\\src\\main\\java\\com\\automation_testing\\xmlfile\\request.xml";
+    private static final Logger LOG = LogManager.getLogger(Post.class);
     public static String bodyResponse;
     public static UniversalResponseRootTag rootTag;
     protected Integer codeStatusResponse;
+
+    private void printReqAndRes() throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(Post.PATH_REQUEST_BODY));
+        StringBuilder stringBuilder = new StringBuilder();
+        String line;
+        LOG.warn("Запрос:");
+        while ((line = bufferedReader.readLine()) != null) {
+            stringBuilder.append(line + "\n");
+        }
+        bufferedReader.close();
+        LOG.warn(stringBuilder.toString());
+        LOG.warn("Ответ:");
+        StringBuilder stringBuilder1 = new StringBuilder();
+        bufferedReader = new BufferedReader(new StringReader(Post.bodyResponse));
+        while ((line = bufferedReader.readLine()) != null) {
+            stringBuilder1.append(line + "\n");
+        }
+        bufferedReader.close();
+        LOG.warn(stringBuilder1.toString());
+    }
 
     protected void marshalling(UniversalRequestRootTag rootTag) throws JAXBException {
         JAXBUtils.marshalling(rootTag);
@@ -63,35 +84,11 @@ public abstract class Post implements Launchable {
         if (codeStatusResponse == 200) {
             rootTag = unmarshalling();
         } else {
-            PrintDataInLog.printReqAndRes();
+            printReqAndRes();
         }
     }
 
     protected abstract void createXmlBodyRequest() throws JAXBException, IOException;
 
     protected abstract void checkTest() throws IOException, JAXBException;
-}
-
-class PrintDataInLog {
-    private static final Logger LOG = LogManager.getLogger(PrintDataInLog.class);
-
-    public static void printReqAndRes() throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(Post.PATH_REQUEST_BODY));
-        StringBuilder stringBuilder = new StringBuilder();
-        String line;
-        LOG.warn("Запрос:");
-        while ((line = bufferedReader.readLine()) != null) {
-            stringBuilder.append(line).append("\n");
-        }
-        bufferedReader.close();
-        LOG.warn(stringBuilder.toString());
-        LOG.warn("Ответ:");
-        StringBuilder stringBuilder1 = new StringBuilder();
-        bufferedReader = new BufferedReader(new StringReader(Post.bodyResponse));
-        while ((line = bufferedReader.readLine()) != null) {
-            stringBuilder1.append(line).append("\n");
-        }
-        bufferedReader.close();
-        LOG.warn(stringBuilder1.toString());
-    }
 }

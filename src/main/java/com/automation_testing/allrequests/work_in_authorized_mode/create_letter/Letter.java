@@ -3,9 +3,9 @@ package com.automation_testing.allrequests.work_in_authorized_mode.create_letter
 import com.automation_testing.allrequests.authorization.UserFilter;
 import com.automation_testing.allrequests.work_in_authorized_mode.dictionary.GetDictMessageType;
 import com.automation_testing.allrequests.work_in_authorized_mode.docnumber.DocumentNumber;
-import com.automation_testing.parsingxml.TagFOfTagUnivRes;
-import com.automation_testing.parsingxml.TagROfTagUnivRes;
-import com.automation_testing.parsingxml.TagVOfTagUnivRes;
+import com.automation_testing.parsing_xml.TagFOfTagUnivRes;
+import com.automation_testing.parsing_xml.TagROfTagUnivRes;
+import com.automation_testing.parsing_xml.TagVOfTagUnivRes;
 import com.automation_testing.utils.DateUtils;
 import lombok.Getter;
 

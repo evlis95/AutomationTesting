@@ -1,7 +1,7 @@
 package com.automation_testing.allrequests.authorization;
 
 import com.automation_testing.checks.Check;
-import com.automation_testing.creatingxml.UniversalRequestRootTag;
+import com.automation_testing.creating_xml.UniversalRequestRootTag;
 import com.automation_testing.hibernate.dao.DivisionsDAO;
 import com.automation_testing.hibernate.dao.MobileServicesDAO;
 import com.automation_testing.hibernate.dao.OrganizationsDAO;
@@ -9,10 +9,10 @@ import com.automation_testing.hibernate.interfaces.CRUDable;
 import com.automation_testing.hibernate.pojo.Divisions;
 import com.automation_testing.hibernate.pojo.MobileServices;
 import com.automation_testing.hibernate.pojo.Organizations;
-import com.automation_testing.parsingxml.TagCOfTagUnivRes;
-import com.automation_testing.parsingxml.TagFOfTagUnivRes;
-import com.automation_testing.parsingxml.TagVOfTagUnivRes;
-import com.automation_testing.parsingxml.UniversalResponseRootTag;
+import com.automation_testing.parsing_xml.TagCOfTagUnivRes;
+import com.automation_testing.parsing_xml.TagFOfTagUnivRes;
+import com.automation_testing.parsing_xml.TagVOfTagUnivRes;
+import com.automation_testing.parsing_xml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
 import com.automation_testing.utils.ActivServicesAllDivision;
 

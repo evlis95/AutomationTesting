@@ -3,6 +3,7 @@ package com.automation_testing.hibernate.dao;
 import com.automation_testing.hibernate.interfaces.CRUDable;
 import com.automation_testing.hibernate.pojo.Accounts;
 import com.automation_testing.utils.HibernateUtils;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public class AccountsDAO implements CRUDable<Accounts> {
     }
 
     public void saveOrUpdate(Accounts account) {
-        Session session = HibernateUtils.sessionFactory.getCurrentSession();
+        Session session = HibernateUtils.sessionFactory.openSession();
         try {
             session.getTransaction().begin();
             session.saveOrUpdate(account);
@@ -26,7 +27,7 @@ public class AccountsDAO implements CRUDable<Accounts> {
     }
 
     public void delete(Accounts account) {
-        Session session = HibernateUtils.sessionFactory.getCurrentSession();
+        Session session = HibernateUtils.sessionFactory.openSession();
         try {
             session.getTransaction().begin();
             session.delete(account);
@@ -37,7 +38,7 @@ public class AccountsDAO implements CRUDable<Accounts> {
     }
 
     public void save(Accounts account) {
-        Session session = HibernateUtils.sessionFactory.getCurrentSession();
+        Session session = HibernateUtils.sessionFactory.openSession();
         try {
             session.getTransaction().begin();
             session.save(account);
@@ -48,7 +49,7 @@ public class AccountsDAO implements CRUDable<Accounts> {
     }
 
     public void merge(Accounts account) {
-        Session session = HibernateUtils.sessionFactory.getCurrentSession();
+        Session session = HibernateUtils.sessionFactory.openSession();
         try {
             session.getTransaction().begin();
             session.merge(account);
@@ -59,7 +60,7 @@ public class AccountsDAO implements CRUDable<Accounts> {
     }
 
     public void update(Accounts account) {
-        Session session = HibernateUtils.sessionFactory.getCurrentSession();
+        Session session = HibernateUtils.sessionFactory.openSession();
         try {
             session.getTransaction().begin();
             session.update(account);

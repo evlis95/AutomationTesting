@@ -1,8 +1,8 @@
 package com.automation_testing.utils;
 
-import com.automation_testing.creatingxml.UniversalRequestRootTag;
-import com.automation_testing.jaxbsettings.CustomCharacterEscapeHandler;
-import com.automation_testing.parsingxml.UniversalResponseRootTag;
+import com.automation_testing.creating_xml.UniversalRequestRootTag;
+import com.automation_testing.jaxb_settings.CustomCharacterEscapeHandler;
+import com.automation_testing.parsing_xml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
 import com.sun.xml.bind.marshaller.CharacterEscapeHandler;
 

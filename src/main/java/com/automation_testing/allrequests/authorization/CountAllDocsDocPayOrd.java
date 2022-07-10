@@ -1,10 +1,10 @@
 package com.automation_testing.allrequests.authorization;
 
 import com.automation_testing.checks.Check;
-import com.automation_testing.creatingxml.*;
-import com.automation_testing.parsingxml.TagAOfTagUnivRes;
-import com.automation_testing.parsingxml.TagFOfTagUnivRes;
-import com.automation_testing.parsingxml.UniversalResponseRootTag;
+import com.automation_testing.creating_xml.*;
+import com.automation_testing.parsing_xml.TagAOfTagUnivRes;
+import com.automation_testing.parsing_xml.TagFOfTagUnivRes;
+import com.automation_testing.parsing_xml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
 
 import javax.xml.bind.JAXBException;

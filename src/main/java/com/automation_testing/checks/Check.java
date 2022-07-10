@@ -9,7 +9,7 @@ import com.automation_testing.hibernate.dao.PaymentOrderDAO;
 import com.automation_testing.hibernate.interfaces.CRUDable;
 import com.automation_testing.hibernate.pojo.MobileServices;
 import com.automation_testing.hibernate.pojo.PaymentOrder;
-import com.automation_testing.parsingxml.*;
+import com.automation_testing.parsing_xml.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;

@@ -15,7 +15,7 @@ public class OrganizationsDAO implements CRUDable<Organizations> {
     }
 
     public void save(Organizations organizations) {
-        Session session = HibernateUtils.sessionFactory.getCurrentSession();
+        Session session = HibernateUtils.sessionFactory.openSession();
         try {
             session.getTransaction().begin();
             session.saveOrUpdate(organizations);
@@ -26,7 +26,7 @@ public class OrganizationsDAO implements CRUDable<Organizations> {
     }
 
     public void merge(Organizations organizations) {
-        Session session = HibernateUtils.sessionFactory.getCurrentSession();
+        Session session = HibernateUtils.sessionFactory.openSession();
         try {
             session.getTransaction().begin();
             session.merge(organizations);
@@ -37,7 +37,7 @@ public class OrganizationsDAO implements CRUDable<Organizations> {
     }
 
     public void update(Organizations organizations) {
-        Session session = HibernateUtils.sessionFactory.getCurrentSession();
+        Session session = HibernateUtils.sessionFactory.openSession();
         try {
             session.getTransaction().begin();
             session.merge(organizations);
@@ -59,7 +59,7 @@ public class OrganizationsDAO implements CRUDable<Organizations> {
     }
 
     public void delete(Organizations organizations) {
-        Session session = HibernateUtils.sessionFactory.getCurrentSession();
+        Session session = HibernateUtils.sessionFactory.openSession();
         try {
             session.getTransaction().begin();
             session.delete(organizations);

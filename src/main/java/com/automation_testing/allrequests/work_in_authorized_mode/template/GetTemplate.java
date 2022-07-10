@@ -2,9 +2,9 @@ package com.automation_testing.allrequests.work_in_authorized_mode.template;
 
 import com.automation_testing.allrequests.authorization.AuthLogin;
 import com.automation_testing.checks.Check;
-import com.automation_testing.creatingxml.TagPOfUnivReq;
-import com.automation_testing.creatingxml.UniversalRequestRootTag;
-import com.automation_testing.parsingxml.UniversalResponseRootTag;
+import com.automation_testing.creating_xml.TagPOfUnivReq;
+import com.automation_testing.creating_xml.UniversalRequestRootTag;
+import com.automation_testing.parsing_xml.UniversalResponseRootTag;
 import com.automation_testing.post_request_pattern.Post;
 
 import javax.xml.bind.JAXBException;

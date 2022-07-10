@@ -1,7 +1,7 @@
 package com.automation_testing.utils;
 
 import com.automation_testing.allrequests.authorization.UserFilter;
-import com.automation_testing.parsingxml.TagVOfTagUnivRes;
+import com.automation_testing.parsing_xml.TagVOfTagUnivRes;
 
 public class ActivServicesAllDivision {
     public static boolean adv;

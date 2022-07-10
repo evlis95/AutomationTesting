@@ -1,8 +1,9 @@
 package com.automation_testing.testruns;
 
 import com.automation_testing.allrequests.authorization.*;
+import com.automation_testing.allrequests.managedevice.BindManageDevice;
+import com.automation_testing.allrequests.managedevice.UnBindManageDevice;
 import com.automation_testing.allrequests.connect.*;
-import com.automation_testing.allrequests.managedevice.*;
 import com.automation_testing.allrequests.work_in_authorized_mode.create_cancell_req.*;
 import com.automation_testing.allrequests.work_in_authorized_mode.create_letter.Letter;
 import com.automation_testing.allrequests.work_in_authorized_mode.create_pay_ord.*;
